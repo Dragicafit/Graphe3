@@ -26,4 +26,10 @@ public class Modele {
 	public Segment getSegment(int index) {
 		return segments.get(index);
 	}
+	public boolean containsPoint(Point p) {
+		return points.contains(p);
+	}
+	public boolean containsSegment(Segment s) {
+		return segments.contains(s);
+	}
 }

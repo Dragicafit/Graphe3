@@ -8,34 +8,42 @@ import javafx.scene.control.Button;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
 import modele.Modele;
+import modele.point.PointCouleur;
 
 public class Controleur implements EventHandler<ActionEvent> {
 	protected Modele modele;
 	protected Vue vue;
 	protected Regles regle;
-	protected boolean bouton1;
-	protected boolean bouton2;
-	protected boolean bouton3;
-	protected boolean bouton4;
-	protected boolean bouton5;
+	protected Joueurs joueur;
+	protected boolean point;
+	protected boolean segment;
+	protected boolean undo;
+	protected boolean redo;
+	protected boolean supprimer;
+	protected boolean supprimerTout;
+	protected boolean colorier;
+	protected boolean deplacer;
 	
 	public Controleur(Vue vue) {
 		this.modele = vue.getModele();
 		this.vue = vue;
 		this.regle = new regle();
-		this.bouton1 = false;
-		this.bouton2 = false;
-		this.bouton3 = false;
-		this.bouton4 = false;
-		this.bouton5 = false;
+		this.point = false;
+		this.segment = false;
+		this.undo = false;
+		this.redo = false;
+		this.supprimer = false;
+		this.supprimerTout = false;
+		this.colorier = false;
+		this.deplacer = false;
 	}
 
 	@Override
 	public void handle(ActionEvent event) {
 		Object source = event.getSource();
 		if(vue.getCircles().contains((Circle)source)) {
-			if(regle.check_regle_choisie()) {
-			
+			if(regle.check_regle_choisie() && colorier) {
+				(modele.getPoint(vue.indexOfPoint((Circle)source))).setCouleur(joueur.getJoueurCourant.getCouleur());
 			}
 		}
 		if(vue.getSegment().contains((Line)source)) {
@@ -45,7 +53,30 @@ public class Controleur implements EventHandler<ActionEvent> {
 			
 		}
 		if(vue.getMenu().contains((Button)source)) {
-			
+			if(((Button)source).getText().equals("point")) {
+				point = true;
+			}
+			if(((Button)source).getText().equals("segment")) {
+				segment = true;
+			}
+			if(((Button)source).getText().equals("undo")) {
+				undo = true;
+			}
+			if(((Button)source).getText().equals("redo")) {
+				redo = true;
+			}
+			if(((Button)source).getText().equals("supprimer")) {
+				supprimer = true;
+			}
+			if(((Button)source).getText().equals("supprimerTout")) {
+				supprimerTout = true;
+			}
+			if(((Button)source).getText().equals("colorier")) {
+				colorier = true;
+			}
+			if(((Button)source).getText().equals("deplacer")) {
+				deplacer = true;
+			}
 		}
 	}
 }

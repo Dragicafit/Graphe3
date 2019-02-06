@@ -26,4 +26,7 @@ public class Modele {
 	public Segment getSegment(int index) {
 		return segments.get(index);
 	}
+	public int getSize_segments() {
+		return segments.size();
+	}
 }

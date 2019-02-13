@@ -8,6 +8,7 @@ import javafx.scene.control.Button;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
 import modele.Modele;
+import modele.point.Point;
 import modele.point.PointCouleur;
 
 public class Controleur implements EventHandler<ActionEvent> {
@@ -20,7 +21,6 @@ public class Controleur implements EventHandler<ActionEvent> {
 	protected boolean undo;
 	protected boolean redo;
 	protected boolean supprimer;
-	protected boolean supprimerTout;
 	protected boolean colorier;
 	protected boolean deplacer;
 	
@@ -33,7 +33,6 @@ public class Controleur implements EventHandler<ActionEvent> {
 		this.undo = false;
 		this.redo = false;
 		this.supprimer = false;
-		this.supprimerTout = false;
 		this.colorier = false;
 		this.deplacer = false;
 	}
@@ -43,14 +42,24 @@ public class Controleur implements EventHandler<ActionEvent> {
 		Object source = event.getSource();
 		if(vue.getCircles().contains((Circle)source)) {
 			if(regle.check_regle_choisie() && colorier) {
-				(modele.getPoint(vue.indexOfPoint((Circle)source))).setCouleur(joueur.getJoueurCourant.getCouleur());
+				(modele.getPoint(vue.indexOfCircle((Circle)source))).setCouleur(joueur.getJoueurCourant.getCouleur());
+			}
+			if(supprimer) {
+				modele.removePoint(vue.indexOfPoint((Circle)source)));
 			}
 		}
-		if(vue.getSegment().contains((Line)source)) {
-			
+		if(vue.getLines().contains((Line)source)) {
+			if(regle.check_regle_choisie() && colorier) {
+				(modele.getSegment(vue.indexOfLine((Line)source))).setCouleur(joueur.getJoueurCourant.getCouleur());
+			}
+			if(supprimer) {
+				modele.removeLine(vue.indexOfSegment((Line)source)));
+			}
 		}
 		if(vue.getPlateau().contains((Object)source)) { // Object à modifier
-			
+			if(point) {
+				this.modele.addPoint(new Point(posX, posY));
+			}
 		}
 		if(vue.getMenu().contains((Button)source)) {
 			if(((Button)source).getText().equals("point")) {
@@ -68,8 +77,9 @@ public class Controleur implements EventHandler<ActionEvent> {
 			if(((Button)source).getText().equals("supprimer")) {
 				supprimer = true;
 			}
-			if(((Button)source).getText().equals("supprimerTout")) {
-				supprimerTout = true;
+			if(((Button)source).getText().equals("supprimer tout")) {
+				vue.setModele(new Modele());
+				this.modele = vue.modele;
 			}
 			if(((Button)source).getText().equals("colorier")) {
 				colorier = true;

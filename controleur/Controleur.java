@@ -42,7 +42,7 @@ public class Controleur implements EventHandler<ActionEvent> {
 		Object source = event.getSource();
 		if(vue.getCircles().contains((Circle)source)) {
 			if(regle.check_regle_choisie() && colorier) {
-				(modele.getPoint(vue.indexOfCircle((Circle)source))).setCouleur(joueur.getJoueurCourant.getCouleur());
+				(modele.getPoint(vue.indexOfCircle((Circle)source))).setCouleur(modele.getJoueur(modele.getJoueurCourant()).getCouleur());
 			}
 			if(supprimer) {
 				modele.removePoint(vue.indexOfPoint((Circle)source)));
@@ -50,7 +50,7 @@ public class Controleur implements EventHandler<ActionEvent> {
 		}
 		if(vue.getLines().contains((Line)source)) {
 			if(regle.check_regle_choisie() && colorier) {
-				(modele.getSegment(vue.indexOfLine((Line)source))).setCouleur(joueur.getJoueurCourant.getCouleur());
+				(modele.getSegment(vue.indexOfLine((Line)source))).setCouleur(modele.getJoueur(modele.getJoueurCourant()).getCouleur());
 			}
 			if(supprimer) {
 				modele.removeLine(vue.indexOfSegment((Line)source)));

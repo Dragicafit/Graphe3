@@ -14,7 +14,6 @@ import modele.point.PointCouleur;
 public class Controleur implements EventHandler<ActionEvent> {
 	protected Modele modele;
 	protected Vue vue;
-	protected Regles regle;
 	protected Joueurs joueur;
 	protected boolean point;
 	protected boolean segment;
@@ -27,7 +26,6 @@ public class Controleur implements EventHandler<ActionEvent> {
 	public Controleur(Vue vue) {
 		this.modele = vue.getModele();
 		this.vue = vue;
-		this.regle = new regle();
 		this.point = false;
 		this.segment = false;
 		this.undo = false;
@@ -41,7 +39,7 @@ public class Controleur implements EventHandler<ActionEvent> {
 	public void handle(ActionEvent event) {
 		Object source = event.getSource();
 		if(vue.getCircles().contains((Circle)source)) {
-			if(regle.check_regle_choisie() && colorier) {
+			if(colorier) {
 				(modele.getPoint(vue.indexOfCircle((Circle)source))).setCouleur(modele.getJoueur(modele.getJoueurCourant()).getCouleur());
 			}
 			if(supprimer) {
@@ -49,7 +47,7 @@ public class Controleur implements EventHandler<ActionEvent> {
 			}
 		}
 		if(vue.getLines().contains((Line)source)) {
-			if(regle.check_regle_choisie() && colorier) {
+			if(colorier) {
 				(modele.getSegment(vue.indexOfLine((Line)source))).setCouleur(modele.getJoueur(modele.getJoueurCourant()).getCouleur());
 			}
 			if(supprimer) {

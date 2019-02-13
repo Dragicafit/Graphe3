@@ -1,6 +1,6 @@
 package modele;
 
-import java.awt.Color;
+import javafx.scene.paint.Color;
 
 public interface estColoriable {
 	

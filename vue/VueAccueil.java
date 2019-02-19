@@ -69,5 +69,10 @@ public class VueAccueil extends Vue {
 		root.setRight(Regles);
 		root.setCenter(Center);
 	}
-
+	
+	@Override
+	public void update() {
+		// TODO Auto-generated method stub
+		
+	}
 }

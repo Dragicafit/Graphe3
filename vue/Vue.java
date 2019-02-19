@@ -1,33 +1,61 @@
 package vue;
-import java.util.ArrayList;
-import java.util.LinkedList;
 
-import javafx.application.Application;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+
+import controleur.Controleur;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
 import javafx.stage.Stage;
 import modele.Modele;
 
-public class Vue {
+public abstract class Vue {
 
-	Modele modele;
-	ArrayList<Circle> points;
-	ArrayList<Line> segments;
-	public Stage primaryStage = new Stage();
-	public BorderPane root = new BorderPane();
-	public Scene scene = new Scene(root, 800, 600);
+	protected Modele modele;
+	protected Controleur controleur;
+	protected ArrayList<Circle> cercles;
+	protected ArrayList<Line> lignes;
+	protected Map <Button, String> boutons;
+	protected Stage primaryStage = new Stage();
+	protected BorderPane root = new BorderPane();
+	protected Scene scene = new Scene(root, 800, 600);
 
 	public Vue(Modele m) {
 		modele = m;
-		points = new ArrayList<Circle>();
-		segments = new ArrayList<Line>();
+		cercles = new ArrayList<Circle>();
+		lignes = new ArrayList<Line>();
+		boutons = new HashMap<>();
 		root.setStyle("-fx-padding: 10;");
 		primaryStage.setScene(scene);
 		primaryStage.setTitle("Vue Generale");
 		primaryStage.setMaximized(true);
 		primaryStage.show();
+		controleur = new Controleur(this);
+	}
+	
+	public abstract void update();
+	
+	public Modele getModele() {
+		return modele;
+	}
+
+	public ArrayList<Circle> getCercles() {
+		return cercles;
+	}
+
+	public ArrayList<Line> getLignes() {
+		return lignes;
+	}
+	
+	public String getBoutons(Button b) {
+		return boutons.get(b);
+	}
+	
+	public Map<Button, String> getBoutons() {
+		return boutons;
 	}
 }

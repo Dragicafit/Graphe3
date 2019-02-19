@@ -54,4 +54,12 @@ public class Modele {
 	public void setJoueurCourant(int joueurCourant) {
 		this.joueurCourant = joueurCourant;
 	}
+	
+	public int getSizePoints() {
+		return points.size();
+	}
+	
+	public int getSizeSegments() {
+		return segments.size();
+	}
 }

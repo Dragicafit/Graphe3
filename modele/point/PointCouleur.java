@@ -1,6 +1,6 @@
 package modele.point;
 
-import java.awt.Color;
+import javafx.scene.paint.Color;
 
 import modele.estColoriable;
 

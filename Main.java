@@ -1,24 +1,26 @@
-import java.awt.Color;
-
+import javafx.application.Application;
+import javafx.stage.Stage;
 import modele.Modele;
-import modele.point.Point;
-import modele.point.PointCouleur;
-import modele.segment.Segment;
-import modele.segment.SegmentCouleur;
+import vue.Vue;
+import vue.VueAccueil;
+import vue.VueCreationGraphe;
+import vue.VuePlateauJeu;
 
-public class Main {
+
+public class Main extends Application{
+
 	public static void main(String[] args) {
-		Modele modele = new Modele();
-		Point point1 = new Point(21, 39);
-		Point point2 = new PointCouleur(11, 21, new Color(0, 25, 251));
-		Point point3 = new PointCouleur(23, 1, new Color(36, 64, 65));
-
-		modele.addPoint(point1);
-		modele.addPoint(point2);
-		modele.addPoint(point3);
-
-		modele.addSegment(new Segment(point1, point2));
-		modele.addSegment(new SegmentCouleur(point1, point3, new Color(21, 29, 23)));
-		modele.addSegment(new Segment(point1, point3, true));
+		
+		launch(args);
 	}
+
+	@Override
+	public void start(Stage primaryStage) throws Exception {
+		Modele m = new Modele();
+		Vue vue1 = new VueCreationGraphe(m);
+		Vue vue2 = new VueAccueil(m);
+		Vue vue3 = new VuePlateauJeu(m);
+		
+	}
+	
 }

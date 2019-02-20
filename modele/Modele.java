@@ -38,19 +38,57 @@ public class Modele {
 	public Segment getSegment(int index) {
 		return segments.get(index);
 	}
+	
 	public int getSize_segments() {
 		return segments.size();
+	}
+
+	public boolean containsPoint(Point p) {
+		return points.contains(p);
+	}
+	
+	public boolean containsSegment(Segment s) {
+		return segments.contains(s);
 	}
 	
 	public Joueur getJoueur(int index) {
 		return joueurs.get(index);
 	}
-
+	
 	public int getJoueurCourant() {
 		return joueurCourant;
 	}
-
+	
 	public void setJoueurCourant(int joueurCourant) {
 		this.joueurCourant = joueurCourant;
+	}
+	
+	public int getSizePoints() {
+		return points.size();
+	}
+	
+	public int getSizeSegments() {
+		return segments.size();
+	}
+	
+	public void removePoint(Point p) {
+		points.remove(p);
+	}
+	
+	public void removePoint(int i) {
+		points.remove(i);
+	}
+	
+	public void removeSegment(Segment s) {
+		segments.remove(s);
+	}
+	
+	public void removeSegment(int i) {
+		segments.remove(i);
+	}
+	
+	public void supprimerTout() {
+		points = new ArrayList<Point>();
+		segments = new ArrayList<Segment>();
 	}
 }

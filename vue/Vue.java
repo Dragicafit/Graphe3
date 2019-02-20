@@ -19,7 +19,7 @@ public abstract class Vue {
 	protected Controleur controleur;
 	protected ArrayList<Circle> cercles;
 	protected ArrayList<Line> lignes;
-	protected Map <Button, String> boutons;
+	protected Map<Button, String> boutons;
 	protected Stage primaryStage = new Stage();
 	protected BorderPane root = new BorderPane();
 	protected Scene scene = new Scene(root, 800, 600);
@@ -36,9 +36,9 @@ public abstract class Vue {
 		primaryStage.show();
 		controleur = new Controleur(this);
 	}
-	
+
 	public abstract void update();
-	
+
 	public Modele getModele() {
 		return modele;
 	}
@@ -50,11 +50,11 @@ public abstract class Vue {
 	public ArrayList<Line> getLignes() {
 		return lignes;
 	}
-	
+
 	public String getBoutons(Button b) {
 		return boutons.get(b);
 	}
-	
+
 	public Map<Button, String> getBoutons() {
 		return boutons;
 	}

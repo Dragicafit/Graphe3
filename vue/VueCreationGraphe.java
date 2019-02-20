@@ -52,7 +52,7 @@ public class VueCreationGraphe extends VueJeu {
 		viewPoint.setFitWidth(30);
 		point = new Button("Point", viewPoint);
 		point.setMaxWidth(Double.MAX_VALUE);
-		point.addEventHandler(MouseEvent.MOUSE_CLICKED, controleur);	
+		point.addEventHandler(MouseEvent.MOUSE_CLICKED, controleur);
 
 		Image imageSegment = new Image("images/segment.png");
 		ImageView viewSegment = new ImageView(imageSegment);
@@ -61,7 +61,7 @@ public class VueCreationGraphe extends VueJeu {
 		segment = new Button("Segment", viewSegment);
 		segment.setStyle("-fx-padding-top: 100;" + "-fx-padding-bottom: 100;");
 		segment.setMaxWidth(Double.MAX_VALUE);
-		segment.addEventHandler(MouseEvent.MOUSE_CLICKED, controleur);	
+		segment.addEventHandler(MouseEvent.MOUSE_CLICKED, controleur);
 
 		Image imageDelete = new Image("images/delete.png");
 		ImageView viewDelete = new ImageView(imageDelete);
@@ -69,7 +69,7 @@ public class VueCreationGraphe extends VueJeu {
 		viewDelete.setFitWidth(30);
 		supprimer = new Button("Supprimer", viewDelete);
 		supprimer.setMaxWidth(Double.MAX_VALUE);
-		supprimer.addEventHandler(MouseEvent.MOUSE_CLICKED, controleur);	
+		supprimer.addEventHandler(MouseEvent.MOUSE_CLICKED, controleur);
 
 		Image imageUndo = new Image("images/undo.png");
 		ImageView viewUndo = new ImageView(imageUndo);
@@ -77,7 +77,7 @@ public class VueCreationGraphe extends VueJeu {
 		viewUndo.setFitWidth(30);
 		undo = new Button("", viewUndo);
 		undo.setMaxWidth(Double.MAX_VALUE);
-		undo.addEventHandler(MouseEvent.MOUSE_CLICKED, controleur);	
+		undo.addEventHandler(MouseEvent.MOUSE_CLICKED, controleur);
 
 		Image imageRedo = new Image("images/redo.png");
 		ImageView viewRedo = new ImageView(imageRedo);
@@ -85,12 +85,12 @@ public class VueCreationGraphe extends VueJeu {
 		viewRedo.setFitWidth(30);
 		redo = new Button("", viewRedo);
 		redo.setMaxWidth(Double.MAX_VALUE);
-		redo.addEventHandler(MouseEvent.MOUSE_CLICKED, controleur);	
+		redo.addEventHandler(MouseEvent.MOUSE_CLICKED, controleur);
 
 		supprimerTout = new Button("Supprimer\n    Tout");
 		supprimerTout.setMaxWidth(Double.MAX_VALUE);
 		supprimerTout.setAlignment(Pos.TOP_CENTER);
-		supprimerTout.addEventHandler(MouseEvent.MOUSE_CLICKED, controleur);	
+		supprimerTout.addEventHandler(MouseEvent.MOUSE_CLICKED, controleur);
 
 	}
 

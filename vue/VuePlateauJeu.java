@@ -1,5 +1,6 @@
 package vue;
 
+import controleur.Controleur;
 import javafx.scene.control.Button;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
@@ -31,6 +32,11 @@ public class VuePlateauJeu extends VueJeu {
 		this.deplacer.setMaxWidth(Double.MAX_VALUE);
 		this.nomJoueur = new Text();
 		this.nomJoueur.setText("   Inserer le nom  \n     du joueur !!!");
+	}
+
+	@Override
+	public Controleur creationControleur() {
+		return null;
 	}
 
 }

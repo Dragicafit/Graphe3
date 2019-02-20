@@ -1,5 +1,7 @@
 package vue;
 
+import controleur.Controleur;
+import controleur.ControleurCreationGaphe;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
@@ -92,6 +94,11 @@ public class VueCreationGraphe extends VueJeu {
 		supprimerTout.setAlignment(Pos.TOP_CENTER);
 		supprimerTout.addEventHandler(MouseEvent.MOUSE_CLICKED, controleur);
 
+	}
+
+	@Override
+	public Controleur creationControleur() {
+		return new ControleurCreationGaphe(this);
 	}
 
 }

@@ -14,9 +14,6 @@ import modele.segment.SegmentCouleur;
 
 public abstract class VueJeu extends Vue {
 
-	public double clickX;
-	public double clickY;
-
 	public BorderPane menu;
 	public Pane graphe;
 
@@ -42,45 +39,15 @@ public abstract class VueJeu extends Vue {
 		majListe();
 	}
 
-	public void effacerPoints() {
-		if (cercles != null) {
-			for (Circle c : cercles) {
-				c.setVisible(false);
-			}
-			cercles.clear();
-		}
-	}
-
-	public void effacerSegments() {
-		if (lignes != null) {
-			for (Line l : lignes) {
-				l.setVisible(false);
-			}
-			lignes.clear();
-		}
-	}
-
 	public void effacerTout() {
-		effacerPoints();
-		effacerSegments();
+		graphe.getChildren().clear();
+		cercles.clear();
+		lignes.clear();
 	}
 
 	public void majListe() {
 		effacerTout();
 		if (modele != null) {
-			for (int i = 0; i < modele.getSizePoints(); i++) {
-				Circle c = new Circle(modele.getPoint(i).getX(), modele.getPoint(i).getY(), 15);
-				if (modele.getPoint(i) instanceof PointCouleur) {
-					c.setFill(((PointCouleur) modele.getPoint(i)).getCouleur());
-				} else {
-					c.setFill(Color.WHITE);
-				}
-				c.setStroke(Color.BLACK);
-				c.setStrokeWidth(3);
-				c.setVisible(true);
-				cercles.add(c);
-
-			}
 			for (int i = 0; i < modele.getSizeSegments(); i++) {
 				Line l = new Line(modele.getSegment(i).getPoint1().getX(), modele.getSegment(i).getPoint1().getY(),
 						modele.getSegment(i).getPoint2().getX(), modele.getSegment(i).getPoint2().getY());
@@ -91,7 +58,23 @@ public abstract class VueJeu extends Vue {
 				}
 				l.setStrokeWidth(2);
 				l.setVisible(true);
+				l.addEventHandler(MouseEvent.MOUSE_CLICKED, controleur);
 				lignes.add(l);
+				this.graphe.getChildren().add(l);
+			}
+			for (int i = 0; i < modele.getSizePoints(); i++) {
+				Circle c = new Circle(modele.getPoint(i).getX(), modele.getPoint(i).getY(), 15);
+				if (modele.getPoint(i) instanceof PointCouleur) {
+					c.setFill(((PointCouleur) modele.getPoint(i)).getCouleur());
+				} else {
+					c.setFill(Color.WHITE);
+				}
+				c.setStroke(Color.BLACK);
+				c.setStrokeWidth(3);
+				c.setVisible(true);
+				c.addEventHandler(MouseEvent.MOUSE_CLICKED, controleur);
+				cercles.add(c);
+				this.graphe.getChildren().add(c);
 			}
 		}
 	}

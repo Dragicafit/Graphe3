@@ -1,16 +1,17 @@
 package vue;
+
 import javafx.scene.control.Button;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import modele.Modele;
 
-public class VuePlateauJeu extends VueJeu{
-	
+public class VuePlateauJeu extends VueJeu {
+
 	public Button colorier;
 	public Button deplacer;
 	public Text nomJoueur;
 	public VBox menuJeu;
-	
+
 	public VuePlateauJeu(Modele m) {
 		super(m);
 		creationBouton();
@@ -22,7 +23,7 @@ public class VuePlateauJeu extends VueJeu{
 		menuJeu.setStyle("-fx-padding: 10;");
 		menu.setCenter(menuJeu);
 	}
-	
+
 	public void creationBouton() {
 		this.colorier = new Button("Colorier");
 		this.colorier.setMaxWidth(Double.MAX_VALUE);

@@ -6,11 +6,10 @@ import vue.VueAccueil;
 import vue.VueCreationGraphe;
 import vue.VuePlateauJeu;
 
-
-public class Main extends Application{
+public class Main extends Application {
 
 	public static void main(String[] args) {
-		
+
 		launch(args);
 	}
 
@@ -18,9 +17,6 @@ public class Main extends Application{
 	public void start(Stage primaryStage) throws Exception {
 		Modele m = new Modele();
 		Vue vue1 = new VueCreationGraphe(m);
-		Vue vue2 = new VueAccueil(m);
-		Vue vue3 = new VuePlateauJeu(m);
-		
 	}
-	
+
 }

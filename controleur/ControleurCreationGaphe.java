@@ -12,10 +12,10 @@ import modele.segment.SegmentCouleur;
 import vue.Vue;
 import vue.VueJeu;
 
-public class ControleurCreationGaphe extends Controleur{
+public class ControleurCreationGaphe extends Controleur {
 
 	private Point premierPoint;
-	
+
 	public ControleurCreationGaphe(Vue vue) {
 		super(vue);
 		this.premierPoint = null;
@@ -42,7 +42,8 @@ public class ControleurCreationGaphe extends Controleur{
 				if (premierPoint == null) {
 					premierPoint = modele.getPoint(vue.getCercles().indexOf(source));
 				} else {
-					this.modele.addSegment(new Segment(premierPoint, modele.getPoint(vue.getCercles().indexOf((Circle) source))));
+					this.modele.addSegment(
+							new Segment(premierPoint, modele.getPoint(vue.getCercles().indexOf((Circle) source))));
 					premierPoint = null;
 				}
 			}
@@ -53,7 +54,7 @@ public class ControleurCreationGaphe extends Controleur{
 			} else if (bouton == Bouton.SUPPRIMER) {
 				modele.removeSegment(vue.getLignes().indexOf(source));
 			}
-		} else if (vue instanceof VueJeu && source instanceof Pane && ((VueJeu) vue).getGraphe() == source) {
+		} else if (vue instanceof VueJeu && source instanceof Pane && source == ((VueJeu) vue).getGraphe()) {
 			if (bouton == Bouton.POINT) {
 				this.modele.addPoint(new Point(event.getX(), event.getY()));
 			}

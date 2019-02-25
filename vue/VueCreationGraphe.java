@@ -31,7 +31,7 @@ public class VueCreationGraphe extends VueJeu {
 		HBox undoRedo = new HBox();
 		top = new VBox();
 		bottom = new VBox();
-		undoRedo.getChildren().addAll(undo, redo);
+//		undoRedo.getChildren().addAll(undo, redo);
 		top.getChildren().addAll(point, segment, supprimer, undoRedo);
 		bottom.getChildren().addAll(supprimerTout);
 		top.setSpacing(20);
@@ -72,7 +72,7 @@ public class VueCreationGraphe extends VueJeu {
 		supprimer = new Button("Supprimer", viewDelete);
 		supprimer.setMaxWidth(Double.MAX_VALUE);
 		supprimer.addEventHandler(MouseEvent.MOUSE_CLICKED, controleur);
-
+/*
 		Image imageUndo = new Image("images/undo.png");
 		ImageView viewUndo = new ImageView(imageUndo);
 		viewUndo.setFitHeight(30);
@@ -88,7 +88,7 @@ public class VueCreationGraphe extends VueJeu {
 		redo = new Button("", viewRedo);
 		redo.setMaxWidth(Double.MAX_VALUE);
 		redo.addEventHandler(MouseEvent.MOUSE_CLICKED, controleur);
-
+*/
 		supprimerTout = new Button("Supprimer\n    Tout");
 		supprimerTout.setMaxWidth(Double.MAX_VALUE);
 		supprimerTout.setAlignment(Pos.TOP_CENTER);

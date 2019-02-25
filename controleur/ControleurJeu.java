@@ -9,8 +9,8 @@ import modele.segment.Segment;
 import modele.segment.SegmentCouleur;
 import vue.Vue;
 
-public class ControleurJeu extends Controleur{
-	
+public class ControleurJeu extends Controleur {
+
 	public ControleurJeu(Vue vue) {
 		super(vue);
 		this.boutons.put("colorier", Bouton.COLORIER);

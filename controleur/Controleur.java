@@ -9,6 +9,7 @@ import modele.Modele;
 import vue.Vue;
 
 public abstract class Controleur implements EventHandler<MouseEvent> {
+
 	protected Modele modele;
 	protected Vue vue;
 	protected Bouton bouton;

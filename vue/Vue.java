@@ -34,10 +34,12 @@ public abstract class Vue {
 		primaryStage.setTitle("Vue Generale");
 		primaryStage.setMaximized(true);
 		primaryStage.show();
-		controleur = new Controleur(this);
+		this.controleur = creationControleur();
 	}
 
 	public abstract void update();
+	
+	public abstract Controleur creationControleur();
 
 	public Modele getModele() {
 		return modele;

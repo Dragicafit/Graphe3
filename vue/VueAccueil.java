@@ -1,5 +1,7 @@
 package vue;
 
+import controleur.Controleur;
+import controleur.ControleurAccueil;
 import javafx.scene.control.Button;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
@@ -151,5 +153,10 @@ public class VueAccueil extends Vue {
 	public void update() {
 		// TODO Auto-generated method stub
 
+	}
+
+	@Override
+	public Controleur creationControleur() {
+		return new ControleurAccueil(this);
 	}
 }

@@ -33,6 +33,7 @@ public class ControleurCreationGaphe extends Controleur {
 	public void handle(MouseEvent event) {
 		Object source = event.getSource();
 		if (source instanceof Circle && vue.getCercles().contains(source)) {
+			event.consume();
 			Point point = modele.getPoint(vue.getCercles().indexOf(source));
 			if (point instanceof PointCouleur && bouton == Bouton.COLORIER) {
 				((PointCouleur) point).setCouleur(modele.getJoueur(modele.getJoueurCourant()).getCouleur());
@@ -56,7 +57,7 @@ public class ControleurCreationGaphe extends Controleur {
 			}
 		} else if (vue instanceof VueJeu && source instanceof Pane && source == ((VueJeu) vue).getGraphe()) {
 			if (bouton == Bouton.POINT) {
-				this.modele.addPoint(new Point(event.getX(), event.getY()));
+				addPoint(event.getX(), event.getY());
 			}
 		} else if (source instanceof Button && vue.getBoutons().containsKey(source)) {
 			bouton = boutons.get(vue.getBoutons((Button) source));
@@ -66,5 +67,17 @@ public class ControleurCreationGaphe extends Controleur {
 			bouton = null;
 		}
 		vue.update();
+	}
+	
+	public void addPoint(double x, double y) {
+		boolean b = true;
+		for (int i = 0; i < modele.getSizePoints(); i++) {
+			if (Math.sqrt(Math.pow(modele.getPoint(i).getX() - x, 2) + Math.pow(modele.getPoint(i).getY() - y, 2)) < 30) {
+				b = false;
+			}
+ 		}
+		if (b) {
+			this.modele.addPoint(new Point(x, y));
+		}
 	}
 }

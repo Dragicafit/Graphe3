@@ -68,14 +68,15 @@ public class ControleurCreationGaphe extends Controleur {
 		}
 		vue.update();
 	}
-	
+
 	public void addPoint(double x, double y) {
 		boolean b = true;
 		for (int i = 0; i < modele.getSizePoints(); i++) {
-			if (Math.sqrt(Math.pow(modele.getPoint(i).getX() - x, 2) + Math.pow(modele.getPoint(i).getY() - y, 2)) < 30) {
+			if (Math.sqrt(
+					Math.pow(modele.getPoint(i).getX() - x, 2) + Math.pow(modele.getPoint(i).getY() - y, 2)) < 30) {
 				b = false;
 			}
- 		}
+		}
 		if (b) {
 			this.modele.addPoint(new Point(x, y));
 		}

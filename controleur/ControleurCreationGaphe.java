@@ -73,7 +73,7 @@ public class ControleurCreationGaphe extends Controleur {
 		boolean b = true;
 		for (int i = 0; i < modele.getSizePoints(); i++) {
 			if (Math.sqrt(
-					Math.pow(modele.getPoint(i).getX() - x, 2) + Math.pow(modele.getPoint(i).getY() - y, 2)) < 30) {
+					Math.pow(modele.getPoint(i).getX() - x + 5, 2) + Math.pow(modele.getPoint(i).getY() - y + 5, 2)) < 30) {
 				b = false;
 			}
 		}

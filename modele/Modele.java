@@ -68,7 +68,7 @@ public class Modele {
 	}
 	
 	public void removePoint(Point p) {
-		for (int i = 0; i<segments.size(); i++) {
+		for (int i = segments.size()-1; i>=0; i--) {
 			if (segments.get(i).getPoint1() == p || segments.get(i).getPoint2() == p)
 				removeSegment(i);
 		}
@@ -76,11 +76,7 @@ public class Modele {
 	}
 	
 	public void removePoint(int nb) {
-		for (int i = 0; i<segments.size(); i++) {
-			if (segments.get(i).getPoint1() == points.get(nb) || segments.get(i).getPoint2() == points.get(nb))
-				removeSegment(i);
-		}
-		points.remove(nb);
+		removePoint(points.get(nb));
 	}
 	
 	public void removeSegment(Segment s) {

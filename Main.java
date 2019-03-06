@@ -1,8 +1,8 @@
 import javafx.application.Application;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import modele.Joueur;
 import modele.Modele;
-import vue.Vue;
-import vue.VueAccueil;
 import vue.VueCreationGraphe;
 import vue.VuePlateauJeu;
 
@@ -16,7 +16,9 @@ public class Main extends Application {
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 		Modele m = new Modele();
-		Vue vue1 = new VueCreationGraphe(m);
+		m.addJoueur(new Joueur("test", Color.BLUEVIOLET));
+		new VueCreationGraphe(m);
+		new VuePlateauJeu(m);
 	}
 
 }

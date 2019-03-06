@@ -1,7 +1,9 @@
 package vue;
 
 import controleur.Controleur;
+import controleur.ControleurJeu;
 import javafx.scene.control.Button;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import modele.Modele;
@@ -28,15 +30,19 @@ public class VuePlateauJeu extends VueJeu {
 	public void creationBouton() {
 		this.colorier = new Button("Colorier");
 		this.colorier.setMaxWidth(Double.MAX_VALUE);
+		boutons.put(colorier, "colorier");
+		this.colorier.addEventHandler(MouseEvent.MOUSE_CLICKED, controleur);
 		this.deplacer = new Button("Déplacer");
 		this.deplacer.setMaxWidth(Double.MAX_VALUE);
+		boutons.put(deplacer, "deplacer");
+		this.deplacer.addEventHandler(MouseEvent.MOUSE_CLICKED, controleur);
 		this.nomJoueur = new Text();
 		this.nomJoueur.setText("   Inserer le nom  \n     du joueur !!!");
 	}
 
 	@Override
 	public Controleur creationControleur() {
-		return null;
+		return new ControleurJeu(this);
 	}
 
 }

@@ -1,5 +1,6 @@
 package controleur;
 
+import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
@@ -15,7 +16,6 @@ public class ControleurJeu extends Controleur {
 		super(vue);
 		this.boutons.put("colorier", Bouton.COLORIER);
 		this.boutons.put("deplacer", Bouton.DEPLACER);
-		this.boutons.put("retour", Bouton.RETOUR);
 	}
 
 	@Override
@@ -31,6 +31,9 @@ public class ControleurJeu extends Controleur {
 			if (segment instanceof SegmentCouleur && bouton == Bouton.COLORIER) {
 				((SegmentCouleur) segment).setCouleur(modele.getJoueur(modele.getJoueurCourant()).getCouleur());
 			}
+		} else if (source instanceof Button && vue.getBoutons().containsKey(source)) {
+			bouton = boutons.get(vue.getBoutons((Button) source));
 		}
+		vue.update();
 	}
 }

@@ -2,6 +2,8 @@ package vue;
 
 import java.util.LinkedList;
 
+import javafx.geometry.Orientation;
+import javafx.scene.control.SplitPane;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
@@ -13,13 +15,16 @@ import modele.point.PointCouleur;
 import modele.segment.SegmentCouleur;
 
 public abstract class VueJeu extends Vue {
-
+	public SplitPane main;
 	public BorderPane menu;
 	public Pane graphe;
 
 	public VueJeu(Modele m) {
 		super(m);
 		creationBouton();
+		main = new SplitPane();
+		main.setOrientation(Orientation.HORIZONTAL);
+		main.setDividerPositions(0.);
 		menu = new BorderPane();
 		menu.setStyle("-fx-padding: 10;" + "-fx-border-style: solid inside;" + "-fx-border-width: 2;"
 				+ "-fx-border-insets: 5;" + "-fx-border-radius: 5;" + "-fx-border-color: black;");
@@ -28,7 +33,10 @@ public abstract class VueJeu extends Vue {
 		graphe.setStyle("-fx-padding: 10;" + "-fx-border-style: solid inside;" + "-fx-border-width: 2;"
 				+ "-fx-border-insets: 5;" + "-fx-border-radius: 5;" + "-fx-border-color: black;");
 		graphe.addEventHandler(MouseEvent.MOUSE_CLICKED, controleur);
-		root.setCenter(graphe);
+		menu.maxWidthProperty().bind(main.widthProperty().multiply(0.12));
+		menu.minWidthProperty().bind(main.widthProperty().multiply(0.12));
+		main.getItems().addAll(menu, graphe);
+		root.setCenter(main);
 	}
 
 	public Pane getGraphe() {

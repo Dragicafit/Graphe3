@@ -19,6 +19,7 @@ public abstract class VueJeu extends Vue {
 
 	public VueJeu(Modele m) {
 		super(m);
+		creationBouton();
 		menu = new BorderPane();
 		menu.setStyle("-fx-padding: 10;" + "-fx-border-style: solid inside;" + "-fx-border-width: 2;"
 				+ "-fx-border-insets: 5;" + "-fx-border-radius: 5;" + "-fx-border-color: black;");

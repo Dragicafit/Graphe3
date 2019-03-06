@@ -3,6 +3,7 @@ package controleur;
 import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
 import modele.point.Point;
@@ -78,7 +79,7 @@ public class ControleurCreationGaphe extends Controleur {
 			}
 		}
 		if (b) {
-			this.modele.addPoint(new Point(x, y));
+			this.modele.addPoint(new PointCouleur(x, y, Color.WHITE));
 		}
 	}
 }

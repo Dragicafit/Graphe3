@@ -5,8 +5,12 @@ import java.util.HashMap;
 import java.util.Map;
 
 import controleur.Controleur;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
@@ -37,6 +41,32 @@ public abstract class Vue {
 		this.controleur = creationControleur();
 	}
 
+	
+	public Button creerBouton(String nom) {
+		Button b = new Button(nom);
+		b.setMaxWidth(Double.MAX_VALUE);
+		b.setAlignment(Pos.TOP_CENTER);
+		b.addEventHandler(MouseEvent.MOUSE_CLICKED, controleur);
+		return b;
+	}
+	
+	public Button creerBouton(String nomPoint, String nomImage) {
+		return creerBouton(nomPoint, nomImage, 30, 30);
+	}
+	
+	public Button creerBouton(String nomPoint, String nomImage, int height, int width ) {
+		
+		Image image = new Image("images/" + nomImage);
+		ImageView view = new ImageView(image);
+		view.setFitHeight(height);
+		view.setFitWidth(width);
+		Button b = new Button(nomPoint, view);
+		b.setMaxWidth(Double.MAX_VALUE);
+		b.setAlignment(Pos.TOP_CENTER);
+		b.addEventHandler(MouseEvent.MOUSE_CLICKED, controleur);
+		return b;
+	}
+	
 	public abstract void update();
 	
 	public abstract Controleur creationControleur();

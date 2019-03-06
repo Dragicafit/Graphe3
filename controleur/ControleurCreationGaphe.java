@@ -25,7 +25,7 @@ public class ControleurCreationGaphe extends Controleur {
 		this.boutons.put("supprimer", Bouton.SUPPRIMER);
 		this.boutons.put("colorier", Bouton.COLORIER);
 		this.boutons.put("deplacer", Bouton.DEPLACER);
-		this.boutons.put("supprimer tout", Bouton.SUPPRIMERTOUT);
+		this.boutons.put("supprimerTout", Bouton.SUPPRIMERTOUT);
 		this.boutons.put("sauvegarder", Bouton.SAUVEGARDER);
 		this.boutons.put("retour", Bouton.RETOUR);
 	}

@@ -88,7 +88,7 @@ public class Modele {
 	}
 	
 	public void supprimerTout() {
-		points = new ArrayList<Point>();
-		segments = new ArrayList<Segment>();
+		points.clear();
+		segments.clear();
 	}
 }

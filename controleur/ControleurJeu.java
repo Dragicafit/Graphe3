@@ -1,6 +1,5 @@
 package controleur;
 
-
 import Jeux.Jeux;
 import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
@@ -12,16 +11,17 @@ import modele.segment.Segment;
 import modele.segment.SegmentCouleur;
 import vue.Vue;
 
-public class ControleurJeu extends Controleur{
-	
+public class ControleurJeu extends Controleur {
+
 	protected Jeux jeu;
 
 	public ControleurJeu(Vue vue, Jeux jeu) {
 		super(vue);
-		boutons.put("colorier", Bouton.COLORIER);
-		boutons.put("deplacer", Bouton.DEPLACER);
+		this.jeu = jeu;
+		this.boutons.put("colorier", Bouton.COLORIER);
+		this.boutons.put("deplacer", Bouton.DEPLACER);
 	}
-	
+
 	public void applique(MouseEvent event) {
 		Object source = event.getSource();
 		if (source instanceof Circle && vue.getCercles().contains(source)) {
@@ -43,7 +43,5 @@ public class ControleurJeu extends Controleur{
 	@Override
 	public void handle(MouseEvent event) {
 		jeu.setEvent(event);
-		
 	}
-
 }

@@ -1,5 +1,6 @@
 package Jeux;
 
+import controleur.ControleurJeu;
 import javafx.scene.shape.Circle;
 import modele.Joueur;
 import regles.Regles;
@@ -23,7 +24,7 @@ public class Snort extends Jeux{
 		if (source instanceof Circle && vue.getCercles().contains((Circle) source)) {
 			Point point = m.getPoint(vue.getCercles().indexOf((Circle) source));
 			if(check_regles(point)) {
-				(ControleurJeu) vue.getControleur().applique(event);
+				((ControleurJeu) vue.getControleur()).applique(event);
 			}
 		}
 	}

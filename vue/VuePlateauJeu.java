@@ -1,16 +1,21 @@
 package vue;
+
+import Jeux.Snort;
+import controleur.Controleur;
+import controleur.ControleurJeu;
 import javafx.scene.control.Button;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import modele.Modele;
+import regles.Regles;
 
-public class VuePlateauJeu extends VueJeu{
-	
+public class VuePlateauJeu extends VueJeu {
+
 	public Button colorier;
 	public Button deplacer;
 	public Text nomJoueur;
 	public VBox menuJeu;
-	
+
 	public VuePlateauJeu(Modele m) {
 		super(m);
 		creationBouton();
@@ -22,14 +27,20 @@ public class VuePlateauJeu extends VueJeu{
 		menuJeu.setStyle("-fx-padding: 10;");
 		menu.setCenter(menuJeu);
 	}
-	
+
 	public void creationBouton() {
-		this.colorier = new Button("Colorier");
-		this.colorier.setMaxWidth(Double.MAX_VALUE);
-		this.deplacer = new Button("Déplacer");
-		this.deplacer.setMaxWidth(Double.MAX_VALUE);
+		this.colorier = creerBouton("Colorier");
+		this.deplacer = creerBouton("Dï¿½placer");
+		boutons.put(colorier, "colorier");
+		boutons.put(deplacer, "deplacer");
 		this.nomJoueur = new Text();
 		this.nomJoueur.setText("   Inserer le nom  \n     du joueur !!!");
+	}
+
+	@Override
+	public Controleur creationControleur() {
+		return 	new ControleurJeu(this, new Snort(new Regles(modele,true,true,true,true), false, this));
+
 	}
 
 }

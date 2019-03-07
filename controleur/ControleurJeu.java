@@ -1,13 +1,11 @@
 package controleur;
 
-import java.util.HashMap;
+
 import java.util.Map;
 
 import Jeux.Jeux;
-import javafx.event.EventHandler;
 import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.Pane;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
 import modele.Joueur;
@@ -17,9 +15,8 @@ import modele.point.PointCouleur;
 import modele.segment.Segment;
 import modele.segment.SegmentCouleur;
 import vue.Vue;
-import vue.VueJeu;
 
-public class ControleurJeu implements EventHandler<MouseEvent> {
+public class ControleurJeu extends Controleur{
 	protected Modele modele;
 	protected Vue vue;
 	protected Joueur joueur;
@@ -28,46 +25,24 @@ public class ControleurJeu implements EventHandler<MouseEvent> {
 	protected Jeux jeu;
 
 	public ControleurJeu(Vue vue, Jeux jeu) {
-		this.jeu = jeu;
-		this.modele = vue.getModele();
-		this.vue = vue;
-		boutons = new HashMap<>();
-		boutons.put("point", Bouton.POINT);
-		boutons.put("segment", Bouton.SEGMENT);
-		boutons.put("undo", Bouton.UNDO);
-		boutons.put("redo", Bouton.REDO);
-		boutons.put("supprimer", Bouton.SUPPRIMER);
+		super(vue);
 		boutons.put("colorier", Bouton.COLORIER);
 		boutons.put("deplacer", Bouton.DEPLACER);
-		boutons.put("supprimer tout", Bouton.SUPPRIMERTOUT);
 	}
 	
 	public void applique(MouseEvent event) {
 		Object source = event.getSource();
-		if (source instanceof Circle && vue.getCercles().contains((Circle) source)) {
-			Point point = modele.getPoint(vue.getCercles().indexOf((Circle) source));
+		if (source instanceof Circle && vue.getCercles().contains(source)) {
+			Point point = modele.getPoint(vue.getCercles().indexOf(source));
 			if (point instanceof PointCouleur && bouton == Bouton.COLORIER) {
 				((PointCouleur) point).setCouleur(modele.getJoueur(modele.getJoueurCourant()).getCouleur());
 			}
-			if (bouton == Bouton.SUPPRIMER) {
-				modele.removePoint(point);
-			}
-		}
-		if (source instanceof Line && vue.getLignes().contains((Line) source)) {
-			Segment segment = modele.getSegment(vue.getLignes().indexOf((Line) source));
+		} else if (source instanceof Line && vue.getLignes().contains(source)) {
+			Segment segment = modele.getSegment(vue.getLignes().indexOf(source));
 			if (segment instanceof SegmentCouleur && bouton == Bouton.COLORIER) {
 				((SegmentCouleur) segment).setCouleur(modele.getJoueur(modele.getJoueurCourant()).getCouleur());
 			}
-			if (bouton == Bouton.SUPPRIMER) {
-				modele.removeSegment(vue.getLignes().indexOf((Line) source));
-			}
-		}
-		if (vue instanceof VueJeu && source instanceof Pane && ((VueJeu)vue).getGraphe() == (Pane) source) {
-			if (bouton == Bouton.POINT) {
-				this.modele.addPoint(new Point(event.getX(), event.getY()));
-			}
-		}
-		if (source instanceof Button && vue.getBoutons().containsKey((Button) source)) {
+		} else if (source instanceof Button && vue.getBoutons().containsKey(source)) {
 			bouton = boutons.get(vue.getBoutons((Button) source));
 		}
 		vue.update();
@@ -78,8 +53,5 @@ public class ControleurJeu implements EventHandler<MouseEvent> {
 		jeu.setEvent(event);
 		
 	}
-}
 
-enum Bouton {
-	POINT, SEGMENT, UNDO, REDO, SUPPRIMER, COLORIER, DEPLACER, SUPPRIMERTOUT
 }

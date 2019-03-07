@@ -72,11 +72,15 @@ public class Modele {
 	}
 	
 	public void removePoint(Point p) {
+		for (int i = segments.size()-1; i>=0; i--) {
+			if (segments.get(i).getPoint1() == p || segments.get(i).getPoint2() == p)
+				removeSegment(i);
+		}
 		points.remove(p);
 	}
 	
-	public void removePoint(int i) {
-		points.remove(i);
+	public void removePoint(int nb) {
+		removePoint(points.get(nb));
 	}
 	
 	public void removeSegment(Segment s) {
@@ -88,7 +92,7 @@ public class Modele {
 	}
 	
 	public void supprimerTout() {
-		points = new ArrayList<Point>();
-		segments = new ArrayList<Segment>();
+		points.clear();
+		segments.clear();
 	}
 }

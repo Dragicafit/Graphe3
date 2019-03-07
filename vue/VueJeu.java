@@ -2,6 +2,8 @@ package vue;
 
 import java.util.LinkedList;
 
+import javafx.geometry.Orientation;
+import javafx.scene.control.SplitPane;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
@@ -13,15 +15,16 @@ import modele.point.PointCouleur;
 import modele.segment.SegmentCouleur;
 
 public abstract class VueJeu extends Vue {
-
-	public double clickX;
-	public double clickY;
-
+	public SplitPane main;
 	public BorderPane menu;
 	public Pane graphe;
 
 	public VueJeu(Modele m) {
 		super(m);
+		creationBouton();
+		main = new SplitPane();
+		main.setOrientation(Orientation.HORIZONTAL);
+		main.setDividerPositions(0.);
 		menu = new BorderPane();
 		menu.setStyle("-fx-padding: 10;" + "-fx-border-style: solid inside;" + "-fx-border-width: 2;"
 				+ "-fx-border-insets: 5;" + "-fx-border-radius: 5;" + "-fx-border-color: black;");
@@ -30,7 +33,10 @@ public abstract class VueJeu extends Vue {
 		graphe.setStyle("-fx-padding: 10;" + "-fx-border-style: solid inside;" + "-fx-border-width: 2;"
 				+ "-fx-border-insets: 5;" + "-fx-border-radius: 5;" + "-fx-border-color: black;");
 		graphe.addEventHandler(MouseEvent.MOUSE_CLICKED, controleur);
-		root.setCenter(graphe);
+		menu.maxWidthProperty().bind(main.widthProperty().multiply(0.12));
+		menu.minWidthProperty().bind(main.widthProperty().multiply(0.12));
+		main.getItems().addAll(menu, graphe);
+		root.setCenter(main);
 	}
 
 	public Pane getGraphe() {
@@ -42,45 +48,15 @@ public abstract class VueJeu extends Vue {
 		majListe();
 	}
 
-	public void effacerPoints() {
-		if (cercles != null) {
-			for (Circle c : cercles) {
-				c.setVisible(false);
-			}
-			cercles.clear();
-		}
-	}
-
-	public void effacerSegments() {
-		if (lignes != null) {
-			for (Line l : lignes) {
-				l.setVisible(false);
-			}
-			lignes.clear();
-		}
-	}
-
 	public void effacerTout() {
-		effacerPoints();
-		effacerSegments();
+		graphe.getChildren().clear();
+		cercles.clear();
+		lignes.clear();
 	}
 
 	public void majListe() {
 		effacerTout();
 		if (modele != null) {
-			for (int i = 0; i < modele.getSizePoints(); i++) {
-				Circle c = new Circle(modele.getPoint(i).getX(), modele.getPoint(i).getY(), 15);
-				if (modele.getPoint(i) instanceof PointCouleur) {
-					c.setFill(((PointCouleur) modele.getPoint(i)).getCouleur());
-				} else {
-					c.setFill(Color.WHITE);
-				}
-				c.setStroke(Color.BLACK);
-				c.setStrokeWidth(3);
-				c.setVisible(true);
-				cercles.add(c);
-
-			}
 			for (int i = 0; i < modele.getSizeSegments(); i++) {
 				Line l = new Line(modele.getSegment(i).getPoint1().getX(), modele.getSegment(i).getPoint1().getY(),
 						modele.getSegment(i).getPoint2().getX(), modele.getSegment(i).getPoint2().getY());
@@ -91,7 +67,23 @@ public abstract class VueJeu extends Vue {
 				}
 				l.setStrokeWidth(2);
 				l.setVisible(true);
+				l.addEventHandler(MouseEvent.MOUSE_CLICKED, controleur);
 				lignes.add(l);
+				this.graphe.getChildren().add(l);
+			}
+			for (int i = 0; i < modele.getSizePoints(); i++) {
+				Circle c = new Circle(modele.getPoint(i).getX(), modele.getPoint(i).getY(), 15);
+				if (modele.getPoint(i) instanceof PointCouleur) {
+					c.setFill(((PointCouleur) modele.getPoint(i)).getCouleur());
+				} else {
+					c.setFill(Color.WHITE);
+				}
+				c.setStroke(Color.BLACK);
+				c.setStrokeWidth(3);
+				c.setVisible(true);
+				c.addEventHandler(MouseEvent.MOUSE_CLICKED, controleur);
+				cercles.add(c);
+				this.graphe.getChildren().add(c);
 			}
 		}
 	}

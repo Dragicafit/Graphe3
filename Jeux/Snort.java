@@ -1,35 +1,39 @@
 package Jeux;
 
-import modele.Modele;
+import javafx.scene.shape.Circle;
+import modele.Joueur;
 import regles.Regles;
+import vue.Vue;
 import modele.point.*;
 
 public class Snort extends Jeux{
 	
 	private boolean mode_jeu; //True = ne pas jouer a coté ennemis, a coté de soit sinon
 	
-	public Snort(Regles r, boolean mode_jeu, Modele m, Vue vue) {
-		super("Snort", r, m, vue);
+	public Snort(Regles r, boolean mode_jeu, Vue vue) {
+		super("Snort", r, vue);
 		this.mode_jeu = mode_jeu;
 	}
-
+	
 	@Override
-	public void Jeu() {
-		while(!end_game()) {
-			int j = m.getJoueurCourant();
-			tour(j);
+	public void tour(int nb) {
+		Joueur j = m.getJoueur(nb);
+		attente();
+		Object source = event.getSource();
+		if (source instanceof Circle && vue.getCercles().contains((Circle) source)) {
+			Point point = m.getPoint(vue.getCercles().indexOf((Circle) source));
+			if(check_regles(point)) {
+				(ControleurJeu) vue.getControleur().applique(event);
+			}
 		}
-		
 	}
 	
-	public void tour(int nb) {
-		
-	}
+	
 
 	@Override
 	public boolean end_game() {
 		boolean b = false;
-		for(int i = 0; i< 4/*m.getSize_points()*/; i++ ) {
+		for(int i = 0; i< m.getSizePoints(); i++ ) {
 			Point p = m.getPoint(i);
 			if(mode_jeu && !regles.check_cote_ennemi(p)) {
 					b = true;

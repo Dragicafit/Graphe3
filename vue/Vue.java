@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import Jeux.Jeux;
 import controleur.Controleur;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -12,7 +13,9 @@ import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
 import javafx.stage.Stage;
 import modele.Modele;
-
+import modele.point.Point;
+import regles.Regles;
+import Jeux.Snort;
 public abstract class Vue {
 
 	protected Modele modele;
@@ -34,7 +37,7 @@ public abstract class Vue {
 		primaryStage.setTitle("Vue Generale");
 		primaryStage.setMaximized(true);
 		primaryStage.show();
-		controleur = new Controleur(this);
+		controleur = new Controleur(this, new Snort(new Regles(modele,true,true,true,true), false, this));
 	}
 	
 	public abstract void update();
@@ -57,5 +60,9 @@ public abstract class Vue {
 	
 	public Map<Button, String> getBoutons() {
 		return boutons;
+	}
+	
+	public Controleur getControleur() {
+		return controleur;
 	}
 }

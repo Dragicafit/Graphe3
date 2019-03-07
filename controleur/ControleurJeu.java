@@ -3,6 +3,7 @@ package controleur;
 import java.util.HashMap;
 import java.util.Map;
 
+import Jeux.Jeux;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
@@ -18,14 +19,16 @@ import modele.segment.SegmentCouleur;
 import vue.Vue;
 import vue.VueJeu;
 
-public class Controleur implements EventHandler<MouseEvent> {
+public class ControleurJeu implements EventHandler<MouseEvent> {
 	protected Modele modele;
 	protected Vue vue;
 	protected Joueur joueur;
 	protected Bouton bouton;
 	protected Map <String, Bouton> boutons;
+	protected Jeux jeu;
 
-	public Controleur(Vue vue) {
+	public ControleurJeu(Vue vue, Jeux jeu) {
+		this.jeu = jeu;
 		this.modele = vue.getModele();
 		this.vue = vue;
 		boutons = new HashMap<>();
@@ -38,9 +41,8 @@ public class Controleur implements EventHandler<MouseEvent> {
 		boutons.put("deplacer", Bouton.DEPLACER);
 		boutons.put("supprimer tout", Bouton.SUPPRIMERTOUT);
 	}
-
-	@Override
-	public void handle(MouseEvent event) {
+	
+	public void applique(MouseEvent event) {
 		Object source = event.getSource();
 		if (source instanceof Circle && vue.getCercles().contains((Circle) source)) {
 			Point point = modele.getPoint(vue.getCercles().indexOf((Circle) source));
@@ -69,6 +71,12 @@ public class Controleur implements EventHandler<MouseEvent> {
 			bouton = boutons.get(vue.getBoutons((Button) source));
 		}
 		vue.update();
+	}
+
+	@Override
+	public void handle(MouseEvent event) {
+		jeu.setEvent(event);
+		
 	}
 }
 

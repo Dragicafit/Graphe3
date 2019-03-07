@@ -1,15 +1,11 @@
 package controleur;
 
 
-import java.util.Map;
-
 import Jeux.Jeux;
 import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
-import modele.Joueur;
-import modele.Modele;
 import modele.point.Point;
 import modele.point.PointCouleur;
 import modele.segment.Segment;
@@ -17,11 +13,7 @@ import modele.segment.SegmentCouleur;
 import vue.Vue;
 
 public class ControleurJeu extends Controleur{
-	protected Modele modele;
-	protected Vue vue;
-	protected Joueur joueur;
-	protected Bouton bouton;
-	protected Map <String, Bouton> boutons;
+	
 	protected Jeux jeu;
 
 	public ControleurJeu(Vue vue, Jeux jeu) {

@@ -39,7 +39,7 @@ public class VuePlateauJeu extends VueJeu {
 
 	@Override
 	public Controleur creationControleur() {
-		return 	new ControleurJeu(this, new Snort(new Regles(modele,true,true,true,true), false, this));
+		return new ControleurJeu(this, new Snort(new Regles(modele,true,true,true,true), false, this));
 
 	}
 

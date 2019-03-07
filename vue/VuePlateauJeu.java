@@ -1,11 +1,14 @@
 package vue;
 
+import Jeux.Jeux;
+import Jeux.Snort;
 import controleur.Controleur;
 import controleur.ControleurJeu;
 import javafx.scene.control.Button;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import modele.Modele;
+import regles.Regles;
 
 public class VuePlateauJeu extends VueJeu {
 
@@ -37,7 +40,8 @@ public class VuePlateauJeu extends VueJeu {
 
 	@Override
 	public Controleur creationControleur() {
-		return new ControleurJeu(this);
+		Jeux jeu = new Snort(new Regles(modele, true, true, true, true), false, this);
+		jeu.start();
+		return new ControleurJeu(this, jeu);
 	}
-
 }

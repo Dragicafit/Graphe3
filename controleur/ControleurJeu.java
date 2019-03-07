@@ -1,5 +1,6 @@
 package controleur;
 
+import Jeux.Jeux;
 import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.shape.Circle;
@@ -12,14 +13,16 @@ import vue.Vue;
 
 public class ControleurJeu extends Controleur {
 
-	public ControleurJeu(Vue vue) {
+	protected Jeux jeu;
+
+	public ControleurJeu(Vue vue, Jeux jeu) {
 		super(vue);
+		this.jeu = jeu;
 		this.boutons.put("colorier", Bouton.COLORIER);
 		this.boutons.put("deplacer", Bouton.DEPLACER);
 	}
 
-	@Override
-	public void handle(MouseEvent event) {
+	public void applique(MouseEvent event) {
 		Object source = event.getSource();
 		if (source instanceof Circle && vue.getCercles().contains(source)) {
 			Point point = modele.getPoint(vue.getCercles().indexOf(source));
@@ -35,5 +38,10 @@ public class ControleurJeu extends Controleur {
 			bouton = boutons.get(vue.getBoutons((Button) source));
 		}
 		vue.update();
+	}
+
+	@Override
+	public void handle(MouseEvent event) {
+		jeu.setEvent(event);
 	}
 }

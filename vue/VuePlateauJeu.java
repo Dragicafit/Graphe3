@@ -1,5 +1,6 @@
 package vue;
 
+import Jeux.Jeux;
 import Jeux.Snort;
 import controleur.Controleur;
 import controleur.ControleurJeu;
@@ -39,8 +40,8 @@ public class VuePlateauJeu extends VueJeu {
 
 	@Override
 	public Controleur creationControleur() {
-		return new ControleurJeu(this, new Snort(new Regles(modele,true,true,true,true), false, this));
-
+		Jeux jeu = new Snort(new Regles(modele, true, true, true, true), false, this);
+		jeu.start();
+		return new ControleurJeu(this, jeu);
 	}
-
 }

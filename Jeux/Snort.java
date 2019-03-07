@@ -17,9 +17,9 @@ public class Snort extends Jeux {
 	}
 
 	@Override
-	public void tour(int nb) {
+	public synchronized void tour(int nb) throws InterruptedException {
 		Joueur j = m.getJoueur(nb);
-		attente();
+		wait();
 		Object source = event.getSource();
 		if (source instanceof Circle && vue.getCercles().contains((Circle) source)) {
 			Point point = m.getPoint(vue.getCercles().indexOf((Circle) source));

@@ -6,7 +6,7 @@ import modele.point.Point;
 import regles.Regles;
 import vue.Vue;
 
-public abstract class Jeux {
+public abstract class Jeux extends Thread {
 
 	protected String nom;
 	protected Regles regles;
@@ -20,33 +20,28 @@ public abstract class Jeux {
 		this.m = vue.getModele();
 		this.vue = vue;
 		this.event = null;
-
 	}
 
-	public abstract void tour(int nb);
+	public abstract void tour(int nb) throws InterruptedException;
 
-	public void jeu() {
-		while (!end_game()) {
-			int j = m.getJoueurCourant();
-			tour(j);
+	@Override
+	public void run() {
+		try {
+			while (!end_game()) {
+				int j = m.getJoueurCourant();
+				tour(j);
+			}
+		} catch (InterruptedException e) {
+			e.printStackTrace();
 		}
 	}
 
-	public void setEvent(MouseEvent event) {
+	public synchronized void setEvent(MouseEvent event) {
 		this.event = event;
+		notify();
 	}
 
 	public abstract boolean end_game();
 
 	public abstract boolean check_regles(Point p);
-
-	public void attente() {
-		while (event == null) {
-			try {
-				Thread.sleep(200);
-			} catch (InterruptedException e) {
-			}
-
-		}
-	}
 }

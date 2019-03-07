@@ -45,7 +45,7 @@ public class ControleurCreationGaphe extends Controleur {
 					premierPoint = modele.getPoint(vue.getCercles().indexOf(source));
 				} else {
 					this.modele.addSegment(
-							new Segment(premierPoint, modele.getPoint(vue.getCercles().indexOf((Circle) source))));
+							new SegmentCouleur(premierPoint, modele.getPoint(vue.getCercles().indexOf((Circle) source)), Color.BLACK));
 					premierPoint = null;
 				}
 			}

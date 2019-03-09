@@ -44,7 +44,6 @@ public class ControleurJeu extends Controleur {
 			bouton = boutons.get(vue.getBoutons((Button) source));
 		} else {
 			jeu.setEvent(event);
-			jeu.run();
 		}
 		vue.update();
 	}

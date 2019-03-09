@@ -28,7 +28,6 @@ public abstract class Jeux extends Thread {
 			while (!end_game()) {
 				int j = m.getJoueurCourant();
 				tour(j);
-				vue.update();
 				m.setJoueurCourant((j++)%m.getNbJoueurs());
 			}
 		} catch (InterruptedException e) {

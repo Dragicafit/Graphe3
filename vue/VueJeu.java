@@ -55,7 +55,7 @@ public abstract class VueJeu extends Vue {
 	}
 
 	public void majListe() {
-		if (modele != null)
+		if (modele == null)
 			return;
 		for (int i = 0; i < modele.getSizeSegments(); i++) {
 			Line l = new Line(modele.getSegment(i).getPoint1().getX(), modele.getSegment(i).getPoint1().getY(),

@@ -2,10 +2,9 @@ package Jeux;
 
 import controleur.ControleurJeu;
 import javafx.scene.shape.Circle;
-import modele.Joueur;
+import modele.point.Point;
 import regles.Regles;
 import vue.Vue;
-import modele.point.*;
 
 public class Snort extends Jeux {
 
@@ -18,7 +17,6 @@ public class Snort extends Jeux {
 
 	@Override
 	public synchronized void tour(int nb) throws InterruptedException {
-		Joueur j = m.getJoueur(nb);
 		wait();
 		Object source = event.getSource();
 		if (source instanceof Circle && vue.getCercles().contains((Circle) source)) {

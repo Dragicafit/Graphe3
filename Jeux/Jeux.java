@@ -22,14 +22,14 @@ public abstract class Jeux extends Thread {
 		this.event = null;
 	}
 
-	public abstract void tour(int nb) throws InterruptedException;
-
 	@Override
 	public void run() {
 		try {
 			while (!end_game()) {
 				int j = m.getJoueurCourant();
 				tour(j);
+				vue.update();
+				m.setJoueurCourant((j++)%m.getNbJoueurs());
 			}
 		} catch (InterruptedException e) {
 			e.printStackTrace();
@@ -42,6 +42,8 @@ public abstract class Jeux extends Thread {
 	}
 
 	public abstract boolean end_game();
+	
+	public abstract void tour(int nb) throws InterruptedException;
 
 	public abstract boolean check_regles(Point p);
 }

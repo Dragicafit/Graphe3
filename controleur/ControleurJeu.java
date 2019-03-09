@@ -34,14 +34,18 @@ public class ControleurJeu extends Controleur {
 			if (segment instanceof SegmentCouleur && bouton == Bouton.COLORIER) {
 				((SegmentCouleur) segment).setCouleur(modele.getJoueur(modele.getJoueurCourant()).getCouleur());
 			}
-		} else if (source instanceof Button && vue.getBoutons().containsKey(source)) {
-			bouton = boutons.get(vue.getBoutons((Button) source));
 		}
-		vue.update();
 	}
 
 	@Override
 	public void handle(MouseEvent event) {
-		jeu.setEvent(event);
+		Object source = event.getSource();
+		if (source instanceof Button && vue.getBoutons().containsKey(source)) {
+			bouton = boutons.get(vue.getBoutons((Button) source));
+		} else {
+			jeu.setEvent(event);
+			jeu.run();
+		}
+		vue.update();
 	}
 }

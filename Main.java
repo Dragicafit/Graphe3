@@ -16,7 +16,8 @@ public class Main extends Application {
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 		Modele m = new Modele();
-		m.addJoueur(new Joueur("test", Color.BLUEVIOLET));
+		m.addJoueur(new Joueur("j1", Color.RED));
+		m.addJoueur(new Joueur("j2", Color.BLUE));
 		new VueCreationGraphe(m);
 		new VuePlateauJeu(m);
 	}

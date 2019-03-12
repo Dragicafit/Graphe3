@@ -1,5 +1,6 @@
 package regles;
 
+import javafx.scene.paint.Color;
 import modele.*;
 import modele.point.*;
 
@@ -26,6 +27,8 @@ public class Regles {
 			if (v instanceof PointCouleur) {
 				PointCouleur pc = (PointCouleur) v;
 				if(pc.getCouleur() == J.getCouleur()) { return true; }
+			} else {
+				return true;
 			}
 		}
 		return false;
@@ -36,7 +39,7 @@ public class Regles {
 			Point v = m.getSegment(i).getVoisin(p);
 			if (v instanceof PointCouleur) {
 				PointCouleur pc = (PointCouleur) v;
-				if(pc.getCouleur() != J.getCouleur()) { return true; }
+				if(pc.getCouleur() != J.getCouleur() && pc.getCouleur() != Color.WHITE) { return true; }
 			}
 		}
 		return false;

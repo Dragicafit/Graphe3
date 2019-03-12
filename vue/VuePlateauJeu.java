@@ -35,13 +35,18 @@ public class VuePlateauJeu extends VueJeu {
 		boutons.put(colorier, "colorier");
 		boutons.put(deplacer, "deplacer");
 		this.nomJoueur = new Text();
-		this.nomJoueur.setText("   Inserer le nom  \n     du joueur !!!");
 	}
 
 	@Override
 	public Controleur creationControleur() {
-		Jeux jeu = new Snort(new Regles(modele, true, true, true, true), true, this);
+		Jeux jeu = new Snort(new Regles(modele, true, true, true, true), false, this);
 		jeu.start();
 		return new ControleurJeu(this, jeu);
+	}
+	
+	@Override
+	public void update() {
+		super.update();
+		this.nomJoueur.setText(modele.getJoueur(modele.getJoueurCourant()).getNom());
 	}
 }

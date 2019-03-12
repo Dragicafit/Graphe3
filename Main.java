@@ -23,12 +23,15 @@ public class Main extends Application {
 		Point p1 = new PointCouleur(100, 100, Color.RED);
 		Point p2 = new PointCouleur(200, 200, Color.WHITE);
 		Point p3 = new PointCouleur(100, 200, Color.WHITE);
+		Point p4 = new PointCouleur(300, 200, Color.BLUE);
 		m.addPoint(p1);
 		m.addPoint(p2);
 		m.addPoint(p3);
+		m.addPoint(p4);
 		m.addSegment(new Segment(p1, p2));
 		m.addSegment(new Segment(p2, p3));
 		m.addSegment(new Segment(p1, p3));
+		m.addSegment(new Segment(p4, p2));
 		new VuePlateauJeu(m);
 	}
 }

@@ -19,13 +19,13 @@ public class Regles {
 		this.m = modele;
 	}
 
-	public boolean check_cote_soit(Point p) {
+	public boolean check_cote_soit(PointCouleur p) {
 		Joueur j = m.getJoueur(m.getJoueurCourant());
 		for (int i = 0; i < m.getSize_segments(); i++) {
 			Point v = m.getSegment(i).getVoisin(p);
 			if (v instanceof PointCouleur) {
 				PointCouleur pc = (PointCouleur) v;
-				if(pc.getCouleur().equals(j.getCouleur())) { return true; }
+				if(pc.getCouleur().equals(j.getCouleur()) && p.getCouleur().equals(Color.WHITE)) { return true; }
 			}
 		}
 		return false;
@@ -37,7 +37,7 @@ public class Regles {
 			Point v = m.getSegment(i).getVoisin(p);
 			if (v instanceof PointCouleur) {
 				PointCouleur pc = (PointCouleur) v;
-				if(pc.getCouleur() != j.getCouleur() && pc.getCouleur() != Color.WHITE) { return true; }
+				if(!pc.getCouleur().equals(j.getCouleur()) && !pc.getCouleur().equals(Color.WHITE)) { return true; }
 			}
 		}
 		return false;

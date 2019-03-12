@@ -3,6 +3,8 @@ package Jeux;
 import controleur.ControleurJeu;
 import javafx.scene.shape.Circle;
 import modele.point.Point;
+import modele.point.PointCouleur;
+import modele.segment.SegmentCouleur;
 import regles.Regles;
 import vue.Vue;
 
@@ -20,9 +22,9 @@ public class Snort extends Jeux {
 		wait();
 		Object source = event.getSource();
 		if (source instanceof Circle && vue.getCercles().contains((Circle) source)) {
-			Point point = m.getPoint(vue.getCercles().indexOf((Circle) source));
+			PointCouleur point = (PointCouleur) m.getPoint(vue.getCercles().indexOf((Circle) source));
 			if (check_regles(point)) {
-				((ControleurJeu) vue.getControleur()).applique(event);
+				applique(point);
 			}
 		}
 	}
@@ -30,7 +32,7 @@ public class Snort extends Jeux {
 	@Override
 	public boolean end_game() {
 		for (int i = 0; i < m.getSizePoints(); i++) {
-			Point p = m.getPoint(i);
+			PointCouleur p = (PointCouleur) m.getPoint(i);
 			if (mode_jeu && regles.check_cote_ennemi(p)) {
 				return false;
 			} else if (!mode_jeu && regles.check_cote_soit(p)) {
@@ -44,9 +46,18 @@ public class Snort extends Jeux {
 	public boolean check_regles(Point p) {
 		if (mode_jeu && !regles.check_cote_ennemi(p)) {
 			return true;
-		} else if (!mode_jeu && regles.check_cote_soit(p)) {
+		} else if (!mode_jeu && regles.check_cote_soit((PointCouleur) p)) {
 			return true;
 		}
 		return false;
+	}
+
+	public void applique(Object o) {
+		ControleurJeu c = (ControleurJeu) vue.getControleur();
+		if (o instanceof PointCouleur) {
+			c.applique((PointCouleur) o);
+		} else if (o instanceof SegmentCouleur) {
+			c.applique((SegmentCouleur) o);
+		}
 	}
 }

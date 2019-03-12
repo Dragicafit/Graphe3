@@ -11,7 +11,7 @@ public class Regles {
 	boolean sur_ennemi;
 	boolean estVide;
 
-	public Regles(Modele modele,boolean check_soit, boolean check_ennemi, boolean sur_ennemi, boolean estVide) {
+	public Regles(Modele modele, boolean check_soit, boolean check_ennemi, boolean sur_ennemi, boolean estVide) {
 		this.check_cote_soit = check_soit;
 		this.check_cote_ennemi = check_ennemi;
 		this.sur_ennemi = sur_ennemi;
@@ -25,7 +25,9 @@ public class Regles {
 			Point v = m.getSegment(i).getVoisin(p);
 			if (v instanceof PointCouleur) {
 				PointCouleur pc = (PointCouleur) v;
-				if(pc.getCouleur().equals(j.getCouleur()) && p.getCouleur().equals(Color.WHITE)) { return true; }
+				if (pc.getCouleur().equals(j.getCouleur()) && p.getCouleur().equals(Color.WHITE)) {
+					return true;
+				}
 			}
 		}
 		return false;
@@ -37,7 +39,9 @@ public class Regles {
 			Point v = m.getSegment(i).getVoisin(p);
 			if (v instanceof PointCouleur) {
 				PointCouleur pc = (PointCouleur) v;
-				if(!pc.getCouleur().equals(j.getCouleur()) && !pc.getCouleur().equals(Color.WHITE)) { return true; }
+				if (!pc.getCouleur().equals(j.getCouleur()) && !pc.getCouleur().equals(Color.WHITE)) {
+					return true;
+				}
 			}
 		}
 		return false;
@@ -49,10 +53,14 @@ public class Regles {
 		for (int i = 0; i < m.getSize_segments(); i++) {
 			if (m.getSegment(i).getPoint1() == p) {
 				ennemi = (PointCouleur) m.getSegment(i).getPoint1();
-				if(ennemi.getCouleur() != j.getCouleur() ){ return true; }
+				if (ennemi.getCouleur() != j.getCouleur()) {
+					return true;
+				}
 			} else if (m.getSegment(i).getPoint2() == p) {
 				ennemi = (PointCouleur) m.getSegment(i).getPoint2();
-				 if(ennemi.getCouleur() != j.getCouleur() ){ return true; }
+				if (ennemi.getCouleur() != j.getCouleur()) {
+					return true;
+				}
 			}
 		}
 		return false;
@@ -80,7 +88,9 @@ public class Regles {
 			if (v != null) {
 				if (v != null && v instanceof PointCouleur) {
 					PointCouleur pc = (PointCouleur) v;
-					 if(pc.getCouleur() != j.getCouleur()){ return false; }
+					if (pc.getCouleur() != j.getCouleur()) {
+						return false;
+					}
 				} else if (v != null) {
 					return false;
 				}

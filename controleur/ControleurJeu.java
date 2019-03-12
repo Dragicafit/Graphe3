@@ -23,7 +23,7 @@ public class ControleurJeu extends Controleur {
 			p.setCouleur(modele.getJoueur(modele.getJoueurCourant()).getCouleur());
 		}
 	}
-	
+
 	public void applique(PointCouleur p, double x, double y) {
 		if (bouton == Bouton.DEPLACER) {
 			p.setX(x);

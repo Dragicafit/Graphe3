@@ -35,6 +35,7 @@ public class ControleurJeu extends Controleur {
 				((SegmentCouleur) segment).setCouleur(modele.getJoueur(modele.getJoueurCourant()).getCouleur());
 			}
 		}
+		vue.update();
 	}
 
 	@Override
@@ -45,6 +46,6 @@ public class ControleurJeu extends Controleur {
 		} else {
 			jeu.setEvent(event);
 		}
-		vue.update();
+		event.consume();
 	}
 }

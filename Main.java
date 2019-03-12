@@ -8,7 +8,6 @@ import modele.Modele;
 import modele.point.Point;
 import modele.point.PointCouleur;
 import modele.segment.Segment;
-import vue.VueCreationGraphe;
 import vue.VuePlateauJeu;
 
 public class Main extends Application {
@@ -23,7 +22,7 @@ public class Main extends Application {
 		Modele m = new Modele();
 		m.addJoueur(new Joueur("j1", Color.RED));
 		m.addJoueur(new Joueur("j2", Color.BLUE));
-		Point p1 = new PointCouleur(100, 100, Color.WHITE);
+		Point p1 = new PointCouleur(100, 100, Color.RED);
 		Point p2 = new PointCouleur(200, 200, Color.WHITE);
 		Point p3 = new PointCouleur(100, 200, Color.WHITE);
 		m.addPoint(p1);

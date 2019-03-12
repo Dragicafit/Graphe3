@@ -29,23 +29,22 @@ public class Snort extends Jeux {
 
 	@Override
 	public boolean end_game() {
-		boolean b = false;
 		for (int i = 0; i < m.getSizePoints(); i++) {
 			Point p = m.getPoint(i);
-			if (mode_jeu && !regles.check_cote_ennemi(p)) {
-				b = true;
-			} else if (!regles.check_cote_soit(p)) {
-				b = true;
+			if (mode_jeu && regles.check_cote_ennemi(p)) {
+				return false;
+			} else if (!mode_jeu && regles.check_cote_soit(p)) {
+				return false;
 			}
 		}
-		return b;
+		return true;
 	}
 
 	@Override
 	public boolean check_regles(Point p) {
 		if (mode_jeu && !regles.check_cote_ennemi(p)) {
 			return true;
-		} else if (!mode_jeu && !regles.check_cote_soit(p)) {
+		} else if (!mode_jeu && regles.check_cote_soit(p)) {
 			return true;
 		}
 		return false;

@@ -41,11 +41,11 @@ public class Segment {
 	public void setOriente(boolean oriente) {
 		this.oriente = oriente;
 	}
-	
+
 	public Point getVoisin(Point p) {
-		if(point1 == p) {
+		if (point1 == p) {
 			return point2;
-		}else if(point2 == p) {
+		} else if (point2 == p) {
 			return point1;
 		}
 		return null;

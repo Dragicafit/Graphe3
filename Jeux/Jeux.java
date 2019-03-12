@@ -28,7 +28,7 @@ public abstract class Jeux extends Thread {
 			while (!end_game()) {
 				int j = m.getJoueurCourant();
 				tour(j);
-				m.setJoueurCourant((j++)%m.getNbJoueurs());
+				m.setJoueurCourant((j+1)%m.getNbJoueurs());
 			}
 		} catch (InterruptedException e) {
 			e.printStackTrace();

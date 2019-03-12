@@ -2,6 +2,7 @@ package vue;
 
 import java.util.LinkedList;
 
+import javafx.application.Platform;
 import javafx.geometry.Orientation;
 import javafx.scene.control.SplitPane;
 import javafx.scene.input.MouseEvent;
@@ -44,8 +45,14 @@ public abstract class VueJeu extends Vue {
 	}
 
 	public void update() {
-		effacerTout();
-		majListe();
+		Platform.runLater(new Runnable(){
+			@Override
+			public void run() {
+				effacerTout();
+				majListe();
+			}
+		});
+
 	}
 
 	public void effacerTout() {

@@ -1,5 +1,3 @@
-
-
 import javafx.application.Application;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
@@ -33,5 +31,4 @@ public class Main extends Application {
 		m.addSegment(new Segment(p1, p3));
 		new VuePlateauJeu(m);
 	}
-
 }

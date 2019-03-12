@@ -1,11 +1,11 @@
 package regles;
 
+import javafx.scene.paint.Color;
 import modele.*;
 import modele.point.*;
 
 public class Regles {
 	public Modele m;
-	Joueur J;
 	boolean check_cote_soit;
 	boolean check_cote_ennemi;
 	boolean sur_ennemi;
@@ -17,40 +17,42 @@ public class Regles {
 		this.sur_ennemi = sur_ennemi;
 		this.estVide = estVide;
 		this.m = modele;
-		this.J = m.getJoueur(m.getJoueurCourant());
 	}
 
 	public boolean check_cote_soit(Point p) {
+		Joueur j = m.getJoueur(m.getJoueurCourant());
 		for (int i = 0; i < m.getSize_segments(); i++) {
 			Point v = m.getSegment(i).getVoisin(p);
 			if (v instanceof PointCouleur) {
 				PointCouleur pc = (PointCouleur) v;
-				if(pc.getCouleur() == J.getCouleur()) { return true; }
+				if(pc.getCouleur().equals(j.getCouleur())) { return true; }
 			}
 		}
 		return false;
 	}
 
 	public boolean check_cote_ennemi(Point p) {
+		Joueur j = m.getJoueur(m.getJoueurCourant());
 		for (int i = 0; i < m.getSize_segments(); i++) {
 			Point v = m.getSegment(i).getVoisin(p);
 			if (v instanceof PointCouleur) {
 				PointCouleur pc = (PointCouleur) v;
-				if(pc.getCouleur() != J.getCouleur()) { return true; }
+				if(pc.getCouleur() != j.getCouleur() && pc.getCouleur() != Color.WHITE) { return true; }
 			}
 		}
 		return false;
 	}
 
 	public boolean sur_ennemi(Point p) {
+		Joueur j = m.getJoueur(m.getJoueurCourant());
 		PointCouleur ennemi;
 		for (int i = 0; i < m.getSize_segments(); i++) {
 			if (m.getSegment(i).getPoint1() == p) {
 				ennemi = (PointCouleur) m.getSegment(i).getPoint1();
-				if(ennemi.getCouleur() != J.getCouleur() ){ return true; }
+				if(ennemi.getCouleur() != j.getCouleur() ){ return true; }
 			} else if (m.getSegment(i).getPoint2() == p) {
 				ennemi = (PointCouleur) m.getSegment(i).getPoint2();
-				 if(ennemi.getCouleur() != J.getCouleur() ){ return true; }
+				 if(ennemi.getCouleur() != j.getCouleur() ){ return true; }
 			}
 		}
 		return false;
@@ -72,12 +74,13 @@ public class Regles {
 	}
 
 	public boolean allAround(Point p) {
+		Joueur j = m.getJoueur(m.getJoueurCourant());
 		for (int i = 0; i < m.getSize_segments(); i++) {
 			Point v = m.getSegment(i).getVoisin(p);
 			if (v != null) {
 				if (v != null && v instanceof PointCouleur) {
 					PointCouleur pc = (PointCouleur) v;
-					 if(pc.getCouleur() != J.getCouleur()){ return false; }
+					 if(pc.getCouleur() != j.getCouleur()){ return false; }
 				} else if (v != null) {
 					return false;
 				}

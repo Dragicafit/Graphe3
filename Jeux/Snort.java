@@ -2,10 +2,9 @@ package Jeux;
 
 import controleur.ControleurJeu;
 import javafx.scene.shape.Circle;
-import modele.Joueur;
+import modele.point.Point;
 import regles.Regles;
 import vue.Vue;
-import modele.point.*;
 
 public class Snort extends Jeux {
 
@@ -18,7 +17,6 @@ public class Snort extends Jeux {
 
 	@Override
 	public synchronized void tour(int nb) throws InterruptedException {
-		Joueur j = m.getJoueur(nb);
 		wait();
 		Object source = event.getSource();
 		if (source instanceof Circle && vue.getCercles().contains((Circle) source)) {
@@ -31,23 +29,22 @@ public class Snort extends Jeux {
 
 	@Override
 	public boolean end_game() {
-		boolean b = false;
 		for (int i = 0; i < m.getSizePoints(); i++) {
 			Point p = m.getPoint(i);
-			if (mode_jeu && !regles.check_cote_ennemi(p)) {
-				b = true;
-			} else if (!regles.check_cote_soit(p)) {
-				b = true;
+			if (mode_jeu && regles.check_cote_ennemi(p)) {
+				return false;
+			} else if (!mode_jeu && regles.check_cote_soit(p)) {
+				return false;
 			}
 		}
-		return b;
+		return true;
 	}
 
 	@Override
 	public boolean check_regles(Point p) {
 		if (mode_jeu && !regles.check_cote_ennemi(p)) {
 			return true;
-		} else if (!mode_jeu && !regles.check_cote_soit(p)) {
+		} else if (!mode_jeu && regles.check_cote_soit(p)) {
 			return true;
 		}
 		return false;

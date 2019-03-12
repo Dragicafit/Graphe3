@@ -71,6 +71,10 @@ public class Modele {
 		return segments.size();
 	}
 	
+	public int getNbJoueurs() {
+		return joueurs.size();
+	}
+	
 	public void removePoint(Point p) {
 		for (int i = segments.size()-1; i>=0; i--) {
 			if (segments.get(i).getPoint1() == p || segments.get(i).getPoint2() == p)

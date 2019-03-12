@@ -20,7 +20,7 @@ public class VuePlateauJeu extends VueJeu {
 	public VuePlateauJeu(Modele m) {
 		super(m);
 		creationBouton();
-		majListe();
+		update();
 		super.primaryStage.setTitle("Lets GO !!!");
 		menuJeu = new VBox();
 		menuJeu.getChildren().addAll(this.nomJoueur, this.colorier, this.deplacer);
@@ -40,7 +40,7 @@ public class VuePlateauJeu extends VueJeu {
 
 	@Override
 	public Controleur creationControleur() {
-		Jeux jeu = new Snort(new Regles(modele, true, true, true, true), false, this);
+		Jeux jeu = new Snort(new Regles(modele, true, true, true, true), true, this);
 		jeu.start();
 		return new ControleurJeu(this, jeu);
 	}

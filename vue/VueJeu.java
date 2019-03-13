@@ -4,10 +4,13 @@ import java.util.LinkedList;
 
 import javafx.application.Platform;
 import javafx.geometry.Orientation;
+import javafx.geometry.Pos;
+import javafx.scene.control.Button;
 import javafx.scene.control.SplitPane;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
@@ -15,18 +18,29 @@ import modele.Modele;
 import modele.point.PointCouleur;
 import modele.segment.SegmentCouleur;
 
-public abstract class VueJeu extends Vue {
+public abstract class VueJeu extends VueRetour {
 	public SplitPane main;
 	public BorderPane menu;
+	public VBox top;
+	public VBox bottom;
 	public Pane graphe;
 
 	public VueJeu(Modele m) {
 		super(m);
-		creationBouton();
+		top = new VBox();
+		bottom = new VBox();
 		main = new SplitPane();
 		main.setOrientation(Orientation.HORIZONTAL);
 		main.setDividerPositions(0.);
 		menu = new BorderPane();
+		top.setSpacing(20);
+		top.setAlignment(Pos.CENTER);
+		bottom.setSpacing(20);
+		bottom.setAlignment(Pos.CENTER);
+		bottom.setStyle("-fx-padding: 10;");
+		bottom.getChildren().addAll(sauvegarder, retour);
+		menu.setTop(top);
+		menu.setBottom(bottom);
 		menu.setStyle("-fx-padding: 10;" + "-fx-border-style: solid inside;" + "-fx-border-width: 2;"
 				+ "-fx-border-insets: 5;" + "-fx-border-radius: 5;" + "-fx-border-color: black;");
 		root.setLeft(menu);
@@ -34,8 +48,8 @@ public abstract class VueJeu extends Vue {
 		graphe.setStyle("-fx-padding: 10;" + "-fx-border-style: solid inside;" + "-fx-border-width: 2;"
 				+ "-fx-border-insets: 5;" + "-fx-border-radius: 5;" + "-fx-border-color: black;");
 		graphe.addEventHandler(MouseEvent.MOUSE_CLICKED, controleur);
-		menu.maxWidthProperty().bind(main.widthProperty().multiply(0.12));
-		menu.minWidthProperty().bind(main.widthProperty().multiply(0.12));
+		menu.maxWidthProperty().set(150.);
+		menu.minWidthProperty().set(150.);
 		main.getItems().addAll(menu, graphe);
 		root.setCenter(main);
 	}
@@ -45,7 +59,7 @@ public abstract class VueJeu extends Vue {
 	}
 
 	public void update() {
-		Platform.runLater(new Runnable(){
+		Platform.runLater(new Runnable() {
 			@Override
 			public void run() {
 				effacerTout();
@@ -61,6 +75,13 @@ public abstract class VueJeu extends Vue {
 		lignes.clear();
 	}
 
+	@Override
+	public Button creerBouton(String nom) {
+		Button b = super.creerBouton(nom);
+		b.setMaxWidth(Double.MAX_VALUE);
+		return b;
+	}
+
 	public void majListe() {
 		if (modele == null)
 			return;
@@ -72,7 +93,7 @@ public abstract class VueJeu extends Vue {
 			} else {
 				l.setStroke(Color.BLACK);
 			}
-			l.setStrokeWidth(2);
+			l.setStrokeWidth(3);
 			l.setVisible(true);
 			l.addEventHandler(MouseEvent.MOUSE_CLICKED, controleur);
 			lignes.add(l);
@@ -99,7 +120,4 @@ public abstract class VueJeu extends Vue {
 			l.get(i).toFront();
 		}
 	}
-
-	public abstract void creationBouton();
-
 }

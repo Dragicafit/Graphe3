@@ -33,18 +33,20 @@ public abstract class Vue {
 		cercles = new ArrayList<Circle>();
 		lignes = new ArrayList<Line>();
 		boutons = new HashMap<>();
+		this.controleur = creationControleur();
+		creationBouton();
 		root.setStyle("-fx-padding: 10;");
 		primaryStage.setScene(scene);
 		primaryStage.setTitle("Vue Generale");
 		primaryStage.setMaximized(true);
 		primaryStage.show();
-		this.controleur = creationControleur();
 	}
+
+	public abstract void creationBouton();
 
 	public Button creerBouton(String nom) {
 		Button b = new Button(nom);
-		b.setMaxWidth(Double.MAX_VALUE);
-		b.setAlignment(Pos.TOP_CENTER);
+		b.setAlignment(Pos.CENTER);
 		b.addEventHandler(MouseEvent.MOUSE_CLICKED, controleur);
 		return b;
 	}

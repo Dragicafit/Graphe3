@@ -6,6 +6,7 @@ import modele.Modele;
 import modele.point.Point;
 import modele.point.PointCouleur;
 import modele.segment.Segment;
+import vue.VueCreationGraphe;
 import vue.VuePlateauJeu;
 
 public class Main extends Application {
@@ -18,6 +19,7 @@ public class Main extends Application {
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 		Modele m = new Modele();
+		Modele m2 = new Modele();
 		m.addJoueur(new Joueur("j1", Color.RED));
 		m.addJoueur(new Joueur("j2", Color.BLUE));
 		Point p1 = new PointCouleur(200, 100, Color.WHITE);
@@ -53,6 +55,6 @@ public class Main extends Application {
 		m.addSegment(new Segment(p8, p4));
 		m.addSegment(new Segment(p3, p10));
 		m.addSegment(new Segment(p9, p6));
-		new VuePlateauJeu(m);
+		new VueCreationGraphe(m2);
 	}
 }

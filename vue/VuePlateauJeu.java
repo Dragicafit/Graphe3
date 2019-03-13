@@ -3,7 +3,6 @@ package vue;
 import controleur.Controleur;
 import controleur.ControleurJeu;
 import javafx.scene.control.Button;
-import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import modele.Modele;
 
@@ -12,21 +11,17 @@ public class VuePlateauJeu extends VueJeu {
 	public Button colorier;
 	public Button deplacer;
 	public Text nomJoueur;
-	public VBox menuJeu;
 
 	public VuePlateauJeu(Modele m) {
 		super(m);
 		creationBouton();
 		majListe();
 		super.primaryStage.setTitle("Lets GO !!!");
-		menuJeu = new VBox();
-		menuJeu.getChildren().addAll(this.nomJoueur, this.colorier, this.deplacer);
-		menuJeu.setSpacing(20);
-		menuJeu.setStyle("-fx-padding: 10;");
-		menu.setCenter(menuJeu);
+		top.getChildren().addAll(this.nomJoueur, this.colorier, this.deplacer);
 	}
 
 	public void creationBouton() {
+		super.creationBouton();
 		this.colorier = creerBouton("Colorier");
 		this.deplacer = creerBouton("Déplacer");
 		boutons.put(colorier, "colorier");

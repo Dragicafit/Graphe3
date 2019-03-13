@@ -10,7 +10,7 @@ import vue.Vue;
 
 public class Snort extends Jeux {
 
-	private boolean mode_jeu; // True = ne pas jouer a cot� ennemis, a cot� de soit sinon
+	private boolean mode_jeu; // True = ne pas jouer a coté ennemis, a coté de soit sinon
 
 	public Snort(Regles r, boolean mode_jeu, Vue vue) {
 		super("Snort", r, vue);
@@ -35,9 +35,9 @@ public class Snort extends Jeux {
 	public boolean end_game() {
 		for (int i = 0; i < m.getSizePoints(); i++) {
 			PointCouleur p = (PointCouleur) m.getPoint(i);
-			if (mode_jeu && regles.check_cote_ennemi(p)) {
+			if (mode_jeu && !regles.check_cote_ennemi(p) && regles.check_cote_soit(p)) {
 				return false;
-			} else if (!mode_jeu && regles.check_cote_soit(p)) {
+			} else if (!mode_jeu && !regles.check_cote_soit(p) && regles.check_cote_ennemi(p)) {
 				return false;
 			}
 		}
@@ -46,9 +46,9 @@ public class Snort extends Jeux {
 
 	@Override
 	public boolean check_regles(Point p) {
-		if (mode_jeu && !regles.check_cote_ennemi(p)) {
+		if (mode_jeu && regles.check_cote_soit((PointCouleur)p)) {
 			return true;
-		} else if (!mode_jeu && regles.check_cote_soit((PointCouleur) p)) {
+		} else if (!mode_jeu && !regles.check_cote_soit((PointCouleur) p)) {
 			return true;
 		}
 		return false;
@@ -61,5 +61,11 @@ public class Snort extends Jeux {
 		} else if (o instanceof SegmentCouleur) {
 			c.applique((SegmentCouleur) o);
 		}
+	}
+	
+	@Override
+	public boolean deplacementAvailable() {
+		return false;
+		
 	}
 }

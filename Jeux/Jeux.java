@@ -42,6 +42,8 @@ public abstract class Jeux extends Thread {
 		this.event = event;
 		notify();
 	}
+	
+	public abstract boolean deplacementAvailable();
 
 	public abstract boolean end_game();
 

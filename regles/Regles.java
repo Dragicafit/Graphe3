@@ -33,7 +33,7 @@ public class Regles {
 		return false;
 	}
 
-	public boolean check_cote_ennemi(Point p) {
+	public boolean check_cote_ennemi(PointCouleur p) {
 		Joueur j = m.getJoueur(m.getJoueurCourant());
 		for (int i = 0; i < m.getSize_segments(); i++) {
 			Point v = m.getSegment(i).getVoisin(p);

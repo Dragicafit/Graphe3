@@ -10,7 +10,7 @@ import vue.Vue;
 
 public class Snort extends Jeux {
 
-	private boolean mode_jeu; // True = ne pas jouer a coté ennemis, a coté de soit sinon
+	private boolean mode_jeu; // True = ne pas jouer a cotï¿½ ennemis, a cotï¿½ de soit sinon
 
 	public Snort(Regles r, boolean mode_jeu, Vue vue) {
 		super("Snort", r, vue);
@@ -18,15 +18,17 @@ public class Snort extends Jeux {
 	}
 
 	@Override
-	public synchronized void tour(int nb) throws InterruptedException {
+	public synchronized boolean tour(int nb) throws InterruptedException {
 		wait();
 		Object source = event.getSource();
 		if (source instanceof Circle && vue.getCercles().contains((Circle) source)) {
 			PointCouleur point = (PointCouleur) m.getPoint(vue.getCercles().indexOf((Circle) source));
 			if (check_regles(point)) {
 				applique(point);
+				return true;
 			}
 		}
+		return false;
 	}
 
 	@Override

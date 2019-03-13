@@ -31,7 +31,7 @@ public class VuePlateauJeu extends VueJeu {
 
 	public void creationBouton() {
 		this.colorier = creerBouton("Colorier");
-		this.deplacer = creerBouton("DÃ©placer");
+		this.deplacer = creerBouton("Déplacer");
 		boutons.put(colorier, "colorier");
 		boutons.put(deplacer, "deplacer");
 		this.nomJoueur = new Text();

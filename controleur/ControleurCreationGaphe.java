@@ -45,7 +45,7 @@ public class ControleurCreationGaphe extends Controleur {
 					premierPoint = modele.getPoint(vue.getCercles().indexOf(source));
 				} else {
 					addSegment(premierPoint, modele.getPoint(vue.getCercles().indexOf(source)));
-					if (event.isControlDown() && premierPoint != null) {
+					if (event.isControlDown()) {
 						premierPoint = modele.getPoint(vue.getCercles().indexOf(source));
 					} else {
 						premierPoint = null;
@@ -80,19 +80,20 @@ public class ControleurCreationGaphe extends Controleur {
 				addPoint(x, y);
 				premierPoint = modele.getPoint(modele.getSizePoints() - 1);
 			} else if (bouton == Bouton.SEGMENT && premierPoint != null) {
-				if (event.isControlDown()) {
-					addPointSegment(event.getX(), event.getY());
-				} else if (event.isShiftDown()) {
-					if (event.getX() > premierPoint.getX() - 60 && event.getX() < premierPoint.getX() + 60) {
-						addPointSegment(premierPoint.getX(), event.getY());
-					} else if (event.getY() > premierPoint.getY() - 60 && event.getY() < premierPoint.getY() + 60) {
-						addPointSegment(event.getX(), premierPoint.getY());
+				double x = event.getX();
+				double y = event.getY();
+				if (event.isShiftDown()) {
+					if (60 > Math.abs(premierPoint.getX() - x)) {
+						x = premierPoint.getX();
+					} else if (60 > Math.abs(premierPoint.getY() - y)) {
+						y = premierPoint.getY();
 					}
-				} else if (event.isAltDown()) {
-					double x = event.getX();
-					double y = event.getY();
+				}
+				if (event.isAltDown()) {
 					x = premierPoint.getX() + (x - premierPoint.getX()) * 120 / Math.sqrt(Math.pow(x - premierPoint.getX(), 2) + Math.pow(y - premierPoint.getY(), 2));
 					y = premierPoint.getY() + (y - premierPoint.getY()) * 120 / Math.sqrt(Math.pow(x - premierPoint.getX(), 2) + Math.pow(y - premierPoint.getY(), 2));
+				}
+				if (!event.isControlDown()) {
 					addPointSegment(x, y);
 				}
 				premierPoint = modele.getPoint(modele.getSizePoints() - 1);
@@ -123,11 +124,11 @@ public class ControleurCreationGaphe extends Controleur {
 		}
 		this.modele.addPoint(new PointCouleur(x, y, Color.WHITE));
 	}
-	
+
 	public void addSegment(Point p1, Point p2) {
 		this.modele.addSegment(new SegmentCouleur(p1, p2, Color.BLACK));
 	}
-	
+
 	public void addPointSegment(double x, double y) {
 		addPoint(x, y);
 		addSegment(premierPoint, modele.getPoint(modele.getSizePoints() - 1));

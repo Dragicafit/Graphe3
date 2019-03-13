@@ -2,6 +2,7 @@ package vue;
 
 import java.util.LinkedList;
 
+import javafx.application.Platform;
 import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -58,8 +59,14 @@ public abstract class VueJeu extends VueRetour {
 	}
 
 	public void update() {
-		effacerTout();
-		majListe();
+		Platform.runLater(new Runnable(){
+			@Override
+			public void run() {
+				effacerTout();
+				majListe();
+			}
+		});
+
 	}
 
 	public void effacerTout() {
@@ -76,36 +83,35 @@ public abstract class VueJeu extends VueRetour {
 	}
 
 	public void majListe() {
-		effacerTout();
-		if (modele != null) {
-			for (int i = 0; i < modele.getSizeSegments(); i++) {
-				Line l = new Line(modele.getSegment(i).getPoint1().getX(), modele.getSegment(i).getPoint1().getY(),
-						modele.getSegment(i).getPoint2().getX(), modele.getSegment(i).getPoint2().getY());
-				if (modele.getSegment(i) instanceof SegmentCouleur) {
-					l.setStroke(((SegmentCouleur) modele.getSegment(i)).getCouleur());
-				} else {
-					l.setStroke(Color.BLACK);
-				}
-				l.setStrokeWidth(3);
-				l.setVisible(true);
-				l.addEventHandler(MouseEvent.MOUSE_CLICKED, controleur);
-				lignes.add(l);
-				this.graphe.getChildren().add(l);
+		if (modele == null)
+			return;
+		for (int i = 0; i < modele.getSizeSegments(); i++) {
+			Line l = new Line(modele.getSegment(i).getPoint1().getX(), modele.getSegment(i).getPoint1().getY(),
+					modele.getSegment(i).getPoint2().getX(), modele.getSegment(i).getPoint2().getY());
+			if (modele.getSegment(i) instanceof SegmentCouleur) {
+				l.setStroke(((SegmentCouleur) modele.getSegment(i)).getCouleur());
+			} else {
+				l.setStroke(Color.BLACK);
 			}
-			for (int i = 0; i < modele.getSizePoints(); i++) {
-				Circle c = new Circle(modele.getPoint(i).getX(), modele.getPoint(i).getY(), 15);
-				if (modele.getPoint(i) instanceof PointCouleur) {
-					c.setFill(((PointCouleur) modele.getPoint(i)).getCouleur());
-				} else {
-					c.setFill(Color.WHITE);
-				}
-				c.setStroke(Color.BLACK);
-				c.setStrokeWidth(3);
-				c.setVisible(true);
-				c.addEventHandler(MouseEvent.MOUSE_CLICKED, controleur);
-				cercles.add(c);
-				this.graphe.getChildren().add(c);
+			l.setStrokeWidth(3);
+			l.setVisible(true);
+			l.addEventHandler(MouseEvent.MOUSE_CLICKED, controleur);
+			lignes.add(l);
+			this.graphe.getChildren().add(l);
+		}
+		for (int i = 0; i < modele.getSizePoints(); i++) {
+			Circle c = new Circle(modele.getPoint(i).getX(), modele.getPoint(i).getY(), 15);
+			if (modele.getPoint(i) instanceof PointCouleur) {
+				c.setFill(((PointCouleur) modele.getPoint(i)).getCouleur());
+			} else {
+				c.setFill(Color.WHITE);
 			}
+			c.setStroke(Color.BLACK);
+			c.setStrokeWidth(3);
+			c.setVisible(true);
+			c.addEventHandler(MouseEvent.MOUSE_CLICKED, controleur);
+			cercles.add(c);
+			this.graphe.getChildren().add(c);
 		}
 	}
 

@@ -50,13 +50,13 @@ public abstract class Vue {
 		b.addEventHandler(MouseEvent.MOUSE_CLICKED, controleur);
 		return b;
 	}
-	
+
 	public Button creerBouton(String nomPoint, String nomImage) {
 		return creerBouton(nomPoint, nomImage, 30, 30);
 	}
-	
-	public Button creerBouton(String nomPoint, String nomImage, int height, int width ) {
-		
+
+	public Button creerBouton(String nomPoint, String nomImage, int height, int width) {
+
 		Image image = new Image("images/" + nomImage);
 		ImageView view = new ImageView(image);
 		view.setFitHeight(height);
@@ -67,9 +67,9 @@ public abstract class Vue {
 		b.addEventHandler(MouseEvent.MOUSE_CLICKED, controleur);
 		return b;
 	}
-	
+
 	public abstract void update();
-	
+
 	public abstract Controleur creationControleur();
 
 	public Modele getModele() {
@@ -90,5 +90,9 @@ public abstract class Vue {
 
 	public Map<Button, String> getBoutons() {
 		return boutons;
+	}
+
+	public Controleur getControleur() {
+		return controleur;
 	}
 }

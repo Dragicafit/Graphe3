@@ -44,8 +44,7 @@ public class ControleurCreationGaphe extends Controleur {
 				if (premierPoint == null) {
 					premierPoint = modele.getPoint(vue.getCercles().indexOf(source));
 				} else {
-					this.modele.addSegment(
-							new Segment(premierPoint, modele.getPoint(vue.getCercles().indexOf((Circle) source))));
+					this.modele.addSegment(new SegmentCouleur(premierPoint, modele.getPoint(vue.getCercles().indexOf((Circle) source)), Color.BLACK));
 					premierPoint = null;
 				}
 			}
@@ -73,8 +72,7 @@ public class ControleurCreationGaphe extends Controleur {
 	public void addPoint(double x, double y) {
 		boolean b = true;
 		for (int i = 0; i < modele.getSizePoints(); i++) {
-			if (Math.sqrt(
-					Math.pow(modele.getPoint(i).getX() - x + 5, 2) + Math.pow(modele.getPoint(i).getY() - y + 5, 2)) < 30) {
+			if (Math.sqrt(Math.pow(modele.getPoint(i).getX() - x + 5, 2) + Math.pow(modele.getPoint(i).getY() - y + 5, 2)) < 30) {
 				b = false;
 			}
 		}

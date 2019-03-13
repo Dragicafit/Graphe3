@@ -14,7 +14,6 @@ public class VueCreationGraphe extends VueJeu {
 
 	public VueCreationGraphe(Modele m) {
 		super(m);
-		majListe();
 		super.primaryStage.setTitle("Création d'un graphe");
 		top.getChildren().addAll(point, segment, supprimer, supprimerTout);		
 	}

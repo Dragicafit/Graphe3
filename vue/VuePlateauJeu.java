@@ -1,10 +1,13 @@
 package vue;
 
+import Jeux.Jeux;
+import Jeux.Snort;
 import controleur.Controleur;
 import controleur.ControleurJeu;
 import javafx.scene.control.Button;
 import javafx.scene.text.Text;
 import modele.Modele;
+import regles.Regles;
 
 public class VuePlateauJeu extends VueJeu {
 
@@ -15,7 +18,7 @@ public class VuePlateauJeu extends VueJeu {
 	public VuePlateauJeu(Modele m) {
 		super(m);
 		creationBouton();
-		majListe();
+		update();
 		super.primaryStage.setTitle("Lets GO !!!");
 		top.getChildren().addAll(this.nomJoueur, this.colorier, this.deplacer);
 	}
@@ -27,12 +30,18 @@ public class VuePlateauJeu extends VueJeu {
 		boutons.put(colorier, "colorier");
 		boutons.put(deplacer, "deplacer");
 		this.nomJoueur = new Text();
-		this.nomJoueur.setText("   Inserer le nom  \n     du joueur !!!");
 	}
 
 	@Override
 	public Controleur creationControleur() {
-		return new ControleurJeu(this);
+		Jeux jeu = new Snort(new Regles(modele, true, true, true, true), false, this);
+		jeu.start();
+		return new ControleurJeu(this, jeu);
 	}
-
+	
+	@Override
+	public void update() {
+		super.update();
+		this.nomJoueur.setText(modele.getJoueur(modele.getJoueurCourant()).getNom());
+	}
 }

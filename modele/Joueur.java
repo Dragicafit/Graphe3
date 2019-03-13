@@ -5,7 +5,7 @@ import javafx.scene.paint.Color;
 public class Joueur {
 	private final String nom;
 	private final Color couleur;
-	
+
 	public Joueur(String nom, Color couleur) {
 		super();
 		this.nom = nom;

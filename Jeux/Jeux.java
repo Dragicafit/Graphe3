@@ -28,7 +28,8 @@ public abstract class Jeux extends Thread {
 			while (!end_game()) {
 				int j = m.getJoueurCourant();
 				tour(j);
-				m.setJoueurCourant((j+1)%m.getNbJoueurs());
+				m.setJoueurCourant((j + 1) % m.getNbJoueurs());
+				vue.update();
 			}
 		} catch (InterruptedException e) {
 			e.printStackTrace();
@@ -41,7 +42,7 @@ public abstract class Jeux extends Thread {
 	}
 
 	public abstract boolean end_game();
-	
+
 	public abstract void tour(int nb) throws InterruptedException;
 
 	public abstract boolean check_regles(Point p);

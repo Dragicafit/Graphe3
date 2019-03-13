@@ -43,7 +43,7 @@ public abstract class Vue {
 	}
 
 	public abstract void creationBouton();
-	
+
 	public Button creerBouton(String nom) {
 		Button b = new Button(nom);
 		b.setAlignment(Pos.CENTER);

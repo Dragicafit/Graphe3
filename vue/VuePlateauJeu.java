@@ -38,7 +38,7 @@ public class VuePlateauJeu extends VueJeu {
 		jeu.start();
 		return new ControleurJeu(this, jeu);
 	}
-	
+
 	@Override
 	public void update() {
 		super.update();

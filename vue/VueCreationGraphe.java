@@ -15,7 +15,7 @@ public class VueCreationGraphe extends VueJeu {
 	public VueCreationGraphe(Modele m) {
 		super(m);
 		super.primaryStage.setTitle("Création d'un graphe");
-		top.getChildren().addAll(point, segment, supprimer, supprimerTout);		
+		top.getChildren().addAll(point, segment, supprimer, supprimerTout);
 	}
 
 	@Override
@@ -25,7 +25,7 @@ public class VueCreationGraphe extends VueJeu {
 		segment = creerBouton("Segment", "segment.png", 3, 45);
 		supprimer = creerBouton("Supprimer", "delete.png");
 		supprimerTout = creerBouton("Supprimer\n    Tout");
-		
+
 		boutons.put(point, "point");
 		boutons.put(supprimer, "supprimer");
 		boutons.put(segment, "segment");
@@ -37,5 +37,4 @@ public class VueCreationGraphe extends VueJeu {
 	public Controleur creationControleur() {
 		return new ControleurCreationGaphe(this);
 	}
-
 }

@@ -59,7 +59,7 @@ public abstract class VueJeu extends VueRetour {
 	}
 
 	public void update() {
-		Platform.runLater(new Runnable(){
+		Platform.runLater(new Runnable() {
 			@Override
 			public void run() {
 				effacerTout();
@@ -74,7 +74,7 @@ public abstract class VueJeu extends VueRetour {
 		cercles.clear();
 		lignes.clear();
 	}
-	
+
 	@Override
 	public Button creerBouton(String nom) {
 		Button b = super.creerBouton(nom);
@@ -120,5 +120,4 @@ public abstract class VueJeu extends VueRetour {
 			l.get(i).toFront();
 		}
 	}
-
 }

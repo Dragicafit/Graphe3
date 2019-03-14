@@ -1,10 +1,8 @@
 package modele;
 
-import javafx.scene.paint.Color;
-
 public interface estColoriable {
 
-	Color getCouleur();
+	Couleur getCouleur();
 
-	void setCouleur(Color couleur);
+	void setCouleur(Couleur couleur);
 }

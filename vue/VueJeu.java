@@ -89,7 +89,7 @@ public abstract class VueJeu extends VueRetour {
 			Line l = new Line(modele.getSegment(i).getPoint1().getX(), modele.getSegment(i).getPoint1().getY(),
 					modele.getSegment(i).getPoint2().getX(), modele.getSegment(i).getPoint2().getY());
 			if (modele.getSegment(i) instanceof SegmentCouleur) {
-				l.setStroke(((SegmentCouleur) modele.getSegment(i)).getCouleur());
+				l.setStroke(((SegmentCouleur) modele.getSegment(i)).getCouleur().toColor());
 			} else {
 				l.setStroke(Color.BLACK);
 			}
@@ -102,7 +102,7 @@ public abstract class VueJeu extends VueRetour {
 		for (int i = 0; i < modele.getSizePoints(); i++) {
 			Circle c = new Circle(modele.getPoint(i).getX(), modele.getPoint(i).getY(), 15);
 			if (modele.getPoint(i) instanceof PointCouleur) {
-				c.setFill(((PointCouleur) modele.getPoint(i)).getCouleur());
+				c.setFill(((PointCouleur) modele.getPoint(i)).getCouleur().toColor());
 			} else {
 				c.setFill(Color.WHITE);
 			}

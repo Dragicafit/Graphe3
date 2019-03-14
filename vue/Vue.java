@@ -39,7 +39,7 @@ public abstract class Vue {
 		creationBouton();
 		root.setStyle("-fx-padding: 10;");
 		primaryStage.setScene(scene);
-		primaryStage.setTitle("Vue Generale");
+		primaryStage.setTitle("Vue Générale");
 		primaryStage.setMaximized(true);
 		primaryStage.show();
 	}

@@ -67,14 +67,14 @@ public class VueAccueil extends Vue {
 	
 		RegleBottom.setStyle("-fx-padding: 10;");
 
-		Text RP = new Text("Règles Prédéfinies");
-		Text RM = new Text("Mes Règles");
+		Text RP = new Text("RÃ¨gles PrÃ©dÃ©finies");
+		Text RM = new Text("Mes RÃ¨gles");
 		RP.setStyle("-fx-font-size: 20px;");
 		RM.setStyle("-fx-font-size: 20px;");
 		RegleCenterTopTop.setCenter(RP);
 		RegleCenterBottomTop.setCenter(RM);
 
-		Text GP = new Text("Graphes Prédéfinis");
+		Text GP = new Text("Graphes PrÃ©dÃ©finis");
 		Text GM = new Text("Mes Graphes");
 		GP.setStyle("-fx-font-size: 20px;");
 		GM.setStyle("-fx-font-size: 20px;");
@@ -130,8 +130,8 @@ public class VueAccueil extends Vue {
 
 	@Override
 	public void creationBouton() {
-		creerGraphe = creerBouton("Créer Graphes");
-		aleatoireGraphe = creerBouton("Graphes Aléatoire");
-		creerRegle = creerBouton("Créer Règles");
+		creerGraphe = creerBouton("CrÃ©er Graphes");
+		aleatoireGraphe = creerBouton("Graphes AlÃ©atoire");
+		creerRegle = creerBouton("CrÃ©er RÃ¨gles");
 	}
 }

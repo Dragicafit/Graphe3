@@ -14,4 +14,9 @@ public class Main extends Application {
 		Modele m = Modele.importModele();
 		new VuePlateauJeu(m);
 	}
+	
+	@Override
+	public void stop() throws Exception {
+		System.exit(0);
+	}
 }

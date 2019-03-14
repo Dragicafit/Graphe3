@@ -2,7 +2,6 @@ package vue;
 
 import controleur.Controleur;
 import controleur.ControleurAccueil;
-import javafx.geometry.Insets;
 import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -44,41 +43,29 @@ public class VueAccueil extends Vue {
 		super(m);
 		main = new SplitPane();
 
-		Regles = new BorderPane();
+		Regles = creerBorderPane(false);
 		Regles.setPrefSize((root.getWidth() - 30) / 2, root.getHeight());
 		RegleCenter = new SplitPane();
-		RegleCenterTop = new BorderPane();
-		RegleCenterTopTop = new BorderPane();
-		RegleCenterTopBottom = new BorderPane();
-		RegleCenterBottom = new BorderPane();
-		RegleCenterBottomTop = new BorderPane();
-		RegleCenterBottomBottom = new BorderPane();
-		RegleBottom = new BorderPane();
+		RegleCenterTop = creerBorderPane(true);
+		RegleCenterTopTop = creerBorderPane(false);
+		RegleCenterTopBottom = creerBorderPane(false);
+		RegleCenterBottom = creerBorderPane(true);
+		RegleCenterBottomTop = creerBorderPane(false);
+		RegleCenterBottomBottom = creerBorderPane(false);
+		RegleBottom = creerBorderPane(false);
 
-		Graphes = new BorderPane();
+		Graphes = creerBorderPane(false);
 		Graphes.setPrefSize((root.getWidth() - 30) / 2, root.getHeight());
 		GrapheCenter = new SplitPane();
-		GrapheCenterTop = new BorderPane();
-		GrapheCenterTopTop = new BorderPane();
-		GrapheCenterTopBottom = new BorderPane();
-		GrapheCenterBottom = new BorderPane();
-		GrapheCenterBottomTop = new BorderPane();
-		GrapheCenterBottomBottom = new BorderPane();
-		GrapheBottom = new GridPane();
-		GrapheBottom.setHgap(10);
-		GrapheBottom.setPadding(new Insets(0, 10, 0, 10));
-
-		RegleCenterTop.setStyle("-fx-padding: 10;" + "-fx-border-style: solid inside;" + "-fx-border-width: 2;"
-				+ "-fx-border-insets: 5;" + "-fx-border-radius: 5;" + "-fx-border-color: black;");
-		RegleCenterBottom.setStyle("-fx-padding: 10;" + "-fx-border-style: solid inside;" + "-fx-border-width: 2;"
-				+ "-fx-border-insets: 5;" + "-fx-border-radius: 5;" + "-fx-border-color: black;");
+		GrapheCenterTop = creerBorderPane(true);
+		GrapheCenterTopTop = creerBorderPane(false);
+		GrapheCenterTopBottom = creerBorderPane(false);
+		GrapheCenterBottom = creerBorderPane(true);
+		GrapheCenterBottomTop = creerBorderPane(false);
+		GrapheCenterBottomBottom = creerBorderPane(false);
+		GrapheBottom = creerGridPane(Pos.CENTER, false);
+	
 		RegleBottom.setStyle("-fx-padding: 10;");
-
-		GrapheCenterTop.setStyle("-fx-padding: 10;" + "-fx-border-style: solid inside;" + "-fx-border-width: 2;"
-				+ "-fx-border-insets: 5;" + "-fx-border-radius: 5;" + "-fx-border-color: black;");
-		GrapheCenterBottom.setStyle("-fx-padding: 10;" + "-fx-border-style: solid inside;" + "-fx-border-width: 2;"
-				+ "-fx-border-insets: 5;" + "-fx-border-radius: 5;" + "-fx-border-color: black;");
-		GrapheBottom.setStyle("-fx-padding: 10;");
 
 		Text RP = new Text("Règles Prédéfinies");
 		Text RM = new Text("Mes Règles");
@@ -96,7 +83,6 @@ public class VueAccueil extends Vue {
 
 		GrapheBottom.add(creerGraphe, 0, 0);
 		GrapheBottom.add(aleatoireGraphe, 1, 0);
-		GrapheBottom.setAlignment(Pos.CENTER);
 		RegleBottom.setCenter(creerRegle);
 
 		Regles.setCenter(RegleCenter);
@@ -126,7 +112,6 @@ public class VueAccueil extends Vue {
 
 	@Override
 	public void update() {
-		// TODO Auto-generated method stub
 
 	}
 
@@ -134,17 +119,19 @@ public class VueAccueil extends Vue {
 	public Controleur creationControleur() {
 		return new ControleurAccueil(this);
 	}
+	
+	@Override
+	public Button creerBouton(String nom) {
+		Button b = super.creerBouton(nom);
+		b.setPrefWidth(150.);
+		b.setPrefHeight(40.);
+		return b;
+	}
 
 	@Override
 	public void creationBouton() {
 		creerGraphe = creerBouton("Créer Graphes");
-		creerGraphe.setPrefWidth(150.);
-		creerGraphe.setPrefHeight(40.);
 		aleatoireGraphe = creerBouton("Graphes Aléatoire");
-		aleatoireGraphe.setPrefWidth(150.);
-		aleatoireGraphe.setPrefHeight(40.);
 		creerRegle = creerBouton("Créer Règles");
-		creerRegle.setPrefWidth(150.);
-		creerRegle.setPrefHeight(40.);
 	}
 }

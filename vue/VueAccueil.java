@@ -80,14 +80,14 @@ public class VueAccueil extends Vue {
 				+ "-fx-border-insets: 5;" + "-fx-border-radius: 5;" + "-fx-border-color: black;");
 		GrapheBottom.setStyle("-fx-padding: 10;");
 
-		Text RP = new Text("Règles Prédéfinies");
-		Text RM = new Text("Mes Règles");
+		Text RP = new Text("RÃ¨gles PrÃ©dÃ©finies");
+		Text RM = new Text("Mes RÃ¨gles");
 		RP.setStyle("-fx-font-size: 20px;");
 		RM.setStyle("-fx-font-size: 20px;");
 		RegleCenterTopTop.setCenter(RP);
 		RegleCenterBottomTop.setCenter(RM);
 
-		Text GP = new Text("Graphes Prédéfinis");
+		Text GP = new Text("Graphes PrÃ©dÃ©finis");
 		Text GM = new Text("Mes Graphes");
 		GP.setStyle("-fx-font-size: 20px;");
 		GM.setStyle("-fx-font-size: 20px;");
@@ -137,13 +137,13 @@ public class VueAccueil extends Vue {
 
 	@Override
 	public void creationBouton() {
-		creerGraphe = creerBouton("Créer Graphes");
+		creerGraphe = creerBouton("CrÃ©er Graphes");
 		creerGraphe.setPrefWidth(150.);
 		creerGraphe.setPrefHeight(40.);
-		aleatoireGraphe = creerBouton("Graphes Aléatoire");
+		aleatoireGraphe = creerBouton("Graphes AlÃ©atoire");
 		aleatoireGraphe.setPrefWidth(150.);
 		aleatoireGraphe.setPrefHeight(40.);
-		creerRegle = creerBouton("Créer Règles");
+		creerRegle = creerBouton("CrÃ©er RÃ¨gles");
 		creerRegle.setPrefWidth(150.);
 		creerRegle.setPrefHeight(40.);
 	}

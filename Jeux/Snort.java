@@ -18,25 +18,31 @@ public class Snort extends Jeux {
 	}
 
 	@Override
-	public synchronized void tour(int nb) throws InterruptedException {
+	public synchronized boolean tour(int nb) throws InterruptedException {
 		wait();
 		Object source = event.getSource();
 		if (source instanceof Circle && vue.getCercles().contains((Circle) source)) {
 			PointCouleur point = (PointCouleur) m.getPoint(vue.getCercles().indexOf((Circle) source));
 			if (check_regles(point)) {
 				applique(point);
+				return true;
 			}
 		}
+		return false;
 	}
 
 	@Override
 	public boolean end_game() {
 		for (int i = 0; i < m.getSizePoints(); i++) {
 			PointCouleur p = (PointCouleur) m.getPoint(i);
-			if (mode_jeu && regles.check_cote_ennemi(p)) {
-				return false;
-			} else if (!mode_jeu && regles.check_cote_soit(p)) {
-				return false;
+			if (mode_jeu) {
+				if (!regles.check_cote_ennemi(p) && regles.check_cote_soit(p)) {
+					return false;
+				}
+			} else {
+				if (!regles.check_cote_soit(p) && regles.check_cote_ennemi(p)) {
+					return false;
+				}
 			}
 		}
 		return true;
@@ -44,10 +50,14 @@ public class Snort extends Jeux {
 
 	@Override
 	public boolean check_regles(Point p) {
-		if (mode_jeu && !regles.check_cote_ennemi(p)) {
-			return true;
-		} else if (!mode_jeu && regles.check_cote_soit((PointCouleur) p)) {
-			return true;
+		if (mode_jeu) {
+			if (regles.check_cote_soit((PointCouleur) p)) {
+				return true;
+			}
+		} else {
+			if (!regles.check_cote_soit((PointCouleur) p)) {
+				return true;
+			}
 		}
 		return false;
 	}
@@ -59,5 +69,10 @@ public class Snort extends Jeux {
 		} else if (o instanceof SegmentCouleur) {
 			c.applique((SegmentCouleur) o);
 		}
+	}
+
+	@Override
+	public boolean deplacementAvailable() {
+		return false;
 	}
 }

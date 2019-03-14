@@ -10,7 +10,7 @@ import vue.Vue;
 
 public class Snort extends Jeux {
 
-	private boolean mode_jeu; // True = ne pas jouer a coté ennemis, a coté de soit sinon
+	private boolean mode_jeu; // True = ne pas jouer a cotÃ© ennemis, a cotÃ© de soit sinon
 
 	public Snort(Regles r, boolean mode_jeu, Vue vue) {
 		super("Snort", r, vue);

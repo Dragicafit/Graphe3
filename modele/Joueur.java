@@ -1,12 +1,12 @@
 package modele;
 
-import javafx.scene.paint.Color;
+import java.io.Serializable;
 
-public class Joueur {
+public class Joueur implements Serializable {
 	private final String nom;
-	private final Color couleur;
+	private final Couleur couleur;
 
-	public Joueur(String nom, Color couleur) {
+	public Joueur(String nom, Couleur couleur) {
 		super();
 		this.nom = nom;
 		this.couleur = couleur;
@@ -16,7 +16,7 @@ public class Joueur {
 		return nom;
 	}
 
-	public Color getCouleur() {
+	public Couleur getCouleur() {
 		return couleur;
 	}
 }

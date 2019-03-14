@@ -6,6 +6,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
+import modele.Couleur;
 import modele.point.Point;
 import modele.point.PointCouleur;
 import modele.segment.Segment;
@@ -44,7 +45,7 @@ public class ControleurCreationGaphe extends Controleur {
 				if (premierPoint == null) {
 					premierPoint = modele.getPoint(vue.getCercles().indexOf(source));
 				} else {
-					this.modele.addSegment(new SegmentCouleur(premierPoint, modele.getPoint(vue.getCercles().indexOf((Circle) source)), Color.BLACK));
+					this.modele.addSegment(new SegmentCouleur(premierPoint, modele.getPoint(vue.getCercles().indexOf((Circle) source)), Couleur.NOIR));
 					premierPoint = null;
 				}
 			}
@@ -77,7 +78,7 @@ public class ControleurCreationGaphe extends Controleur {
 			}
 		}
 		if (b) {
-			this.modele.addPoint(new PointCouleur(x, y, Color.WHITE));
+			this.modele.addPoint(new PointCouleur(x, y, Couleur.BLANC));
 		}
 	}
 }

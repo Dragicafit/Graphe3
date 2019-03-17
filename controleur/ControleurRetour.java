@@ -27,7 +27,6 @@ public class ControleurRetour extends Controleur {
 					System.out.println("Impossible de sauvegarder le jeu en cours");
 				}
 			} else if (bouton == Bouton.RETOUR) {
-				this.vue = null;
 				new VueAccueil(modele);
 			}
 		}

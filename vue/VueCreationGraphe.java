@@ -1,7 +1,7 @@
 package vue;
 
 import controleur.Controleur;
-import controleur.ControleurCreationGaphe;
+import controleur.ControleurGraphes;
 import javafx.scene.control.Button;
 import modele.Modele;
 
@@ -35,6 +35,6 @@ public class VueCreationGraphe extends VueJeu {
 
 	@Override
 	public Controleur creationControleur() {
-		return new ControleurCreationGaphe(this);
+		return new ControleurGraphes(this);
 	}
 }

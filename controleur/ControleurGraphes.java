@@ -3,7 +3,6 @@ package controleur;
 import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
-import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
 import modele.Couleur;
@@ -14,11 +13,11 @@ import modele.segment.SegmentCouleur;
 import vue.Vue;
 import vue.VueJeu;
 
-public class ControleurCreationGaphe extends Controleur {
+public class ControleurGraphes extends ControleurRetour {
 
 	private Point premierPoint;
 
-	public ControleurCreationGaphe(Vue vue) {
+	public ControleurGraphes(Vue vue) {
 		super(vue);
 		this.premierPoint = null;
 		this.boutons.put("point", Bouton.POINT);
@@ -33,6 +32,7 @@ public class ControleurCreationGaphe extends Controleur {
 
 	@Override
 	public void handle(MouseEvent event) {
+		super.handle(event);
 		Object source = event.getSource();
 		if (source instanceof Circle && vue.getCercles().contains(source)) {
 			event.consume();

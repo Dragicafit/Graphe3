@@ -17,7 +17,6 @@ public class VuePlateauJeu extends VueJeu {
 
 	public VuePlateauJeu(Modele m) {
 		super(m);
-		creationBouton();
 		update();
 		super.primaryStage.setTitle("Lets GO !!!");
 		top.getChildren().addAll(this.nomJoueur, this.colorier, this.deplacer);

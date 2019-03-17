@@ -1,7 +1,7 @@
 package vue;
 
 import controleur.Controleur;
-import controleur.ControleurCreationRegle;
+import controleur.ControleurRegles;
 import javafx.geometry.Insets;
 import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
@@ -81,7 +81,7 @@ public class VueCreationRegle extends VueRetour {
 	
 	@Override
 	public Controleur creationControleur() {
-		return new ControleurCreationRegle(this);
+		return new ControleurRegles(this);
 	}
 
 }

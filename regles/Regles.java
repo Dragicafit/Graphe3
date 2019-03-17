@@ -1,8 +1,10 @@
 package regles;
 
-import javafx.scene.paint.Color;
-import modele.*;
-import modele.point.*;
+import modele.Couleur;
+import modele.Joueur;
+import modele.Modele;
+import modele.point.Point;
+import modele.point.PointCouleur;
 
 public class Regles {
 	public Modele m;
@@ -25,7 +27,7 @@ public class Regles {
 			Point v = m.getSegment(i).getVoisin(p);
 			if (v instanceof PointCouleur) {
 				PointCouleur pc = (PointCouleur) v;
-				if (pc.getCouleur().equals(j.getCouleur()) && p.getCouleur().equals(Color.WHITE)) {
+				if (pc.getCouleur().equals(j.getCouleur()) && p.getCouleur().equals(Couleur.BLANC)) {
 					return true;
 				}
 			}
@@ -33,13 +35,13 @@ public class Regles {
 		return false;
 	}
 
-	public boolean check_cote_ennemi(Point p) {
+	public boolean check_cote_ennemi(PointCouleur p) {
 		Joueur j = m.getJoueur(m.getJoueurCourant());
 		for (int i = 0; i < m.getSize_segments(); i++) {
 			Point v = m.getSegment(i).getVoisin(p);
 			if (v instanceof PointCouleur) {
 				PointCouleur pc = (PointCouleur) v;
-				if (!pc.getCouleur().equals(j.getCouleur()) && !pc.getCouleur().equals(Color.WHITE)) {
+				if (!pc.getCouleur().equals(j.getCouleur()) && !pc.getCouleur().equals(Couleur.BLANC)) {
 					return true;
 				}
 			}

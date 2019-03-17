@@ -3,9 +3,9 @@ package controleur;
 import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
-import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
+import modele.Couleur;
 import modele.point.Point;
 import modele.point.PointCouleur;
 import modele.segment.Segment;
@@ -122,11 +122,11 @@ public class ControleurCreationGaphe extends Controleur {
 				return;
 			}
 		}
-		this.modele.addPoint(new PointCouleur(x, y, Color.WHITE));
+		this.modele.addPoint(new PointCouleur(x, y, Couleur.BLANC));
 	}
 
 	public void addSegment(Point p1, Point p2) {
-		this.modele.addSegment(new SegmentCouleur(p1, p2, Color.BLACK));
+		this.modele.addSegment(new SegmentCouleur(p1, p2, Couleur.BLANC));
 	}
 
 	public void addPointSegment(double x, double y) {

@@ -1,8 +1,10 @@
 package modele.segment;
 
+import java.io.Serializable;
+
 import modele.point.Point;
 
-public class Segment {
+public class Segment implements Serializable {
 
 	private Point point1;
 	private Point point2;

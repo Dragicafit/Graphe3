@@ -1,11 +1,17 @@
 package modele;
 
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import modele.point.Point;
 import modele.segment.Segment;
 
-public class Modele {
+public class Modele implements Serializable {
 	private ArrayList<Point> points;
 	private ArrayList<Segment> segments;
 	private ArrayList<Joueur> joueurs;
@@ -17,6 +23,23 @@ public class Modele {
 		this.segments = new ArrayList<>();
 		this.joueurs = new ArrayList<>();
 		this.joueurCourant = 0;
+	}
+
+	public void exportModele() throws IOException {
+		String fileName = "modele.ser";
+		FileOutputStream fos = new FileOutputStream(fileName);
+		ObjectOutputStream oos = new ObjectOutputStream(fos);
+		oos.writeObject(this);
+		oos.close();
+	}
+
+	public static Modele importModele() throws IOException, ClassNotFoundException {
+		String fileName = "modele.ser";
+		FileInputStream fin = new FileInputStream(fileName);
+		ObjectInputStream ois = new ObjectInputStream(fin);
+		Modele m = (Modele) ois.readObject();
+		ois.close();
+		return m;
 	}
 
 	public void addPoint(Point point) {

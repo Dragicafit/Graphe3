@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import controleur.Controleur;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -12,6 +13,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.GridPane;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
 import javafx.stage.Stage;
@@ -33,18 +35,20 @@ public abstract class Vue {
 		cercles = new ArrayList<Circle>();
 		lignes = new ArrayList<Line>();
 		boutons = new HashMap<>();
+		this.controleur = creationControleur();
+		creationBouton();
 		root.setStyle("-fx-padding: 10;");
 		primaryStage.setScene(scene);
-		primaryStage.setTitle("Vue Generale");
+		primaryStage.setTitle("Vue Générale");
 		primaryStage.setMaximized(true);
 		primaryStage.show();
-		this.controleur = creationControleur();
 	}
+
+	public abstract void creationBouton();
 
 	public Button creerBouton(String nom) {
 		Button b = new Button(nom);
-		b.setMaxWidth(Double.MAX_VALUE);
-		b.setAlignment(Pos.TOP_CENTER);
+		b.setAlignment(Pos.CENTER);
 		b.addEventHandler(MouseEvent.MOUSE_CLICKED, controleur);
 		return b;
 	}
@@ -64,6 +68,27 @@ public abstract class Vue {
 		b.setAlignment(Pos.TOP_CENTER);
 		b.addEventHandler(MouseEvent.MOUSE_CLICKED, controleur);
 		return b;
+	}
+	
+	public GridPane creerGridPane(Pos p, boolean Border) {
+		GridPane grid = new GridPane();
+		grid.setAlignment(p);
+		grid.setHgap(10);
+		grid.setVgap(10);
+		grid.setPadding(new Insets(10, 10, 10, 10));
+		if(Border) {
+		grid.setStyle("-fx-padding: 10;" + "-fx-border-style: solid inside;" + "-fx-border-width: 2;"
+				+ "-fx-border-insets: 5;" + "-fx-border-radius: 5;" + "-fx-border-color: black;");
+		}else {
+			grid.setStyle("-fx-padding: 10;");
+		}
+		return grid;
+	}
+	
+	public BorderPane creerBorderPane(boolean Border) {
+		BorderPane pane = new BorderPane();
+		if(Border) pane.setStyle("-fx-padding: 10;" + "-fx-border-style: solid inside;" + "-fx-border-width: 2;" + "-fx-border-insets: 5;" + "-fx-border-radius: 5;" + "-fx-border-color: black;");
+		return pane;
 	}
 
 	public abstract void update();

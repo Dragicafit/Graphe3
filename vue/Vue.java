@@ -118,4 +118,8 @@ public abstract class Vue {
 	public Controleur getControleur() {
 		return controleur;
 	}
+	
+	public Stage getPrimaryStage() {
+		return primaryStage;
+	}
 }

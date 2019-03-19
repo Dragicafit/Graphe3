@@ -23,6 +23,10 @@ public abstract class Controleur implements EventHandler<MouseEvent> {
 	}
 
 	public abstract void handle(MouseEvent event);
+	
+	public void exit() {
+		vue.getPrimaryStage().close();
+	}
 }
 
 enum Bouton {

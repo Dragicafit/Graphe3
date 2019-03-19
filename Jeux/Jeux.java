@@ -15,6 +15,7 @@ public abstract class Jeux extends Thread {
 	protected MouseEvent event;
 
 	public Jeux(String nom, Regles r, Vue vue) {
+		super("Jeu");
 		this.nom = nom;
 		this.regles = r;
 		this.m = vue.getModele();
@@ -27,14 +28,13 @@ public abstract class Jeux extends Thread {
 		try {
 			while (!end_game()) {
 				int j = m.getJoueurCourant();
-				if(tour(j)) {
+				if (tour(j)) {
 					m.setJoueurCourant((j + 1) % m.getNbJoueurs());
 					vue.update();
 
 				}
 			}
 		} catch (InterruptedException e) {
-			e.printStackTrace();
 		}
 	}
 
@@ -42,7 +42,7 @@ public abstract class Jeux extends Thread {
 		this.event = event;
 		notify();
 	}
-	
+
 	public abstract boolean deplacementAvailable();
 
 	public abstract boolean end_game();

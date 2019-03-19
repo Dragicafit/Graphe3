@@ -48,4 +48,10 @@ public class ControleurJeu extends ControleurRetour {
 		}
 		event.consume();
 	}
+	
+	@Override
+	public void exit() {
+		jeu.interrupt();
+		super.exit();
+	}
 }

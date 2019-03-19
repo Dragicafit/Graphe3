@@ -7,7 +7,7 @@ import javafx.scene.input.MouseEvent;
 import vue.Vue;
 import vue.VueAccueil;
 
-public class ControleurRetour extends Controleur {
+public abstract class ControleurRetour extends Controleur {
 	
 	public ControleurRetour(Vue vue) {
 		super(vue);
@@ -27,9 +27,9 @@ public class ControleurRetour extends Controleur {
 					System.out.println("Impossible de sauvegarder le jeu en cours");
 				}
 			} else if (bouton == Bouton.RETOUR) {
+				exit();
 				new VueAccueil(modele);
 			}
 		}
 	}
-
 }

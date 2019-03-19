@@ -7,7 +7,7 @@ import modele.point.PointCouleur;
 import modele.segment.SegmentCouleur;
 import vue.Vue;
 
-public class ControleurJeu extends Controleur {
+public class ControleurJeu extends ControleurRetour {
 
 	protected Jeux jeu;
 
@@ -39,6 +39,7 @@ public class ControleurJeu extends Controleur {
 
 	@Override
 	public void handle(MouseEvent event) {
+		super.handle(event);
 		Object source = event.getSource();
 		if (source instanceof Button && vue.getBoutons().containsKey(source)) {
 			bouton = boutons.get(vue.getBoutons((Button) source));
@@ -46,5 +47,11 @@ public class ControleurJeu extends Controleur {
 			jeu.setEvent(event);
 		}
 		event.consume();
+	}
+	
+	@Override
+	public void exit() {
+		jeu.interrupt();
+		super.exit();
 	}
 }

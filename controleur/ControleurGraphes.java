@@ -13,11 +13,11 @@ import modele.segment.SegmentCouleur;
 import vue.Vue;
 import vue.VueJeu;
 
-public class ControleurCreationGaphe extends Controleur {
+public class ControleurGraphes extends ControleurRetour {
 
 	private Point premierPoint;
 
-	public ControleurCreationGaphe(Vue vue) {
+	public ControleurGraphes(Vue vue) {
 		super(vue);
 		this.premierPoint = null;
 		this.boutons.put("point", Bouton.POINT);

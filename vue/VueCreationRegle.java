@@ -1,14 +1,12 @@
 package vue;
 
 import controleur.Controleur;
-import controleur.ControleurCreationRegle;
-import javafx.geometry.Insets;
+import controleur.ControleurRegles;
 import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.SplitPane;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import modele.Modele;
@@ -81,7 +79,7 @@ public class VueCreationRegle extends VueRetour {
 	
 	@Override
 	public Controleur creationControleur() {
-		return new ControleurCreationRegle(this);
+		return new ControleurRegles(this);
 	}
 
 }

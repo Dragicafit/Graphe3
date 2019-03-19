@@ -4,11 +4,11 @@ import java.util.HashMap;
 import java.util.Map;
 
 import javafx.event.EventHandler;
-import javafx.scene.input.MouseEvent;
+import javafx.scene.input.InputEvent;
 import modele.Modele;
 import vue.Vue;
 
-public abstract class Controleur implements EventHandler<MouseEvent> {
+public abstract class Controleur implements EventHandler<InputEvent> {
 
 	protected Modele modele;
 	protected Vue vue;
@@ -22,7 +22,7 @@ public abstract class Controleur implements EventHandler<MouseEvent> {
 		this.boutons = new HashMap<>();
 	}
 
-	public abstract void handle(MouseEvent event);
+	public abstract void handle(InputEvent event);
 	
 	public void exit() {
 		vue.getPrimaryStage().close();

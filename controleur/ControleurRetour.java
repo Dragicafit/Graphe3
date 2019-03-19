@@ -3,7 +3,7 @@ package controleur;
 import java.io.IOException;
 
 import javafx.scene.control.Button;
-import javafx.scene.input.MouseEvent;
+import javafx.scene.input.InputEvent;
 import vue.Vue;
 import vue.VueAccueil;
 
@@ -16,7 +16,7 @@ public abstract class ControleurRetour extends Controleur {
 	}
 
 	@Override
-	public void handle(MouseEvent event) {
+	public void handle(InputEvent event) {
 		Object source = event.getSource();
 		if (source instanceof Button && vue.getBoutons().containsKey(source)) {
 			bouton = boutons.get(vue.getBoutons((Button) source));

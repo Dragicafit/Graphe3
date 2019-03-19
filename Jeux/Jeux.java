@@ -1,6 +1,6 @@
 package Jeux;
 
-import javafx.scene.input.MouseEvent;
+import javafx.scene.input.InputEvent;
 import modele.Modele;
 import modele.point.Point;
 import regles.Regles;
@@ -12,7 +12,7 @@ public abstract class Jeux extends Thread {
 	protected Regles regles;
 	protected Modele m;
 	protected Vue vue;
-	protected MouseEvent event;
+	protected InputEvent event;
 
 	public Jeux(String nom, Regles r, Vue vue) {
 		super("Jeu");
@@ -38,7 +38,7 @@ public abstract class Jeux extends Thread {
 		}
 	}
 
-	public synchronized void setEvent(MouseEvent event) {
+	public synchronized void setEvent(InputEvent event) {
 		this.event = event;
 		notify();
 	}

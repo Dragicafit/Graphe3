@@ -2,7 +2,7 @@ package controleur;
 
 import Jeux.Jeux;
 import javafx.scene.control.Button;
-import javafx.scene.input.MouseEvent;
+import javafx.scene.input.InputEvent;
 import modele.point.PointCouleur;
 import modele.segment.SegmentCouleur;
 import vue.Vue;
@@ -38,7 +38,7 @@ public class ControleurJeu extends ControleurRetour {
 	}
 
 	@Override
-	public void handle(MouseEvent event) {
+	public void handle(InputEvent event) {
 		super.handle(event);
 		Object source = event.getSource();
 		if (source instanceof Button && vue.getBoutons().containsKey(source)) {

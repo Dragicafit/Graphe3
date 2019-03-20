@@ -1,6 +1,6 @@
 package controleur;
 
-import javafx.scene.input.MouseEvent;
+import javafx.scene.input.InputEvent;
 import vue.Vue;
 
 public class ControleurRegles extends ControleurRetour {
@@ -10,7 +10,7 @@ public class ControleurRegles extends ControleurRetour {
 	}
 
 	@Override
-	public void handle(MouseEvent event) {
+	public void handle(InputEvent event) {
 		super.handle(event);
 	}
 }

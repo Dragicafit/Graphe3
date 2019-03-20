@@ -7,6 +7,7 @@ import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.SplitPane;
+import javafx.scene.input.DragEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
@@ -47,11 +48,14 @@ public abstract class VueJeu extends VueRetour {
 		graphe = new Pane();
 		graphe.setStyle("-fx-padding: 10;" + "-fx-border-style: solid inside;" + "-fx-border-width: 2;"
 				+ "-fx-border-insets: 5;" + "-fx-border-radius: 5;" + "-fx-border-color: black;");
+		graphe.addEventHandler(DragEvent.DRAG_DROPPED, controleur);
+		graphe.addEventHandler(DragEvent.DRAG_OVER, controleur);
 		graphe.addEventHandler(MouseEvent.MOUSE_CLICKED, controleur);
 		menu.maxWidthProperty().set(150.);
 		menu.minWidthProperty().set(150.);
 		main.getItems().addAll(menu, graphe);
 		root.setCenter(main);
+		update();
 	}
 
 	public Pane getGraphe() {
@@ -110,6 +114,7 @@ public abstract class VueJeu extends VueRetour {
 			c.setStrokeWidth(3);
 			c.setVisible(true);
 			c.addEventHandler(MouseEvent.MOUSE_CLICKED, controleur);
+			c.addEventHandler(MouseEvent.DRAG_DETECTED, controleur);
 			cercles.add(c);
 			this.graphe.getChildren().add(c);
 		}

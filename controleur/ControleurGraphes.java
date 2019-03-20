@@ -42,9 +42,15 @@ public class ControleurGraphes extends ControleurRetour {
 		if (event instanceof DragEvent) {
 			DragEvent drag = (DragEvent) event;
 			if (source instanceof Pane) {
-				Circle cercle = (Circle) drag.getGestureSource();
-				Point p = modele.getPoint(vue.getCercles().indexOf(cercle));
-				drag.setDropCompleted(deplacerPoint(p, drag.getX(), drag.getY()));
+				if (drag.getEventType() == DragEvent.DRAG_OVER) {
+					drag.acceptTransferModes(TransferMode.COPY_OR_MOVE);
+					drag.consume();
+					return;
+				} else if (drag.getEventType() == DragEvent.DRAG_DROPPED) {
+					Circle cercle = (Circle) drag.getGestureSource();
+					Point p = modele.getPoint(vue.getCercles().indexOf(cercle));
+					drag.setDropCompleted(deplacerPoint(p, drag.getX(), drag.getY()));
+				}
 			}
 		} else if (event instanceof MouseEvent) {
 			MouseEvent clic = (MouseEvent) event;

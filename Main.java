@@ -1,6 +1,7 @@
 import javafx.application.Application;
 import javafx.stage.Stage;
 import modele.Modele;
+import vue.VueCreationGraphe;
 import vue.VuePlateauJeu;
 
 public class Main extends Application {
@@ -13,6 +14,7 @@ public class Main extends Application {
 	public void start(Stage primaryStage) throws Exception {
 		Modele m = Modele.importModele();
 		new VuePlateauJeu(m);
+		new VueCreationGraphe(m);
 	}
 	
 	@Override

@@ -3,14 +3,12 @@ package vue;
 import java.util.LinkedList;
 
 import javafx.application.Platform;
-import javafx.event.EventHandler;
 import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.SplitPane;
 import javafx.scene.input.DragEvent;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.input.TransferMode;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
@@ -51,12 +49,7 @@ public abstract class VueJeu extends VueRetour {
 		graphe.setStyle("-fx-padding: 10;" + "-fx-border-style: solid inside;" + "-fx-border-width: 2;"
 				+ "-fx-border-insets: 5;" + "-fx-border-radius: 5;" + "-fx-border-color: black;");
 		graphe.addEventHandler(DragEvent.DRAG_DROPPED, controleur);
-		graphe.setOnDragOver(new EventHandler <DragEvent>() {
-			public void handle(DragEvent event) {
-				event.acceptTransferModes(TransferMode.COPY_OR_MOVE);
-				event.consume();
-			}
-		});
+		graphe.addEventHandler(DragEvent.DRAG_OVER, controleur);
 		graphe.addEventHandler(MouseEvent.MOUSE_CLICKED, controleur);
 		menu.maxWidthProperty().set(150.);
 		menu.minWidthProperty().set(150.);

@@ -82,6 +82,10 @@ public class Regles {
 		}
 		return false;
 	}
+	
+	public boolean estBlanc(PointCouleur p) {
+		return p.getCouleur().equals(Couleur.BLANC);
+	}
 
 	public boolean allAround(Point p) {
 		Joueur j = m.getJoueur(m.getJoueurCourant());

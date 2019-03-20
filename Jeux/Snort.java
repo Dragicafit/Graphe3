@@ -51,11 +51,11 @@ public class Snort extends Jeux {
 	@Override
 	public boolean check_regles(Point p) {
 		if (mode_jeu) {
-			if (regles.check_cote_soit((PointCouleur) p)) {
+			if (regles.check_cote_soit((PointCouleur) p) && regles.estBlanc((PointCouleur)p) ) {
 				return true;
 			}
 		} else {
-			if (!regles.check_cote_soit((PointCouleur) p)) {
+			if (!regles.check_cote_soit((PointCouleur) p) && regles.estBlanc((PointCouleur)p)) {
 				return true;
 			}
 		}

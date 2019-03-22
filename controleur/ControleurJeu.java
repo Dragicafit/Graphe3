@@ -14,27 +14,19 @@ public class ControleurJeu extends ControleurRetour {
 	public ControleurJeu(Vue vue, Jeux jeu) {
 		super(vue);
 		this.jeu = jeu;
-		this.boutons.put("colorier", Bouton.COLORIER);
-		this.boutons.put("deplacer", Bouton.DEPLACER);
 	}
 
 	public void applique(PointCouleur p) {
-		if (bouton == Bouton.COLORIER) {
-			p.setCouleur(modele.getJoueur(modele.getJoueurCourant()).getCouleur());
-		}
+		p.setCouleur(modele.getJoueur(modele.getJoueurCourant()).getCouleur());
 	}
 
 	public void applique(PointCouleur p, double x, double y) {
-		if (bouton == Bouton.DEPLACER) {
-			p.setX(x);
-			p.setY(y);
-		}
+		p.setX(x);
+		p.setY(y);
 	}
 
 	public void applique(SegmentCouleur s) {
-		if (bouton == Bouton.COLORIER) {
-			s.setCouleur(modele.getJoueur(modele.getJoueurCourant()).getCouleur());
-		}
+		s.setCouleur(modele.getJoueur(modele.getJoueurCourant()).getCouleur());
 	}
 
 	@Override
@@ -48,7 +40,7 @@ public class ControleurJeu extends ControleurRetour {
 		}
 		event.consume();
 	}
-	
+
 	@Override
 	public void exit() {
 		jeu.interrupt();

@@ -16,7 +16,9 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
 import modele.Modele;
+import modele.point.Point;
 import modele.point.PointCouleur;
+import modele.segment.Segment;
 import modele.segment.SegmentCouleur;
 
 public abstract class VueJeu extends VueRetour {
@@ -89,11 +91,11 @@ public abstract class VueJeu extends VueRetour {
 	public void majListe() {
 		if (modele == null)
 			return;
-		for (int i = 0; i < modele.getSizeSegments(); i++) {
-			Line l = new Line(modele.getSegment(i).getPoint1().getX(), modele.getSegment(i).getPoint1().getY(),
-					modele.getSegment(i).getPoint2().getX(), modele.getSegment(i).getPoint2().getY());
-			if (modele.getSegment(i) instanceof SegmentCouleur) {
-				l.setStroke(((SegmentCouleur) modele.getSegment(i)).getCouleur().toColor());
+		for (Segment s : modele.getSegments()) {
+			Line l = new Line(s.getPoint1().getX(), s.getPoint1().getY(),
+					s.getPoint2().getX(), s.getPoint2().getY());
+			if (s instanceof SegmentCouleur) {
+				l.setStroke(((SegmentCouleur) s).getCouleur().toColor());
 			} else {
 				l.setStroke(Color.BLACK);
 			}
@@ -103,10 +105,10 @@ public abstract class VueJeu extends VueRetour {
 			lignes.add(l);
 			this.graphe.getChildren().add(l);
 		}
-		for (int i = 0; i < modele.getSizePoints(); i++) {
-			Circle c = new Circle(modele.getPoint(i).getX(), modele.getPoint(i).getY(), 15);
-			if (modele.getPoint(i) instanceof PointCouleur) {
-				c.setFill(((PointCouleur) modele.getPoint(i)).getCouleur().toColor());
+		for (Point p : modele.getPoints()) {
+			Circle c = new Circle(p.getX(), p.getY(), 15);
+			if (p instanceof PointCouleur) {
+				c.setFill(((PointCouleur) p).getCouleur().toColor());
 			} else {
 				c.setFill(Color.WHITE);
 			}

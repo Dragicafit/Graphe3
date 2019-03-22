@@ -57,13 +57,17 @@ public class Modele implements Serializable {
 	public Point getPoint(int index) {
 		return points.get(index);
 	}
+	
+	public ArrayList<Point> getPoints() {
+		return points;
+	}
 
 	public Segment getSegment(int index) {
 		return segments.get(index);
 	}
-
-	public int getSize_segments() {
-		return segments.size();
+	
+	public ArrayList<Segment> getSegments() {
+		return segments;
 	}
 
 	public boolean containsPoint(Point p) {

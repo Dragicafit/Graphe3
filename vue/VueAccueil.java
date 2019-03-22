@@ -133,5 +133,9 @@ public class VueAccueil extends Vue {
 		creerGraphe = creerBouton("Créer Graphes");
 		aleatoireGraphe = creerBouton("Graphes Aléatoire");
 		creerRegle = creerBouton("Créer Règles");
+		
+		boutons.put(creerGraphe, "graphe");
+		boutons.put(creerRegle, "regles");
+		boutons.put(aleatoireGraphe, "aleatoire");
 	}
 }

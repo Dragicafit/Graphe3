@@ -1,6 +1,5 @@
 package controleur;
 
-import javafx.scene.control.Button;
 import javafx.scene.input.ClipboardContent;
 import javafx.scene.input.DragEvent;
 import javafx.scene.input.Dragboard;
@@ -28,56 +27,18 @@ public class ControleurGraphes extends ControleurRetour {
 		this.boutons.put("point", Bouton.POINT);
 		this.boutons.put("segment", Bouton.SEGMENT);
 		this.boutons.put("supprimer", Bouton.SUPPRIMER);
-		this.boutons.put("colorier", Bouton.COLORIER);
 		this.boutons.put("supprimerTout", Bouton.SUPPRIMERTOUT);
-		this.boutons.put("sauvegarder", Bouton.SAUVEGARDER);
-		this.boutons.put("retour", Bouton.RETOUR);
 	}
 
 	@Override
 	public void handle(InputEvent event) {
-        
-        event.consume();
+		super.handle(event);
+		event.consume();
 		Object source = event.getSource();
 		if (event instanceof DragEvent) {
-			DragEvent drag = (DragEvent) event;
-			if (source instanceof Pane) {
-				if (drag.getEventType() == DragEvent.DRAG_OVER) {
-					drag.acceptTransferModes(TransferMode.COPY_OR_MOVE);
-					drag.consume();
-					return;
-				} else if (drag.getEventType() == DragEvent.DRAG_DROPPED) {
-					Circle cercle = (Circle) drag.getGestureSource();
-					Point p = modele.getPoint(vue.getCercles().indexOf(cercle));
-					drag.setDropCompleted(deplacerPoint(p, drag.getX(), drag.getY()));
-				}
-			}
+			eventDrag((DragEvent) event, (Pane) source);
 		} else if (event instanceof MouseEvent) {
-			MouseEvent clic = (MouseEvent) event;
-			if (clic.isDragDetect() && clic.getEventType() == MouseEvent.DRAG_DETECTED) {
-				if (source instanceof Circle && vue.getCercles().contains(source)) {
-					Dragboard db = ((Circle) source).startDragAndDrop(TransferMode.ANY);
-			        ClipboardContent content = new ClipboardContent();
-			        content.putString("");
-			        db.setContent(content);
-			        return;
-				}
-			} else {
-				if (source instanceof Circle && vue.getCercles().contains(source)) {
-					eventCercle(clic, (Circle) source);
-				} else if (source instanceof Line && vue.getLignes().contains(source)) {
-					eventLine(clic, (Line) source);
-				} else if (vue instanceof VueJeu && source instanceof Pane && source == ((VueJeu) vue).getGraphe()) {
-					eventVueJeu(clic);
-				} else if (source instanceof Button && vue.getBoutons().containsKey(source)) {
-					if (bouton == boutons.get(vue.getBoutons((Button) source))) {
-						bouton = null;
-					} else {
-						bouton = boutons.get(vue.getBoutons((Button) source));
-						premierPoint = null;
-					}
-				}
-			}
+			eventMouse((MouseEvent) event, source);
 		}
 		if (bouton == Bouton.SUPPRIMERTOUT) {
 			modele.supprimerTout();
@@ -95,7 +56,7 @@ public class ControleurGraphes extends ControleurRetour {
 		}
 		this.modele.addPoint(new PointCouleur(x, y, Couleur.BLANC));
 	}
-	
+
 	public boolean deplacerPoint(Point p, double x, double y) {
 		for (int i = 0; i < modele.getSizePoints(); i++) {
 			if (Math.sqrt(Math.pow(modele.getPoint(i).getX() - x, 2) + Math.pow(modele.getPoint(i).getY() - y, 2)) < 60) {
@@ -108,20 +69,17 @@ public class ControleurGraphes extends ControleurRetour {
 	}
 
 	public void addSegment(Point p1, Point p2) {
-		this.modele.addSegment(new SegmentCouleur(p1, p2, Couleur.BLANC));
+		this.modele.addSegment(new SegmentCouleur(p1, p2, Couleur.NOIR));
 	}
 
 	public void addPointSegment(double x, double y) {
 		addPoint(x, y);
 		addSegment(premierPoint, modele.getPoint(modele.getSizePoints() - 1));
 	}
-	
+
 	public void eventCercle(MouseEvent event, Circle source) {
-		event.consume();
 		Point point = modele.getPoint(vue.getCercles().indexOf(source));
-		if (point instanceof PointCouleur && bouton == Bouton.COLORIER) {
-			((PointCouleur) point).setCouleur(modele.getJoueur(modele.getJoueurCourant()).getCouleur());
-		} else if (bouton == Bouton.SUPPRIMER) {
+		if (bouton == Bouton.SUPPRIMER) {
 			modele.removePoint(point);
 		} else if (bouton == Bouton.SEGMENT) {
 			if (premierPoint == null) {
@@ -134,21 +92,31 @@ public class ControleurGraphes extends ControleurRetour {
 					premierPoint = null;
 				}
 			}
-		} else {
-			premierPoint = point;
+		} else if (bouton == Bouton.SUPPRIMER) {
+			modele.removePoint(point);
+		} else if (point instanceof PointCouleur) {
+			PointCouleur p = (PointCouleur) point;
+			Couleur c = p.getCouleur();
+			if (c.equals(Couleur.BLANC))
+				p.setCouleur(Couleur.BLEU);
+			else if (c.equals(Couleur.BLEU))
+				p.setCouleur(Couleur.ROUGE);
+			else if (c.equals(Couleur.ROUGE))
+				p.setCouleur(Couleur.BLANC);
 		}
+		premierPoint = point;
 	}
-	
+
 	public void eventLine(MouseEvent event, Line source) {
 		Segment segment = modele.getSegment(vue.getLignes().indexOf(source));
-		if (segment instanceof SegmentCouleur && bouton == Bouton.COLORIER) {
+		if (segment instanceof SegmentCouleur) {
 			((SegmentCouleur) segment).setCouleur(modele.getJoueur(modele.getJoueurCourant()).getCouleur());
 		} else if (bouton == Bouton.SUPPRIMER) {
 			modele.removeSegment(segment);
 		}
 	}
-	
-	public void eventVueJeu(MouseEvent event) {
+
+	public void eventPane(MouseEvent event) {
 		if (bouton == Bouton.POINT) {
 			double x = event.getX();
 			double y = event.getY();
@@ -186,6 +154,39 @@ public class ControleurGraphes extends ControleurRetour {
 			premierPoint = modele.getPoint(modele.getSizePoints() - 1);
 		} else {
 			premierPoint = null;
+		}
+	}
+
+	public void eventDrag(DragEvent event, Pane source) {
+		if (source instanceof Pane) {
+			if (event.getEventType() == DragEvent.DRAG_OVER) {
+				event.acceptTransferModes(TransferMode.COPY_OR_MOVE);
+				return;
+			} else if (event.getEventType() == DragEvent.DRAG_DROPPED) {
+				Circle cercle = (Circle) event.getGestureSource();
+				Point p = modele.getPoint(vue.getCercles().indexOf(cercle));
+				event.setDropCompleted(deplacerPoint(p, event.getX(), event.getY()));
+			}
+		}
+	}
+
+	public void eventMouse(MouseEvent event, Object source) {
+		if (event.isDragDetect() && event.getEventType() == MouseEvent.DRAG_DETECTED) {
+			if (source instanceof Circle && vue.getCercles().contains(source)) {
+				Dragboard db = ((Circle) source).startDragAndDrop(TransferMode.ANY);
+				ClipboardContent content = new ClipboardContent();
+				content.putString("");
+				db.setContent(content);
+				return;
+			}
+		} else {
+			if (source instanceof Circle && vue.getCercles().contains(source)) {
+				eventCercle(event, (Circle) source);
+			} else if (source instanceof Line && vue.getLignes().contains(source)) {
+				eventLine(event, (Line) source);
+			} else if (vue instanceof VueJeu && source instanceof Pane && source == ((VueJeu) vue).getGraphe()) {
+				eventPane(event);
+			}
 		}
 	}
 }

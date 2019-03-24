@@ -11,10 +11,14 @@ public class Main extends Application {
 	}
 
 	@Override
-	public void start(Stage primaryStage) throws Exception {
-		Modele m = Modele.importModele();
-		new VuePlateauJeu(m);
-		new VueCreationGraphe(m);
+	public void start(Stage primaryStage) {
+		try {
+			Modele m = Modele.importModele();
+			new VuePlateauJeu(m);
+			new VueCreationGraphe(m);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 	
 	@Override

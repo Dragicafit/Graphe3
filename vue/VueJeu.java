@@ -2,7 +2,6 @@ package vue;
 
 import java.util.LinkedList;
 
-import javafx.application.Platform;
 import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -65,13 +64,8 @@ public abstract class VueJeu extends VueRetour {
 	}
 
 	public void update() {
-		Platform.runLater(new Runnable() {
-			@Override
-			public void run() {
-				effacerTout();
-				majListe();
-			}
-		});
+		effacerTout();
+		majListe();
 
 	}
 

@@ -3,6 +3,7 @@ package controleur;
 import java.util.HashMap;
 import java.util.Map;
 
+import javafx.application.Platform;
 import javafx.event.EventHandler;
 import javafx.scene.input.InputEvent;
 import modele.Modele;
@@ -25,7 +26,12 @@ public abstract class Controleur implements EventHandler<InputEvent> {
 	public abstract void handle(InputEvent event);
 	
 	public void exit() {
-		vue.getPrimaryStage().close();
+		Platform.runLater(new Runnable() {
+			@Override
+			public void run() {
+				vue.getPrimaryStage().close();
+			}
+		});
 	}
 }
 

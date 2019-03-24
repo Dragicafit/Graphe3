@@ -1,5 +1,6 @@
 package Jeux;
 
+import controleur.ControleurJeu;
 import javafx.scene.input.InputEvent;
 import modele.Modele;
 import modele.point.Point;
@@ -30,11 +31,13 @@ public abstract class Jeux extends Thread {
 				int j = m.getJoueurCourant();
 				if (tour(j)) {
 					m.setJoueurCourant((j + 1) % m.getNbJoueurs());
-					vue.update();
-
+				} else {
+					((ControleurJeu) vue.getControleur()).setApplique(null);
 				}
 			}
 		} catch (InterruptedException e) {
+		} finally {
+			vue.getControleur().exit();
 		}
 	}
 
@@ -50,4 +53,6 @@ public abstract class Jeux extends Thread {
 	public abstract boolean tour(int nb) throws InterruptedException;
 
 	public abstract boolean check_regles(Point p);
+
+	public abstract void applique(Object o);
 }

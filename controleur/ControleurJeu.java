@@ -10,10 +10,16 @@ import vue.Vue;
 public class ControleurJeu extends ControleurRetour {
 
 	protected Jeux jeu;
+	private Object action;
 
 	public ControleurJeu(Vue vue, Jeux jeu) {
 		super(vue);
 		this.jeu = jeu;
+	}
+
+	public synchronized void setApplique(Object action) {
+		this.action = action;
+		notify();
 	}
 
 	public void applique(PointCouleur p) {
@@ -30,13 +36,22 @@ public class ControleurJeu extends ControleurRetour {
 	}
 
 	@Override
-	public void handle(InputEvent event) {
+	public synchronized void handle(InputEvent event) {
 		super.handle(event);
 		Object source = event.getSource();
 		if (source instanceof Button && vue.getBoutons().containsKey(source)) {
 			bouton = boutons.get(vue.getBoutons((Button) source));
 		} else {
+			action = null;
 			jeu.setEvent(event);
+			try {
+				wait();
+				if (action != null) {
+					jeu.applique(action);
+					vue.update();
+				}
+			} catch (InterruptedException e) {
+			}
 		}
 		event.consume();
 	}

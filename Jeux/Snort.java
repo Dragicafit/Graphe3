@@ -24,7 +24,7 @@ public class Snort extends Jeux {
 		if (source instanceof Circle && vue.getCercles().contains((Circle) source)) {
 			PointCouleur point = (PointCouleur) m.getPoint(vue.getCercles().indexOf((Circle) source));
 			if (check_regles(point)) {
-				applique(point);
+				((ControleurJeu) vue.getControleur()).setApplique(point);
 				return true;
 			}
 		}
@@ -62,6 +62,7 @@ public class Snort extends Jeux {
 		return false;
 	}
 
+	@Override
 	public void applique(Object o) {
 		ControleurJeu c = (ControleurJeu) vue.getControleur();
 		if (o instanceof PointCouleur) {

@@ -32,7 +32,9 @@ public abstract class Jeux extends Thread {
 				if (tour(j)) {
 					m.setJoueurCourant((j + 1) % m.getNbJoueurs());
 				} else {
-					((ControleurJeu) vue.getControleur()).setApplique(null);
+					synchronized (vue.getControleur()) {
+						((ControleurJeu) vue.getControleur()).notify();
+					}
 				}
 			}
 		} catch (InterruptedException e) {

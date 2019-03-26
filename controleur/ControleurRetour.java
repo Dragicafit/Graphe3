@@ -17,6 +17,7 @@ public abstract class ControleurRetour extends Controleur {
 
 	@Override
 	public void handle(InputEvent event) {
+		super.handle(event);
 		Object source = event.getSource();
 		if (source instanceof Button && vue.getBoutons().containsKey(source)) {
 			bouton = boutons.get(vue.getBoutons((Button) source));

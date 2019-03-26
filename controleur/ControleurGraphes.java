@@ -45,7 +45,6 @@ public class ControleurGraphes extends ControleurRetour {
 			bouton = null;
 			premierPoint = null;
 		}
-		vue.update();
 	}
 
 	public void addPoint(double x, double y) {
@@ -161,31 +160,33 @@ public class ControleurGraphes extends ControleurRetour {
 		if (source instanceof Pane) {
 			if (event.getEventType() == DragEvent.DRAG_OVER) {
 				event.acceptTransferModes(TransferMode.COPY_OR_MOVE);
-				return;
 			} else if (event.getEventType() == DragEvent.DRAG_DROPPED) {
 				Circle cercle = (Circle) event.getGestureSource();
 				Point p = modele.getPoint(vue.getCercles().indexOf(cercle));
 				event.setDropCompleted(deplacerPoint(p, event.getX(), event.getY()));
+				vue.update();
 			}
 		}
 	}
 
 	public void eventMouse(MouseEvent event, Object source) {
-		if (event.isDragDetect() && event.getEventType() == MouseEvent.DRAG_DETECTED) {
+		if (event.getEventType() == MouseEvent.DRAG_DETECTED) {
 			if (source instanceof Circle && vue.getCercles().contains(source)) {
 				Dragboard db = ((Circle) source).startDragAndDrop(TransferMode.ANY);
 				ClipboardContent content = new ClipboardContent();
 				content.putString("");
 				db.setContent(content);
-				return;
 			}
 		} else {
 			if (source instanceof Circle && vue.getCercles().contains(source)) {
 				eventCercle(event, (Circle) source);
+				vue.update();
 			} else if (source instanceof Line && vue.getLignes().contains(source)) {
 				eventLine(event, (Line) source);
+				vue.update();
 			} else if (vue instanceof VueJeu && source instanceof Pane && source == ((VueJeu) vue).getGraphe()) {
 				eventPane(event);
+				vue.update();
 			}
 		}
 	}

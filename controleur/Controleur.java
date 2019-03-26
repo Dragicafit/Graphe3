@@ -23,7 +23,9 @@ public abstract class Controleur implements EventHandler<InputEvent> {
 		this.boutons = new HashMap<>();
 	}
 
-	public abstract void handle(InputEvent event);
+	public void handle(InputEvent event) {
+		event.consume();
+	}
 	
 	public void exit() {
 		Platform.runLater(new Runnable() {

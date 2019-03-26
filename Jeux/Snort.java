@@ -1,6 +1,7 @@
 package Jeux;
 
 import controleur.ControleurJeu;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.shape.Circle;
 import modele.point.Point;
 import modele.point.PointCouleur;
@@ -21,7 +22,14 @@ public class Snort extends Jeux {
 	public synchronized boolean tour(int nb) throws InterruptedException {
 		wait();
 		Object source = event.getSource();
-		if (source instanceof Circle && vue.getCercles().contains((Circle) source)) {
+		/*if (event.getEventType() == MouseEvent.DRAG_DETECTED) {
+			if (source instanceof Circle && vue.getCercles().contains(source)) {
+				if (deplacementAvailable()) {
+					((ControleurJeu) vue.getControleur()).setApplique((Circle) source);
+					return false;
+				}
+			}
+		} else */if (source instanceof Circle && vue.getCercles().contains((Circle) source)) {
 			PointCouleur point = (PointCouleur) m.getPoint(vue.getCercles().indexOf((Circle) source));
 			if (check_regles(point)) {
 				((ControleurJeu) vue.getControleur()).setApplique(point);
@@ -69,6 +77,8 @@ public class Snort extends Jeux {
 			c.applique((PointCouleur) o);
 		} else if (o instanceof SegmentCouleur) {
 			c.applique((SegmentCouleur) o);
+		} else if (o instanceof Circle) {
+			c.appliqueDep((Circle) o);
 		}
 	}
 

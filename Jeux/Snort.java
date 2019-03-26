@@ -22,14 +22,14 @@ public class Snort extends Jeux {
 	public synchronized boolean tour(int nb) throws InterruptedException {
 		wait();
 		Object source = event.getSource();
-		/*if (event.getEventType() == MouseEvent.DRAG_DETECTED) {
+		if (event.getEventType() == MouseEvent.DRAG_DETECTED) {
 			if (source instanceof Circle && vue.getCercles().contains(source)) {
 				if (deplacementAvailable()) {
 					((ControleurJeu) vue.getControleur()).setApplique((Circle) source);
 					return false;
 				}
 			}
-		} else */if (source instanceof Circle && vue.getCercles().contains((Circle) source)) {
+		} else if (source instanceof Circle && vue.getCercles().contains((Circle) source)) {
 			PointCouleur point = (PointCouleur) m.getPoint(vue.getCercles().indexOf((Circle) source));
 			if (check_regles(point)) {
 				((ControleurJeu) vue.getControleur()).setApplique(point);

@@ -5,6 +5,7 @@ import java.io.Serializable;
 import modele.point.Point;
 
 public class Segment implements Serializable {
+	private static final long serialVersionUID = 20L;
 
 	private Point point1;
 	private Point point2;
@@ -53,4 +54,13 @@ public class Segment implements Serializable {
 		return null;
 	}
 
+	@Override
+	public boolean equals(Object obj) {
+		if (obj instanceof Segment) {
+			Segment segment = (Segment) obj;
+			return point1.equals(segment.point1) && point2.equals(segment.point2)
+					|| point1.equals(segment.point2) && point2.equals(segment.point1);
+		}
+		return false;
+	}
 }

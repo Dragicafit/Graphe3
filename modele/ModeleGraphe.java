@@ -2,38 +2,43 @@ package modele;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import modele.point.Point;
-import modele.point.PointCouleur;
 import modele.segment.Segment;
 
 public class ModeleGraphe implements Serializable {
-	
+	private static final long serialVersionUID = 51L;
+
 	private String nom;
 	private ArrayList<Point> points;
+	private Map<String, Point> pointsSpeciaux;
 	private ArrayList<Segment> segments;
 	private ArrayList<Joueur> joueurs;
 
 	private int joueurCourant;
 
 	public ModeleGraphe(String nom) {
-		this.points = new ArrayList<>();
-		this.segments = new ArrayList<>();
-		this.joueurs = new ArrayList<>();
-		this.joueurCourant = 0;
+		this();
 		this.nom = nom;
 	}
-	
+
 	public ModeleGraphe() {
+		this.nom = null;
 		this.points = new ArrayList<>();
+		this.pointsSpeciaux = new HashMap<>();
 		this.segments = new ArrayList<>();
 		this.joueurs = new ArrayList<>();
 		this.joueurCourant = 0;
-		this.nom = null;
 	}
 
 	public void addPoint(Point point) {
 		points.add(point);
+	}
+
+	public void addPointSpeciaux(String string, Point point) {
+		pointsSpeciaux.put(string, point);
 	}
 
 	public void addSegment(Segment segment) {
@@ -47,15 +52,23 @@ public class ModeleGraphe implements Serializable {
 	public Point getPoint(int index) {
 		return points.get(index);
 	}
-	
+
 	public ArrayList<Point> getPoints() {
 		return points;
+	}
+
+	public Point getPointSpeciaux(String string) {
+		return pointsSpeciaux.get(string);
+	}
+
+	public Map<String, Point> getPointsSpeciaux() {
+		return pointsSpeciaux;
 	}
 
 	public Segment getSegment(int index) {
 		return segments.get(index);
 	}
-	
+
 	public ArrayList<Segment> getSegments() {
 		return segments;
 	}
@@ -116,12 +129,24 @@ public class ModeleGraphe implements Serializable {
 		points.clear();
 		segments.clear();
 	}
-	
+
 	public String getNom() {
 		return nom;
 	}
-	
+
 	public void setNom(String nom) {
 		this.nom = nom;
 	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (obj instanceof ModeleGraphe) {
+			ModeleGraphe modeleGraphe = (ModeleGraphe) obj;
+			return nom.equals(modeleGraphe.nom) && points.equals(modeleGraphe.points)
+					&& pointsSpeciaux.equals(modeleGraphe.pointsSpeciaux) && segments.equals(modeleGraphe.segments)
+					&& joueurs.equals(modeleGraphe.joueurs);
+		}
+		return false;
+	}
+
 }

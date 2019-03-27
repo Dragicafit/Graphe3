@@ -41,7 +41,7 @@ public abstract class Vue extends Stage{
 		creationBouton();
 		root.setStyle("-fx-padding: 10;");
 		this.setScene(scene);
-		this.setTitle("Vue Générale");
+		this.setTitle("Vue GÃ©nÃ©rale");
 		this.setMaximized(true);
 		this.show();
 	}

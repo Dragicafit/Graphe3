@@ -3,6 +3,7 @@ package modele.point;
 import java.io.Serializable;
 
 public class Point implements Serializable {
+	private static final long serialVersionUID = 10L;
 
 	private double x;
 	private double y;
@@ -54,5 +55,14 @@ public class Point implements Serializable {
 
 	public void setDeplacable(boolean deplacable) {
 		this.deplacable = deplacable;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (obj instanceof Point) {
+			Point point = (Point) obj;
+			return x == point.x && y == point.y;
+		}
+		return false;
 	}
 }

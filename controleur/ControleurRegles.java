@@ -1,11 +1,11 @@
 package controleur;
 
 import javafx.scene.input.InputEvent;
-import vue.Vue;
+import vue.VueCreationRegle;
 
 public class ControleurRegles extends ControleurRetour {
 
-	public ControleurRegles(Vue vue) {
+	public ControleurRegles(VueCreationRegle vue) {
 		super(vue);
 	}
 

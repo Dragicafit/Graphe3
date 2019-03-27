@@ -1,11 +1,11 @@
 package controleur;
 
-import java.io.IOException;
-
 import javafx.scene.control.Button;
 import javafx.scene.input.InputEvent;
 import vue.Vue;
 import vue.VueAccueil;
+import vue.VueCreationGraphe;
+import vue.VueCreationRegle;
 
 public abstract class ControleurRetour extends Controleur {
 	
@@ -22,10 +22,21 @@ public abstract class ControleurRetour extends Controleur {
 		if (source instanceof Button && vue.getBoutons().containsKey(source)) {
 			bouton = boutons.get(vue.getBoutons((Button) source));
 			if (bouton == Bouton.SAUVEGARDER) {
-				try {
-					modele.exportModele();
-				} catch (IOException e) {
-					System.out.println("Impossible de sauvegarder le jeu en cours");
+				if (vue instanceof VueCreationGraphe) {
+					VueCreationGraphe vueGraphe = (VueCreationGraphe) vue;
+					String nomGraphe = vueGraphe.getNomGraphe().getText();
+					if (!nomGraphe.isEmpty()) {
+						modele.getGrapheCourant().setNom(nomGraphe);
+						modele.getGraphesLocal().add(modele.getGrapheCourant());
+					}
+					modele.getGraphesLocal().add(modele.getGrapheCourant());
+				} else if (vue instanceof VueCreationRegle) {
+					VueCreationRegle vueRegles = (VueCreationRegle) vue;
+					String nomRegle = vueRegles.getNomRegleField().getText();
+					if (!nomRegle.isEmpty()) {
+						modele.getRegleCourant().setNom(nomRegle);
+						modele.getReglesLocal().add(modele.getRegleCourant());
+					}
 				}
 			} else if (bouton == Bouton.RETOUR) {
 				exit();

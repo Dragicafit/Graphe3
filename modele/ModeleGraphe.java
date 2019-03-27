@@ -8,17 +8,27 @@ import modele.segment.Segment;
 
 public class ModeleGraphe implements Serializable {
 	
+	private String nom;
 	private ArrayList<Point> points;
 	private ArrayList<Segment> segments;
 	private ArrayList<Joueur> joueurs;
 
 	private int joueurCourant;
 
+	public ModeleGraphe(String nom) {
+		this.points = new ArrayList<>();
+		this.segments = new ArrayList<>();
+		this.joueurs = new ArrayList<>();
+		this.joueurCourant = 0;
+		this.nom = nom;
+	}
+	
 	public ModeleGraphe() {
 		this.points = new ArrayList<>();
 		this.segments = new ArrayList<>();
 		this.joueurs = new ArrayList<>();
 		this.joueurCourant = 0;
+		this.nom = null;
 	}
 
 	public void addPoint(Point point) {
@@ -104,5 +114,13 @@ public class ModeleGraphe implements Serializable {
 	public void supprimerTout() {
 		points.clear();
 		segments.clear();
+	}
+	
+	public String getNom() {
+		return nom;
+	}
+	
+	public void setNom(String nom) {
+		this.nom = nom;
 	}
 }

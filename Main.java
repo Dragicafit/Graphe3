@@ -2,6 +2,7 @@ import javafx.application.Application;
 import javafx.stage.Stage;
 import modele.Modele;
 import vue.VueCreationGraphe;
+import vue.VueCreationRegle;
 import vue.VuePlateauJeu;
 
 public class Main extends Application {

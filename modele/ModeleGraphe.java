@@ -34,19 +34,23 @@ public class ModeleGraphe implements Serializable {
 	}
 
 	public void addPoint(Point point) {
-		points.add(point);
+		if (!points.contains(point))
+			points.add(point);
 	}
 
 	public void addPointSpeciaux(String string, Point point) {
-		pointsSpeciaux.put(string, point);
+		if (!pointsSpeciaux.containsKey(string))
+			pointsSpeciaux.put(string, point);
 	}
 
 	public void addSegment(Segment segment) {
-		segments.add(segment);
+		if (!segments.contains(segment))
+			segments.add(segment);
 	}
 
 	public void addJoueur(Joueur joueur) {
-		joueurs.add(joueur);
+		if (!joueurs.contains(joueur))
+			joueurs.add(joueur);
 	}
 
 	public Point getPoint(int index) {

@@ -1,10 +1,13 @@
 package regles;
 
+import java.util.ArrayList;
+
 import modele.Couleur;
 import modele.Joueur;
 import modele.Modele;
 import modele.point.Point;
 import modele.point.PointCouleur;
+import modele.segment.Segment;
 
 public class Regles {
 	public Modele m;
@@ -82,6 +85,10 @@ public class Regles {
 		}
 		return false;
 	}
+	
+	public boolean estBlanc(PointCouleur p) {
+		return p.getCouleur().equals(Couleur.BLANC);
+	}
 
 	public boolean allAround(Point p) {
 		Joueur j = m.getJoueur(m.getJoueurCourant());
@@ -90,7 +97,7 @@ public class Regles {
 			if (v != null) {
 				if (v != null && v instanceof PointCouleur) {
 					PointCouleur pc = (PointCouleur) v;
-					if (pc.getCouleur() != j.getCouleur()) {
+					if (!pc.getCouleur().equals(j.getCouleur())) {
 						return false;
 					}
 				} else if (v != null) {
@@ -100,5 +107,21 @@ public class Regles {
 		}
 		return true;
 	}
+	
+	public boolean estLie(Point p, ArrayList<Point> point,Point depart) {
+		point.add(p);
+		for (Segment s : m.getSegments()) {
+			Point deux = s.getVoisin(p);
+			if (deux == depart) {
+				return true;
+			}
+			if (deux != null && !point.contains(deux)) {
+				return estLie(deux, point, depart);
+			}
+
+		}
+		return false;
+	}
+	
 
 }

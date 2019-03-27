@@ -1,7 +1,6 @@
 package vue;
 
-import Jeux.Jeux;
-import Jeux.Snort;
+import Jeux.*;
 import controleur.Controleur;
 import controleur.ControleurJeu;
 import javafx.scene.text.Text;
@@ -26,7 +25,7 @@ public class VuePlateauJeu extends VueJeu {
 
 	@Override
 	public Controleur creationControleur() {
-		Jeux jeu = new Snort(new Regles(modele, true, true, true, true), false, this);
+		Jeux jeu = new Col(new Regles(modele, true, true, true, true), this);
 		jeu.start();
 		return new ControleurJeu(this, jeu);
 	}

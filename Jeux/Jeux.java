@@ -2,8 +2,11 @@ package Jeux;
 
 import controleur.ControleurJeu;
 import javafx.scene.input.InputEvent;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.shape.Circle;
 import modele.Modele;
 import modele.point.Point;
+import modele.point.PointCouleur;
 import regles.Regles;
 import vue.Vue;
 
@@ -47,14 +50,33 @@ public abstract class Jeux extends Thread {
 		this.event = event;
 		notify();
 	}
-
-	public abstract boolean deplacementAvailable();
+	
+	public synchronized boolean tour(int nb) throws InterruptedException {
+		wait();
+		Object source = event.getSource();
+		if (event.getEventType() == MouseEvent.DRAG_DETECTED) {
+			if (source instanceof Circle && vue.getCercles().contains(source)) {
+				if (deplacementAvailable()) {
+					((ControleurJeu) vue.getControleur()).setApplique((Circle) source);
+					return false;
+				}
+			}
+		} else if (source instanceof Circle && vue.getCercles().contains((Circle) source)) {
+			PointCouleur point = (PointCouleur) m.getPoint(vue.getCercles().indexOf((Circle) source));
+			if (check_regles(point)) {
+				((ControleurJeu) vue.getControleur()).setApplique(point);
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	public abstract boolean check_regles(Point p);
 
 	public abstract boolean end_game();
 
-	public abstract boolean tour(int nb) throws InterruptedException;
-
-	public abstract boolean check_regles(Point p);
-
 	public abstract void applique(Object o);
+	
+	public abstract boolean deplacementAvailable();
+
 }

@@ -44,6 +44,7 @@ public class ControleurGraphes extends ControleurRetour {
 			modele.supprimerTout();
 			bouton = null;
 			premierPoint = null;
+			vue.update();
 		}
 	}
 

@@ -15,7 +15,6 @@ public class Regles {
 	private Boolean jouerAcoteEnnemi;
 	private Boolean jouerSurEnnemi;
 	private Boolean estBlanc;
-	
 
 	public Regles(Modele modele, Boolean check_soit, Boolean check_ennemi, Boolean jouerSurEnnemi, Boolean estBlanc) {
 		this.jouerAcoteSoit = check_soit;

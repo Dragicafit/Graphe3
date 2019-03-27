@@ -20,18 +20,19 @@ import javafx.scene.shape.Line;
 import javafx.stage.Stage;
 import modele.Modele;
 
-public abstract class Vue {
+public abstract class Vue extends Stage{
 
 	protected Modele modele;
 	protected Controleur controleur;
 	protected ArrayList<Circle> cercles;
 	protected ArrayList<Line> lignes;
 	protected Map<Button, String> boutons;
-	protected Stage primaryStage = new Stage();
-	protected BorderPane root = new BorderPane();
-	protected Scene scene = new Scene(root, 800, 600);
+	protected BorderPane root;
+	protected Scene scene;
 
 	public Vue(Modele m) {
+		root = new BorderPane();
+		scene = new Scene(root, 800, 600);
 		modele = m;
 		cercles = new ArrayList<Circle>();
 		lignes = new ArrayList<Line>();
@@ -39,10 +40,10 @@ public abstract class Vue {
 		this.controleur = creationControleur();
 		creationBouton();
 		root.setStyle("-fx-padding: 10;");
-		primaryStage.setScene(scene);
-		primaryStage.setTitle("Vue GÃ©nÃ©rale");
-		primaryStage.setMaximized(true);
-		primaryStage.show();
+		this.setScene(scene);
+		this.setTitle("Vue Générale");
+		this.setMaximized(true);
+		this.show();
 	}
 
 	public abstract void creationBouton();
@@ -133,9 +134,5 @@ public abstract class Vue {
 
 	public Controleur getControleur() {
 		return controleur;
-	}
-	
-	public Stage getPrimaryStage() {
-		return primaryStage;
 	}
 }

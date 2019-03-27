@@ -1,23 +1,23 @@
 package Jeux;
 
+import java.util.ArrayList;
+
 import controleur.ControleurJeu;
 import javafx.scene.shape.Circle;
 import modele.point.Point;
 import modele.point.PointCouleur;
+import modele.segment.Segment;
 import modele.segment.SegmentCouleur;
 import regles.Regles;
 import vue.Vue;
 
-public class Hex extends Jeux{
-	
+public class Hex extends Jeux {
+
 	private PointCouleur red1;
 	private PointCouleur red2;
 	private PointCouleur blue1;
 	private PointCouleur blue2;
 	private PointCouleur PointDepart;
-	private PointCouleur PointArrivee;
-
-
 
 	public Hex(Regles r, Vue vue, PointCouleur red1, PointCouleur red2, PointCouleur blue1, PointCouleur blue2) {
 		super("Hex", r, vue);
@@ -27,7 +27,7 @@ public class Hex extends Jeux{
 		this.blue2 = blue2;
 
 	}
-	
+
 	@Override
 	public boolean tour(int nb) throws InterruptedException {
 		wait();
@@ -41,47 +41,55 @@ public class Hex extends Jeux{
 		}
 		return false;
 	}
-	
+
 	@Override
 	public boolean check_regles(Point p) {
-		return regles.check_cote_soit((PointCouleur) p) && regles.estBlanc((PointCouleur)p);
+		return regles.check_cote_soit((PointCouleur) p) && regles.estBlanc((PointCouleur) p);
 	}
-
 
 	@Override
 	public boolean end_game() {
-		if(estLie(this.red1)) {
-			this.PointDepart = red1;
+		ArrayList<Point> point = new ArrayList<>();
+		this.PointDepart = red1;
+		if (estLie(this.red2, point)) {
 			return true;
 		}
-		if(estLie(this.blue1)) {
-			this.PointDepart = blue1;
+		point.clear();
+		this.PointDepart = blue1;
+		if (estLie(this.blue2, point)) {
 			return true;
-		}	
+		}
 		return false;
 	}
-	
-	public boolean estLie(PointCouleur p) {
-		for(int i =0; i<m.getSizeSegments();i++) {
-			if(m.getSegment(i).getPoint1() == p && ((PointCouleur) m.getSegment(i).getPoint2()).getCouleur().equals(PointDepart.getCouleur())){
-				return estLie((PointCouleur) m.getSegment(i).getPoint2());
+
+	public boolean estLie(Point p, ArrayList<Point> point) {
+		point.add(p);
+		for (Segment s : m.getSegments()) {
+			Point deux = s.getVoisin(p);
+			if (deux == PointDepart) {
+				return true;
 			}
+			if (deux != null && !point.contains(deux)) {
+				return estLie(deux, point);
+			}
+
 		}
 		return false;
 	}
+
 	@Override
 	public void applique(Object o) {
 		ControleurJeu c = (ControleurJeu) vue.getControleur();
-		if(o instanceof PointCouleur) {
+		if (o instanceof PointCouleur) {
 			c.applique((PointCouleur) o);
 		} else if (o instanceof SegmentCouleur) {
 			c.applique((SegmentCouleur) o);
 		}
 	}
-	
+
 	@Override
 	public boolean deplacementAvailable() {
 		return false;
 	}
-	
+
 }

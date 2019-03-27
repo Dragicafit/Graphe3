@@ -10,24 +10,17 @@ import modele.point.PointCouleur;
 import modele.segment.Segment;
 
 public class Regles {
-	public Modele m;
-	boolean check_cote_soit;
-	boolean check_cote_ennemi;
-	boolean sur_ennemi;
-	boolean estVide;
+	
+	public Modele modele;
 
-	public Regles(Modele modele, boolean check_soit, boolean check_ennemi, boolean sur_ennemi, boolean estVide) {
-		this.check_cote_soit = check_soit;
-		this.check_cote_ennemi = check_ennemi;
-		this.sur_ennemi = sur_ennemi;
-		this.estVide = estVide;
-		this.m = modele;
+	public Regles(Modele modele) {
+		this.modele = modele;
 	}
 
-	public boolean check_cote_soit(PointCouleur p) {
-		Joueur j = m.getJoueur(m.getJoueurCourant());
-		for (int i = 0; i < m.getSizeSegments(); i++) {
-			Point v = m.getSegment(i).getVoisin(p);
+	public boolean jouerAcoteSoit(PointCouleur p) {
+		Joueur j = modele.getJoueur(modele.getJoueurCourant());
+		for (int i = 0; i < modele.getSizeSegments(); i++) {
+			Point v = modele.getSegment(i).getVoisin(p);
 			if (v instanceof PointCouleur) {
 				PointCouleur pc = (PointCouleur) v;
 				if (pc.getCouleur().equals(j.getCouleur()) && p.getCouleur().equals(Couleur.BLANC)) {
@@ -38,10 +31,10 @@ public class Regles {
 		return false;
 	}
 
-	public boolean check_cote_ennemi(PointCouleur p) {
-		Joueur j = m.getJoueur(m.getJoueurCourant());
-		for (int i = 0; i < m.getSizeSegments(); i++) {
-			Point v = m.getSegment(i).getVoisin(p);
+	public boolean jouerAcoteEnnemi(PointCouleur p) {
+		Joueur j = modele.getJoueur(modele.getJoueurCourant());
+		for (int i = 0; i < modele.getSizeSegments(); i++) {
+			Point v = modele.getSegment(i).getVoisin(p);
 			if (v instanceof PointCouleur) {
 				PointCouleur pc = (PointCouleur) v;
 				if (!pc.getCouleur().equals(j.getCouleur()) && !pc.getCouleur().equals(Couleur.BLANC)) {
@@ -52,17 +45,17 @@ public class Regles {
 		return false;
 	}
 
-	public boolean sur_ennemi(Point p) {
-		Joueur j = m.getJoueur(m.getJoueurCourant());
+	public boolean jouerSurEnnemi(Point p) {
+		Joueur j = modele.getJoueur(modele.getJoueurCourant());
 		PointCouleur ennemi;
-		for (int i = 0; i < m.getSizeSegments(); i++) {
-			if (m.getSegment(i).getPoint1() == p) {
-				ennemi = (PointCouleur) m.getSegment(i).getPoint1();
+		for (int i = 0; i < modele.getSizeSegments(); i++) {
+			if (modele.getSegment(i).getPoint1() == p) {
+				ennemi = (PointCouleur) modele.getSegment(i).getPoint1();
 				if (ennemi.getCouleur() != j.getCouleur()) {
 					return true;
 				}
-			} else if (m.getSegment(i).getPoint2() == p) {
-				ennemi = (PointCouleur) m.getSegment(i).getPoint2();
+			} else if (modele.getSegment(i).getPoint2() == p) {
+				ennemi = (PointCouleur) modele.getSegment(i).getPoint2();
 				if (ennemi.getCouleur() != j.getCouleur()) {
 					return true;
 				}
@@ -71,29 +64,14 @@ public class Regles {
 		return false;
 	}
 
-	public boolean estVide(Point p) {
-		for (int i = 0; i < m.getSizeSegments(); i++) {
-			if (m.getSegment(i).getPoint1() == p) {
-				if (!(m.getSegment(i).getPoint1() instanceof PointCouleur)) {
-					return true;
-				}
-			} else if (m.getSegment(i).getPoint2() == p) {
-				if (!(m.getSegment(i).getPoint2() instanceof PointCouleur)) {
-					return true;
-				}
-			}
-		}
-		return false;
-	}
-	
 	public boolean estBlanc(PointCouleur p) {
 		return p.getCouleur().equals(Couleur.BLANC);
 	}
 
 	public boolean allAround(Point p) {
-		Joueur j = m.getJoueur(m.getJoueurCourant());
-		for (int i = 0; i < m.getSizeSegments(); i++) {
-			Point v = m.getSegment(i).getVoisin(p);
+		Joueur j = modele.getJoueur(modele.getJoueurCourant());
+		for (int i = 0; i < modele.getSizeSegments(); i++) {
+			Point v = modele.getSegment(i).getVoisin(p);
 			if (v != null) {
 				if (v != null && v instanceof PointCouleur) {
 					PointCouleur pc = (PointCouleur) v;
@@ -107,10 +85,10 @@ public class Regles {
 		}
 		return true;
 	}
-	
-	public boolean estLie(Point p, ArrayList<Point> point,Point depart) {
+
+	public boolean estLie(Point p, ArrayList<Point> point, Point depart) {
 		point.add(p);
-		for (Segment s : m.getSegments()) {
+		for (Segment s : modele.getSegments()) {
 			Point deux = s.getVoisin(p);
 			if (deux == depart) {
 				return true;
@@ -122,6 +100,4 @@ public class Regles {
 		}
 		return false;
 	}
-	
-
 }

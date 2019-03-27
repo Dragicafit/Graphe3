@@ -5,6 +5,7 @@ import java.io.Serializable;
 import javafx.scene.paint.Color;
 
 public class Couleur implements Serializable {
+	private static final long serialVersionUID = 30L;
 
 	private double rouge;
 	private double vert;
@@ -31,9 +32,8 @@ public class Couleur implements Serializable {
 		if (obj instanceof Couleur) {
 			Couleur couleur = (Couleur) obj;
 			return rouge == couleur.rouge && vert == couleur.vert && bleu == couleur.bleu;
-		} else {
-			return super.equals(obj);
 		}
+		return false;
 	}
 
 	public double getRouge() {

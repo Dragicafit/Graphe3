@@ -50,7 +50,7 @@ public class VueCreationRegle extends VueRetour {
 		point.add(allAround, 1, 4);
 		segment = creerGridPane(Pos.CENTER_LEFT, true);
 		bottom = creerGridPane(Pos.CENTER, true);
-		nomRegleField = creerZoneText("Nom de la règle", 40.);
+		nomRegleField = creerZoneText("Nom de la rÃ¨gle", 40.);
 		bottom.add(retour, 0, 0);
 		bottom.add(nomRegleField, 1,0);
 		bottom.add(sauvegarder, 2, 0);		

@@ -12,6 +12,7 @@ import modele.point.Point;
 import modele.segment.Segment;
 
 public class Modele implements Serializable {
+	private static final long serialVersionUID = 50L;
 
 	private ArrayList<ModeleGraphe> graphesPredefinis;
 	private ArrayList<ModeleGraphe> graphesLocal;
@@ -20,13 +21,13 @@ public class Modele implements Serializable {
 
 	private ModeleGraphe grapheCourant;
 	private ModeleRegle regleCourant;
-	
+
 	public Modele() {
 		graphesPredefinis = new ArrayList<>();
 		graphesLocal = new ArrayList<>();
 		reglesPredefinis = new ArrayList<>();
 		reglesLocal = new ArrayList<>();
-		
+
 		grapheCourant = null;
 		regleCourant = null;
 	}
@@ -111,7 +112,7 @@ public class Modele implements Serializable {
 	public Point getPoint(int index) {
 		return grapheCourant.getPoint(index);
 	}
-	
+
 	public ArrayList<Point> getPoints() {
 		return grapheCourant.getPoints();
 	}
@@ -119,7 +120,7 @@ public class Modele implements Serializable {
 	public Segment getSegment(int index) {
 		return grapheCourant.getSegment(index);
 	}
-	
+
 	public ArrayList<Segment> getSegments() {
 		return grapheCourant.getSegments();
 	}
@@ -141,7 +142,8 @@ public class Modele implements Serializable {
 	}
 
 	public void setJoueurCourant(int joueurCourant) {
-		this.grapheCourant.setJoueurCourant(joueurCourant);;
+		this.grapheCourant.setJoueurCourant(joueurCourant);
+		;
 	}
 
 	public int getSizePoints() {

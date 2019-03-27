@@ -5,7 +5,8 @@ import modele.estColoriable;
 import modele.point.Point;
 
 public class SegmentCouleur extends Segment implements estColoriable {
-
+	private static final long serialVersionUID = 21L;
+	
 	private Couleur couleur;
 
 	public SegmentCouleur(Point point1, Point point2, boolean oriente, Couleur couleur) {
@@ -26,5 +27,14 @@ public class SegmentCouleur extends Segment implements estColoriable {
 	@Override
 	public void setCouleur(Couleur couleur) {
 		this.couleur = couleur;
+	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		if (obj instanceof SegmentCouleur) {
+			SegmentCouleur segmentCouleur = (SegmentCouleur) obj;
+			return super.equals(obj) && couleur.equals(segmentCouleur.couleur);
+		}
+		return false;
 	}
 }

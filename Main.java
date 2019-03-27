@@ -2,6 +2,7 @@ import javafx.application.Application;
 import javafx.stage.Stage;
 import modele.Modele;
 import modele.ModeleGraphe1;
+import modele.ModeleRegleSnort;
 import vue.VueCreationGraphe;
 import vue.VuePlateauJeu;
 
@@ -16,6 +17,7 @@ public class Main extends Application {
 		try {
 			Modele m = new Modele();
 			m.setGrapheCourant(new ModeleGraphe1());
+			m.setRegleCourant(new ModeleRegleSnort());
 			new VuePlateauJeu(m);
 			new VueCreationGraphe(m);
 		} catch (Exception e) {

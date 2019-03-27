@@ -7,12 +7,25 @@ public class ModeleRegle implements Serializable {
 
 	private String nom;
 
+	public Boolean JouerAcoteSoit;
+	public Boolean JouerAcoteEnnemi;
+	public Boolean JouerSurEnnemi;
+	public Boolean EstBlanc;
+	public boolean DeplacementAutorise;
+	public boolean FinHex;
+
 	public ModeleRegle(String nom) {
 		this.nom = nom;
 	}
 
 	public ModeleRegle() {
 		this.nom = null;
+		this.JouerAcoteSoit = null;
+		this.JouerAcoteEnnemi = null;
+		this.JouerSurEnnemi = null;
+		this.EstBlanc = null;
+		this.DeplacementAutorise = false;
+		this.FinHex = false;
 	}
 
 	public String getNom() {
@@ -27,7 +40,10 @@ public class ModeleRegle implements Serializable {
 	public boolean equals(Object obj) {
 		if (obj instanceof ModeleRegle) {
 			ModeleRegle modeleRegle = (ModeleRegle) obj;
-			return nom.equals(modeleRegle.nom);
+			return nom.equals(modeleRegle.nom) && JouerAcoteSoit.equals(modeleRegle.JouerAcoteSoit)
+					&& JouerAcoteEnnemi.equals(modeleRegle.JouerAcoteEnnemi)
+					&& JouerSurEnnemi.equals(modeleRegle.JouerSurEnnemi) && EstBlanc.equals(modeleRegle.EstBlanc)
+					&& DeplacementAutorise == modeleRegle.DeplacementAutorise && FinHex == modeleRegle.FinHex;
 		}
 		return false;
 	}

@@ -12,6 +12,7 @@ public class ModeleGraphe implements Serializable {
 	private static final long serialVersionUID = 51L;
 
 	private String nom;
+	
 	private ArrayList<Point> points;
 	private Map<String, Point> pointsSpeciaux;
 	private ArrayList<Segment> segments;

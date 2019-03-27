@@ -8,6 +8,7 @@ public class ModeleGraphe1 extends ModeleGraphe {
 	private static final long serialVersionUID = 100L;
 
 	public ModeleGraphe1() {
+		super("1");
 		addJoueur(new Joueur("j1", Couleur.ROUGE));
 		addJoueur(new Joueur("j2", Couleur.BLEU));
 		Point p1 = new PointCouleur(200, 100, Couleur.BLANC);

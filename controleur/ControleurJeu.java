@@ -19,9 +19,10 @@ public class ControleurJeu extends ControleurRetour {
 	protected Jeux jeu;
 	private Object action;
 
-	public ControleurJeu(Vue vue, Jeux jeu) {
+	public ControleurJeu(Vue vue) {
 		super(vue);
-		this.jeu = jeu;
+		this.jeu = new Jeux(vue);
+		jeu.start();
 	}
 
 	public synchronized void setApplique(Object action) {

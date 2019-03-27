@@ -6,7 +6,6 @@ import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
-import javafx.scene.control.Label;
 import javafx.scene.control.SplitPane;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
@@ -89,5 +88,31 @@ public class VueCreationRegle extends VueRetour {
 
 	public TextField getNomRegleField() {
 		return nomRegleField;
+	}
+
+	public CheckBox getPointColoriable() {
+		return pointColoriable;
+	}
+
+	public CheckBox getPointDeplacable() {
+		return pointDeplacable;
+	}
+
+	public CheckBox getaCoteDeSoit() {
+		return aCoteDeSoit;
+	}
+
+	public CheckBox getaCoteDennemi() {
+		return aCoteDennemi;
+	}
+
+	public CheckBox getSurEnnemi() {
+		return surEnnemi;
+	}
+
+	public CheckBox getAllAround() {
+		return allAround;
 	}	
+	
+	
 }

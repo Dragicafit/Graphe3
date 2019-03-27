@@ -40,7 +40,7 @@ public abstract class VueJeu extends VueRetour {
 		top.setAlignment(Pos.CENTER);
 		bottom.setSpacing(20);
 		bottom.setAlignment(Pos.CENTER);
-		bottom.setStyle("-fx-padding: 10;");
+		bottom.setStyle("-fx-padding: 5;");
 		bottom.getChildren().addAll(sauvegarder, retour);
 		menu.setTop(top);
 		menu.setBottom(bottom);

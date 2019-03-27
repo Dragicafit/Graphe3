@@ -18,7 +18,8 @@ public class VueCreationGraphe extends VueJeu {
 		super(m);
 		super.primaryStage.setTitle("Création d'un graphe");
 		nomGraphe = creerZoneText("Nom du Graphe", 40.);
-		top.getChildren().addAll(point, segment, supprimer, supprimerTout, nomGraphe);
+		top.getChildren().addAll(point, segment, supprimer, supprimerTout);
+		bottom.getChildren().add(0, nomGraphe);
 	}
 
 	@Override

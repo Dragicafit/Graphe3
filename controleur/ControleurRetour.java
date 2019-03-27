@@ -2,7 +2,6 @@ package controleur;
 
 import javafx.scene.control.Button;
 import javafx.scene.input.InputEvent;
-import javafx.scene.text.Text;
 import vue.Vue;
 import vue.VueAccueil;
 import vue.VueCreationGraphe;
@@ -25,15 +24,15 @@ public abstract class ControleurRetour extends Controleur {
 			if (bouton == Bouton.SAUVEGARDER) {
 				if (vue instanceof VueCreationGraphe) {
 					VueCreationGraphe vueGraphe = (VueCreationGraphe) vue;
-					String nomGraphe = vueGraphe.nomGrapheField.getText();
-					if (!nomGaphe.isEmpty()) {
+					String nomGraphe = vueGraphe.getNomGraphe().getText();
+					if (!nomGraphe.isEmpty()) {
 						modele.getGrapheCourant().setNom(nomGraphe);
 						modele.getGraphesLocal().add(modele.getGrapheCourant());
 					}
 					modele.getGraphesLocal().add(modele.getGrapheCourant());
 				} else if (vue instanceof VueCreationRegle) {
 					VueCreationRegle vueRegles = (VueCreationRegle) vue;
-					String nomRegle = vueRegles.nomRegleField.getText();
+					String nomRegle = vueRegles.getNomRegleField().getText();
 					if (!nomRegle.isEmpty()) {
 						modele.getRegleCourant().setNom(nomRegle);
 						modele.getReglesLocal().add(modele.getRegleCourant());

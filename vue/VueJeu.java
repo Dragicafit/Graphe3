@@ -21,11 +21,12 @@ import modele.segment.Segment;
 import modele.segment.SegmentCouleur;
 
 public abstract class VueJeu extends VueRetour {
-	public SplitPane main;
-	public BorderPane menu;
-	public VBox top;
-	public VBox bottom;
-	public Pane graphe;
+	
+	protected SplitPane main;
+	protected BorderPane menu;
+	protected VBox top;
+	protected VBox bottom;
+	protected Pane graphe;
 
 	public VueJeu(Modele m) {
 		super(m);

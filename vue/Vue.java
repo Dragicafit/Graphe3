@@ -9,6 +9,7 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -68,6 +69,21 @@ public abstract class Vue {
 		b.setAlignment(Pos.TOP_CENTER);
 		b.addEventHandler(MouseEvent.MOUSE_CLICKED, controleur);
 		return b;
+	}
+	
+	public TextField creerZoneText (String nom, Double taille) {
+		TextField zone = new TextField();
+		zone.setPromptText(nom);
+		zone.setPrefHeight(taille);
+		zone.setFocusTraversable(false);
+		return zone;
+	}
+	
+	public TextField creerZoneText (String nom) {
+		TextField zone = new TextField();
+		zone.setPromptText(nom);
+		zone.setFocusTraversable(false);
+		return zone;
 	}
 	
 	public GridPane creerGridPane(Pos p, boolean Border) {

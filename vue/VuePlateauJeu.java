@@ -4,29 +4,23 @@ import Jeux.Jeux;
 import Jeux.Snort;
 import controleur.Controleur;
 import controleur.ControleurJeu;
-import javafx.scene.control.Button;
 import javafx.scene.text.Text;
 import modele.Modele;
 import regles.Regles;
 
 public class VuePlateauJeu extends VueJeu {
 
-	public Button colorier;
-	public Button deplacer;
-	public Text nomJoueur;
+	private Text nomJoueur;
 
 	public VuePlateauJeu(Modele m) {
 		super(m);
 		super.primaryStage.setTitle("Lets GO !!!");
-		top.getChildren().addAll(this.nomJoueur, this.colorier, this.deplacer);
+		top.getChildren().add(this.nomJoueur);
 	}
 
+	@Override
 	public void creationBouton() {
 		super.creationBouton();
-		this.colorier = creerBouton("Colorier");
-		this.deplacer = creerBouton("Déplacer");
-		boutons.put(colorier, "colorier");
-		boutons.put(deplacer, "deplacer");
 		this.nomJoueur = new Text();
 	}
 

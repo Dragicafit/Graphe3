@@ -3,19 +3,22 @@ package vue;
 import controleur.Controleur;
 import controleur.ControleurGraphes;
 import javafx.scene.control.Button;
+import javafx.scene.control.TextField;
 import modele.Modele;
 
 public class VueCreationGraphe extends VueJeu {
 
-	public Button point;
-	public Button segment;
-	public Button supprimer;
-	public Button supprimerTout;
+	protected Button point;
+	protected Button segment;
+	protected Button supprimer;
+	protected Button supprimerTout;
+	protected TextField nomGraphe;
 
 	public VueCreationGraphe(Modele m) {
 		super(m);
-		super.primaryStage.setTitle("CrÃ©ation d'un graphe");
-		top.getChildren().addAll(point, segment, supprimer, supprimerTout);
+		super.primaryStage.setTitle("Création d'un graphe");
+		nomGraphe = creerZoneText("Nom du Graphe", 40.);
+		top.getChildren().addAll(point, segment, supprimer, supprimerTout, nomGraphe);
 	}
 
 	@Override
@@ -36,5 +39,25 @@ public class VueCreationGraphe extends VueJeu {
 	@Override
 	public Controleur creationControleur() {
 		return new ControleurGraphes(this);
+	}
+
+	public Button getPoint() {
+		return point;
+	}
+
+	public Button getSegment() {
+		return segment;
+	}
+
+	public Button getSupprimer() {
+		return supprimer;
+	}
+
+	public Button getSupprimerTout() {
+		return supprimerTout;
+	}
+
+	public TextField getNomGraphe() {
+		return nomGraphe;
 	}
 }

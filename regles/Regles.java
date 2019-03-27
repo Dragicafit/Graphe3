@@ -94,7 +94,7 @@ public class Regles {
 			if (v != null) {
 				if (v != null && v instanceof PointCouleur) {
 					PointCouleur pc = (PointCouleur) v;
-					if (pc.getCouleur() != j.getCouleur()) {
+					if (!pc.getCouleur().equals(j.getCouleur())) {
 						return false;
 					}
 				} else if (v != null) {

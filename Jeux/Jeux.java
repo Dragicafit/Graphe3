@@ -42,12 +42,15 @@ public abstract class Jeux extends Thread {
 		this.event = event;
 		notify();
 	}
-
-	public abstract boolean deplacementAvailable();
+	
+	public abstract boolean tour(int nb) throws InterruptedException;
+	
+	public abstract boolean check_regles(Point p);
 
 	public abstract boolean end_game();
 
-	public abstract boolean tour(int nb) throws InterruptedException;
+	public abstract void applique(Object o);
+	
+	public abstract boolean deplacementAvailable();
 
-	public abstract boolean check_regles(Point p);
 }

@@ -9,12 +9,9 @@ import regles.Regles;
 import vue.Vue;
 
 public class Snort extends Jeux {
-
-	private boolean mode_jeu; // True = ne pas jouer a coté ennemis, a coté de soit sinon
-
-	public Snort(Regles r, boolean mode_jeu, Vue vue) {
+	
+	public Snort(Regles r, Vue vue) {
 		super("Snort", r, vue);
-		this.mode_jeu = mode_jeu;
 	}
 
 	@Override
@@ -35,14 +32,8 @@ public class Snort extends Jeux {
 	public boolean end_game() {
 		for (int i = 0; i < m.getSizePoints(); i++) {
 			PointCouleur p = (PointCouleur) m.getPoint(i);
-			if (mode_jeu) {
-				if (!regles.check_cote_ennemi(p) && regles.check_cote_soit(p)) {
+			if (!regles.check_cote_ennemi(p)) {
 					return false;
-				}
-			} else {
-				if (!regles.check_cote_soit(p) && regles.check_cote_ennemi(p)) {
-					return false;
-				}
 			}
 		}
 		return true;
@@ -50,18 +41,10 @@ public class Snort extends Jeux {
 
 	@Override
 	public boolean check_regles(Point p) {
-		if (mode_jeu) {
-			if (regles.check_cote_soit((PointCouleur) p) && regles.estBlanc((PointCouleur)p) ) {
-				return true;
-			}
-		} else {
-			if (!regles.check_cote_soit((PointCouleur) p) && regles.estBlanc((PointCouleur)p)) {
-				return true;
-			}
-		}
-		return false;
+		return !regles.check_cote_ennemi((PointCouleur) p) && regles.estBlanc((PointCouleur)p);
 	}
-
+	
+	@Override
 	public void applique(Object o) {
 		ControleurJeu c = (ControleurJeu) vue.getControleur();
 		if (o instanceof PointCouleur) {

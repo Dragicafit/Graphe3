@@ -71,7 +71,54 @@ public abstract class Jeux extends Thread {
 		return false;
 	}
 	
-	public abstract boolean check_regles(Point p);
+	public boolean check_regles(Point p) {
+		if(regles.getCheckCoteSoit() != null){
+			if(regles.getCheckCoteSoit()){
+				if(!regles.jouerAcoteSoit((PointCouleur) p)){
+					return false;
+				}
+			}else{	
+				if(regles.jouerAcoteSoit((PointCouleur) p)){
+					return false;
+				}
+			}
+		}
+		if(regles.getCheckCoteEnnemi() != null) {
+			if(regles.getCheckCoteEnnemi()) {
+				if(!regles.jouerAcoteEnnemi((PointCouleur) p)){
+					return false;
+				}
+			}else {
+				if(regles.jouerAcoteEnnemi((PointCouleur) p)){
+					return false;
+				}
+			}
+		}
+		if(regles.getSurEnnemi() != null) {
+			if(regles.getSurEnnemi()) {
+				if(!regles.jouerSurEnnemi(p)){
+					return false;
+				}
+			}else {
+				if(regles.jouerSurEnnemi(p)) {
+					return false;
+				}
+			}
+		}
+		if(regles.getEstBlanc() != null) {
+			if(regles.getEstBlanc()) {
+				if(!regles.estBlanc((PointCouleur)p)){
+					return false;
+				
+				}
+			}else {
+				if(regles.estBlanc((PointCouleur) p)) {
+					return false;
+				}
+			}
+		}
+		return true;
+	}
 
 	public abstract boolean end_game();
 

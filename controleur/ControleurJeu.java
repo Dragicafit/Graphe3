@@ -65,7 +65,7 @@ public class ControleurJeu extends ControleurRetour {
 	}
 
 	@Override
-	public void exit() {
+	public synchronized void exit() {
 		jeu.interrupt();
 		notifyAll();
 		super.exit();

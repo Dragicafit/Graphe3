@@ -3,10 +3,8 @@ package Jeux;
 import java.util.ArrayList;
 
 import controleur.ControleurJeu;
-import javafx.scene.shape.Circle;
 import modele.point.Point;
 import modele.point.PointCouleur;
-import modele.segment.Segment;
 import modele.segment.SegmentCouleur;
 import regles.Regles;
 import vue.Vue;
@@ -28,18 +26,13 @@ public class Hex extends Jeux {
 	}
 
 	@Override
-	public boolean check_regles(Point p) {
-		return regles.check_cote_soit((PointCouleur) p) && regles.estBlanc((PointCouleur) p);
-	}
-
-	@Override
 	public boolean end_game() {
 		ArrayList<Point> point = new ArrayList<>();
-		if (regles.estLie(this.red2, point, red1)) {
+		if (regles.estLie(this.red2, point, this.red1)) {
 			return true;
 		}
 		point.clear();
-		if (regles.estLie(this.blue2, point, blue1)) {
+		if (regles.estLie(this.blue2, point, this.blue1)) {
 			return true;
 		}
 		return false;

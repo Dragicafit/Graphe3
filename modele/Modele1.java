@@ -17,8 +17,8 @@ public class Modele1 extends ModeleGraphe {
 		Point p6 = new PointCouleur(500, 200, Couleur.BLANC);
 		Point p7 = new PointCouleur(200, 300, Couleur.BLANC);
 		Point p8 = new PointCouleur(500, 300, Couleur.BLANC);
-		Point p9 = new PointCouleur(600, 200, Couleur.BLANC);
-		Point p10 = new PointCouleur(100, 200, Couleur.BLANC);
+		Point p9 = new PointCouleur(600, 200, Couleur.BLEU);
+		Point p10 = new PointCouleur(100, 200, Couleur.ROUGE);
 		addPoint(p1);
 		addPoint(p2);
 		addPoint(p3);

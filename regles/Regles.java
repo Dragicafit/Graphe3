@@ -11,20 +11,37 @@ import modele.segment.Segment;
 
 public class Regles {
 	public Modele m;
-	boolean check_cote_soit;
-	boolean check_cote_ennemi;
-	boolean sur_ennemi;
-	boolean estVide;
+	private Boolean jouerAcoteSoit;
+	private Boolean jouerAcoteEnnemi;
+	private Boolean jouerSurEnnemi;
+	private Boolean estBlanc;
 
-	public Regles(Modele modele, boolean check_soit, boolean check_ennemi, boolean sur_ennemi, boolean estVide) {
-		this.check_cote_soit = check_soit;
-		this.check_cote_ennemi = check_ennemi;
-		this.sur_ennemi = sur_ennemi;
-		this.estVide = estVide;
+	public Regles(Modele modele, Boolean check_soit, Boolean check_ennemi, Boolean jouerSurEnnemi, Boolean estBlanc) {
+		this.jouerAcoteSoit = check_soit;
+		this.jouerAcoteEnnemi = check_ennemi;
+		this.jouerSurEnnemi = jouerSurEnnemi;
 		this.m = modele;
 	}
+	
+	public Boolean getCheckCoteSoit() {
+		return jouerAcoteSoit;
+	}
+	
+	public Boolean getCheckCoteEnnemi() {
+		return jouerAcoteEnnemi;
+	}
+	
+	public Boolean getSurEnnemi() {
+		return jouerSurEnnemi;
+	}
+	
+	public Boolean getEstBlanc() {
+		return estBlanc;
+	}
 
-	public boolean check_cote_soit(PointCouleur p) {
+
+
+	public boolean jouerAcoteSoit(PointCouleur p) {
 		Joueur j = m.getJoueur(m.getJoueurCourant());
 		for (int i = 0; i < m.getSizeSegments(); i++) {
 			Point v = m.getSegment(i).getVoisin(p);
@@ -38,7 +55,7 @@ public class Regles {
 		return false;
 	}
 
-	public boolean check_cote_ennemi(PointCouleur p) {
+	public boolean jouerAcoteEnnemi(PointCouleur p) {
 		Joueur j = m.getJoueur(m.getJoueurCourant());
 		for (int i = 0; i < m.getSizeSegments(); i++) {
 			Point v = m.getSegment(i).getVoisin(p);
@@ -52,7 +69,7 @@ public class Regles {
 		return false;
 	}
 
-	public boolean sur_ennemi(Point p) {
+	public boolean jouerSurEnnemi(Point p) {
 		Joueur j = m.getJoueur(m.getJoueurCourant());
 		PointCouleur ennemi;
 		for (int i = 0; i < m.getSizeSegments(); i++) {
@@ -64,21 +81,6 @@ public class Regles {
 			} else if (m.getSegment(i).getPoint2() == p) {
 				ennemi = (PointCouleur) m.getSegment(i).getPoint2();
 				if (ennemi.getCouleur() != j.getCouleur()) {
-					return true;
-				}
-			}
-		}
-		return false;
-	}
-
-	public boolean estVide(Point p) {
-		for (int i = 0; i < m.getSizeSegments(); i++) {
-			if (m.getSegment(i).getPoint1() == p) {
-				if (!(m.getSegment(i).getPoint1() instanceof PointCouleur)) {
-					return true;
-				}
-			} else if (m.getSegment(i).getPoint2() == p) {
-				if (!(m.getSegment(i).getPoint2() instanceof PointCouleur)) {
 					return true;
 				}
 			}

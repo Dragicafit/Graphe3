@@ -11,35 +11,19 @@ import modele.segment.Segment;
 
 public class Regles {
 	public Modele m;
-	private Boolean jouerAcoteSoit;
-	private Boolean jouerAcoteEnnemi;
-	private Boolean jouerSurEnnemi;
-	private Boolean estBlanc;
+	public Boolean JouerAcoteSoit;
+	public Boolean JouerAcoteEnnemi;
+	public Boolean JouerSurEnnemi;
+	public Boolean EstBlanc;
+	public boolean DeplacementAutorise;
+	public boolean FinHex;
 
 	public Regles(Modele modele, Boolean check_soit, Boolean check_ennemi, Boolean jouerSurEnnemi, Boolean estBlanc) {
-		this.jouerAcoteSoit = check_soit;
-		this.jouerAcoteEnnemi = check_ennemi;
-		this.jouerSurEnnemi = jouerSurEnnemi;
+		this.JouerAcoteSoit = check_soit;
+		this.JouerAcoteEnnemi = check_ennemi;
+		this.JouerSurEnnemi = jouerSurEnnemi;
 		this.m = modele;
 	}
-	
-	public Boolean getCheckCoteSoit() {
-		return jouerAcoteSoit;
-	}
-	
-	public Boolean getCheckCoteEnnemi() {
-		return jouerAcoteEnnemi;
-	}
-	
-	public Boolean getSurEnnemi() {
-		return jouerSurEnnemi;
-	}
-	
-	public Boolean getEstBlanc() {
-		return estBlanc;
-	}
-
-
 
 	public boolean jouerAcoteSoit(PointCouleur p) {
 		Joueur j = m.getJoueur(m.getJoueurCourant());
@@ -87,7 +71,7 @@ public class Regles {
 		}
 		return false;
 	}
-	
+
 	public boolean estBlanc(PointCouleur p) {
 		return p.getCouleur().equals(Couleur.BLANC);
 	}
@@ -109,8 +93,8 @@ public class Regles {
 		}
 		return true;
 	}
-	
-	public boolean estLie(Point p, ArrayList<Point> point,Point depart) {
+
+	public boolean estLie(Point p, ArrayList<Point> point, Point depart) {
 		point.add(p);
 		for (Segment s : m.getSegments()) {
 			Point deux = s.getVoisin(p);
@@ -124,6 +108,4 @@ public class Regles {
 		}
 		return false;
 	}
-	
-
 }

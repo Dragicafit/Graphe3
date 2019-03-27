@@ -1,5 +1,7 @@
 package Jeux;
 
+import java.util.ArrayList;
+
 import controleur.ControleurJeu;
 import javafx.scene.input.InputEvent;
 import javafx.scene.input.MouseEvent;
@@ -7,10 +9,11 @@ import javafx.scene.shape.Circle;
 import modele.Modele;
 import modele.point.Point;
 import modele.point.PointCouleur;
+import modele.segment.SegmentCouleur;
 import regles.Regles;
 import vue.Vue;
 
-public abstract class Jeux extends Thread {
+public class Jeux extends Thread {
 
 	protected String nom;
 	protected Regles regles;
@@ -50,13 +53,13 @@ public abstract class Jeux extends Thread {
 		this.event = event;
 		notify();
 	}
-	
+
 	public synchronized boolean tour(int nb) throws InterruptedException {
 		wait();
 		Object source = event.getSource();
 		if (event.getEventType() == MouseEvent.DRAG_DETECTED) {
 			if (source instanceof Circle && vue.getCercles().contains(source)) {
-				if (deplacementAvailable()) {
+				if (regles.DeplacementAutorise) {
 					((ControleurJeu) vue.getControleur()).setApplique((Circle) source);
 					return false;
 				}
@@ -70,49 +73,49 @@ public abstract class Jeux extends Thread {
 		}
 		return false;
 	}
-	
+
 	public boolean check_regles(Point p) {
-		if(regles.getCheckCoteSoit() != null){
-			if(regles.getCheckCoteSoit()){
-				if(!regles.jouerAcoteSoit((PointCouleur) p)){
+		if (regles.JouerAcoteSoit != null) {
+			if (regles.JouerAcoteSoit) {
+				if (!regles.jouerAcoteSoit((PointCouleur) p)) {
 					return false;
 				}
-			}else{	
-				if(regles.jouerAcoteSoit((PointCouleur) p)){
-					return false;
-				}
-			}
-		}
-		if(regles.getCheckCoteEnnemi() != null) {
-			if(regles.getCheckCoteEnnemi()) {
-				if(!regles.jouerAcoteEnnemi((PointCouleur) p)){
-					return false;
-				}
-			}else {
-				if(regles.jouerAcoteEnnemi((PointCouleur) p)){
+			} else {
+				if (regles.jouerAcoteSoit((PointCouleur) p)) {
 					return false;
 				}
 			}
 		}
-		if(regles.getSurEnnemi() != null) {
-			if(regles.getSurEnnemi()) {
-				if(!regles.jouerSurEnnemi(p)){
+		if (regles.JouerAcoteEnnemi != null) {
+			if (regles.JouerAcoteEnnemi) {
+				if (!regles.jouerAcoteEnnemi((PointCouleur) p)) {
 					return false;
 				}
-			}else {
-				if(regles.jouerSurEnnemi(p)) {
+			} else {
+				if (regles.jouerAcoteEnnemi((PointCouleur) p)) {
 					return false;
 				}
 			}
 		}
-		if(regles.getEstBlanc() != null) {
-			if(regles.getEstBlanc()) {
-				if(!regles.estBlanc((PointCouleur)p)){
+		if (regles.JouerSurEnnemi != null) {
+			if (regles.JouerSurEnnemi) {
+				if (!regles.jouerSurEnnemi(p)) {
 					return false;
-				
 				}
-			}else {
-				if(regles.estBlanc((PointCouleur) p)) {
+			} else {
+				if (regles.jouerSurEnnemi(p)) {
+					return false;
+				}
+			}
+		}
+		if (regles.EstBlanc != null) {
+			if (regles.EstBlanc) {
+				if (!regles.estBlanc((PointCouleur) p)) {
+					return false;
+
+				}
+			} else {
+				if (regles.estBlanc((PointCouleur) p)) {
 					return false;
 				}
 			}
@@ -120,10 +123,37 @@ public abstract class Jeux extends Thread {
 		return true;
 	}
 
-	public abstract boolean end_game();
-
-	public abstract void applique(Object o);
+	public boolean end_game() {
+		if (regles.FinHex) {
+			ArrayList<Point> point = new ArrayList<>();
+			if (regles.estLie(this.red2, point, this.red1)) {
+				return true;
+			}
+			point.clear();
+			if (regles.estLie(this.blue2, point, this.blue1)) {
+				return true;
+			}
+			return false;
+		} else {
+			for (int i = 0; i < m.getSizePoints(); i++) {
+				PointCouleur p = (PointCouleur) m.getPoint(i);
+				if (!check_regles(p)) {
+					return false;
+				}
+			}
+			return true;
+		}
+	}
 	
-	public abstract boolean deplacementAvailable();
+	public void applique(Object o) {
+		ControleurJeu c = (ControleurJeu) vue.getControleur();
+		if (o instanceof PointCouleur) {
+			c.applique((PointCouleur) o);
+		} else if (o instanceof SegmentCouleur) {
+			c.applique((SegmentCouleur) o);
+		} else if (o instanceof Circle) {
+			c.appliqueDep((Circle) o);
+		}
+	}
 
 }

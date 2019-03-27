@@ -23,7 +23,7 @@ public class Regles {
 
 	public boolean check_cote_soit(PointCouleur p) {
 		Joueur j = m.getJoueur(m.getJoueurCourant());
-		for (int i = 0; i < m.getSize_segments(); i++) {
+		for (int i = 0; i < m.getSizeSegments(); i++) {
 			Point v = m.getSegment(i).getVoisin(p);
 			if (v instanceof PointCouleur) {
 				PointCouleur pc = (PointCouleur) v;
@@ -37,7 +37,7 @@ public class Regles {
 
 	public boolean check_cote_ennemi(PointCouleur p) {
 		Joueur j = m.getJoueur(m.getJoueurCourant());
-		for (int i = 0; i < m.getSize_segments(); i++) {
+		for (int i = 0; i < m.getSizeSegments(); i++) {
 			Point v = m.getSegment(i).getVoisin(p);
 			if (v instanceof PointCouleur) {
 				PointCouleur pc = (PointCouleur) v;
@@ -52,7 +52,7 @@ public class Regles {
 	public boolean sur_ennemi(Point p) {
 		Joueur j = m.getJoueur(m.getJoueurCourant());
 		PointCouleur ennemi;
-		for (int i = 0; i < m.getSize_segments(); i++) {
+		for (int i = 0; i < m.getSizeSegments(); i++) {
 			if (m.getSegment(i).getPoint1() == p) {
 				ennemi = (PointCouleur) m.getSegment(i).getPoint1();
 				if (ennemi.getCouleur() != j.getCouleur()) {
@@ -69,7 +69,7 @@ public class Regles {
 	}
 
 	public boolean estVide(Point p) {
-		for (int i = 0; i < m.getSize_segments(); i++) {
+		for (int i = 0; i < m.getSizeSegments(); i++) {
 			if (m.getSegment(i).getPoint1() == p) {
 				if (!(m.getSegment(i).getPoint1() instanceof PointCouleur)) {
 					return true;
@@ -89,7 +89,7 @@ public class Regles {
 
 	public boolean allAround(Point p) {
 		Joueur j = m.getJoueur(m.getJoueurCourant());
-		for (int i = 0; i < m.getSize_segments(); i++) {
+		for (int i = 0; i < m.getSizeSegments(); i++) {
 			Point v = m.getSegment(i).getVoisin(p);
 			if (v != null) {
 				if (v != null && v instanceof PointCouleur) {

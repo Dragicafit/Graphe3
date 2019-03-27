@@ -3,6 +3,7 @@ package controleur;
 import java.util.HashMap;
 import java.util.Map;
 
+import javafx.application.Platform;
 import javafx.event.EventHandler;
 import javafx.scene.input.InputEvent;
 import modele.Modele;
@@ -22,13 +23,20 @@ public abstract class Controleur implements EventHandler<InputEvent> {
 		this.boutons = new HashMap<>();
 	}
 
-	public abstract void handle(InputEvent event);
+	public void handle(InputEvent event) {
+		event.consume();
+	}
 	
 	public void exit() {
-		vue.getPrimaryStage().close();
+		Platform.runLater(new Runnable() {
+			@Override
+			public void run() {
+				vue.getPrimaryStage().close();
+			}
+		});
 	}
 }
 
 enum Bouton {
-	POINT, SEGMENT, SUPPRIMER, COLORIER, DEPLACER, SUPPRIMERTOUT, RETOUR, SAUVEGARDER
+	POINT, SEGMENT, SUPPRIMER, SUPPRIMERTOUT, RETOUR, SAUVEGARDER, CREERREGLE, CREERGRAPHE, ALEATOIRE
 }

@@ -51,17 +51,19 @@ public class Hex extends Jeux{
 	@Override
 	public boolean end_game() {
 		if(estLie(this.red1)) {
+			this.PointDepart = red1;
 			return true;
 		}
 		if(estLie(this.blue1)) {
+			this.PointDepart = blue1;
 			return true;
 		}	
 		return false;
 	}
 	
 	public boolean estLie(PointCouleur p) {
-		for(int i =0; i<m.getSize_segments();i++) {
-			if(m.getSegment(i).getPoint1() == p && ((PointCouleur) m.getSegment(i).getPoint2()).getCouleur() == PointDepart.getCouleur()){
+		for(int i =0; i<m.getSizeSegments();i++) {
+			if(m.getSegment(i).getPoint1() == p && ((PointCouleur) m.getSegment(i).getPoint2()).getCouleur().equals(PointDepart.getCouleur())){
 				return estLie((PointCouleur) m.getSegment(i).getPoint2());
 			}
 		}

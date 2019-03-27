@@ -1,5 +1,6 @@
 package Jeux;
 
+import controleur.ControleurJeu;
 import javafx.scene.input.InputEvent;
 import modele.Modele;
 import modele.point.Point;
@@ -30,11 +31,15 @@ public abstract class Jeux extends Thread {
 				int j = m.getJoueurCourant();
 				if (tour(j)) {
 					m.setJoueurCourant((j + 1) % m.getNbJoueurs());
-					vue.update();
-
+				} else {
+					synchronized (vue.getControleur()) {
+						((ControleurJeu) vue.getControleur()).notify();
+					}
 				}
 			}
 		} catch (InterruptedException e) {
+		} finally {
+			vue.getControleur().exit();
 		}
 	}
 

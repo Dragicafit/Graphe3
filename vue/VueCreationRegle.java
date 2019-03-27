@@ -6,27 +6,30 @@ import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.SplitPane;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import modele.Modele;
 
 public class VueCreationRegle extends VueRetour {
 
-	
+
 	public BorderPane main;
 	public SplitPane pointEtSegment;
 	public GridPane point;
 	public GridPane segment;
 	public GridPane bottom;
+	public TextField nomRegleField;
 	public CheckBox pointColoriable;
 	public CheckBox pointDeplacable;
 	public CheckBox aCoteDeSoit;
 	public CheckBox aCoteDennemi;
 	public CheckBox surEnnemi;
 	public CheckBox allAround;
-	
-	
+
+
 	public VueCreationRegle(Modele m) {
 		super(m);
 		pointColoriable = creerCheckBox("Point Coloriable");
@@ -48,8 +51,13 @@ public class VueCreationRegle extends VueRetour {
 		point.add(allAround, 1, 4);
 		segment = creerGridPane(Pos.CENTER_LEFT, true);
 		bottom = creerGridPane(Pos.CENTER, true);
-		bottom.add(sauvegarder, 0, 0);
-		bottom.add(retour, 1, 0);
+		nomRegleField = new TextField();
+		nomRegleField.setPromptText("nom de la regle");
+		nomRegleField.setPrefHeight(40);
+		nomRegleField.setFocusTraversable(false);
+		bottom.add(retour, 0, 0);
+		bottom.add(nomRegleField, 1,0);
+		bottom.add(sauvegarder, 2, 0);		
 		pointEtSegment.setOrientation(Orientation.HORIZONTAL);
 		point.maxWidthProperty().bind(pointEtSegment.widthProperty().multiply(0.5));
 		point.minWidthProperty().bind(pointEtSegment.widthProperty().multiply(0.5));
@@ -58,7 +66,7 @@ public class VueCreationRegle extends VueRetour {
 		main.setBottom(bottom);
 		root.setCenter(main);
 	}
-	
+
 	@Override
 	public Button creerBouton(String nom) {
 		Button b = super.creerBouton(nom);
@@ -66,17 +74,17 @@ public class VueCreationRegle extends VueRetour {
 		b.setPrefHeight(40.);
 		return b;
 	}
-	
+
 	public CheckBox creerCheckBox (String nom) {
 		CheckBox c = new CheckBox(nom);
 		return c;
 	}
-	
+
 	@Override
 	public void update() {
-		
+
 	}
-	
+
 	@Override
 	public Controleur creationControleur() {
 		return new ControleurRegles(this);

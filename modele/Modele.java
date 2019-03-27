@@ -12,17 +12,23 @@ import modele.point.Point;
 import modele.segment.Segment;
 
 public class Modele implements Serializable {
-	private ArrayList<Point> points;
-	private ArrayList<Segment> segments;
-	private ArrayList<Joueur> joueurs;
 
-	private int joueurCourant;
+	private ArrayList<ModeleGraphe> graphesPredefinis;
+	private ArrayList<ModeleGraphe> graphesLocal;
+	private ArrayList<ModeleRegle> reglesPredefinis;
+	private ArrayList<ModeleRegle> reglesLocal;
 
+	private ModeleGraphe grapheCourant;
+	private ModeleRegle regleCourant;
+	
 	public Modele() {
-		this.points = new ArrayList<>();
-		this.segments = new ArrayList<>();
-		this.joueurs = new ArrayList<>();
-		this.joueurCourant = 0;
+		graphesPredefinis = new ArrayList<>();
+		graphesLocal = new ArrayList<>();
+		reglesPredefinis = new ArrayList<>();
+		reglesLocal = new ArrayList<>();
+		
+		grapheCourant = null;
+		regleCourant = null;
 	}
 
 	public void exportModele() throws IOException {
@@ -42,84 +48,132 @@ public class Modele implements Serializable {
 		return m;
 	}
 
+	public ArrayList<ModeleGraphe> getGraphesPredefinis() {
+		return graphesPredefinis;
+	}
+
+	public void setGraphesPredefinis(ArrayList<ModeleGraphe> graphesPredefinis) {
+		this.graphesPredefinis = graphesPredefinis;
+	}
+
+	public ArrayList<ModeleGraphe> getGraphesLocal() {
+		return graphesLocal;
+	}
+
+	public void setGraphesLocal(ArrayList<ModeleGraphe> graphesLocal) {
+		this.graphesLocal = graphesLocal;
+	}
+
+	public ArrayList<ModeleRegle> getReglesPredefinis() {
+		return reglesPredefinis;
+	}
+
+	public void setReglesPredefinis(ArrayList<ModeleRegle> reglesPredefinis) {
+		this.reglesPredefinis = reglesPredefinis;
+	}
+
+	public ArrayList<ModeleRegle> getReglesLocal() {
+		return reglesLocal;
+	}
+
+	public void setReglesLocal(ArrayList<ModeleRegle> reglesLocal) {
+		this.reglesLocal = reglesLocal;
+	}
+
+	public ModeleGraphe getGrapheCourant() {
+		return grapheCourant;
+	}
+
+	public void setGrapheCourant(ModeleGraphe grapheCourant) {
+		this.grapheCourant = grapheCourant;
+	}
+
+	public ModeleRegle getRegleCourant() {
+		return regleCourant;
+	}
+
+	public void setRegleCourant(ModeleRegle regleCourant) {
+		this.regleCourant = regleCourant;
+	}
+
 	public void addPoint(Point point) {
-		points.add(point);
+		grapheCourant.addPoint(point);
 	}
 
 	public void addSegment(Segment segment) {
-		segments.add(segment);
+		grapheCourant.addSegment(segment);
 	}
 
 	public void addJoueur(Joueur joueur) {
-		joueurs.add(joueur);
+		grapheCourant.addJoueur(joueur);
 	}
 
 	public Point getPoint(int index) {
-		return points.get(index);
+		return grapheCourant.getPoint(index);
+	}
+	
+	public ArrayList<Point> getPoints() {
+		return grapheCourant.getPoints();
 	}
 
 	public Segment getSegment(int index) {
-		return segments.get(index);
+		return grapheCourant.getSegment(index);
 	}
-
-	public int getSize_segments() {
-		return segments.size();
+	
+	public ArrayList<Segment> getSegments() {
+		return grapheCourant.getSegments();
 	}
 
 	public boolean containsPoint(Point p) {
-		return points.contains(p);
+		return grapheCourant.containsPoint(p);
 	}
 
 	public boolean containsSegment(Segment s) {
-		return segments.contains(s);
+		return grapheCourant.containsSegment(s);
 	}
 
 	public Joueur getJoueur(int index) {
-		return joueurs.get(index);
+		return grapheCourant.getJoueur(index);
 	}
 
 	public int getJoueurCourant() {
-		return joueurCourant;
+		return grapheCourant.getJoueurCourant();
 	}
 
 	public void setJoueurCourant(int joueurCourant) {
-		this.joueurCourant = joueurCourant;
+		this.grapheCourant.setJoueurCourant(joueurCourant);;
 	}
 
 	public int getSizePoints() {
-		return points.size();
+		return grapheCourant.getSizePoints();
 	}
 
 	public int getSizeSegments() {
-		return segments.size();
+		return grapheCourant.getSizeSegments();
 	}
 
 	public int getNbJoueurs() {
-		return joueurs.size();
+		return grapheCourant.getNbJoueurs();
 	}
 
 	public void removePoint(Point p) {
-		for (int i = segments.size() - 1; i >= 0; i--) {
-			if (segments.get(i).getPoint1() == p || segments.get(i).getPoint2() == p)
-				removeSegment(i);
-		}
-		points.remove(p);
+		grapheCourant.removePoint(p);
 	}
 
 	public void removePoint(int nb) {
-		removePoint(points.get(nb));
+		grapheCourant.removePoint(nb);
 	}
 
 	public void removeSegment(Segment s) {
-		segments.remove(s);
+		grapheCourant.removeSegment(s);
 	}
 
 	public void removeSegment(int i) {
-		segments.remove(i);
+		grapheCourant.removeSegment(i);
 	}
 
 	public void supprimerTout() {
-		points.clear();
-		segments.clear();
+		grapheCourant.supprimerTout();
 	}
+
 }

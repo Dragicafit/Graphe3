@@ -1,8 +1,15 @@
 package controleur;
 
 import Jeux.Jeux;
-import javafx.scene.control.Button;
+import javafx.scene.input.ClipboardContent;
+import javafx.scene.input.DragEvent;
+import javafx.scene.input.Dragboard;
 import javafx.scene.input.InputEvent;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.input.TransferMode;
+import javafx.scene.layout.Pane;
+import javafx.scene.shape.Circle;
+import modele.point.Point;
 import modele.point.PointCouleur;
 import modele.segment.SegmentCouleur;
 import vue.Vue;
@@ -10,48 +17,92 @@ import vue.Vue;
 public class ControleurJeu extends ControleurRetour {
 
 	protected Jeux jeu;
+	private Object action;
 
 	public ControleurJeu(Vue vue, Jeux jeu) {
 		super(vue);
 		this.jeu = jeu;
-		this.boutons.put("colorier", Bouton.COLORIER);
-		this.boutons.put("deplacer", Bouton.DEPLACER);
+	}
+
+	public synchronized void setApplique(Object action) {
+		this.action = action;
+		notify();
 	}
 
 	public void applique(PointCouleur p) {
-		if (bouton == Bouton.COLORIER) {
-			p.setCouleur(modele.getJoueur(modele.getJoueurCourant()).getCouleur());
-		}
+		p.setCouleur(modele.getJoueur(modele.getJoueurCourant()).getCouleur());
+		vue.update();
 	}
 
 	public void applique(PointCouleur p, double x, double y) {
-		if (bouton == Bouton.DEPLACER) {
-			p.setX(x);
-			p.setY(y);
-		}
+		p.setX(x);
+		p.setY(y);
+		vue.update();
 	}
 
 	public void applique(SegmentCouleur s) {
-		if (bouton == Bouton.COLORIER) {
-			s.setCouleur(modele.getJoueur(modele.getJoueurCourant()).getCouleur());
-		}
+		s.setCouleur(modele.getJoueur(modele.getJoueurCourant()).getCouleur());
+		vue.update();
+	}
+	
+	public void appliqueDep(Circle cercle) {
+		Dragboard db = cercle.startDragAndDrop(TransferMode.ANY);
+		ClipboardContent content = new ClipboardContent();
+		content.putString("");
+		db.setContent(content);
 	}
 
 	@Override
-	public void handle(InputEvent event) {
+	public synchronized void handle(InputEvent event) {
 		super.handle(event);
 		Object source = event.getSource();
-		if (source instanceof Button && vue.getBoutons().containsKey(source)) {
-			bouton = boutons.get(vue.getBoutons((Button) source));
-		} else {
-			jeu.setEvent(event);
+		if (event instanceof DragEvent) {
+			eventDrag((DragEvent) event, (Pane) source);
+		} else if (event instanceof MouseEvent) {
+			eventMouse((MouseEvent) event, source);
 		}
 		event.consume();
 	}
-	
+
 	@Override
 	public void exit() {
 		jeu.interrupt();
 		super.exit();
+	}
+	
+	public void eventDrag(DragEvent event, Pane source) {
+		if (source instanceof Pane) {
+			if (event.getEventType() == DragEvent.DRAG_OVER) {
+				event.acceptTransferModes(TransferMode.COPY_OR_MOVE);
+			} else if (event.getEventType() == DragEvent.DRAG_DROPPED) {
+				Circle cercle = (Circle) event.getGestureSource();
+				Point p = modele.getPoint(vue.getCercles().indexOf(cercle));
+				event.setDropCompleted(deplacerPoint(p, event.getX(), event.getY()));
+				vue.update();
+			}
+		}
+	}
+	
+	public void eventMouse(MouseEvent event, Object source) {
+		action = null;
+		jeu.setEvent(event);
+		try {
+			wait();
+			if (action != null) {
+				jeu.applique(action);
+			}
+		} catch (InterruptedException e) {
+		}
+	}
+	
+	public boolean deplacerPoint(Point p, double x, double y) {
+		for (int i = 0; i < modele.getSizePoints(); i++) {
+			if (Math.sqrt(Math.pow(modele.getPoint(i).getX() - x, 2) + Math.pow(modele.getPoint(i).getY() - y, 2)) < 15) {
+				return false;
+			}
+		}
+		p.setX(x);
+		p.setY(y);
+		return true;
 	}
 }

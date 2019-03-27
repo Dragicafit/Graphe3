@@ -13,31 +13,31 @@ import modele.Modele;
 
 public class VueAccueil extends Vue {
 
-	public SplitPane main;
+	protected SplitPane main;
 
-	public BorderPane Regles;
-	public SplitPane RegleCenter;
-	public BorderPane RegleCenterTop;
-	public BorderPane RegleCenterTopTop;
-	public BorderPane RegleCenterTopBottom;
-	public BorderPane RegleCenterBottom;
-	public BorderPane RegleCenterBottomTop;
-	public BorderPane RegleCenterBottomBottom;
-	public BorderPane RegleBottom;
+	protected BorderPane Regles;
+	protected SplitPane RegleCenter;
+	protected BorderPane RegleCenterTop;
+	protected BorderPane RegleCenterTopTop;
+	protected BorderPane RegleCenterTopBottom;
+	protected BorderPane RegleCenterBottom;
+	protected BorderPane RegleCenterBottomTop;
+	protected BorderPane RegleCenterBottomBottom;
+	protected BorderPane RegleBottom;
 
-	public BorderPane Graphes;
-	public SplitPane GrapheCenter;
-	public BorderPane GrapheCenterTop;
-	public BorderPane GrapheCenterTopTop;
-	public BorderPane GrapheCenterTopBottom;
-	public BorderPane GrapheCenterBottom;
-	public BorderPane GrapheCenterBottomTop;
-	public BorderPane GrapheCenterBottomBottom;
-	public GridPane GrapheBottom;
+	protected BorderPane Graphes;
+	protected SplitPane GrapheCenter;
+	protected BorderPane GrapheCenterTop;
+	protected BorderPane GrapheCenterTopTop;
+	protected BorderPane GrapheCenterTopBottom;
+	protected BorderPane GrapheCenterBottom;
+	protected BorderPane GrapheCenterBottomTop;
+	protected BorderPane GrapheCenterBottomBottom;
+	protected GridPane GrapheBottom;
 
-	public Button creerGraphe;
-	public Button aleatoireGraphe;
-	public Button creerRegle;
+	protected Button creerGraphe;
+	protected Button aleatoireGraphe;
+	protected Button creerRegle;
 
 	public VueAccueil(Modele m) {
 		super(m);

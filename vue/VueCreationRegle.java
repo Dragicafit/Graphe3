@@ -16,18 +16,18 @@ import modele.Modele;
 public class VueCreationRegle extends VueRetour {
 
 
-	public BorderPane main;
-	public SplitPane pointEtSegment;
-	public GridPane point;
-	public GridPane segment;
-	public GridPane bottom;
-	public TextField nomRegleField;
-	public CheckBox pointColoriable;
-	public CheckBox pointDeplacable;
-	public CheckBox aCoteDeSoit;
-	public CheckBox aCoteDennemi;
-	public CheckBox surEnnemi;
-	public CheckBox allAround;
+	protected BorderPane main;
+	protected SplitPane pointEtSegment;
+	protected GridPane point;
+	protected GridPane segment;
+	protected GridPane bottom;
+	protected TextField nomRegleField;
+	protected CheckBox pointColoriable;
+	protected CheckBox pointDeplacable;
+	protected CheckBox aCoteDeSoit;
+	protected CheckBox aCoteDennemi;
+	protected CheckBox surEnnemi;
+	protected CheckBox allAround;
 
 
 	public VueCreationRegle(Modele m) {
@@ -51,10 +51,7 @@ public class VueCreationRegle extends VueRetour {
 		point.add(allAround, 1, 4);
 		segment = creerGridPane(Pos.CENTER_LEFT, true);
 		bottom = creerGridPane(Pos.CENTER, true);
-		nomRegleField = new TextField();
-		nomRegleField.setPromptText("nom de la regle");
-		nomRegleField.setPrefHeight(40);
-		nomRegleField.setFocusTraversable(false);
+		nomRegleField = creerZoneText("Nom de la règle", 40.);
 		bottom.add(retour, 0, 0);
 		bottom.add(nomRegleField, 1,0);
 		bottom.add(sauvegarder, 2, 0);		
@@ -90,4 +87,7 @@ public class VueCreationRegle extends VueRetour {
 		return new ControleurRegles(this);
 	}
 
+	public TextField getNomRegleField() {
+		return nomRegleField;
+	}	
 }

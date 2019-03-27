@@ -1,10 +1,13 @@
 package regles;
 
+import java.util.ArrayList;
+
 import modele.Couleur;
 import modele.Joueur;
 import modele.Modele;
 import modele.point.Point;
 import modele.point.PointCouleur;
+import modele.segment.Segment;
 
 public class Regles {
 	public Modele m;
@@ -104,5 +107,21 @@ public class Regles {
 		}
 		return true;
 	}
+	
+	public boolean estLie(Point p, ArrayList<Point> point,Point depart) {
+		point.add(p);
+		for (Segment s : m.getSegments()) {
+			Point deux = s.getVoisin(p);
+			if (deux == depart) {
+				return true;
+			}
+			if (deux != null && !point.contains(deux)) {
+				return estLie(deux, point, depart);
+			}
+
+		}
+		return false;
+	}
+	
 
 }

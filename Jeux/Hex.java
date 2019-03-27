@@ -17,7 +17,6 @@ public class Hex extends Jeux {
 	private PointCouleur red2;
 	private PointCouleur blue1;
 	private PointCouleur blue2;
-	private PointCouleur PointDepart;
 
 	public Hex(Regles r, Vue vue, PointCouleur red1, PointCouleur red2, PointCouleur blue1, PointCouleur blue2) {
 		super("Hex", r, vue);
@@ -36,29 +35,12 @@ public class Hex extends Jeux {
 	@Override
 	public boolean end_game() {
 		ArrayList<Point> point = new ArrayList<>();
-		this.PointDepart = red1;
-		if (estLie(this.red2, point)) {
+		if (regles.estLie(this.red2, point, red1)) {
 			return true;
 		}
 		point.clear();
-		this.PointDepart = blue1;
-		if (estLie(this.blue2, point)) {
+		if (regles.estLie(this.blue2, point, blue1)) {
 			return true;
-		}
-		return false;
-	}
-
-	public boolean estLie(Point p, ArrayList<Point> point) {
-		point.add(p);
-		for (Segment s : m.getSegments()) {
-			Point deux = s.getVoisin(p);
-			if (deux == PointDepart) {
-				return true;
-			}
-			if (deux != null && !point.contains(deux)) {
-				return estLie(deux, point);
-			}
-
 		}
 		return false;
 	}

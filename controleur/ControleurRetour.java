@@ -29,7 +29,6 @@ public abstract class ControleurRetour extends Controleur {
 						modele.getGrapheCourant().setNom(nomGraphe);
 						modele.getGraphesLocal().add(modele.getGrapheCourant());
 					}
-					modele.getGraphesLocal().add(modele.getGrapheCourant());
 				} else if (vue instanceof VueCreationRegle) {
 					VueCreationRegle vueRegles = (VueCreationRegle) vue;
 					String nomRegle = vueRegles.getNomRegleField().getText();

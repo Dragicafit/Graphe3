@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 import modele.point.Point;
+import modele.point.PointCouleur;
 import modele.segment.Segment;
 
 public class ModeleGraphe implements Serializable {

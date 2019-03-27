@@ -29,20 +29,6 @@ public class Hex extends Jeux {
 	}
 
 	@Override
-	public boolean tour(int nb) throws InterruptedException {
-		wait();
-		Object source = event.getSource();
-		if (source instanceof Circle && vue.getCercles().contains((Circle) source)) {
-			PointCouleur point = (PointCouleur) m.getPoint(vue.getCercles().indexOf((Circle) source));
-			if (check_regles(point)) {
-				applique(point);
-				return true;
-			}
-		}
-		return false;
-	}
-
-	@Override
 	public boolean check_regles(Point p) {
 		return regles.check_cote_soit((PointCouleur) p) && regles.estBlanc((PointCouleur) p);
 	}

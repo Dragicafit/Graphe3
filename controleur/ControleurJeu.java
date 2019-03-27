@@ -44,7 +44,7 @@ public class ControleurJeu extends ControleurRetour {
 		s.setCouleur(modele.getJoueur(modele.getJoueurCourant()).getCouleur());
 		vue.update();
 	}
-	
+
 	public void appliqueDep(Circle cercle) {
 		Dragboard db = cercle.startDragAndDrop(TransferMode.ANY);
 		ClipboardContent content = new ClipboardContent();
@@ -70,7 +70,7 @@ public class ControleurJeu extends ControleurRetour {
 		notifyAll();
 		super.exit();
 	}
-	
+
 	public void eventDrag(DragEvent event, Pane source) {
 		if (source instanceof Pane) {
 			if (event.getEventType() == DragEvent.DRAG_OVER) {
@@ -83,7 +83,7 @@ public class ControleurJeu extends ControleurRetour {
 			}
 		}
 	}
-	
+
 	public void eventMouse(MouseEvent event, Object source) {
 		action = null;
 		jeu.setEvent(event);
@@ -95,10 +95,11 @@ public class ControleurJeu extends ControleurRetour {
 		} catch (InterruptedException e) {
 		}
 	}
-	
+
 	public boolean deplacerPoint(Point p, double x, double y) {
 		for (int i = 0; i < modele.getSizePoints(); i++) {
-			if (Math.sqrt(Math.pow(modele.getPoint(i).getX() - x, 2) + Math.pow(modele.getPoint(i).getY() - y, 2)) < 15) {
+			if (Math.sqrt(
+					Math.pow(modele.getPoint(i).getX() - x, 2) + Math.pow(modele.getPoint(i).getY() - y, 2)) < 15) {
 				return false;
 			}
 		}

@@ -1,9 +1,8 @@
 import javafx.application.Application;
 import javafx.stage.Stage;
 import modele.Modele;
-import modele.Modele1;
+import modele.ModeleGraphe1;
 import vue.VueCreationGraphe;
-import vue.VueCreationRegle;
 import vue.VuePlateauJeu;
 
 public class Main extends Application {
@@ -16,7 +15,7 @@ public class Main extends Application {
 	public void start(Stage primaryStage) {
 		try {
 			Modele m = new Modele();
-			m.setGrapheCourant(new Modele1());
+			m.setGrapheCourant(new ModeleGraphe1());
 			new VuePlateauJeu(m);
 			new VueCreationGraphe(m);
 		} catch (Exception e) {

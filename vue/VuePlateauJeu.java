@@ -13,7 +13,7 @@ public class VuePlateauJeu extends VueJeu {
 
 	public VuePlateauJeu(Modele m) {
 		super(m);
-		super.primaryStage.setTitle("Lets GO !!!");
+		this.setTitle("Lets GO !!!");
 		top.getChildren().add(this.nomJoueur);
 	}
 

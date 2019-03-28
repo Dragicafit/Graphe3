@@ -1,10 +1,11 @@
-package modele;
+package modele.graphe;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import modele.Joueur;
 import modele.point.Point;
 import modele.segment.Segment;
 

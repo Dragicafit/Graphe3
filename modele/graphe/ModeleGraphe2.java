@@ -1,14 +1,16 @@
-package modele;
+package modele.graphe;
 
+import modele.Couleur;
+import modele.Joueur;
 import modele.point.Point;
 import modele.point.PointCouleur;
 import modele.segment.Segment;
 
-public class ModeleGraphe1 extends ModeleGraphe {
-	private static final long serialVersionUID = 100L;
+public class ModeleGraphe2 extends ModeleGraphe {
+	private static final long serialVersionUID = 102L;
 
-	public ModeleGraphe1() {
-		super("1");
+	public ModeleGraphe2() {
+		super("2");
 		addJoueur(new Joueur("j1", Couleur.ROUGE));
 		addJoueur(new Joueur("j2", Couleur.BLEU));
 		Point p1 = new PointCouleur(200, 100, Couleur.BLANC);

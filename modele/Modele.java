@@ -8,7 +8,9 @@ import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+import modele.graphe.ModeleGraphe;
 import modele.point.Point;
+import modele.regle.ModeleRegle;
 import modele.segment.Segment;
 
 public class Modele implements Serializable {

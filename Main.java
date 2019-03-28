@@ -1,8 +1,15 @@
+import java.util.ArrayList;
+
 import javafx.application.Application;
 import javafx.stage.Stage;
 import modele.Modele;
-import modele.ModeleGraphe1;
-import modele.ModeleRegleSnort;
+import modele.graphe.ModeleGraphe;
+import modele.graphe.ModeleGraphe1;
+import modele.graphe.ModeleGraphe2;
+import modele.graphe.ModeleGraphe3;
+import modele.graphe.ModeleGraphe4;
+import modele.graphe.ModeleGraphe5;
+import modele.regle.ModeleRegleSnort;
 import vue.VueCreationGraphe;
 import vue.VuePlateauJeu;
 
@@ -17,6 +24,12 @@ public class Main extends Application {
 		try {
 			Modele m = new Modele();
 			m.setGrapheCourant(new ModeleGraphe1());
+			ArrayList<ModeleGraphe> graphe = m.getGraphesPredefinis();
+			graphe.add(new ModeleGraphe1());
+			graphe.add(new ModeleGraphe2());
+			graphe.add(new ModeleGraphe3());
+			graphe.add(new ModeleGraphe4());
+			graphe.add(new ModeleGraphe5());
 			m.setRegleCourant(new ModeleRegleSnort());
 			new VuePlateauJeu(m);
 			new VueCreationGraphe(m);

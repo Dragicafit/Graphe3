@@ -92,8 +92,6 @@ public class ControleurGraphes extends ControleurRetour {
 					premierPoint = null;
 				}
 			}
-		} else if (bouton == Bouton.SUPPRIMER) {
-			modele.removePoint(point);
 		} else if (point instanceof PointCouleur) {
 			PointCouleur p = (PointCouleur) point;
 			Couleur c = p.getCouleur();
@@ -109,10 +107,10 @@ public class ControleurGraphes extends ControleurRetour {
 
 	public void eventLine(MouseEvent event, Line source) {
 		Segment segment = modele.getSegment(vue.getLignes().indexOf(source));
-		if (segment instanceof SegmentCouleur) {
-			((SegmentCouleur) segment).setCouleur(modele.getJoueur(modele.getJoueurCourant()).getCouleur());
-		} else if (bouton == Bouton.SUPPRIMER) {
+		if (bouton == Bouton.SUPPRIMER) {
 			modele.removeSegment(segment);
+		} else if (segment instanceof SegmentCouleur) {
+			((SegmentCouleur) segment).setCouleur(modele.getJoueur(modele.getJoueurCourant()).getCouleur());
 		}
 	}
 
@@ -122,10 +120,12 @@ public class ControleurGraphes extends ControleurRetour {
 			double y = event.getY();
 			if (premierPoint != null) {
 				if (event.isShiftDown()) {
-					if (event.getX() > premierPoint.getX() - 60 && event.getX() < premierPoint.getX() + 60) {
+					if (Math.abs(event.getX()) < premierPoint.getX() + 60) {
 						x = premierPoint.getX();
-					} else if (event.getY() > premierPoint.getY() - 60 && event.getY() < premierPoint.getY() + 60) {
+					} else if (Math.abs(event.getY()) < premierPoint.getY() + 60) {
 						y = premierPoint.getY();
+					} else if (Math.abs(event.getY()) > premierPoint.getY() + 60 && Math.abs(event.getX()) > premierPoint.getX() + 60){
+						
 					}
 				} else if (event.isAltDown()) {
 					x = premierPoint.getX() + (x - premierPoint.getX()) * 120 / Math.sqrt(Math.pow(x - premierPoint.getX(), 2) + Math.pow(y - premierPoint.getY(), 2));

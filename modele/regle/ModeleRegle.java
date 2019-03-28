@@ -1,4 +1,4 @@
-package modele;
+package modele.regle;
 
 import java.io.Serializable;
 

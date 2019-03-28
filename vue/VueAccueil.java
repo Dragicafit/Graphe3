@@ -10,6 +10,8 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
 import modele.Modele;
+import modele.ModeleGraphe;
+import modele.ModeleRegle;
 
 public class VueAccueil extends Vue {
 
@@ -19,20 +21,20 @@ public class VueAccueil extends Vue {
 	protected SplitPane RegleCenter;
 	protected BorderPane RegleCenterTop;
 	protected BorderPane RegleCenterTopTop;
-	protected BorderPane RegleCenterTopBottom;
+	protected GridPane RegleCenterTopBottom;
 	protected BorderPane RegleCenterBottom;
 	protected BorderPane RegleCenterBottomTop;
-	protected BorderPane RegleCenterBottomBottom;
+	protected GridPane RegleCenterBottomBottom;
 	protected BorderPane RegleBottom;
 
 	protected BorderPane Graphes;
 	protected SplitPane GrapheCenter;
 	protected BorderPane GrapheCenterTop;
 	protected BorderPane GrapheCenterTopTop;
-	protected BorderPane GrapheCenterTopBottom;
+	protected GridPane GrapheCenterTopBottom;
 	protected BorderPane GrapheCenterBottom;
 	protected BorderPane GrapheCenterBottomTop;
-	protected BorderPane GrapheCenterBottomBottom;
+	protected GridPane GrapheCenterBottomBottom;
 	protected GridPane GrapheBottom;
 
 	protected Button creerGraphe;
@@ -48,10 +50,10 @@ public class VueAccueil extends Vue {
 		RegleCenter = new SplitPane();
 		RegleCenterTop = creerBorderPane(true);
 		RegleCenterTopTop = creerBorderPane(false);
-		RegleCenterTopBottom = creerBorderPane(false);
+		RegleCenterTopBottom = creerGridPane(Pos.TOP_LEFT, true);
 		RegleCenterBottom = creerBorderPane(true);
 		RegleCenterBottomTop = creerBorderPane(false);
-		RegleCenterBottomBottom = creerBorderPane(false);
+		RegleCenterBottomBottom = creerGridPane(Pos.TOP_LEFT, true);
 		RegleBottom = creerBorderPane(false);
 
 		Graphes = creerBorderPane(false);
@@ -59,13 +61,19 @@ public class VueAccueil extends Vue {
 		GrapheCenter = new SplitPane();
 		GrapheCenterTop = creerBorderPane(true);
 		GrapheCenterTopTop = creerBorderPane(false);
-		GrapheCenterTopBottom = creerBorderPane(false);
+		GrapheCenterTopBottom = creerGridPane(Pos.TOP_LEFT, true);
 		GrapheCenterBottom = creerBorderPane(true);
 		GrapheCenterBottomTop = creerBorderPane(false);
-		GrapheCenterBottomBottom = creerBorderPane(false);
+		GrapheCenterBottomBottom = creerGridPane(Pos.TOP_LEFT, true);
 		GrapheBottom = creerGridPane(Pos.CENTER, false);
 	
 		RegleBottom.setStyle("-fx-padding: 10;");
+		
+		
+		ajoutReglePredef();
+		ajoutGraphePredef();
+		ajoutRegleLocal();
+		ajoutGrapheLocal();
 
 		Text RP = new Text("Règles Prédéfinies");
 		Text RM = new Text("Mes Règles");
@@ -137,5 +145,45 @@ public class VueAccueil extends Vue {
 		boutons.put(creerGraphe, "graphe");
 		boutons.put(creerRegle, "regles");
 		boutons.put(aleatoireGraphe, "aleatoire");
+	}
+	
+	public void ajoutReglePredef() {
+		int x = 0;
+		for(ModeleRegle e : this.modele.getReglesPredefinis()) {
+			Text t = new Text(e.getNom());
+			t.setStyle("-fx-font-size: 20px;");
+			RegleCenterTopBottom.add(t, 0, x);
+			x++;
+		}
+	}
+	
+	public void ajoutRegleLocal() {
+		int x = 0;
+		for(ModeleRegle e : this.modele.getReglesLocal()) {
+			Text t = new Text(e.getNom());
+			t.setStyle("-fx-font-size: 20px;");
+			RegleCenterBottomBottom.add(t, 0, x);
+			x++;
+		}
+	}
+	
+	public void ajoutGraphePredef() {
+		int x = 0;
+		for(ModeleGraphe e : this.modele.getGraphesPredefinis()) {
+			Text t = new Text(e.getNom());
+			t.setStyle("-fx-font-size: 20px;");
+			GrapheCenterTopBottom.add(t, 0, x);
+			x++;
+		}
+	}
+	
+	public void ajoutGrapheLocal() {
+		int x = 0;
+		for(ModeleGraphe e : this.modele.getGraphesLocal()) {
+			Text t = new Text(e.getNom());
+			t.setStyle("-fx-font-size: 20px;");
+			GrapheCenterBottomBottom.add(t, 0, x);
+			x++;
+		}
 	}
 }

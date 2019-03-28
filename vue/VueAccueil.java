@@ -10,8 +10,8 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
 import modele.Modele;
-import modele.ModeleGraphe;
-import modele.ModeleRegle;
+import modele.graphe.ModeleGraphe;
+import modele.regle.ModeleRegle;
 
 public class VueAccueil extends Vue {
 

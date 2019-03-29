@@ -124,10 +124,12 @@ public class ControleurGraphes extends ControleurRetour {
 						x = premierPoint.getX();
 					} else if (Math.abs(event.getY()) < premierPoint.getY() + 60) {
 						y = premierPoint.getY();
-					} else if (Math.abs(event.getY()) > premierPoint.getY() + 60 && Math.abs(event.getX()) > premierPoint.getX() + 60){
-						
+					} else {
+						x = premierPoint.getX() + (x - premierPoint.getX() > 0 ? 1 : -1) * (Math.abs(x - premierPoint.getX()) + Math.abs(y - premierPoint.getY()))/2;
+						y = premierPoint.getY() + (y - premierPoint.getY() > 0 ? 1 : -1) * (Math.abs(x - premierPoint.getX()) + Math.abs(y - premierPoint.getY()))/2;
 					}
-				} else if (event.isAltDown()) {
+				}
+				if (event.isAltDown()) {
 					x = premierPoint.getX() + (x - premierPoint.getX()) * 120 / Math.sqrt(Math.pow(x - premierPoint.getX(), 2) + Math.pow(y - premierPoint.getY(), 2));
 					y = premierPoint.getY() + (y - premierPoint.getY()) * 120 / Math.sqrt(Math.pow(x - premierPoint.getX(), 2) + Math.pow(y - premierPoint.getY(), 2));
 				}
@@ -142,6 +144,9 @@ public class ControleurGraphes extends ControleurRetour {
 					x = premierPoint.getX();
 				} else if (60 > Math.abs(premierPoint.getY() - y)) {
 					y = premierPoint.getY();
+				} else {
+					x = premierPoint.getX() + (x - premierPoint.getX() > 0 ? 1 : -1) * (Math.abs(x - premierPoint.getX()) + Math.abs(y - premierPoint.getY()))/2;
+					y = premierPoint.getY() + (y - premierPoint.getY() > 0 ? 1 : -1) * (Math.abs(x - premierPoint.getX()) + Math.abs(y - premierPoint.getY()))/2;
 				}
 			}
 			if (event.isAltDown()) {

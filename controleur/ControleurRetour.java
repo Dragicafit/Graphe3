@@ -20,27 +20,31 @@ public abstract class ControleurRetour extends Controleur {
 		super.handle(event);
 		Object source = event.getSource();
 		if (source instanceof Button && vue.getBoutons().containsKey(source)) {
-			bouton = boutons.get(vue.getBoutons((Button) source));
-			if (bouton == Bouton.SAUVEGARDER) {
-				if (vue instanceof VueCreationGraphe) {
-					VueCreationGraphe vueGraphe = (VueCreationGraphe) vue;
-					String nomGraphe = vueGraphe.getNomGraphe().getText();
-					if (!nomGraphe.isEmpty()) {
-						modele.getGrapheCourant().setNom(nomGraphe);
-						modele.getGraphesLocal().add(modele.getGrapheCourant());
-					}
-				} else if (vue instanceof VueCreationRegle) {
-					VueCreationRegle vueRegles = (VueCreationRegle) vue;
-					String nomRegle = vueRegles.getNomRegleField().getText();
-					if (!nomRegle.isEmpty()) {
-						modele.getRegleCourant().setNom(nomRegle);
-						modele.getReglesLocal().add(modele.getRegleCourant());
-					}
-				}
-			} else if (bouton == Bouton.RETOUR) {
-				exit();
-				new VueAccueil(modele);
+			if (bouton == boutons.get(vue.getBoutons((Button) source))) {
+				bouton = null;
+			} else {
+				bouton = boutons.get(vue.getBoutons((Button) source));
 			}
+		}
+		if (bouton == Bouton.SAUVEGARDER) {
+			if (vue instanceof VueCreationGraphe) {
+				VueCreationGraphe vueGraphe = (VueCreationGraphe) vue;
+				String nomGraphe = vueGraphe.getNomGraphe().getText();
+				if (!nomGraphe.isEmpty()) {
+					modele.getGrapheCourant().setNom(nomGraphe);
+					modele.getGraphesLocal().add(modele.getGrapheCourant());
+				}
+			} else if (vue instanceof VueCreationRegle) {
+				VueCreationRegle vueRegles = (VueCreationRegle) vue;
+				String nomRegle = vueRegles.getNomRegleField().getText();
+				if (!nomRegle.isEmpty()) {
+					modele.getRegleCourant().setNom(nomRegle);
+					modele.getReglesLocal().add(modele.getRegleCourant());
+				}
+			}
+		} else if (bouton == Bouton.RETOUR) {
+			exit();
+			new VueAccueil(modele);
 		}
 	}
 }

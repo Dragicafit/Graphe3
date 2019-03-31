@@ -41,6 +41,7 @@ public class VueAccueil extends Vue {
 
 	public VueAccueil(Modele m) {
 		super(m);
+		modele.resetCourant();
 		main = new SplitPane();
 
 		Regles = creerBorderPane(false);
@@ -64,7 +65,7 @@ public class VueAccueil extends Vue {
 		GrapheCenterBottomTop = creerBorderPane(false);
 		GrapheCenterBottomBottom = creerBorderPane(false);
 		GrapheBottom = creerGridPane(Pos.CENTER, false);
-	
+
 		RegleBottom.setStyle("-fx-padding: 10;");
 
 		Text RP = new Text("Règles Prédéfinies");
@@ -119,7 +120,7 @@ public class VueAccueil extends Vue {
 	public Controleur creationControleur() {
 		return new ControleurAccueil(this);
 	}
-	
+
 	@Override
 	public Button creerBouton(String nom) {
 		Button b = super.creerBouton(nom);
@@ -133,7 +134,7 @@ public class VueAccueil extends Vue {
 		creerGraphe = creerBouton("Créer Graphes");
 		aleatoireGraphe = creerBouton("Graphes Aléatoire");
 		creerRegle = creerBouton("Créer Règles");
-		
+
 		boutons.put(creerGraphe, "graphe");
 		boutons.put(creerRegle, "regles");
 		boutons.put(aleatoireGraphe, "aleatoire");

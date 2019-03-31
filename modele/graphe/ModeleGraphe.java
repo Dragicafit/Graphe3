@@ -1,19 +1,19 @@
 package modele.graphe;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import modele.DeepClone;
 import modele.Joueur;
 import modele.point.Point;
 import modele.segment.Segment;
 
-public class ModeleGraphe implements Serializable {
+public class ModeleGraphe extends DeepClone {
 	private static final long serialVersionUID = 51L;
 
 	private String nom;
-	
+
 	private ArrayList<Point> points;
 	private Map<String, Point> pointsSpeciaux;
 	private ArrayList<Segment> segments;
@@ -154,5 +154,4 @@ public class ModeleGraphe implements Serializable {
 		}
 		return false;
 	}
-
 }

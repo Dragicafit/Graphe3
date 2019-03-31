@@ -8,7 +8,7 @@ import vue.VueCreationGraphe;
 import vue.VueCreationRegle;
 
 public abstract class ControleurRetour extends Controleur {
-	
+
 	public ControleurRetour(Vue vue) {
 		super(vue);
 		this.boutons.put("sauvegarder", Bouton.SAUVEGARDER);
@@ -32,14 +32,14 @@ public abstract class ControleurRetour extends Controleur {
 				String nomGraphe = vueGraphe.getNomGraphe().getText();
 				if (!nomGraphe.isEmpty()) {
 					modele.getGrapheCourant().setNom(nomGraphe);
-					modele.getGraphesLocal().add(modele.getGrapheCourant());
+					modele.sauvegardeGraphe();
 				}
 			} else if (vue instanceof VueCreationRegle) {
 				VueCreationRegle vueRegles = (VueCreationRegle) vue;
 				String nomRegle = vueRegles.getNomRegleField().getText();
 				if (!nomRegle.isEmpty()) {
 					modele.getRegleCourant().setNom(nomRegle);
-					modele.getReglesLocal().add(modele.getRegleCourant());
+					modele.sauvegardeRegle();
 				}
 			}
 		} else if (bouton == Bouton.RETOUR) {

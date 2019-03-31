@@ -1,8 +1,8 @@
 package modele.regle;
 
-import java.io.Serializable;
+import modele.DeepClone;
 
-public class ModeleRegle implements Serializable {
+public class ModeleRegle extends DeepClone {
 	private static final long serialVersionUID = 52L;
 
 	private String nom;

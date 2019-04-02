@@ -57,7 +57,7 @@ public class Jeux extends Thread {
 		Object source = event.getSource();
 		if (event.getEventType() == MouseEvent.DRAG_DETECTED) {
 			if (source instanceof Circle && vue.getCercles().contains(source)) {
-				if (modele.getRegleCourant().DeplacementAutorise) {
+				if (modele.getRegleCourant().DeplacementAutorise.get()) {
 					((ControleurJeu) vue.getControleur()).setApplique((Circle) source);
 					return false;
 				}
@@ -74,7 +74,7 @@ public class Jeux extends Thread {
 
 	public boolean check_regles(Point p) {
 		if (modele.getRegleCourant().JouerAcoteSoit != null) {
-			if (modele.getRegleCourant().JouerAcoteSoit) {
+			if (modele.getRegleCourant().JouerAcoteSoit.get()) {
 				if (!regles.jouerAcoteSoit((PointCouleur) p)) {
 					return false;
 				}
@@ -85,7 +85,7 @@ public class Jeux extends Thread {
 			}
 		}
 		if (modele.getRegleCourant().JouerAcoteEnnemi != null) {
-			if (modele.getRegleCourant().JouerAcoteEnnemi) {
+			if (modele.getRegleCourant().JouerAcoteEnnemi.get()) {
 				if (!regles.jouerAcoteEnnemi((PointCouleur) p)) {
 					return false;
 				}
@@ -96,7 +96,7 @@ public class Jeux extends Thread {
 			}
 		}
 		if (modele.getRegleCourant().JouerSurEnnemi != null) {
-			if (modele.getRegleCourant().JouerSurEnnemi) {
+			if (modele.getRegleCourant().JouerSurEnnemi.get()) {
 				if (!regles.jouerSurEnnemi(p)) {
 					return false;
 				}
@@ -107,7 +107,7 @@ public class Jeux extends Thread {
 			}
 		}
 		if (modele.getRegleCourant().EstBlanc != null) {
-			if (modele.getRegleCourant().EstBlanc) {
+			if (modele.getRegleCourant().EstBlanc.get()) {
 				if (!regles.estBlanc((PointCouleur) p)) {
 					return false;
 
@@ -122,7 +122,7 @@ public class Jeux extends Thread {
 	}
 
 	public boolean end_game() {
-		if (modele.getRegleCourant().FinHex) {
+		if (modele.getRegleCourant().FinHex.get()) {
 			ArrayList<Point> point = new ArrayList<>();
 			if (regles.estLie(modele.getGrapheCourant().getPointSpeciaux("rouge2"), point, this.modele.getGrapheCourant().getPointSpeciaux("rouge1"))) {
 				return true;

@@ -1,18 +1,20 @@
 package modele.regle;
 
 import modele.DeepClone;
+import modele.MutableBoolean;
 
 public class ModeleRegle extends DeepClone {
 	private static final long serialVersionUID = 52L;
 
 	private String nom;
 
-	public Boolean JouerAcoteSoit;
-	public Boolean JouerAcoteEnnemi;
-	public Boolean JouerSurEnnemi;
-	public Boolean EstBlanc;
-	public boolean DeplacementAutorise;
-	public boolean FinHex;
+	public MutableBoolean JouerAcoteSoit;
+	public MutableBoolean JouerAcoteEnnemi;
+	public MutableBoolean JouerSurEnnemi;
+	public MutableBoolean EstBlanc;
+	public MutableBoolean Coloriable;
+	public MutableBoolean DeplacementAutorise;
+	public MutableBoolean FinHex;
 
 	public ModeleRegle(String nom) {
 		this.nom = nom;
@@ -20,12 +22,13 @@ public class ModeleRegle extends DeepClone {
 
 	public ModeleRegle() {
 		this.nom = null;
-		this.JouerAcoteSoit = null;
-		this.JouerAcoteEnnemi = null;
-		this.JouerSurEnnemi = null;
-		this.EstBlanc = null;
-		this.DeplacementAutorise = false;
-		this.FinHex = false;
+		this.JouerAcoteSoit = new MutableBoolean();
+		this.JouerAcoteEnnemi = new MutableBoolean();
+		this.JouerSurEnnemi = new MutableBoolean();
+		this.EstBlanc = new MutableBoolean();
+		this.Coloriable = new MutableBoolean(true);
+		this.DeplacementAutorise = new MutableBoolean(false);
+		this.FinHex = new MutableBoolean(false);
 	}
 
 	public String getNom() {

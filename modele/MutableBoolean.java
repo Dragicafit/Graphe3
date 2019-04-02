@@ -1,6 +1,10 @@
 package modele;
 
-public class MutableBoolean {
+import java.io.Serializable;
+
+public class MutableBoolean implements Serializable {
+	private static final long serialVersionUID = 2L;
+	
 	private Boolean b;
 	
 	public MutableBoolean() {

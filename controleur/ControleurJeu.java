@@ -98,14 +98,17 @@ public class ControleurJeu extends ControleurRetour {
 	}
 
 	public boolean deplacerPoint(Point p, double x, double y) {
-		for (int i = 0; i < modele.getSizePoints(); i++) {
-			if (Math.sqrt(
-					Math.pow(modele.getPoint(i).getX() - x, 2) + Math.pow(modele.getPoint(i).getY() - y, 2)) < 15) {
+		for (Point point : modele.getPoints()) {
+			if (tailleSegmentMinimum(x - point.getX(), y - point.getY(), 60)) {
 				return false;
 			}
 		}
 		p.setX(x);
 		p.setY(y);
 		return true;
+	}
+	
+	public boolean tailleSegmentMinimum(double x, double y, int i) {
+		return Math.sqrt(Math.pow(x, 2) + Math.pow(y, 2)) < i;
 	}
 }

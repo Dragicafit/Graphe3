@@ -17,6 +17,7 @@ public class ModeleRegle extends DeepClone {
 	public MutableBoolean FinHex;
 
 	public ModeleRegle(String nom) {
+		this();
 		this.nom = nom;
 	}
 

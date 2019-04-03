@@ -33,8 +33,7 @@ public class Jeux extends Thread {
 		try {
 			while (!end_game()) {
 				int j = modele.getJoueurCourant();
-				if (tour(j)) {
-				} else {
+				if (!tour(j)) {
 					synchronized (vue.getControleur()) {
 						((ControleurJeu) vue.getControleur()).notify();
 					}
@@ -72,7 +71,7 @@ public class Jeux extends Thread {
 	}
 
 	public boolean check_regles(Point p) {
-		if (modele.getRegleCourant().JouerAcoteSoit != null) {
+		if (modele.getRegleCourant().JouerAcoteSoit.get() != null) {
 			if (modele.getRegleCourant().JouerAcoteSoit.get()) {
 				if (!regles.jouerAcoteSoit((PointCouleur) p)) {
 					return false;
@@ -83,7 +82,7 @@ public class Jeux extends Thread {
 				}
 			}
 		}
-		if (modele.getRegleCourant().JouerAcoteEnnemi != null) {
+		if (modele.getRegleCourant().JouerAcoteEnnemi.get() != null) {
 			if (modele.getRegleCourant().JouerAcoteEnnemi.get()) {
 				if (!regles.jouerAcoteEnnemi((PointCouleur) p)) {
 					return false;
@@ -94,14 +93,14 @@ public class Jeux extends Thread {
 				}
 			}
 		}
-		if (modele.getRegleCourant().JouerSurEnnemi != null) {
+		if (modele.getRegleCourant().JouerSurEnnemi.get() != null) {
 			if (!modele.getRegleCourant().JouerSurEnnemi.get()) {
 				if (regles.jouerSurEnnemi((PointCouleur) p)) {
 					return false;
 				}
 			}
 		}
-		if (modele.getRegleCourant().EstBlanc != null) {
+		if (modele.getRegleCourant().EstBlanc.get() != null) {
 			if (modele.getRegleCourant().EstBlanc.get()) {
 				if (!regles.estBlanc((PointCouleur) p)) {
 					return false;

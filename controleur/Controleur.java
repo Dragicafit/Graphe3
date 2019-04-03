@@ -5,6 +5,7 @@ import java.util.Map;
 
 import javafx.application.Platform;
 import javafx.event.EventHandler;
+import javafx.scene.control.Button;
 import javafx.scene.input.InputEvent;
 import modele.Modele;
 import vue.Vue;
@@ -25,6 +26,14 @@ public abstract class Controleur implements EventHandler<InputEvent> {
 
 	public void handle(InputEvent event) {
 		event.consume();
+		Object source = event.getSource();
+		if (source instanceof Button && vue.getBoutons().containsKey(source)) {
+			if (bouton == boutons.get(vue.getBoutons((Button) source))) {
+				bouton = null;
+			} else {
+				bouton = boutons.get(vue.getBoutons((Button) source));
+			}
+		}
 	}
 	
 	public void exit() {

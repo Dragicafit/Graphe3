@@ -1,14 +1,16 @@
 package controleur;
 
-import javafx.scene.control.Button;
+import java.io.IOException;
+
 import javafx.scene.input.InputEvent;
 import vue.Vue;
 import vue.VueAccueil;
 import vue.VueCreationGraphe;
 import vue.VueCreationRegle;
+import vue.VueJeu;
 
 public abstract class ControleurRetour extends Controleur {
-	
+
 	public ControleurRetour(Vue vue) {
 		super(vue);
 		this.boutons.put("sauvegarder", Bouton.SAUVEGARDER);
@@ -18,29 +20,32 @@ public abstract class ControleurRetour extends Controleur {
 	@Override
 	public void handle(InputEvent event) {
 		super.handle(event);
-		Object source = event.getSource();
-		if (source instanceof Button && vue.getBoutons().containsKey(source)) {
-			bouton = boutons.get(vue.getBoutons((Button) source));
-			if (bouton == Bouton.SAUVEGARDER) {
-				if (vue instanceof VueCreationGraphe) {
-					VueCreationGraphe vueGraphe = (VueCreationGraphe) vue;
-					String nomGraphe = vueGraphe.getNomGraphe().getText();
-					if (!nomGraphe.isEmpty()) {
-						modele.getGrapheCourant().setNom(nomGraphe);
-						modele.getGraphesLocal().add(modele.getGrapheCourant());
-					}
-				} else if (vue instanceof VueCreationRegle) {
-					VueCreationRegle vueRegles = (VueCreationRegle) vue;
-					String nomRegle = vueRegles.getNomRegleField().getText();
-					if (!nomRegle.isEmpty()) {
-						modele.getRegleCourant().setNom(nomRegle);
-						modele.getReglesLocal().add(modele.getRegleCourant());
-					}
+		if (bouton == Bouton.SAUVEGARDER) {
+			if (vue instanceof VueCreationGraphe) {
+				VueCreationGraphe vueGraphe = (VueCreationGraphe) vue;
+				String nomGraphe = vueGraphe.getNomGraphe().getText();
+				if (!nomGraphe.isEmpty()) {
+					modele.getGrapheCourant().setNom(nomGraphe);
+					modele.sauvegardeGraphe();
 				}
-			} else if (bouton == Bouton.RETOUR) {
-				exit();
-				new VueAccueil(modele);
+			} else if (vue instanceof VueCreationRegle) {
+				VueCreationRegle vueRegles = (VueCreationRegle) vue;
+				String nomRegle = vueRegles.getNomRegleField().getText();
+				if (!nomRegle.isEmpty()) {
+					modele.getRegleCourant().setNom(nomRegle);
+					modele.sauvegardeRegle();
+				}
+			} else if (vue instanceof VueJeu) {
+				try {
+					modele.exportModele();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
 			}
+			bouton = null;
+		} else if (bouton == Bouton.RETOUR) {
+			exit();
+			new VueAccueil(modele);
 		}
 	}
 }

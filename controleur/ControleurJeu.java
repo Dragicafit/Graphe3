@@ -32,17 +32,20 @@ public class ControleurJeu extends ControleurRetour {
 
 	public void applique(PointCouleur p) {
 		p.setCouleur(modele.getJoueur(modele.getJoueurCourant()).getCouleur());
+		modele.setJoueurCourant((modele.getJoueurCourant() + 1) % modele.getNbJoueurs());
 		vue.update();
 	}
 
 	public void applique(PointCouleur p, double x, double y) {
 		p.setX(x);
 		p.setY(y);
+		modele.setJoueurCourant((modele.getJoueurCourant() + 1) % modele.getNbJoueurs());
 		vue.update();
 	}
 
 	public void applique(SegmentCouleur s) {
 		s.setCouleur(modele.getJoueur(modele.getJoueurCourant()).getCouleur());
+		modele.setJoueurCourant((modele.getJoueurCourant() + 1) % modele.getNbJoueurs());
 		vue.update();
 	}
 
@@ -98,14 +101,17 @@ public class ControleurJeu extends ControleurRetour {
 	}
 
 	public boolean deplacerPoint(Point p, double x, double y) {
-		for (int i = 0; i < modele.getSizePoints(); i++) {
-			if (Math.sqrt(
-					Math.pow(modele.getPoint(i).getX() - x, 2) + Math.pow(modele.getPoint(i).getY() - y, 2)) < 15) {
+		for (Point point : modele.getPoints()) {
+			if (tailleSegmentMinimum(x - point.getX(), y - point.getY(), 60)) {
 				return false;
 			}
 		}
 		p.setX(x);
 		p.setY(y);
 		return true;
+	}
+	
+	public boolean tailleSegmentMinimum(double x, double y, int i) {
+		return Math.sqrt(Math.pow(x, 2) + Math.pow(y, 2)) < i;
 	}
 }

@@ -49,8 +49,8 @@ public class ControleurGraphes extends ControleurRetour {
 	}
 
 	public void addPoint(double x, double y) {
-		for (int i = 0; i < modele.getSizePoints(); i++) {
-			if (Math.sqrt(Math.pow(modele.getPoint(i).getX() - x, 2) + Math.pow(modele.getPoint(i).getY() - y, 2)) < 60) {
+		for (Point point : modele.getPoints()) {
+			if (tailleSegmentMinimum(x - point.getX(), y - point.getY(), 60)) {
 				return;
 			}
 		}
@@ -58,8 +58,8 @@ public class ControleurGraphes extends ControleurRetour {
 	}
 
 	public boolean deplacerPoint(Point p, double x, double y) {
-		for (int i = 0; i < modele.getSizePoints(); i++) {
-			if (Math.sqrt(Math.pow(modele.getPoint(i).getX() - x, 2) + Math.pow(modele.getPoint(i).getY() - y, 2)) < 60) {
+		for (Point point : modele.getPoints()) {
+			if (tailleSegmentMinimum(x - point.getX(), y - point.getY(), 60)) {
 				return false;
 			}
 		}
@@ -115,44 +115,20 @@ public class ControleurGraphes extends ControleurRetour {
 	}
 
 	public void eventPane(MouseEvent event) {
+		double x = event.getX();
+		double y = event.getY();
 		if (bouton == Bouton.POINT) {
-			double x = event.getX();
-			double y = event.getY();
 			if (premierPoint != null) {
-				if (event.isShiftDown()) {
-					if (Math.abs(event.getX()) < premierPoint.getX() + 60) {
-						x = premierPoint.getX();
-					} else if (Math.abs(event.getY()) < premierPoint.getY() + 60) {
-						y = premierPoint.getY();
-					} else {
-						x = premierPoint.getX() + (x - premierPoint.getX() > 0 ? 1 : -1) * (Math.abs(x - premierPoint.getX()) + Math.abs(y - premierPoint.getY()))/2;
-						y = premierPoint.getY() + (y - premierPoint.getY() > 0 ? 1 : -1) * (Math.abs(x - premierPoint.getX()) + Math.abs(y - premierPoint.getY()))/2;
-					}
-				}
-				if (event.isAltDown()) {
-					x = premierPoint.getX() + (x - premierPoint.getX()) * 120 / Math.sqrt(Math.pow(x - premierPoint.getX(), 2) + Math.pow(y - premierPoint.getY(), 2));
-					y = premierPoint.getY() + (y - premierPoint.getY()) * 120 / Math.sqrt(Math.pow(x - premierPoint.getX(), 2) + Math.pow(y - premierPoint.getY(), 2));
-				}
+				double[] coor = AltShiftAction(x, y, event);
+				x = coor[0];
+				y = coor[1];
 			}
 			addPoint(x, y);
 			premierPoint = modele.getPoint(modele.getSizePoints() - 1);
 		} else if (bouton == Bouton.SEGMENT && premierPoint != null) {
-			double x = event.getX();
-			double y = event.getY();
-			if (event.isShiftDown()) {
-				if (60 > Math.abs(premierPoint.getX() - x)) {
-					x = premierPoint.getX();
-				} else if (60 > Math.abs(premierPoint.getY() - y)) {
-					y = premierPoint.getY();
-				} else {
-					x = premierPoint.getX() + (x - premierPoint.getX() > 0 ? 1 : -1) * (Math.abs(x - premierPoint.getX()) + Math.abs(y - premierPoint.getY()))/2;
-					y = premierPoint.getY() + (y - premierPoint.getY() > 0 ? 1 : -1) * (Math.abs(x - premierPoint.getX()) + Math.abs(y - premierPoint.getY()))/2;
-				}
-			}
-			if (event.isAltDown()) {
-				x = premierPoint.getX() + (x - premierPoint.getX()) * 120 / Math.sqrt(Math.pow(x - premierPoint.getX(), 2) + Math.pow(y - premierPoint.getY(), 2));
-				y = premierPoint.getY() + (y - premierPoint.getY()) * 120 / Math.sqrt(Math.pow(x - premierPoint.getX(), 2) + Math.pow(y - premierPoint.getY(), 2));
-			}
+			double[] coor = AltShiftAction(x, y, event);
+			x = coor[0];
+			y = coor[1];
 			if (!event.isControlDown()) {
 				addPointSegment(x, y);
 			}
@@ -195,5 +171,43 @@ public class ControleurGraphes extends ControleurRetour {
 				vue.update();
 			}
 		}
+	}
+	
+	public double[] AltShiftAction(double x, double y, MouseEvent event) {
+		if (event.isShiftDown()) {
+			if (tailleAxeMinimum(x, premierPoint.getX(), 30)) {
+				x = premierPoint.getX();
+			} else if (tailleAxeMinimum(y, premierPoint.getY(), 30)) {
+				y = premierPoint.getY();
+			} else {
+				x = premierPoint.getX() + diagonale(x - premierPoint.getX(), y - premierPoint.getY());
+				y = premierPoint.getY() + diagonale(y - premierPoint.getY(), x - premierPoint.getX());
+			}
+		}
+		if (event.isAltDown()) {
+			x = premierPoint.getX() + tailleFixe(x - premierPoint.getX(), y - premierPoint.getY());
+			y = premierPoint.getY() + tailleFixe(y - premierPoint.getY(), x - premierPoint.getX());
+		}
+		return new double[] {x, y};
+	}
+
+	public double tailleFixe(double x, double y) {
+		return x * 120 / Math.sqrt(Math.pow(x, 2) + Math.pow(y, 2));
+	}
+
+	public double diagonale(double x, double y) {
+		return signe(x) * (Math.abs(x) + Math.abs(y)) / 2;
+	}
+
+	public int signe(double x) {
+		return x > 0 ? 1 : -1;
+	}
+
+	public boolean tailleSegmentMinimum(double x, double y, int i) {
+		return Math.sqrt(Math.pow(x, 2) + Math.pow(y, 2)) < i;
+	}
+
+	public boolean tailleAxeMinimum(double a, double b, int i) {
+		return Math.abs(a - b) < i;
 	}
 }

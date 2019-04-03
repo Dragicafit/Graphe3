@@ -5,8 +5,8 @@ public class ModeleRegleCol extends ModeleRegle {
 	
 	public ModeleRegleCol() {
 		super("Col");
-		this.JouerAcoteSoit = false;
-		this.JouerAcoteEnnemi = null;
+		this.JouerAcoteSoit = null;
+		this.JouerAcoteEnnemi = false;
 		this.JouerSurEnnemi = false;
 		this.EstBlanc = true;
 	}

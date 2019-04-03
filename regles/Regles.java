@@ -86,4 +86,13 @@ public class Regles {
 		}
 		return false;
 	}
+	
+	public boolean estColoriable(){
+		for(Point p : modele.getPoints()) {
+			if(!(p instanceof PointCouleur)) {
+				return false;
+			}
+		}
+		return true;
+	}
 }

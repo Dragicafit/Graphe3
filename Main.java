@@ -9,6 +9,7 @@ import modele.graphe.ModeleGraphe2;
 import modele.graphe.ModeleGraphe3;
 import modele.graphe.ModeleGraphe4;
 import modele.graphe.ModeleGraphe5;
+import modele.graphe.ModeleGrapheHex;
 import modele.regle.ModeleRegle;
 import modele.regle.ModeleRegleCol;
 import modele.regle.ModeleRegleHex;
@@ -26,7 +27,7 @@ public class Main extends Application {
 	public void start(Stage primaryStage) {
 		try {
 			Modele m = new Modele();
-			m.setGrapheCourant(new ModeleGraphe1());
+			m.setGrapheCourant(new ModeleGrapheHex());
 			ArrayList<ModeleGraphe> graphe = m.getGraphesPredefinis();
 			graphe.add(new ModeleGraphe1());
 			graphe.add(new ModeleGraphe2());

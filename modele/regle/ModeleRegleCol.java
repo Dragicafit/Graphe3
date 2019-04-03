@@ -1,4 +1,4 @@
-package modele;
+package modele.regle;
 
 public class ModeleRegleCol extends ModeleRegle {
 	private static final long serialVersionUID = 201L;

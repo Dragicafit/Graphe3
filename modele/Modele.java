@@ -8,7 +8,9 @@ import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+import modele.graphe.ModeleGraphe;
 import modele.point.Point;
+import modele.regle.ModeleRegle;
 import modele.segment.Segment;
 
 public class Modele implements Serializable {
@@ -32,6 +34,19 @@ public class Modele implements Serializable {
 		regleCourant = null;
 	}
 
+	public void resetCourant() {
+		grapheCourant = null;
+		regleCourant = null;
+	}
+
+	public void sauvegardeGraphe() {
+		graphesLocal.add(grapheCourant);
+	}
+
+	public void sauvegardeRegle() {
+		reglesLocal.add(regleCourant);
+	}
+
 	public void exportModele() throws IOException {
 		String fileName = "modele.ser";
 		FileOutputStream fos = new FileOutputStream(fileName);
@@ -53,32 +68,48 @@ public class Modele implements Serializable {
 		return graphesPredefinis;
 	}
 
-	public void setGraphesPredefinis(ArrayList<ModeleGraphe> graphesPredefinis) {
-		this.graphesPredefinis = graphesPredefinis;
+	public ModeleGraphe getGraphesPredefinis(int i) {
+		return graphesPredefinis.get(i);
+	}
+
+	public void addGraphesPredefinis(ModeleGraphe graphe) {
+		graphesPredefinis.add(graphe);
 	}
 
 	public ArrayList<ModeleGraphe> getGraphesLocal() {
 		return graphesLocal;
 	}
 
-	public void setGraphesLocal(ArrayList<ModeleGraphe> graphesLocal) {
-		this.graphesLocal = graphesLocal;
+	public ModeleGraphe getGraphesLocal(int i) {
+		return graphesLocal.get(i);
+	}
+
+	public void addGraphesLocal(ModeleGraphe graphe) {
+		graphesLocal.add(graphe);
 	}
 
 	public ArrayList<ModeleRegle> getReglesPredefinis() {
 		return reglesPredefinis;
 	}
 
-	public void setReglesPredefinis(ArrayList<ModeleRegle> reglesPredefinis) {
-		this.reglesPredefinis = reglesPredefinis;
+	public ModeleRegle getReglesPredefinis(int i) {
+		return reglesPredefinis.get(i);
+	}
+
+	public void addReglesPredefinis(ModeleRegle regle) {
+		reglesPredefinis.add(regle);
 	}
 
 	public ArrayList<ModeleRegle> getReglesLocal() {
 		return reglesLocal;
 	}
 
-	public void setReglesLocal(ArrayList<ModeleRegle> reglesLocal) {
-		this.reglesLocal = reglesLocal;
+	public ModeleRegle getReglesLocal(int i) {
+		return reglesLocal.get(i);
+	}
+
+	public void addReglesLocal(ModeleRegle regle) {
+		reglesLocal.add(regle);
 	}
 
 	public ModeleGraphe getGrapheCourant() {
@@ -86,7 +117,7 @@ public class Modele implements Serializable {
 	}
 
 	public void setGrapheCourant(ModeleGraphe grapheCourant) {
-		this.grapheCourant = grapheCourant;
+		this.grapheCourant = (ModeleGraphe) grapheCourant.clone();
 	}
 
 	public ModeleRegle getRegleCourant() {
@@ -94,7 +125,7 @@ public class Modele implements Serializable {
 	}
 
 	public void setRegleCourant(ModeleRegle regleCourant) {
-		this.regleCourant = regleCourant;
+		this.regleCourant = (ModeleRegle) regleCourant.clone();
 	}
 
 	public void addPoint(Point point) {

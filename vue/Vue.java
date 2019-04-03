@@ -9,12 +9,14 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.TilePane;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
 import javafx.stage.Stage;
@@ -87,6 +89,15 @@ public abstract class Vue extends Stage{
 		return zone;
 	}
 	
+	public ScrollPane creerScrollPane() {
+		ScrollPane scroll = new ScrollPane();
+		scroll.setFitToWidth(true);
+		scroll.setFitToHeight(true);
+		scroll.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+		scroll.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
+		return scroll;
+	}
+	
 	public GridPane creerGridPane(Pos p, boolean Border) {
 		GridPane grid = new GridPane();
 		grid.setAlignment(p);
@@ -101,6 +112,20 @@ public abstract class Vue extends Stage{
 		}
 		return grid;
 	}
+	
+	public TilePane creerTilePane(Pos p, boolean Border) {
+		TilePane tile = new TilePane();
+		tile.setAlignment(p);
+		tile.setHgap(10);
+		tile.setVgap(10);
+		if(Border) {
+			tile.setStyle("-fx-padding: 10;" + "-fx-border-style: solid inside;" + "-fx-border-width: 2;"
+				+ "-fx-border-insets: 5;" + "-fx-border-radius: 5;" + "-fx-border-color: black;");
+		}else {
+			tile.setStyle("-fx-padding: 10;");
+		}
+		return tile;
+	}	
 	
 	public BorderPane creerBorderPane(boolean Border) {
 		BorderPane pane = new BorderPane();

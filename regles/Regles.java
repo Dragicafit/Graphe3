@@ -45,23 +45,9 @@ public class Regles {
 		return false;
 	}
 
-	public boolean jouerSurEnnemi(Point p) {
+	public boolean jouerSurEnnemi(PointCouleur p) {
 		Joueur j = modele.getJoueur(modele.getJoueurCourant());
-		PointCouleur ennemi;
-		for (int i = 0; i < modele.getSizeSegments(); i++) {
-			if (modele.getSegment(i).getPoint1() == p) {
-				ennemi = (PointCouleur) modele.getSegment(i).getPoint1();
-				if (ennemi.getCouleur() != j.getCouleur()) {
-					return true;
-				}
-			} else if (modele.getSegment(i).getPoint2() == p) {
-				ennemi = (PointCouleur) modele.getSegment(i).getPoint2();
-				if (ennemi.getCouleur() != j.getCouleur()) {
-					return true;
-				}
-			}
-		}
-		return false;
+		return !p.getCouleur().equals(j.getCouleur()) && !estBlanc(p);
 	}
 
 	public boolean estBlanc(PointCouleur p) {

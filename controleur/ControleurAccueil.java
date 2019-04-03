@@ -1,6 +1,8 @@
 package controleur;
 
 import javafx.scene.input.InputEvent;
+import modele.graphe.ModeleGraphe;
+import modele.regle.ModeleRegle;
 import vue.Vue;
 import vue.VueCreationGraphe;
 import vue.VueCreationRegle;
@@ -21,9 +23,11 @@ public class ControleurAccueil extends Controleur {
 			new VueCreationGraphe(modele);
 			exit();
 		} else if (bouton == Bouton.CREERGRAPHE) {
+			modele.setGrapheCourant(new ModeleGraphe());
 			new VueCreationGraphe(modele);
 			exit();
 		} else if (bouton == Bouton.CREERREGLE) {
+			modele.setRegleCourant(new ModeleRegle());
 			new VueCreationRegle(modele);
 			exit();
 		}

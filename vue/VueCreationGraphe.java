@@ -17,6 +17,7 @@ public class VueCreationGraphe extends VueJeu {
 		this.setTitle("Création d'un graphe");
 		nomGraphe = creerZoneText("Nom du Graphe", 40.);
 		for (Map.Entry<Button, String> entry : boutons.entrySet()) {
+			if (!entry.getValue().equals("retour") && !entry.getValue().equals("sauvegarder"))
 			top.getChildren().add(entry.getKey());
 		}
 		bottom.getChildren().add(0, nomGraphe);

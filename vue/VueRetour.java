@@ -5,16 +5,18 @@ import modele.Modele;
 
 public abstract class VueRetour extends Vue {
 
+	public Button sauvegarder;
+	public Button retour;
+
 	public VueRetour(Modele m) {
 		super(m);
 	}
-
-	public Button sauvegarder;
-	public Button retour;
 
 	@Override
 	public void creationBouton() {
 		sauvegarder = creerBouton("Sauvegarder");
 		retour = creerBouton("Retour");
+		boutons.put(sauvegarder, "sauvegarder");
+		boutons.put(retour, "retour");
 	}
 }

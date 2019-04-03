@@ -1,11 +1,13 @@
 package controleur;
 
-import javafx.scene.control.Button;
+import java.io.IOException;
+
 import javafx.scene.input.InputEvent;
 import vue.Vue;
 import vue.VueAccueil;
 import vue.VueCreationGraphe;
 import vue.VueCreationRegle;
+import vue.VueJeu;
 
 public abstract class ControleurRetour extends Controleur {
 
@@ -18,14 +20,6 @@ public abstract class ControleurRetour extends Controleur {
 	@Override
 	public void handle(InputEvent event) {
 		super.handle(event);
-		Object source = event.getSource();
-		if (source instanceof Button && vue.getBoutons().containsKey(source)) {
-			if (bouton == boutons.get(vue.getBoutons((Button) source))) {
-				bouton = null;
-			} else {
-				bouton = boutons.get(vue.getBoutons((Button) source));
-			}
-		}
 		if (bouton == Bouton.SAUVEGARDER) {
 			if (vue instanceof VueCreationGraphe) {
 				VueCreationGraphe vueGraphe = (VueCreationGraphe) vue;
@@ -41,7 +35,14 @@ public abstract class ControleurRetour extends Controleur {
 					modele.getRegleCourant().setNom(nomRegle);
 					modele.sauvegardeRegle();
 				}
+			} else if (vue instanceof VueJeu) {
+				try {
+					modele.exportModele();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
 			}
+			bouton = null;
 		} else if (bouton == Bouton.RETOUR) {
 			exit();
 			new VueAccueil(modele);

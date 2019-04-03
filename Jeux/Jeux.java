@@ -34,7 +34,6 @@ public class Jeux extends Thread {
 			while (!end_game()) {
 				int j = modele.getJoueurCourant();
 				if (tour(j)) {
-					modele.setJoueurCourant((j + 1) % modele.getNbJoueurs());
 				} else {
 					synchronized (vue.getControleur()) {
 						((ControleurJeu) vue.getControleur()).notify();
@@ -96,12 +95,8 @@ public class Jeux extends Thread {
 			}
 		}
 		if (modele.getRegleCourant().JouerSurEnnemi != null) {
-			if (modele.getRegleCourant().JouerSurEnnemi.get()) {
-				if (!regles.jouerSurEnnemi(p)) {
-					return false;
-				}
-			} else {
-				if (regles.jouerSurEnnemi(p)) {
+			if (!modele.getRegleCourant().JouerSurEnnemi.get()) {
+				if (regles.jouerSurEnnemi((PointCouleur) p)) {
 					return false;
 				}
 			}
@@ -133,9 +128,8 @@ public class Jeux extends Thread {
 			}
 			return false;
 		} else {
-			for (int i = 0; i < modele.getSizePoints(); i++) {
-				PointCouleur p = (PointCouleur) modele.getPoint(i);
-				if (!check_regles(p)) {
+			for (Point p : modele.getPoints()) {
+				if (check_regles(p)) {
 					return false;
 				}
 			}

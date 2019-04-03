@@ -5,7 +5,7 @@ public class ModeleRegleSnort extends ModeleRegle {
 	
 	public ModeleRegleSnort() {
 		super("Snort");
-		this.JouerAcoteSoit.set(true);
+		this.JouerAcoteSoit.set(false);
 		this.JouerSurEnnemi.set(false);
 		this.EstBlanc.set(true);
 	}

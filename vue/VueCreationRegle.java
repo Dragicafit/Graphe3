@@ -1,5 +1,8 @@
 package vue;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import controleur.Controleur;
 import controleur.ControleurRegles;
 import javafx.geometry.Orientation;
@@ -11,9 +14,9 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import modele.Modele;
+import modele.MutableBoolean;
 
 public class VueCreationRegle extends VueRetour {
-
 
 	protected BorderPane main;
 	protected SplitPane pointEtSegment;
@@ -28,10 +31,13 @@ public class VueCreationRegle extends VueRetour {
 	protected CheckBox surEnnemi;
 	protected CheckBox allAround;
 
+	protected Map<CheckBox, MutableBoolean> reglesChoisis;
 
 	public VueCreationRegle(Modele m) {
 		super(m);
 		pointColoriable = creerCheckBox("Point Coloriable");
+		reglesChoisis = new HashMap<>();
+		reglesChoisis.put(creerCheckBox("Point Coloriable"), modele.getRegleCourant().Coloriable);
 		pointColoriable.setUnderline(true);
 		pointDeplacable = creerCheckBox("Point Deplacable");
 		pointDeplacable.setUnderline(true);
@@ -90,29 +96,31 @@ public class VueCreationRegle extends VueRetour {
 		return nomRegleField;
 	}
 
-	public CheckBox getPointColoriable() {
-		return pointColoriable;
+	public boolean getPointColoriable() {
+		return pointColoriable.isSelected();
 	}
 
-	public CheckBox getPointDeplacable() {
-		return pointDeplacable;
+	public boolean getPointDeplacable() {
+		return pointDeplacable.isSelected();
 	}
 
-	public CheckBox getaCoteDeSoit() {
-		return aCoteDeSoit;
+	public boolean getaCoteDeSoit() {
+		return aCoteDeSoit.isSelected();
 	}
 
-	public CheckBox getaCoteDennemi() {
-		return aCoteDennemi;
+	public boolean getaCoteDennemi() {
+		return aCoteDennemi.isSelected();
 	}
 
-	public CheckBox getSurEnnemi() {
-		return surEnnemi;
+	public boolean getSurEnnemi() {
+		return surEnnemi.isSelected();
 	}
 
-	public CheckBox getAllAround() {
-		return allAround;
+	public boolean getAllAround() {
+		return allAround.isSelected();
 	}	
 	
-	
+	public Map<CheckBox, MutableBoolean> getReglesChoisis() {
+		return reglesChoisis;
+	}
 }

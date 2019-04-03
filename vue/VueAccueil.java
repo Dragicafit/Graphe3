@@ -1,5 +1,8 @@
 package vue;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import controleur.Controleur;
 import controleur.ControleurAccueil;
 import javafx.geometry.Orientation;
@@ -46,9 +49,18 @@ public class VueAccueil extends Vue {
 	protected Button creerGraphe;
 	protected Button aleatoireGraphe;
 	protected Button creerRegle;
+	
+	protected Map<Button, ModeleGraphe> graphePredef;
+	protected Map<Button, ModeleGraphe> grapheLocal;
+	protected Map<Button, ModeleRegle> reglePredef;
+	protected Map<Button, ModeleRegle> regleLocal;
 
 	public VueAccueil(Modele m) {
 		super(m);
+		graphePredef = new HashMap<>();
+		grapheLocal = new HashMap<>();
+		reglePredef = new HashMap<>();
+		regleLocal = new HashMap<>();
 		modele.resetCourant();
 		main = new SplitPane();
 
@@ -166,6 +178,7 @@ public class VueAccueil extends Vue {
 	public void ajoutReglePredef() {
 		for(ModeleRegle e : this.modele.getReglesPredefinis()) {
 			Button b = creerBouton(e.getNom());
+			reglePredef.put(b, e);
 			RegleCenterTopBottom.getChildren().add(b);
 		}
 	}
@@ -173,6 +186,7 @@ public class VueAccueil extends Vue {
 	public void ajoutRegleLocal() {
 		for(ModeleRegle e : this.modele.getReglesLocal()) {
 			Button b = creerBouton(e.getNom());
+			regleLocal.put(b, e);
 			RegleCenterBottomBottom.getChildren().add(b);
 		}
 	}
@@ -183,6 +197,7 @@ public class VueAccueil extends Vue {
 			t.setStyle("-fx-font-size: 20px;");
 			GrapheCenterTopBottom.getChildren().add(t);*/
 			Button b = creerBouton(e.getNom());
+			graphePredef.put(b, e);
 			GrapheCenterTopBottom.getChildren().add(b);
 		}
 	}
@@ -190,6 +205,7 @@ public class VueAccueil extends Vue {
 	public void ajoutGrapheLocal() {
 		for(ModeleGraphe e : this.modele.getGraphesLocal()) {
 			Button b = creerBouton(e.getNom());
+			grapheLocal.put(b, e);
 			GrapheCenterBottomBottom.getChildren().add(b);
 		}
 	}

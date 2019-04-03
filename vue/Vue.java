@@ -9,6 +9,7 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
@@ -87,6 +88,17 @@ public abstract class Vue extends Stage{
 		zone.setPromptText(nom);
 		zone.setFocusTraversable(false);
 		return zone;
+	}
+	
+	public CheckBox creerCheckBox (String nom) {
+		CheckBox c = new CheckBox(nom);
+		return c;
+	}
+	
+	public CheckBox creerCheckBox (String nom, boolean underline) {
+		CheckBox c = creerCheckBox(nom);
+		c.setUnderline(underline);
+		return c;
 	}
 	
 	public ScrollPane creerScrollPane() {

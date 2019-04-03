@@ -78,7 +78,7 @@ public class ControleurGraphes extends ControleurRetour {
 	}
 
 	public void eventCercle(MouseEvent event, Circle source) {
-		Point point = modele.getPoint(vue.getCercles().indexOf(source));
+		Point point = vue.getCercles().get(source);
 		if (bouton == Bouton.SUPPRIMER) {
 			modele.removePoint(point);
 		} else if (bouton == Bouton.SEGMENT) {
@@ -106,7 +106,7 @@ public class ControleurGraphes extends ControleurRetour {
 	}
 
 	public void eventLine(MouseEvent event, Line source) {
-		Segment segment = modele.getSegment(vue.getLignes().indexOf(source));
+		Segment segment = vue.getLignes().get(source);
 		if (bouton == Bouton.SUPPRIMER) {
 			modele.removeSegment(segment);
 		} else if (segment instanceof SegmentCouleur) {
@@ -144,7 +144,7 @@ public class ControleurGraphes extends ControleurRetour {
 				event.acceptTransferModes(TransferMode.COPY_OR_MOVE);
 			} else if (event.getEventType() == DragEvent.DRAG_DROPPED) {
 				Circle cercle = (Circle) event.getGestureSource();
-				Point p = modele.getPoint(vue.getCercles().indexOf(cercle));
+				Point p = vue.getCercles().get(cercle);
 				event.setDropCompleted(deplacerPoint(p, event.getX(), event.getY()));
 				vue.update();
 			}
@@ -153,17 +153,17 @@ public class ControleurGraphes extends ControleurRetour {
 
 	public void eventMouse(MouseEvent event, Object source) {
 		if (event.getEventType() == MouseEvent.DRAG_DETECTED) {
-			if (source instanceof Circle && vue.getCercles().contains(source)) {
+			if (source instanceof Circle && vue.getCercles().containsKey(source)) {
 				Dragboard db = ((Circle) source).startDragAndDrop(TransferMode.ANY);
 				ClipboardContent content = new ClipboardContent();
 				content.putString("");
 				db.setContent(content);
 			}
 		} else {
-			if (source instanceof Circle && vue.getCercles().contains(source)) {
+			if (source instanceof Circle && vue.getCercles().containsKey(source)) {
 				eventCercle(event, (Circle) source);
 				vue.update();
-			} else if (source instanceof Line && vue.getLignes().contains(source)) {
+			} else if (source instanceof Line && vue.getLignes().containsKey(source)) {
 				eventLine(event, (Line) source);
 				vue.update();
 			} else if (vue instanceof VueJeu && source instanceof Pane && source == ((VueJeu) vue).getGraphe()) {

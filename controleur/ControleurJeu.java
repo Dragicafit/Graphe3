@@ -81,7 +81,7 @@ public class ControleurJeu extends ControleurRetour {
 				event.acceptTransferModes(TransferMode.COPY_OR_MOVE);
 			} else if (event.getEventType() == DragEvent.DRAG_DROPPED) {
 				Circle cercle = (Circle) event.getGestureSource();
-				Point p = modele.getPoint(vue.getCercles().indexOf(cercle));
+				Point p = vue.getCercles().get(cercle);
 				event.setDropCompleted(deplacerPoint(p, event.getX(), event.getY()));
 				vue.update();
 			}

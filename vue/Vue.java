@@ -1,6 +1,5 @@
 package vue;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -22,13 +21,15 @@ import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
 import javafx.stage.Stage;
 import modele.Modele;
+import modele.point.Point;
+import modele.segment.Segment;
 
 public abstract class Vue extends Stage{
 
 	protected Modele modele;
 	protected Controleur controleur;
-	protected ArrayList<Circle> cercles;
-	protected ArrayList<Line> lignes;
+	protected Map<Circle, Point> cercles;
+	protected Map<Line, Segment> lignes;
 	protected Map<Button, String> boutons;
 	protected BorderPane root;
 	protected Scene scene;
@@ -37,8 +38,8 @@ public abstract class Vue extends Stage{
 		root = new BorderPane();
 		scene = new Scene(root, 800, 600);
 		modele = m;
-		cercles = new ArrayList<Circle>();
-		lignes = new ArrayList<Line>();
+		cercles = new HashMap<>();
+		lignes = new HashMap<>();
 		boutons = new HashMap<>();
 		this.controleur = creationControleur();
 		creationBouton();
@@ -153,11 +154,11 @@ public abstract class Vue extends Stage{
 		return modele;
 	}
 
-	public ArrayList<Circle> getCercles() {
+	public Map<Circle, Point> getCercles() {
 		return cercles;
 	}
 
-	public ArrayList<Line> getLignes() {
+	public Map<Line, Segment> getLignes() {
 		return lignes;
 	}
 

@@ -97,7 +97,7 @@ public abstract class VueJeu extends VueRetour {
 			l.setStrokeWidth(3);
 			l.setVisible(true);
 			l.addEventHandler(MouseEvent.MOUSE_CLICKED, controleur);
-			lignes.add(l);
+			lignes.put(l, s);
 			this.graphe.getChildren().add(l);
 		}
 		for (Point p : modele.getPoints()) {
@@ -112,7 +112,7 @@ public abstract class VueJeu extends VueRetour {
 			c.setVisible(true);
 			c.addEventHandler(MouseEvent.MOUSE_CLICKED, controleur);
 			c.addEventHandler(MouseEvent.DRAG_DETECTED, controleur);
-			cercles.add(c);
+			cercles.put(c, p);
 			this.graphe.getChildren().add(c);
 		}
 	}

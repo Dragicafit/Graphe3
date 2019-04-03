@@ -16,7 +16,5 @@ public abstract class VueRetour extends Vue {
 	public void creationBouton() {
 		sauvegarder = creerBouton("Sauvegarder");
 		retour = creerBouton("Retour");
-		boutons.put(sauvegarder, "sauvegarder");
-		boutons.put(retour, "retour");
 	}
 }

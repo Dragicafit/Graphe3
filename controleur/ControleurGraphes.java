@@ -80,6 +80,9 @@ public class ControleurGraphes extends ControleurRetour {
 	public void eventCercle(MouseEvent event, Circle source) {
 		Point point = vue.getCercles().get(source);
 		if (bouton == Bouton.SUPPRIMER) {
+			if (premierPoint.equals(point)) {
+				premierPoint = null;
+			}
 			modele.removePoint(point);
 		} else if (bouton == Bouton.SEGMENT) {
 			if (premierPoint == null) {

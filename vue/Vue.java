@@ -16,6 +16,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.TilePane;
 import javafx.scene.layout.VBox;
 import javafx.scene.shape.Circle;
@@ -33,17 +34,15 @@ public abstract class Vue extends Stage{
 	protected Map<Line, Segment> lignes;
 	protected Map<Button, String> boutons;
 	protected BorderPane root;
-	protected Scene scene;
 
 	public Vue(Modele m) {
 		root = new BorderPane();
-		scene = new Scene(root, 800, 600);
+		Scene scene = new Scene(root, 800, 600);
 		modele = m;
 		cercles = new HashMap<>();
 		lignes = new HashMap<>();
 		boutons = new HashMap<>();
 		this.controleur = creationControleur();
-		creationBouton();
 		root.setStyle("-fx-padding: 10;");
 		this.setScene(scene);
 		this.setTitle("Vue Générale");
@@ -51,7 +50,7 @@ public abstract class Vue extends Stage{
 		this.show();
 	}
 
-	public abstract void creationBouton();
+	
 
 	public Button creerBouton(String nom) {
 		Button b = new Button(nom);
@@ -157,6 +156,12 @@ public abstract class Vue extends Stage{
 	
 	public BorderPane creerBorderPane(boolean Border) {
 		BorderPane pane = new BorderPane();
+		if(Border) pane.setStyle("-fx-padding: 10;" + "-fx-border-style: solid inside;" + "-fx-border-width: 2;" + "-fx-border-insets: 5;" + "-fx-border-radius: 5;" + "-fx-border-color: black;");
+		return pane;
+	}
+	
+	public Pane creerPane(boolean Border) {
+		Pane pane = new Pane();
 		if(Border) pane.setStyle("-fx-padding: 10;" + "-fx-border-style: solid inside;" + "-fx-border-width: 2;" + "-fx-border-insets: 5;" + "-fx-border-radius: 5;" + "-fx-border-color: black;");
 		return pane;
 	}

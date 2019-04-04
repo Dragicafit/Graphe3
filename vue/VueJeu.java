@@ -21,31 +21,25 @@ import modele.segment.Segment;
 import modele.segment.SegmentCouleur;
 
 public abstract class VueJeu extends VueRetour {
-	
-	protected SplitPane main;
-	protected BorderPane menu;
+
+	private Pane graphe;
 	protected VBox top;
 	protected VBox bottom;
-	protected Pane graphe;
 
 	public VueJeu(Modele m) {
 		super(m);
 		top = creerVBox(Pos.CENTER, 20);
 		bottom = creerVBox(Pos.CENTER, 20);
-		main = new SplitPane();
+		SplitPane main = new SplitPane();
 		main.setOrientation(Orientation.HORIZONTAL);
 		main.setDividerPositions(0.);
-		menu = new BorderPane();
+		BorderPane menu = creerBorderPane(true);
 		bottom.setStyle("-fx-padding: 5;");
 		bottom.getChildren().addAll(sauvegarder, retour);
 		menu.setTop(top);
 		menu.setBottom(bottom);
-		menu.setStyle("-fx-padding: 10;" + "-fx-border-style: solid inside;" + "-fx-border-width: 2;"
-				+ "-fx-border-insets: 5;" + "-fx-border-radius: 5;" + "-fx-border-color: black;");
 		root.setLeft(menu);
-		graphe = new Pane();
-		graphe.setStyle("-fx-padding: 10;" + "-fx-border-style: solid inside;" + "-fx-border-width: 2;"
-				+ "-fx-border-insets: 5;" + "-fx-border-radius: 5;" + "-fx-border-color: black;");
+		graphe = creerPane(true);
 		graphe.addEventHandler(DragEvent.DRAG_DROPPED, controleur);
 		graphe.addEventHandler(DragEvent.DRAG_OVER, controleur);
 		graphe.addEventHandler(MouseEvent.MOUSE_CLICKED, controleur);
@@ -54,10 +48,6 @@ public abstract class VueJeu extends VueRetour {
 		main.getItems().addAll(menu, graphe);
 		root.setCenter(main);
 		update();
-	}
-
-	public Pane getGraphe() {
-		return graphe;
 	}
 
 	public void update() {
@@ -83,8 +73,7 @@ public abstract class VueJeu extends VueRetour {
 		if (modele == null)
 			return;
 		for (Segment s : modele.getSegments()) {
-			Line l = new Line(s.getPoint1().getX(), s.getPoint1().getY(),
-					s.getPoint2().getX(), s.getPoint2().getY());
+			Line l = new Line(s.getPoint1().getX(), s.getPoint1().getY(), s.getPoint2().getX(), s.getPoint2().getY());
 			if (s instanceof SegmentCouleur) {
 				l.setStroke(((SegmentCouleur) s).getCouleur().toColor());
 			} else {
@@ -117,5 +106,9 @@ public abstract class VueJeu extends VueRetour {
 		for (int i = 0; i < cercles.size(); i++) {
 			l.get(i).toFront();
 		}
+	}
+
+	public Pane getGraphe() {
+		return graphe;
 	}
 }

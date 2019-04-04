@@ -129,7 +129,12 @@ public class VueAccueil extends Vue {
 
 	@Override
 	public void update() {
-
+		grapheLocal.clear();
+		regleLocal.clear();
+		GrapheCenterBottomBottom.getChildren().clear();
+		RegleCenterBottomBottom.getChildren().clear();
+		ajoutGrapheLocal();
+		ajoutRegleLocal();
 	}
 
 	@Override

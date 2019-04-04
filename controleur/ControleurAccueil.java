@@ -33,7 +33,6 @@ public class ControleurAccueil extends Controleur {
 			eventReglePredef((Button) source);
 		}
 		launcher();
-		vue.update();
 	}
 	
 	public void eventBouton() {
@@ -64,7 +63,8 @@ public class ControleurAccueil extends Controleur {
 			if (click) {
 				modele.setGrapheCourant((ModeleGraphe) vueAccueil.getGrapheLocal(source).clone());
 			} else {
-				modele.getGraphesLocal().remove(vueAccueil.getGraphePredef(source));
+				modele.getGraphesLocal().remove(vueAccueil.getGrapheLocal(source));
+				vue.update();
 			}
 		}
 	}
@@ -83,6 +83,7 @@ public class ControleurAccueil extends Controleur {
 				modele.setRegleCourant((ModeleRegle) vueAccueil.getRegleLocal(source).clone());
 			} else {
 				modele.getReglesLocal().remove(vueAccueil.getRegleLocal(source));
+				vue.update();
 			}
 		}
 	}

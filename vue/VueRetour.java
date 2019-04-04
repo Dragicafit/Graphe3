@@ -10,10 +10,6 @@ public abstract class VueRetour extends Vue {
 
 	public VueRetour(Modele m) {
 		super(m);
-	}
-
-	@Override
-	public void creationBouton() {
 		sauvegarder = creerBouton("Sauvegarder");
 		retour = creerBouton("Retour");
 		boutons.put(sauvegarder, "sauvegarder");

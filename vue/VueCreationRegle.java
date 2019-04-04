@@ -19,19 +19,13 @@ import modele.MutableBoolean;
 
 public class VueCreationRegle extends VueRetour {
 
-	protected BorderPane main;
-	protected SplitPane pointEtSegment;
-	protected BorderPane point;
-	protected VBox VBoxPoint;
-	protected GridPane segment;
-	protected GridPane bottom;
-	protected TextField nomRegleField;
-
+	private TextField nomRegleField;
+	private VBox VBoxPoint;
 	protected Map<CheckBox, MutableBoolean> reglesChoisis;
 
 	public VueCreationRegle(Modele m) {
 		super(m);
-		point = creerBorderPane(true);
+		BorderPane point = creerBorderPane(true);
 		VBoxPoint = creerVBox(Pos.CENTER_LEFT);
 		VBoxPoint.setStyle("-fx-padding: 10;");
 		reglesChoisis = new HashMap<>();
@@ -41,10 +35,10 @@ public class VueCreationRegle extends VueRetour {
 		ajoutCheckBox(creerCheckBox("Sur Un Ennemi"), modele.getRegleCourant().JouerSurEnnemi);
 		ajoutCheckBox(creerCheckBoxUnderline("Point Deplacable"), modele.getRegleCourant().DeplacementAutorise);
 		//reglesChoisis.put(creerCheckBox("colorier point entourer par nos points"), modele.getRegleCourant().);
-		main = new BorderPane();
-		pointEtSegment = new SplitPane();
-		segment = creerGridPane(Pos.CENTER_LEFT, true);
-		bottom = creerGridPane(Pos.CENTER, true);
+		BorderPane main = new BorderPane();
+		SplitPane pointEtSegment = new SplitPane();
+		GridPane segment = creerGridPane(Pos.CENTER_LEFT, true);
+		GridPane bottom = creerGridPane(Pos.CENTER, true);
 		nomRegleField = creerZoneText("Nom de la règle", 40.);
 		bottom.add(retour, 0, 0);
 		bottom.add(nomRegleField, 1,0);

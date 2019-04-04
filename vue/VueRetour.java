@@ -5,8 +5,8 @@ import modele.Modele;
 
 public abstract class VueRetour extends Vue {
 
-	public Button sauvegarder;
-	public Button retour;
+	protected Button sauvegarder;
+	protected Button retour;
 
 	public VueRetour(Modele m) {
 		super(m);

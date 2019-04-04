@@ -13,7 +13,9 @@ import javafx.scene.control.SplitPane;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Text;
 import modele.Modele;
 import modele.MutableBoolean;
 
@@ -34,15 +36,16 @@ public class VueCreationRegle extends VueRetour {
 		ajoutCheckBox(creerCheckBox("A Cote D'un Ennemi"), modele.getRegleCourant().JouerAcoteEnnemi);
 		ajoutCheckBox(creerCheckBox("Sur Un Ennemi"), modele.getRegleCourant().JouerSurEnnemi);
 		ajoutCheckBox(creerCheckBoxUnderline("Point Deplacable"), modele.getRegleCourant().DeplacementAutorise);
-		//reglesChoisis.put(creerCheckBox("colorier point entourer par nos points"), modele.getRegleCourant().);
+		// reglesChoisis.put(creerCheckBox("colorier point entourer par nos points"),
+		// modele.getRegleCourant().);
 		BorderPane main = new BorderPane();
 		SplitPane pointEtSegment = new SplitPane();
 		GridPane segment = creerGridPane(Pos.CENTER_LEFT, true);
 		GridPane bottom = creerGridPane(Pos.CENTER, true);
 		nomRegleField = creerZoneText("Nom de la règle", 40.);
 		bottom.add(retour, 0, 0);
-		bottom.add(nomRegleField, 1,0);
-		bottom.add(sauvegarder, 2, 0);		
+		bottom.add(nomRegleField, 1, 0);
+		bottom.add(sauvegarder, 2, 0);
 		pointEtSegment.setOrientation(Orientation.HORIZONTAL);
 		point.setLeft(VBoxPoint);
 		point.maxWidthProperty().bind(pointEtSegment.widthProperty().multiply(0.5));
@@ -52,10 +55,15 @@ public class VueCreationRegle extends VueRetour {
 		main.setBottom(bottom);
 		root.setCenter(main);
 	}
-	
+
 	public void ajoutCheckBox(CheckBox c, MutableBoolean b) {
+		HBox h = new HBox();
+		Text space = new Text("");
+		if (c.getId().equals("123"))
+			space.setText("\t\t");
+		h.getChildren().addAll(space, c);
 		reglesChoisis.put(c, b);
-		VBoxPoint.getChildren().add(c);
+		VBoxPoint.getChildren().add(h);
 	}
 
 	@Override
@@ -78,8 +86,8 @@ public class VueCreationRegle extends VueRetour {
 
 	public TextField getNomRegleField() {
 		return nomRegleField;
-	}	
-	
+	}
+
 	public Map<CheckBox, MutableBoolean> getReglesChoisis() {
 		return reglesChoisis;
 	}

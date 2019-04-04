@@ -14,6 +14,7 @@ import modele.regle.ModeleRegle;
 import modele.regle.ModeleRegleCol;
 import modele.regle.ModeleRegleHex;
 import modele.regle.ModeleRegleSnort;
+import vue.VueAccueil;
 import vue.VueCreationGraphe;
 import vue.VuePlateauJeu;
 
@@ -41,8 +42,7 @@ public class Main extends Application {
 			regles.add(new ModeleRegleHex());
 			regles.add(new ModeleRegleCol());
 			
-			new VuePlateauJeu(m);
-			new VueCreationGraphe(m);
+			new VueAccueil(m);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

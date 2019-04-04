@@ -116,6 +116,8 @@ public class VueAccueil extends Vue {
 		Graphes.minWidthProperty().bind(main.widthProperty().multiply(0.25));
 		GrapheCenterTop.minHeightProperty().bind(main.heightProperty().multiply(0.25));
 		GrapheCenterBottom.minHeightProperty().bind(main.heightProperty().multiply(0.25));
+		RegleCenterTop.minHeightProperty().bind(main.heightProperty().multiply(0.25));
+		RegleCenterBottom.minHeightProperty().bind(main.heightProperty().multiply(0.25));
 		Regles.minWidthProperty().bind(main.widthProperty().multiply(0.25));
 		main.getItems().addAll(Graphes, Regles);
 	}

@@ -16,7 +16,9 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.TilePane;
+import javafx.scene.layout.VBox;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
 import javafx.stage.Stage;
@@ -32,17 +34,15 @@ public abstract class Vue extends Stage{
 	protected Map<Line, Segment> lignes;
 	protected Map<Button, String> boutons;
 	protected BorderPane root;
-	protected Scene scene;
 
 	public Vue(Modele m) {
 		root = new BorderPane();
-		scene = new Scene(root, 800, 600);
+		Scene scene = new Scene(root, 800, 600);
 		modele = m;
 		cercles = new HashMap<>();
 		lignes = new HashMap<>();
 		boutons = new HashMap<>();
 		this.controleur = creationControleur();
-		creationBouton();
 		root.setStyle("-fx-padding: 10;");
 		this.setScene(scene);
 		this.setTitle("Vue Générale");
@@ -50,7 +50,7 @@ public abstract class Vue extends Stage{
 		this.show();
 	}
 
-	public abstract void creationBouton();
+	
 
 	public Button creerBouton(String nom) {
 		Button b = new Button(nom);
@@ -92,14 +92,28 @@ public abstract class Vue extends Stage{
 	}
 	
 	public CheckBox creerCheckBox (String nom) {
-		CheckBox c = new CheckBox(nom);
+		CheckBox c = new CheckBox("\t" + nom);
+		c.setStyle("-fx-font-size: 20px;");
 		return c;
 	}
 	
-	public CheckBox creerCheckBox (String nom, boolean underline) {
-		CheckBox c = creerCheckBox(nom);
-		c.setUnderline(underline);
+	public CheckBox creerCheckBoxUnderline (String nom) {
+		CheckBox c = new CheckBox(nom);
+		c.setUnderline(true);
+		c.setStyle("-fx-font-size: 25px;");
 		return c;
+	}
+	
+	public VBox creerVBox(Pos p) {
+		VBox b = new VBox();
+		b.setAlignment(p);
+		return b;
+	}
+	
+	public VBox creerVBox(Pos p, int spacing) {
+		VBox b = creerVBox(p);
+		b.setSpacing(spacing);
+		return b;
 	}
 	
 	public ScrollPane creerScrollPane() {
@@ -142,6 +156,12 @@ public abstract class Vue extends Stage{
 	
 	public BorderPane creerBorderPane(boolean Border) {
 		BorderPane pane = new BorderPane();
+		if(Border) pane.setStyle("-fx-padding: 10;" + "-fx-border-style: solid inside;" + "-fx-border-width: 2;" + "-fx-border-insets: 5;" + "-fx-border-radius: 5;" + "-fx-border-color: black;");
+		return pane;
+	}
+	
+	public Pane creerPane(boolean Border) {
+		Pane pane = new Pane();
 		if(Border) pane.setStyle("-fx-padding: 10;" + "-fx-border-style: solid inside;" + "-fx-border-width: 2;" + "-fx-border-insets: 5;" + "-fx-border-radius: 5;" + "-fx-border-color: black;");
 		return pane;
 	}

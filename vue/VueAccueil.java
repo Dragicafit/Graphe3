@@ -19,37 +19,11 @@ import modele.graphe.ModeleGraphe;
 import modele.regle.ModeleRegle;
 
 public class VueAccueil extends Vue {
-
-	protected SplitPane main;
-
-	protected BorderPane Regles;
-	protected SplitPane RegleCenter;
-	protected BorderPane RegleCenterTop;
-	protected BorderPane RegleCenterTopTop;
-	protected ScrollPane RegleCenterTopScroll;
-	protected TilePane RegleCenterTopBottom;
-	protected BorderPane RegleCenterBottom;
-	protected BorderPane RegleCenterBottomTop;
-	protected ScrollPane RegleCenterBottomScroll;
-	protected TilePane RegleCenterBottomBottom;
-	protected BorderPane RegleBottom;
-
-	protected BorderPane Graphes;
-	protected SplitPane GrapheCenter;
-	protected BorderPane GrapheCenterTop;
-	protected BorderPane GrapheCenterTopTop;
-	protected ScrollPane GrapheCenterTopScroll;
-	protected TilePane GrapheCenterTopBottom;
-	protected BorderPane GrapheCenterBottom;
-	protected BorderPane GrapheCenterBottomTop;
-	protected ScrollPane GrapheCenterBottomScroll;
-	protected TilePane GrapheCenterBottomBottom;
-	protected GridPane GrapheBottom;
-
-	protected Button creerGraphe;
-	protected Button aleatoireGraphe;
-	protected Button creerRegle;
 	
+	private TilePane RegleCenterTopBottom;
+	private TilePane RegleCenterBottomBottom;
+	private TilePane GrapheCenterTopBottom;
+	private TilePane GrapheCenterBottomBottom;
 	protected Map<Button, ModeleGraphe> graphePredef;
 	protected Map<Button, ModeleGraphe> grapheLocal;
 	protected Map<Button, ModeleRegle> reglePredef;
@@ -62,33 +36,33 @@ public class VueAccueil extends Vue {
 		reglePredef = new HashMap<>();
 		regleLocal = new HashMap<>();
 		modele.resetCourant();
-		main = new SplitPane();
+		SplitPane main = new SplitPane();
 
-		Regles = creerBorderPane(false);
+		BorderPane Regles = creerBorderPane(false);
 		Regles.setPrefSize((root.getWidth() - 30) / 2, root.getHeight());
-		RegleCenter = new SplitPane();
-		RegleCenterTop = creerBorderPane(true);
-		RegleCenterTopTop = creerBorderPane(false);
-		RegleCenterTopScroll = creerScrollPane();
+		SplitPane RegleCenter = new SplitPane();
+		BorderPane RegleCenterTop = creerBorderPane(true);
+		BorderPane RegleCenterTopTop = creerBorderPane(false);
+		ScrollPane RegleCenterTopScroll = creerScrollPane();
 		RegleCenterTopBottom = creerTilePane(Pos.TOP_LEFT, false);
-		RegleCenterBottom = creerBorderPane(true);
-		RegleCenterBottomTop = creerBorderPane(false);
-		RegleCenterBottomScroll = creerScrollPane();
+		BorderPane RegleCenterBottom = creerBorderPane(true);
+		BorderPane RegleCenterBottomTop = creerBorderPane(false);
+		ScrollPane RegleCenterBottomScroll = creerScrollPane();
 		RegleCenterBottomBottom = creerTilePane(Pos.TOP_LEFT, false);
-		RegleBottom = creerBorderPane(false);
+		BorderPane RegleBottom = creerBorderPane(false);
 
-		Graphes = creerBorderPane(false);
+		BorderPane Graphes = creerBorderPane(false);
 		Graphes.setPrefSize((root.getWidth() - 30) / 2, root.getHeight());
-		GrapheCenter = new SplitPane();
-		GrapheCenterTop = creerBorderPane(true);
-		GrapheCenterTopTop = creerBorderPane(false);
-		GrapheCenterTopScroll = creerScrollPane();
+		SplitPane GrapheCenter = new SplitPane();
+		BorderPane GrapheCenterTop = creerBorderPane(true);
+		BorderPane GrapheCenterTopTop = creerBorderPane(false);
+		ScrollPane GrapheCenterTopScroll = creerScrollPane();
 		GrapheCenterTopBottom = creerTilePane(Pos.TOP_LEFT, false);
-		GrapheCenterBottom = creerBorderPane(true);
-		GrapheCenterBottomTop = creerBorderPane(false);
-		GrapheCenterBottomScroll = creerScrollPane();
+		BorderPane GrapheCenterBottom = creerBorderPane(true);
+		BorderPane GrapheCenterBottomTop = creerBorderPane(false);
+		ScrollPane GrapheCenterBottomScroll = creerScrollPane();
 		GrapheCenterBottomBottom = creerTilePane(Pos.TOP_LEFT, false);
-		GrapheBottom = creerGridPane(Pos.CENTER, false);
+		GridPane GrapheBottom = creerGridPane(Pos.CENTER, false);
 
 		RegleBottom.setStyle("-fx-padding: 10;");
 		
@@ -115,9 +89,9 @@ public class VueAccueil extends Vue {
 		GrapheCenterTopTop.setCenter(GP);
 		GrapheCenterBottomTop.setCenter(GM);
 
-		GrapheBottom.add(creerGraphe, 0, 0);
-		GrapheBottom.add(aleatoireGraphe, 1, 0);
-		RegleBottom.setCenter(creerRegle);
+		GrapheBottom.add(ajoutBouton(creerBouton("Créer Graphes"), "graphe"), 0, 0);
+		GrapheBottom.add(ajoutBouton(creerBouton("Graphes Aléatoire"), "aleatoire"), 1, 0);
+		RegleBottom.setCenter(ajoutBouton(creerBouton("Créer Règles"), "regles"));
 
 		Regles.setCenter(RegleCenter);
 		RegleCenter.setOrientation(Orientation.VERTICAL);
@@ -145,6 +119,11 @@ public class VueAccueil extends Vue {
 		Regles.minWidthProperty().bind(main.widthProperty().multiply(0.25));
 		main.getItems().addAll(Graphes, Regles);
 	}
+	
+	public Button ajoutBouton(Button b, String s) {
+		boutons.put(b, s);
+		return b;
+	}
 
 	@Override
 	public void update() {
@@ -162,17 +141,6 @@ public class VueAccueil extends Vue {
 		b.setPrefWidth(150.);
 		b.setPrefHeight(40.);
 		return b;
-	}
-
-	@Override
-	public void creationBouton() {
-		creerGraphe = creerBouton("Créer Graphes");
-		aleatoireGraphe = creerBouton("Graphes Aléatoire");
-		creerRegle = creerBouton("Créer Règles");
-
-		boutons.put(creerGraphe, "graphe");
-		boutons.put(creerRegle, "regles");
-		boutons.put(aleatoireGraphe, "aleatoire");
 	}
 	
 	public void ajoutReglePredef() {

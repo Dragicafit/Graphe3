@@ -14,6 +14,7 @@ public class VuePlateauJeu extends VueJeu {
 		this.setTitle("Lets GO !!!");
 		this.nomJoueur = new Text();
 		top.getChildren().add(this.nomJoueur);
+		update();
 	}
 
 	@Override

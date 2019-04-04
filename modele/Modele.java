@@ -40,11 +40,11 @@ public class Modele implements Serializable {
 	}
 
 	public void sauvegardeGraphe() {
-		graphesLocal.add(grapheCourant);
+		graphesLocal.add((ModeleGraphe) grapheCourant.clone());
 	}
 
 	public void sauvegardeRegle() {
-		reglesLocal.add(regleCourant);
+		reglesLocal.add((ModeleRegle) regleCourant.clone());
 	}
 
 	public void exportModele() throws IOException {

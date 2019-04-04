@@ -1,5 +1,6 @@
 package controleur;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -35,12 +36,17 @@ public abstract class Controleur implements EventHandler<InputEvent> {
 			}
 		}
 	}
-	
+
 	public void exit() {
 		Platform.runLater(new Runnable() {
 			@Override
 			public void run() {
 				bouton = null;
+				try {
+					modele.exportModele();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
 				vue.close();
 			}
 		});

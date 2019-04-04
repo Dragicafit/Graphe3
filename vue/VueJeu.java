@@ -47,7 +47,6 @@ public abstract class VueJeu extends VueRetour {
 		menu.minWidthProperty().set(150.);
 		main.getItems().addAll(menu, graphe);
 		root.setCenter(main);
-		update();
 	}
 
 	public void update() {

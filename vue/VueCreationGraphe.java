@@ -19,6 +19,7 @@ public class VueCreationGraphe extends VueJeu {
 		ajoutBouton(creerBouton("Supprimer", "delete.png"), "supprimer");
 		ajoutBouton(creerBouton("Supprimer\n    Tout"), "supprimerTout");
 		bottom.getChildren().add(0, nomGraphe);
+		update();
 	}
 
 	public void ajoutBouton(Button b, String s) {

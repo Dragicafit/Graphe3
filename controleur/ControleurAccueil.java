@@ -51,28 +51,28 @@ public class ControleurAccueil extends Controleur {
 	public void eventGraphePredef(Button source) {
 		VueAccueil vueAccueil = (VueAccueil) vue;
 		if (vueAccueil.getGraphePredef().containsKey(source)) {
-			modele.setGrapheCourant(vueAccueil.getGraphePredef(source));
+			modele.setGrapheCourant((ModeleGraphe) vueAccueil.getGraphePredef(source).clone());
 		}
 	}
 	
 	public void eventGrapheLocal(Button source) {
 		VueAccueil vueAccueil = (VueAccueil) vue;
 		if (vueAccueil.getGrapheLocal().containsKey(source)) {
-			modele.setGrapheCourant(vueAccueil.getGrapheLocal(source));
+			modele.setGrapheCourant((ModeleGraphe) vueAccueil.getGrapheLocal(source).clone());
 		}
 	}
 	
 	public void eventReglePredef(Button source) {
 		VueAccueil vueAccueil = (VueAccueil) vue;
 		if (vueAccueil.getReglePredef().containsKey(source)) {
-			modele.setRegleCourant(vueAccueil.getReglePredef(source));
+			modele.setRegleCourant((ModeleRegle) vueAccueil.getReglePredef(source).clone());
 		}
 	}
 	
 	public void eventRegleLocal(Button source) {
 		VueAccueil vueAccueil = (VueAccueil) vue;
 		if (vueAccueil.getRegleLocal().containsKey(source)) {
-			modele.setRegleCourant(vueAccueil.getRegleLocal(source));
+			modele.setRegleCourant((ModeleRegle) vueAccueil.getRegleLocal(source).clone());
 		}
 	}
 	

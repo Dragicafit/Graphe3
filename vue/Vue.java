@@ -26,7 +26,7 @@ import modele.Modele;
 import modele.point.Point;
 import modele.segment.Segment;
 
-public abstract class Vue extends Stage{
+public abstract class Vue extends Stage {
 
 	protected Modele modele;
 	protected Controleur controleur;
@@ -49,8 +49,6 @@ public abstract class Vue extends Stage{
 		this.setMaximized(true);
 		this.show();
 	}
-
-	
 
 	public Button creerBouton(String nom) {
 		Button b = new Button(nom);
@@ -75,47 +73,47 @@ public abstract class Vue extends Stage{
 		b.addEventHandler(MouseEvent.MOUSE_CLICKED, controleur);
 		return b;
 	}
-	
-	public TextField creerZoneText (String nom, Double taille) {
+
+	public TextField creerZoneText(String nom, Double taille) {
 		TextField zone = new TextField();
 		zone.setPromptText(nom);
 		zone.setPrefHeight(taille);
 		zone.setFocusTraversable(false);
 		return zone;
 	}
-	
-	public TextField creerZoneText (String nom) {
+
+	public TextField creerZoneText(String nom) {
 		TextField zone = new TextField();
 		zone.setPromptText(nom);
 		zone.setFocusTraversable(false);
 		return zone;
 	}
-	
-	public CheckBox creerCheckBox (String nom) {
+
+	public CheckBox creerCheckBox(String nom) {
 		CheckBox c = new CheckBox("\t" + nom);
 		c.setStyle("-fx-font-size: 20px;");
 		return c;
 	}
-	
-	public CheckBox creerCheckBoxUnderline (String nom) {
+
+	public CheckBox creerCheckBoxUnderline(String nom) {
 		CheckBox c = new CheckBox(nom);
 		c.setUnderline(true);
 		c.setStyle("-fx-font-size: 25px;");
 		return c;
 	}
-	
+
 	public VBox creerVBox(Pos p) {
 		VBox b = new VBox();
 		b.setAlignment(p);
 		return b;
 	}
-	
+
 	public VBox creerVBox(Pos p, int spacing) {
 		VBox b = creerVBox(p);
 		b.setSpacing(spacing);
 		return b;
 	}
-	
+
 	public ScrollPane creerScrollPane() {
 		ScrollPane scroll = new ScrollPane();
 		scroll.setFitToWidth(true);
@@ -124,45 +122,49 @@ public abstract class Vue extends Stage{
 		scroll.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
 		return scroll;
 	}
-	
+
 	public GridPane creerGridPane(Pos p, boolean Border) {
 		GridPane grid = new GridPane();
 		grid.setAlignment(p);
 		grid.setHgap(10);
 		grid.setVgap(10);
 		grid.setPadding(new Insets(10, 10, 10, 10));
-		if(Border) {
-		grid.setStyle("-fx-padding: 10;" + "-fx-border-style: solid inside;" + "-fx-border-width: 2;"
-				+ "-fx-border-insets: 5;" + "-fx-border-radius: 5;" + "-fx-border-color: black;");
-		}else {
+		if (Border) {
+			grid.setStyle("-fx-padding: 10;" + "-fx-border-style: solid inside;" + "-fx-border-width: 2;"
+					+ "-fx-border-insets: 5;" + "-fx-border-radius: 5;" + "-fx-border-color: black;");
+		} else {
 			grid.setStyle("-fx-padding: 10;");
 		}
 		return grid;
 	}
-	
+
 	public TilePane creerTilePane(Pos p, boolean Border) {
 		TilePane tile = new TilePane();
 		tile.setAlignment(p);
 		tile.setHgap(10);
 		tile.setVgap(10);
-		if(Border) {
+		if (Border) {
 			tile.setStyle("-fx-padding: 10;" + "-fx-border-style: solid inside;" + "-fx-border-width: 2;"
-				+ "-fx-border-insets: 5;" + "-fx-border-radius: 5;" + "-fx-border-color: black;");
-		}else {
+					+ "-fx-border-insets: 5;" + "-fx-border-radius: 5;" + "-fx-border-color: black;");
+		} else {
 			tile.setStyle("-fx-padding: 10;");
 		}
 		return tile;
-	}	
-	
+	}
+
 	public BorderPane creerBorderPane(boolean Border) {
 		BorderPane pane = new BorderPane();
-		if(Border) pane.setStyle("-fx-padding: 10;" + "-fx-border-style: solid inside;" + "-fx-border-width: 2;" + "-fx-border-insets: 5;" + "-fx-border-radius: 5;" + "-fx-border-color: black;");
+		if (Border)
+			pane.setStyle("-fx-padding: 10;" + "-fx-border-style: solid inside;" + "-fx-border-width: 2;"
+					+ "-fx-border-insets: 5;" + "-fx-border-radius: 5;" + "-fx-border-color: black;");
 		return pane;
 	}
-	
+
 	public Pane creerPane(boolean Border) {
 		Pane pane = new Pane();
-		if(Border) pane.setStyle("-fx-padding: 10;" + "-fx-border-style: solid inside;" + "-fx-border-width: 2;" + "-fx-border-insets: 5;" + "-fx-border-radius: 5;" + "-fx-border-color: black;");
+		if (Border)
+			pane.setStyle("-fx-padding: 10;" + "-fx-border-style: solid inside;" + "-fx-border-width: 2;"
+					+ "-fx-border-insets: 5;" + "-fx-border-radius: 5;" + "-fx-border-color: black;");
 		return pane;
 	}
 

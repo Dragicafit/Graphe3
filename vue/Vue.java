@@ -17,6 +17,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.TilePane;
+import javafx.scene.layout.VBox;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
 import javafx.stage.Stage;
@@ -92,14 +93,28 @@ public abstract class Vue extends Stage{
 	}
 	
 	public CheckBox creerCheckBox (String nom) {
-		CheckBox c = new CheckBox(nom);
+		CheckBox c = new CheckBox("\t" + nom);
+		c.setStyle("-fx-font-size: 20px;");
 		return c;
 	}
 	
-	public CheckBox creerCheckBox (String nom, boolean underline) {
-		CheckBox c = creerCheckBox(nom);
-		c.setUnderline(underline);
+	public CheckBox creerCheckBoxUnderline (String nom) {
+		CheckBox c = new CheckBox(nom);
+		c.setUnderline(true);
+		c.setStyle("-fx-font-size: 25px;");
 		return c;
+	}
+	
+	public VBox creerVBox(Pos p) {
+		VBox b = new VBox();
+		b.setAlignment(p);
+		return b;
+	}
+	
+	public VBox creerVBox(Pos p, int spacing) {
+		VBox b = creerVBox(p);
+		b.setSpacing(spacing);
+		return b;
 	}
 	
 	public ScrollPane creerScrollPane() {

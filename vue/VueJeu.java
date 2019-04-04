@@ -30,16 +30,12 @@ public abstract class VueJeu extends VueRetour {
 
 	public VueJeu(Modele m) {
 		super(m);
-		top = new VBox();
-		bottom = new VBox();
+		top = creerVBox(Pos.CENTER, 20);
+		bottom = creerVBox(Pos.CENTER, 20);
 		main = new SplitPane();
 		main.setOrientation(Orientation.HORIZONTAL);
 		main.setDividerPositions(0.);
 		menu = new BorderPane();
-		top.setSpacing(20);
-		top.setAlignment(Pos.CENTER);
-		bottom.setSpacing(20);
-		bottom.setAlignment(Pos.CENTER);
 		bottom.setStyle("-fx-padding: 5;");
 		bottom.getChildren().addAll(sauvegarder, retour);
 		menu.setTop(top);

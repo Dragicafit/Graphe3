@@ -1,5 +1,6 @@
 package vue;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -50,6 +51,16 @@ public abstract class Vue extends Stage {
 		this.show();
 	}
 
+	@Override
+	public void close() {
+		try {
+			modele.exportModele();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		super.close();
+	}	
+	
 	public Button creerBouton(String nom) {
 		Button b = new Button(nom);
 		b.setAlignment(Pos.CENTER);

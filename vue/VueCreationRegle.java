@@ -13,7 +13,9 @@ import javafx.scene.control.SplitPane;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Text;
 import modele.Modele;
 import modele.MutableBoolean;
 
@@ -54,8 +56,12 @@ public class VueCreationRegle extends VueRetour {
 	}
 	
 	public void ajoutCheckBox(CheckBox c, MutableBoolean b) {
+		HBox h = new HBox();
+		Text space = new Text("");
+		if(c.getId().equals("123")) space.setText("\t\t");
+		h.getChildren().addAll(space, c);
 		reglesChoisis.put(c, b);
-		VBoxPoint.getChildren().add(c);
+		VBoxPoint.getChildren().add(h);
 	}
 
 	@Override

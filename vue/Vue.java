@@ -92,15 +92,17 @@ public abstract class Vue extends Stage{
 	}
 	
 	public CheckBox creerCheckBox (String nom) {
-		CheckBox c = new CheckBox("\t" + nom);
-		c.setStyle("-fx-font-size: 20px;");
+		CheckBox c = new CheckBox(nom);
+		c.setStyle("-fx-font-size: 25px;" + "-fx-padding: 5 0 5 0;");
+		c.setId("123");
 		return c;
 	}
 	
 	public CheckBox creerCheckBoxUnderline (String nom) {
 		CheckBox c = new CheckBox(nom);
-		c.setUnderline(true);
-		c.setStyle("-fx-font-size: 25px;");
+		//c.setUnderline(true);
+		c.setId("");
+		c.setStyle("-fx-font-size: 25px;" + "-fx-font-weight: bold;" + "-fx-padding: 5 0 5 0;");
 		return c;
 	}
 	

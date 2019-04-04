@@ -1,9 +1,13 @@
+import java.io.IOException;
+
 import javafx.application.Application;
 import javafx.stage.Stage;
 import modele.Modele;
 import vue.VueAccueil;
 
 public class Main extends Application {
+	
+	private Modele m;
 
 	public static void main(String[] args) {
 		launch(args);
@@ -12,7 +16,7 @@ public class Main extends Application {
 	@Override
 	public void start(Stage primaryStage) {
 		try {
-			Modele m = Modele.importModele();
+			m = Modele.importModele();
 			new VueAccueil(m);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -21,6 +25,12 @@ public class Main extends Application {
 	
 	@Override
 	public void stop() {
-		System.exit(0);
+		try {
+			m.exportModele();
+		} catch (IOException e) {
+			e.printStackTrace();
+		} finally {
+			System.exit(0);
+		}
 	}
 }

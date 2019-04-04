@@ -31,13 +31,12 @@ public class VueCreationRegle extends VueRetour {
 		VBoxPoint = creerVBox(Pos.CENTER_LEFT);
 		VBoxPoint.setStyle("-fx-padding: 10;");
 		reglesChoisis = new HashMap<>();
-		ajoutCheckBox(creerCheckBoxUnderline("Point Coloriable"), modele.getRegleCourant().Coloriable);
-		ajoutCheckBox(creerCheckBox("A Cote De Soit"), modele.getRegleCourant().JouerAcoteSoit);
-		ajoutCheckBox(creerCheckBox("A Cote D'un Ennemi"), modele.getRegleCourant().JouerAcoteEnnemi);
-		ajoutCheckBox(creerCheckBox("Sur Un Ennemi"), modele.getRegleCourant().JouerSurEnnemi);
-		ajoutCheckBox(creerCheckBoxUnderline("Point Deplacable"), modele.getRegleCourant().DeplacementAutorise);
-		// reglesChoisis.put(creerCheckBox("colorier point entourer par nos points"),
-		// modele.getRegleCourant().);
+		ajoutCheckBox(creerCheckBoxUnderline("Point coloriable"), modele.getRegleCourant().Coloriable);
+		ajoutCheckBox(creerCheckBox("A coté de soit"), modele.getRegleCourant().JouerAcoteSoit);
+		ajoutCheckBox(creerCheckBox("A coté d'un ennemi"), modele.getRegleCourant().JouerAcoteEnnemi);
+		ajoutCheckBox(creerCheckBox("Sur un ennemi"), modele.getRegleCourant().JouerSurEnnemi);
+		ajoutCheckBox(creerCheckBoxUnderline("Point deplacable"), modele.getRegleCourant().DeplacementAutorise);
+		// reglesChoisis.put(creerCheckBox("colorier point entouré par nos points"), modele.getRegleCourant().);
 		BorderPane main = new BorderPane();
 		SplitPane pointEtSegment = new SplitPane();
 		GridPane segment = creerGridPane(Pos.CENTER_LEFT, true);

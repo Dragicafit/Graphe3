@@ -2,6 +2,8 @@ package controleur;
 
 import javafx.scene.control.Button;
 import javafx.scene.input.InputEvent;
+import javafx.scene.input.MouseButton;
+import javafx.scene.input.MouseEvent;
 import modele.graphe.ModeleGraphe;
 import modele.regle.ModeleRegle;
 import vue.Vue;
@@ -25,12 +27,13 @@ public class ControleurAccueil extends Controleur {
 		eventBouton();
 		Object source = event.getSource();
 		if (source instanceof Button) {
-			eventGrapheLocal((Button) source);
+			eventGrapheLocal((Button) source, ((MouseEvent) event).getButton() == MouseButton.PRIMARY);
 			eventGraphePredef((Button) source);
-			eventRegleLocal((Button) source);
+			eventRegleLocal((Button) source, ((MouseEvent) event).getButton() == MouseButton.PRIMARY);
 			eventReglePredef((Button) source);
 		}
 		launcher();
+		vue.update();
 	}
 	
 	public void eventBouton() {
@@ -55,10 +58,14 @@ public class ControleurAccueil extends Controleur {
 		}
 	}
 	
-	public void eventGrapheLocal(Button source) {
+	public void eventGrapheLocal(Button source, boolean click) {
 		VueAccueil vueAccueil = (VueAccueil) vue;
 		if (vueAccueil.getGrapheLocal().containsKey(source)) {
-			modele.setGrapheCourant((ModeleGraphe) vueAccueil.getGrapheLocal(source).clone());
+			if (click) {
+				modele.setGrapheCourant((ModeleGraphe) vueAccueil.getGrapheLocal(source).clone());
+			} else {
+				modele.getGraphesLocal().remove(vueAccueil.getGraphePredef(source));
+			}
 		}
 	}
 	
@@ -69,10 +76,14 @@ public class ControleurAccueil extends Controleur {
 		}
 	}
 	
-	public void eventRegleLocal(Button source) {
+	public void eventRegleLocal(Button source, boolean click) {
 		VueAccueil vueAccueil = (VueAccueil) vue;
 		if (vueAccueil.getRegleLocal().containsKey(source)) {
-			modele.setRegleCourant((ModeleRegle) vueAccueil.getRegleLocal(source).clone());
+			if (click) {
+				modele.setRegleCourant((ModeleRegle) vueAccueil.getRegleLocal(source).clone());
+			} else {
+				modele.getReglesLocal().remove(vueAccueil.getRegleLocal(source));
+			}
 		}
 	}
 	

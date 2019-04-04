@@ -10,12 +10,12 @@ import modele.graphe.ModeleGraphe3;
 import modele.graphe.ModeleGraphe4;
 import modele.graphe.ModeleGraphe5;
 import modele.graphe.ModeleGrapheHex;
+import modele.graphe.ModeleGrapheHex2;
 import modele.regle.ModeleRegle;
 import modele.regle.ModeleRegleCol;
 import modele.regle.ModeleRegleHex;
 import modele.regle.ModeleRegleSnort;
-import vue.VueCreationGraphe;
-import vue.VuePlateauJeu;
+import vue.VueAccueil;
 
 public class Main extends Application {
 
@@ -34,6 +34,8 @@ public class Main extends Application {
 			graphe.add(new ModeleGraphe3());
 			graphe.add(new ModeleGraphe4());
 			graphe.add(new ModeleGraphe5());
+			graphe.add(new ModeleGrapheHex());
+			graphe.add(new ModeleGrapheHex2());
 			
 			m.setRegleCourant(new ModeleRegleSnort());
 			ArrayList<ModeleRegle> regles = m.getReglesPredefinis();
@@ -41,8 +43,7 @@ public class Main extends Application {
 			regles.add(new ModeleRegleHex());
 			regles.add(new ModeleRegleCol());
 			
-			new VuePlateauJeu(m);
-			new VueCreationGraphe(m);
+			new VueAccueil(m);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

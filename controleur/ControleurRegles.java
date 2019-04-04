@@ -5,11 +5,12 @@ import java.util.Map;
 import javafx.scene.control.CheckBox;
 import javafx.scene.input.InputEvent;
 import modele.MutableBoolean;
+import vue.Vue;
 import vue.VueCreationRegle;
 
 public class ControleurRegles extends ControleurRetour {
 
-	public ControleurRegles(VueCreationRegle vue) {
+	public ControleurRegles(Vue vue) {
 		super(vue);
 	}
 

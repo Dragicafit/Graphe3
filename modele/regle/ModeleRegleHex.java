@@ -5,8 +5,9 @@ public class ModeleRegleHex extends ModeleRegle{
 
 	public ModeleRegleHex() {
 		super("Hex");
-		this.JouerAcoteEnnemi.set(false);
+		this.JouerAcoteSoit.set(true);
 		this.JouerSurEnnemi.set(false);
 		this.EstBlanc.set(true);
+		this.FinHex.set(true);
 	}
 }

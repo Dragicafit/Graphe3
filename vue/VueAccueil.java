@@ -177,4 +177,52 @@ public class VueAccueil extends Vue {
 			GrapheCenterBottomBottom.getChildren().add(b);
 		}
 	}
+
+	public Map<Button, ModeleGraphe> getGraphePredef() {
+		return graphePredef;
+	}
+	
+	public ModeleGraphe getGraphePredef(Button key) {
+		return graphePredef.get(key);
+	}
+
+	public void setGraphePredef(Map<Button, ModeleGraphe> graphePredef) {
+		this.graphePredef = graphePredef;
+	}
+
+	public Map<Button, ModeleGraphe> getGrapheLocal() {
+		return grapheLocal;
+	}
+	
+	public ModeleGraphe getGrapheLocal(Button key) {
+		return grapheLocal.get(key);
+	}
+
+	public void setGrapheLocal(Map<Button, ModeleGraphe> grapheLocal) {
+		this.grapheLocal = grapheLocal;
+	}
+
+	public Map<Button, ModeleRegle> getReglePredef() {
+		return reglePredef;
+	}
+	
+	public ModeleRegle getReglePredef(Button key) {
+		return reglePredef.get(key);
+	}
+
+	public void setReglePredef(Map<Button, ModeleRegle> reglePredef) {
+		this.reglePredef = reglePredef;
+	}
+
+	public Map<Button, ModeleRegle> getRegleLocal() {
+		return regleLocal;
+	}
+	
+	public ModeleRegle getRegleLocal(Button key) {
+		return regleLocal.get(key);
+	}
+
+	public void setRegleLocal(Map<Button, ModeleRegle> regleLocal) {
+		this.regleLocal = regleLocal;
+	}
 }

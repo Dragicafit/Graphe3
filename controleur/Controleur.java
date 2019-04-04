@@ -40,6 +40,7 @@ public abstract class Controleur implements EventHandler<InputEvent> {
 		Platform.runLater(new Runnable() {
 			@Override
 			public void run() {
+				bouton = null;
 				vue.close();
 			}
 		});

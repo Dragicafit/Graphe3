@@ -1,5 +1,6 @@
 package vue;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -12,11 +13,19 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.control.SplitPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.TilePane;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
+import javafx.scene.shape.Line;
 import javafx.scene.text.Text;
 import modele.Modele;
 import modele.graphe.ModeleGraphe;
+import modele.point.Point;
+import modele.point.PointCouleur;
 import modele.regle.ModeleRegle;
+import modele.segment.Segment;
+import modele.segment.SegmentCouleur;
 
 public class VueAccueil extends Vue {
 	
@@ -168,10 +177,8 @@ public class VueAccueil extends Vue {
 	
 	public void ajoutGraphePredef() {
 		for(ModeleGraphe e : this.modele.getGraphesPredefinis()) {
-			/*Text t = new Text(e.getNom());
-			t.setStyle("-fx-font-size: 20px;");
-			GrapheCenterTopBottom.getChildren().add(t);*/
-			Button b = creerBouton(e.getNom());
+			Pane p = creerPaneTemporaire(e);
+			Button b = creerBouton("", creerImageView(p), 200, 200);
 			graphePredef.put(b, e);
 			GrapheCenterTopBottom.getChildren().add(b);
 		}
@@ -179,10 +186,60 @@ public class VueAccueil extends Vue {
 	
 	public void ajoutGrapheLocal() {
 		for(ModeleGraphe e : this.modele.getGraphesLocal()) {
-			Button b = creerBouton(e.getNom());
+			Pane p = creerPaneTemporaire(e);
+			Button b = creerBouton(e.getNom(), creerImageView(p), 200, 200);
 			grapheLocal.put(b, e);
 			GrapheCenterBottomBottom.getChildren().add(b);
 		}
+	}
+	
+	//renvoie la position X du point le plus a gauche
+	public double minPointX(ArrayList<Point> l) {
+		double x = l.get(0).getX();
+		for(Point p : l) {
+			if(p.getX()<x) x = p.getX();
+		}
+		return x;
+	}
+	
+	//renvoie la position Y du point le plus en haut
+	public double minPointY(ArrayList<Point> l) {
+		double x = l.get(0).getY();
+		for(Point p : l) {
+			if(p.getY()<x) x = p.getY();
+		}
+		return x;
+	}
+	
+	//creer un Pane avec le graphe contenu dans ModeleGraphe m
+	public Pane creerPaneTemporaire(ModeleGraphe m) {
+		Pane p = new Pane();
+		double x = minPointX(m.getPoints());
+		double y = minPointY(m.getPoints());
+		for(Segment s : m.getSegments()) {
+			Line l = new Line(s.getPoint1().getX()-x, s.getPoint1().getY()-y, s.getPoint2().getX()-x, s.getPoint2().getY()-y);
+			if (s instanceof SegmentCouleur) {
+				l.setStroke(((SegmentCouleur) s).getCouleur().toColor());
+			} else {
+				l.setStroke(Color.BLACK);
+			}
+			l.setStrokeWidth(3);
+			l.setVisible(true);
+			p.getChildren().add(l);
+		}
+		for(Point point : m.getPoints()) {
+			Circle c = new Circle(point.getX()-x, point.getY()-y, 15);
+			if (point instanceof PointCouleur) {
+				c.setFill(((PointCouleur) point).getCouleur().toColor());
+			} else {
+				c.setFill(Color.WHITE);
+			}
+			c.setStroke(Color.BLACK);
+			c.setStrokeWidth(3);
+			c.setVisible(true);
+			p.getChildren().add(c);
+		}
+		return p;
 	}
 
 	public Map<Button, ModeleGraphe> getGraphePredef() {

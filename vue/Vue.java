@@ -8,12 +8,14 @@ import controleur.Controleur;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.SnapshotParameters;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.image.WritableImage;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
@@ -61,6 +63,15 @@ public abstract class Vue extends Stage {
 		super.close();
 	}	
 	
+	
+	public ImageView creerImageView(Pane p) {
+		WritableImage image1 = p.snapshot(new SnapshotParameters(), null);
+		Image image2 = (Image)image1;
+		ImageView image3 = new ImageView(image2);
+		image3.setPreserveRatio(true);
+		return image3;
+	}
+	
 	public Button creerBouton(String nom) {
 		Button b = new Button(nom);
 		b.setAlignment(Pos.CENTER);
@@ -79,6 +90,16 @@ public abstract class Vue extends Stage {
 		view.setFitHeight(height);
 		view.setFitWidth(width);
 		Button b = new Button(nomPoint, view);
+		b.setMaxWidth(Double.MAX_VALUE);
+		b.setAlignment(Pos.TOP_CENTER);
+		b.addEventHandler(MouseEvent.MOUSE_CLICKED, controleur);
+		return b;
+	}
+	
+	public Button creerBouton(String nomPoint, ImageView image, int height, int width) {
+		image.setFitHeight(height);
+		image.setFitWidth(width);
+		Button b = new Button(nomPoint, image);
 		b.setMaxWidth(Double.MAX_VALUE);
 		b.setAlignment(Pos.TOP_CENTER);
 		b.addEventHandler(MouseEvent.MOUSE_CLICKED, controleur);

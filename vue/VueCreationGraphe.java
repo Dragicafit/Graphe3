@@ -4,6 +4,7 @@ import controleur.Controleur;
 import controleur.ControleurGraphes;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import modele.Bouton;
 import modele.Modele;
 
 public class VueCreationGraphe extends VueJeu {
@@ -14,17 +15,17 @@ public class VueCreationGraphe extends VueJeu {
 		super(m);
 		this.setTitle("Création d'un graphe");
 		nomGraphe = creerZoneText("Nom du Graphe", 40.);
-		ajoutBouton(creerBouton("Point", "point.png"), "point");
-		ajoutBouton(creerBouton("Segment", "segment.png", 3, 45), "segment");
-		ajoutBouton(creerBouton("Supprimer", "delete.png"), "supprimer");
-		ajoutBouton(creerBouton("Supprimer\n    Tout"), "supprimerTout");
+		ajoutBouton(creerBouton("Point", "point.png"), Bouton.POINT);
+		ajoutBouton(creerBouton("Segment", "segment.png", 3, 45), Bouton.SEGMENT);
+		ajoutBouton(creerBouton("Supprimer", "delete.png"), Bouton.SUPPRIMER);
+		ajoutBouton(creerBouton("Supprimer\n    Tout"), Bouton.SUPPRIMERTOUT);
 		bottom.getChildren().add(0, nomGraphe);
 		update();
 	}
 
-	public void ajoutBouton(Button b, String s) {
-		boutons.put(b, s);
-		top.getChildren().add(b);
+	public void ajoutBouton(Button button, Bouton bouton) {
+		boutons.put(button, bouton);
+		top.getChildren().add(button);
 	}
 
 	@Override

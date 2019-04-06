@@ -4,6 +4,7 @@ import javafx.scene.control.Button;
 import javafx.scene.input.InputEvent;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
+import modele.Bouton;
 import modele.graphe.ModeleGraphe;
 import modele.regle.ModeleRegle;
 import vue.Vue;
@@ -16,9 +17,6 @@ public class ControleurAccueil extends Controleur {
 	
 	public ControleurAccueil(Vue vue) {
 		super(vue);
-		boutons.put("regles", Bouton.CREERREGLE);
-		boutons.put("aleatoire", Bouton.ALEATOIRE);
-		boutons.put("graphe", Bouton.CREERGRAPHE);
 	}
 
 	@Override

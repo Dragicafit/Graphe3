@@ -19,6 +19,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
 import javafx.scene.text.Text;
+import modele.Bouton;
 import modele.Modele;
 import modele.graphe.ModeleGraphe;
 import modele.point.Point;
@@ -98,9 +99,9 @@ public class VueAccueil extends Vue {
 		GrapheCenterTopTop.setCenter(GP);
 		GrapheCenterBottomTop.setCenter(GM);
 
-		GrapheBottom.add(ajoutBouton(creerBouton("Créer Graphes"), "graphe"), 0, 0);
-		GrapheBottom.add(ajoutBouton(creerBouton("Graphes Aléatoire"), "aleatoire"), 1, 0);
-		RegleBottom.setCenter(ajoutBouton(creerBouton("Créer Règles"), "regles"));
+		GrapheBottom.add(ajoutBouton(creerBouton("Créer Graphes"), Bouton.CREERGRAPHE), 0, 0);
+		GrapheBottom.add(ajoutBouton(creerBouton("Graphes Aléatoire"), Bouton.ALEATOIRE), 1, 0);
+		RegleBottom.setCenter(ajoutBouton(creerBouton("Créer Règles"), Bouton.CREERREGLE));
 
 		Regles.setCenter(RegleCenter);
 		RegleCenter.setOrientation(Orientation.VERTICAL);
@@ -131,9 +132,9 @@ public class VueAccueil extends Vue {
 		main.getItems().addAll(Graphes, Regles);
 	}
 	
-	public Button ajoutBouton(Button b, String s) {
-		boutons.put(b, s);
-		return b;
+	public Button ajoutBouton(Button button, Bouton bouton) {
+		boutons.put(button, bouton);
+		return button;
 	}
 
 	@Override

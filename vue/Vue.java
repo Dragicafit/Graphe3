@@ -25,6 +25,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
 import javafx.stage.Stage;
+import modele.Bouton;
 import modele.Modele;
 import modele.point.Point;
 import modele.segment.Segment;
@@ -35,7 +36,7 @@ public abstract class Vue extends Stage {
 	protected Controleur controleur;
 	protected Map<Circle, Point> cercles;
 	protected Map<Line, Segment> lignes;
-	protected Map<Button, String> boutons;
+	protected Map<Button, Bouton> boutons;
 	protected BorderPane root;
 
 	public Vue(Modele m) {
@@ -218,11 +219,11 @@ public abstract class Vue extends Stage {
 		return lignes;
 	}
 
-	public String getBoutons(Button b) {
+	public Bouton getBoutons(Button b) {
 		return boutons.get(b);
 	}
 
-	public Map<Button, String> getBoutons() {
+	public Map<Button, Bouton> getBoutons() {
 		return boutons;
 	}
 

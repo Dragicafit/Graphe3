@@ -15,7 +15,6 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.image.WritableImage;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
@@ -24,6 +23,7 @@ import javafx.scene.layout.TilePane;
 import javafx.scene.layout.VBox;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
+import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 import modele.Modele;
 import modele.point.Point;
@@ -65,11 +65,15 @@ public abstract class Vue extends Stage {
 	
 	
 	public ImageView creerImageView(Pane p) {
-		WritableImage image1 = p.snapshot(new SnapshotParameters(), null);
-		Image image2 = (Image)image1;
-		ImageView image3 = new ImageView(image2);
-		image3.setPreserveRatio(true);
-		return image3;
+		ImageView image = new ImageView((Image)(p.snapshot(new SnapshotParameters(), null)));
+		image.setPreserveRatio(true);
+		return image;
+	}
+	
+	public ImageView creerImageView(Rectangle r) {
+		ImageView image = new ImageView((Image)(r.snapshot(new SnapshotParameters(), null)));
+		image.setPreserveRatio(true);
+		return image;
 	}
 	
 	public Button creerBouton(String nom) {

@@ -1,6 +1,7 @@
 package vue;
 
 import javafx.scene.control.Button;
+import modele.Bouton;
 import modele.Modele;
 
 public abstract class VueRetour extends Vue {
@@ -12,7 +13,7 @@ public abstract class VueRetour extends Vue {
 		super(m);
 		sauvegarder = creerBouton("Sauvegarder");
 		retour = creerBouton("Retour");
-		boutons.put(sauvegarder, "sauvegarder");
-		boutons.put(retour, "retour");
+		boutons.put(sauvegarder, Bouton.SAUVEGARDER);
+		boutons.put(retour, Bouton.RETOUR);
 	}
 }

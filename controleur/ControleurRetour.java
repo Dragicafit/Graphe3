@@ -3,6 +3,7 @@ package controleur;
 import java.io.IOException;
 
 import javafx.scene.input.InputEvent;
+import modele.Bouton;
 import vue.Vue;
 import vue.VueAccueil;
 import vue.VueCreationGraphe;
@@ -13,8 +14,6 @@ public abstract class ControleurRetour extends Controleur {
 
 	public ControleurRetour(Vue vue) {
 		super(vue);
-		this.boutons.put("sauvegarder", Bouton.SAUVEGARDER);
-		this.boutons.put("retour", Bouton.RETOUR);
 	}
 
 	@Override

@@ -35,7 +35,7 @@ public class Main extends Application {
 			graphe.add(new ModeleGraphe4());
 			graphe.add(new ModeleGraphe5());
 			
-			m.setRegleCourant(new ModeleRegleSnort());
+			m.setRegleCourant(new ModeleRegleHex());
 			ArrayList<ModeleRegle> regles = m.getReglesPredefinis();
 			regles.add(new ModeleRegleSnort());
 			regles.add(new ModeleRegleHex());

@@ -45,7 +45,6 @@ public class VueAccueil extends Vue {
 		grapheLocal = new HashMap<>();
 		reglePredef = new HashMap<>();
 		regleLocal = new HashMap<>();
-		modele.resetCourant();
 		SplitPane main = new SplitPane();
 
 		BorderPane Regles = creerBorderPane(false);

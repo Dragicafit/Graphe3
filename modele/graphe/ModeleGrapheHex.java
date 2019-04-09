@@ -1,7 +1,6 @@
 package modele.graphe;
 
 import modele.Couleur;
-import modele.Joueur;
 import modele.point.Point;
 import modele.point.PointCouleur;
 import modele.segment.Segment;
@@ -12,13 +11,11 @@ public class ModeleGrapheHex extends ModeleGraphe{
 	
 	public ModeleGrapheHex() {
 		super("Hex");
-		addJoueur(new Joueur("Joueur rouge", Couleur.ROUGE));
-		addJoueur(new Joueur("Joueur bleu", Couleur.BLEU));
 		
-		PointCouleur red1 = new PointCouleur(100,360, Couleur.ROUGE);
-		PointCouleur blue1 = new PointCouleur(600, 25, Couleur.BLEU);
-		PointCouleur red2 = new PointCouleur(1100,360, Couleur.ROUGE);
-		PointCouleur blue2 = new PointCouleur(600, 725, Couleur.BLEU);
+		PointCouleur red1 = new PointCouleur(100,360, Couleur.BLANC);
+		PointCouleur blue1 = new PointCouleur(600, 25, Couleur.BLANC);
+		PointCouleur red2 = new PointCouleur(1100,360, Couleur.BLANC);
+		PointCouleur blue2 = new PointCouleur(600, 725, Couleur.BLANC);
 		
 		Point[] ligne1 = ligne(100);
 		Point[] ligne2 = ligne(175);

@@ -22,6 +22,11 @@ public class PointCouleur extends Point implements estColoriable {
 		super(x, y);
 		this.couleur = couleur;
 	}
+	
+	public PointCouleur(double x, double y) {
+		super(x,y);
+		this.couleur = Couleur.BLANC;
+	}
 
 	@Override
 	public Couleur getCouleur() {

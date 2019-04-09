@@ -9,12 +9,12 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import modele.Modele;
 
-public class VueFinJeu extends Vue{
+public class VueGagnant extends Vue{
 	
 	protected Button Relancer;
 	protected Button Retour;
 
-	public VueFinJeu(Modele m) {
+	public VueGagnant(Modele m) {
 		super(m);
 		BorderPane main = creerBorderPane(false);
 		VBox box = creerVBox(Pos.CENTER, 40);

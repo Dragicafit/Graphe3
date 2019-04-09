@@ -15,7 +15,7 @@ import javafx.scene.shape.Rectangle;
 import modele.Couleur;
 import modele.Modele;
 
-public class VueDebutJeu extends Vue {
+public class VueJoueur extends Vue {
 	protected TextField nomJoueur;
 	protected Couleur couleur;
 	protected Button valider;
@@ -24,7 +24,7 @@ public class VueDebutJeu extends Vue {
 	RadioButton rb3;
 	private final ToggleGroup group = new ToggleGroup();
 
-	public VueDebutJeu(Modele m) {
+	public VueJoueur(Modele m) {
 		super(m);
 		BorderPane main = creerBorderPane(false);
 		VBox box = creerVBox(Pos.CENTER);

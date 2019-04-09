@@ -196,7 +196,8 @@ public class VueAccueil extends Vue {
 	
 	//renvoie la position X du point le plus a gauche
 	public double minPointX(ArrayList<Point> l) {
-		double x = 1000000000;
+		if(l.size()==0) return 0;
+		double x = l.get(0).getX();
 		for(Point p : l) {
 			if(p.getX()<x) x = p.getX();
 		}
@@ -205,7 +206,8 @@ public class VueAccueil extends Vue {
 	
 	//renvoie la position Y du point le plus en haut
 	public double minPointY(ArrayList<Point> l) {
-		double x = 1000000000;
+		if(l.size()==0) return 0;
+		double x = l.get(0).getY();
 		for(Point p : l) {
 			if(p.getY()<x) x = p.getY();
 		}

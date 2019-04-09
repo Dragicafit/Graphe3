@@ -3,6 +3,7 @@ package Jeux;
 import java.util.ArrayList;
 
 import controleur.ControleurJeu;
+import javafx.application.Platform;
 import javafx.scene.input.InputEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.shape.Circle;
@@ -12,6 +13,7 @@ import modele.point.PointCouleur;
 import modele.segment.SegmentCouleur;
 import regles.Regles;
 import vue.Vue;
+import vue.VueGagnant;
 
 public class Jeux extends Thread {
 
@@ -41,6 +43,12 @@ public class Jeux extends Thread {
 			}
 		} catch (InterruptedException e) {
 		} finally {
+			Platform.runLater(new Runnable() {
+				@Override
+				public void run() {
+					new VueGagnant(modele);
+				}
+			});
 			vue.getControleur().exit();
 		}
 	}

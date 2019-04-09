@@ -8,7 +8,7 @@ import vue.Vue;
 import vue.VueAccueil;
 import vue.VueCreationGraphe;
 import vue.VueCreationRegle;
-import vue.VueJeu;
+import vue.VueMenu;
 
 public abstract class ControleurRetour extends Controleur {
 
@@ -34,7 +34,7 @@ public abstract class ControleurRetour extends Controleur {
 					modele.getRegleCourant().setNom(nomRegle);
 					modele.sauvegardeRegle();
 				}
-			} else if (vue instanceof VueJeu) {
+			} else if (vue instanceof VueMenu) {
 				try {
 					modele.exportModele();
 				} catch (IOException e) {

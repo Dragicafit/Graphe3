@@ -11,7 +11,7 @@ import vue.Vue;
 import vue.VueAccueil;
 import vue.VueCreationGraphe;
 import vue.VueCreationRegle;
-import vue.VuePlateauJeu;
+import vue.VueJeu;
 
 public class ControleurAccueil extends Controleur {
 	
@@ -89,7 +89,7 @@ public class ControleurAccueil extends Controleur {
 	public void launcher() {
 		if (modele.getGrapheCourant() != null && modele.getRegleCourant() != null) {
 			exit();
-			new VuePlateauJeu(modele);
+			new VueJeu(modele);
 		}
 	}
 }

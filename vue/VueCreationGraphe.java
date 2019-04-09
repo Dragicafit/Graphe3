@@ -7,7 +7,7 @@ import javafx.scene.control.TextField;
 import modele.Bouton;
 import modele.Modele;
 
-public class VueCreationGraphe extends VueJeu {
+public class VueCreationGraphe extends VueMenu {
 
 	protected TextField nomGraphe;
 

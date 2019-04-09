@@ -1,6 +1,5 @@
 package vue;
 
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -57,11 +56,6 @@ public abstract class Vue extends Stage {
 
 	@Override
 	public void close() {
-		try {
-			modele.exportModele();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
 		super.close();
 	}	
 	

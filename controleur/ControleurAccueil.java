@@ -11,13 +11,14 @@ import vue.Vue;
 import vue.VueAccueil;
 import vue.VueCreationGraphe;
 import vue.VueCreationRegle;
+import vue.VueJeu;
 import vue.VueJoueur;
 
 public class ControleurAccueil extends Controleur {
 	
 	public ControleurAccueil(Vue vue) {
 		super(vue);
-		launcher();
+		launcherPartieEnCours();
 	}
 
 	@Override
@@ -91,6 +92,13 @@ public class ControleurAccueil extends Controleur {
 		if (modele.getGrapheCourant() != null && modele.getRegleCourant() != null) {
 			exit();
 			new VueJoueur(modele, 2);
+		}
+	}
+	
+	public void launcherPartieEnCours() {
+		if (modele.getGrapheCourant() != null && modele.getRegleCourant() != null) {
+			exit();
+			new VueJeu(modele);
 		}
 	}
 }

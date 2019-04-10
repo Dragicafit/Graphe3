@@ -24,8 +24,15 @@ public class ControleurJoueur extends ControleurRetour {
 		super.handle(event);
 		if (bouton == Bouton.VALIDER) {
 			VueJoueur vueJoueur = (VueJoueur) vue;
-			for (CreerJoueur joueur : vueJoueur.getJoueurs()) {
-				modele.addJoueur(new Joueur(joueur.getNomJoueur().getText(), joueur.getCouleur()));
+			for (CreerJoueur creerJoueur : vueJoueur.getJoueurs()) {
+				Joueur joueur = new Joueur(creerJoueur.getNomJoueur().getText(), creerJoueur.getCouleur());
+				if(modele.containsJoueur(joueur)) {
+					modele.clearJoueurs();
+					vue.update();
+					return;
+				}
+				modele.addJoueur(joueur);
+
 			}
 			for (Map.Entry<String, Point> entry : modele.getGrapheCourant().getPointsSpeciaux().entrySet()) {
 				for (int i = 0; i < modele.getNbJoueurs(); i++) {

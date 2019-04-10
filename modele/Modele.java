@@ -163,6 +163,10 @@ public class Modele implements Serializable {
 	public boolean containsSegment(Segment s) {
 		return grapheCourant.containsSegment(s);
 	}
+	
+	public boolean containsJoueur(Joueur j) {
+		return grapheCourant.containsJoueur(j);
+	}
 
 	public Joueur getJoueur(int index) {
 		return grapheCourant.getJoueur(index);
@@ -207,6 +211,10 @@ public class Modele implements Serializable {
 
 	public void supprimerTout() {
 		grapheCourant.supprimerTout();
+	}
+	
+	public void clearJoueurs() {
+		grapheCourant.clearJoueurs();
 	}
 
 }

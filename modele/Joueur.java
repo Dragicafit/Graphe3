@@ -26,7 +26,7 @@ public class Joueur implements Serializable {
 	public boolean equals(Object obj) {
 		if (obj instanceof Joueur) {
 			Joueur joueur = (Joueur) obj;
-			return nom.equals(joueur.nom) && couleur.equals(joueur.couleur);
+			return nom.equals(joueur.nom) || couleur.equals(joueur.couleur);
 		}
 		return false;
 	}

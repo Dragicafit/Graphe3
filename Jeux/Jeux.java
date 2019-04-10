@@ -41,14 +41,14 @@ public class Jeux extends Thread {
 					}
 				}
 			}
-		} catch (InterruptedException e) {
-		} finally {
 			Platform.runLater(new Runnable() {
 				@Override
 				public void run() {
 					new VueGagnant(modele);
 				}
 			});
+		} catch (InterruptedException e) {
+		} finally {
 			vue.getControleur().exit();
 		}
 	}

@@ -44,6 +44,7 @@ public abstract class ControleurRetour extends Controleur {
 			bouton = null;
 		} else if (bouton == Bouton.RETOUR) {
 			exit();
+			modele.resetCourant();
 			new VueAccueil(modele);
 		}
 	}

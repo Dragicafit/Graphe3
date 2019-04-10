@@ -9,6 +9,7 @@ import javafx.scene.input.TransferMode;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
+import modele.Bouton;
 import modele.Couleur;
 import modele.point.Point;
 import modele.point.PointCouleur;
@@ -24,10 +25,6 @@ public class ControleurGraphes extends ControleurRetour {
 	public ControleurGraphes(Vue vue) {
 		super(vue);
 		this.premierPoint = null;
-		this.boutons.put("point", Bouton.POINT);
-		this.boutons.put("segment", Bouton.SEGMENT);
-		this.boutons.put("supprimer", Bouton.SUPPRIMER);
-		this.boutons.put("supprimerTout", Bouton.SUPPRIMERTOUT);
 	}
 
 	@Override

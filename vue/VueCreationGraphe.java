@@ -1,11 +1,10 @@
 package vue;
 
-import java.util.Map;
-
 import controleur.Controleur;
 import controleur.ControleurGraphes;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import modele.Bouton;
 import modele.Modele;
 
 public class VueCreationGraphe extends VueJeu {
@@ -16,19 +15,17 @@ public class VueCreationGraphe extends VueJeu {
 		super(m);
 		this.setTitle("Création d'un graphe");
 		nomGraphe = creerZoneText("Nom du Graphe", 40.);
-		for (Map.Entry<Button, String> entry : boutons.entrySet()) {
-			top.getChildren().add(entry.getKey());
-		}
+		ajoutBouton(creerBouton("Point", "point.png"), Bouton.POINT);
+		ajoutBouton(creerBouton("Segment", "segment.png", 3, 45), Bouton.SEGMENT);
+		ajoutBouton(creerBouton("Supprimer", "delete.png"), Bouton.SUPPRIMER);
+		ajoutBouton(creerBouton("Supprimer\n    Tout"), Bouton.SUPPRIMERTOUT);
 		bottom.getChildren().add(0, nomGraphe);
+		update();
 	}
 
-	@Override
-	public void creationBouton() {
-		super.creationBouton();
-		boutons.put(creerBouton("Point", "point.png"), "point");
-		boutons.put(creerBouton("Segment", "segment.png", 3, 45), "segment");
-		boutons.put(creerBouton("Supprimer", "delete.png"), "supprimer");
-		boutons.put(creerBouton("Supprimer\n    Tout"), "supprimerTout");
+	public void ajoutBouton(Button button, Bouton bouton) {
+		boutons.put(button, bouton);
+		top.getChildren().add(button);
 	}
 
 	@Override

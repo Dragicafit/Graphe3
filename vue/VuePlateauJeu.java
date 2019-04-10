@@ -12,13 +12,9 @@ public class VuePlateauJeu extends VueJeu {
 	public VuePlateauJeu(Modele m) {
 		super(m);
 		this.setTitle("Lets GO !!!");
-		top.getChildren().add(this.nomJoueur);
-	}
-
-	@Override
-	public void creationBouton() {
-		super.creationBouton();
 		this.nomJoueur = new Text();
+		top.getChildren().add(this.nomJoueur);
+		update();
 	}
 
 	@Override

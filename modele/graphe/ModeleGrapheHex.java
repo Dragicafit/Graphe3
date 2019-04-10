@@ -34,6 +34,10 @@ public class ModeleGrapheHex extends ModeleGraphe{
 		addPoint(blue1);
 		addPoint(blue2);
 		
+		addPointSpeciaux("rouge1", red1);
+		addPointSpeciaux("rouge2", red2);
+		addPointSpeciaux("bleu1", blue1);
+		addPointSpeciaux("bleu2", blue2);
 		
 		for(int i = 0; i< 7; i++) {
 			addSegment(new Segment(ligne1[i], ligne1[i+1]));
@@ -45,7 +49,6 @@ public class ModeleGrapheHex extends ModeleGraphe{
 			addSegment(new Segment(ligne7[i], ligne7[i+1]));
 			addSegment(new Segment(ligne8[i], ligne8[i+1]));
 			
-
 			addSegment(new Segment(ligne1[i], ligne2[i+1]));
 			addSegment(new Segment(ligne2[i], ligne3[i+1]));
 			addSegment(new Segment(ligne3[i], ligne4[i+1]));
@@ -95,7 +98,6 @@ public class ModeleGrapheHex extends ModeleGraphe{
 		addSegment(new Segment(red2, ligne7[7]));
 		addSegment(new Segment(red2, ligne8[7]));
 
-
 	}
 	
 	public Point[] ligne(int l) {
@@ -116,7 +118,6 @@ public class ModeleGrapheHex extends ModeleGraphe{
 		addPoint(p7);
 		addPoint(p8);
 		return new Point[] {p1,p2,p3,p4,p5,p6,p7,p8};
-		
 	}
 	
 }

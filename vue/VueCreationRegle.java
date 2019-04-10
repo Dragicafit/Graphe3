@@ -13,50 +13,56 @@ import javafx.scene.control.SplitPane;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
+import javafx.scene.text.Text;
 import modele.Modele;
 import modele.MutableBoolean;
 
 public class VueCreationRegle extends VueRetour {
 
-	protected BorderPane main;
-	protected SplitPane pointEtSegment;
-	protected GridPane point;
-	protected GridPane segment;
-	protected GridPane bottom;
-	protected TextField nomRegleField;
-
+	private TextField nomRegleField;
+	private VBox VBoxPoint;
 	protected Map<CheckBox, MutableBoolean> reglesChoisis;
 
 	public VueCreationRegle(Modele m) {
 		super(m);
+		BorderPane point = creerBorderPane(true);
+		VBoxPoint = creerVBox(Pos.CENTER_LEFT);
+		VBoxPoint.setStyle("-fx-padding: 10;");
 		reglesChoisis = new HashMap<>();
-		reglesChoisis.put(creerCheckBox("Point Coloriable", true), modele.getRegleCourant().Coloriable);
-		reglesChoisis.put(creerCheckBox("Point Deplacable", true), modele.getRegleCourant().DeplacementAutorise);
-		reglesChoisis.put(creerCheckBox("A Cote De Soit"), modele.getRegleCourant().JouerAcoteSoit);
-		reglesChoisis.put(creerCheckBox("A Cote D'un Ennemi"), modele.getRegleCourant().JouerAcoteEnnemi);
-		reglesChoisis.put(creerCheckBox("Sur Un Ennemi"), modele.getRegleCourant().JouerSurEnnemi);
-		//reglesChoisis.put(creerCheckBox("colorier point entourer par nos points"), modele.getRegleCourant().);
-		main = new BorderPane();
-		pointEtSegment = new SplitPane();
-		point = creerGridPane(Pos.CENTER_LEFT, true);
-		int x = 0;
-		for (Map.Entry<CheckBox, MutableBoolean> entry : reglesChoisis.entrySet()) {
-			point.add(entry.getKey(), 0, x);
-			x++;
-		}
-		segment = creerGridPane(Pos.CENTER_LEFT, true);
-		bottom = creerGridPane(Pos.CENTER, true);
+		ajoutCheckBox(creerCheckBoxUnderline("Point coloriable"), modele.getRegleCourant().Coloriable);
+		ajoutCheckBox(creerCheckBox("A coté de soit"), modele.getRegleCourant().JouerAcoteSoit);
+		ajoutCheckBox(creerCheckBox("A coté d'un ennemi"), modele.getRegleCourant().JouerAcoteEnnemi);
+		ajoutCheckBox(creerCheckBox("Sur un ennemi"), modele.getRegleCourant().JouerSurEnnemi);
+		ajoutCheckBox(creerCheckBoxUnderline("Point deplacable"), modele.getRegleCourant().DeplacementAutorise);
+		// reglesChoisis.put(creerCheckBox("colorier point entouré par nos points"), modele.getRegleCourant().);
+		BorderPane main = new BorderPane();
+		SplitPane pointEtSegment = new SplitPane();
+		GridPane segment = creerGridPane(Pos.CENTER_LEFT, true);
+		GridPane bottom = creerGridPane(Pos.CENTER, true);
 		nomRegleField = creerZoneText("Nom de la règle", 40.);
 		bottom.add(retour, 0, 0);
-		bottom.add(nomRegleField, 1,0);
-		bottom.add(sauvegarder, 2, 0);		
+		bottom.add(nomRegleField, 1, 0);
+		bottom.add(sauvegarder, 2, 0);
 		pointEtSegment.setOrientation(Orientation.HORIZONTAL);
+		point.setLeft(VBoxPoint);
 		point.maxWidthProperty().bind(pointEtSegment.widthProperty().multiply(0.5));
 		point.minWidthProperty().bind(pointEtSegment.widthProperty().multiply(0.5));
 		pointEtSegment.getItems().addAll(point, segment);
 		main.setCenter(pointEtSegment);
 		main.setBottom(bottom);
 		root.setCenter(main);
+	}
+
+	public void ajoutCheckBox(CheckBox c, MutableBoolean b) {
+		HBox h = new HBox();
+		Text space = new Text("");
+		if (c.getId().equals("123"))
+			space.setText("\t\t");
+		h.getChildren().addAll(space, c);
+		reglesChoisis.put(c, b);
+		VBoxPoint.getChildren().add(h);
 	}
 
 	@Override
@@ -79,8 +85,8 @@ public class VueCreationRegle extends VueRetour {
 
 	public TextField getNomRegleField() {
 		return nomRegleField;
-	}	
-	
+	}
+
 	public Map<CheckBox, MutableBoolean> getReglesChoisis() {
 		return reglesChoisis;
 	}

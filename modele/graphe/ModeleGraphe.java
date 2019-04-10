@@ -86,6 +86,10 @@ public class ModeleGraphe extends DeepClone {
 	public boolean containsSegment(Segment s) {
 		return segments.contains(s);
 	}
+	
+	public boolean containsJoueur(Joueur j) {
+		return joueurs.contains(j);
+	}
 
 	public Joueur getJoueur(int index) {
 		return joueurs.get(index);
@@ -151,6 +155,10 @@ public class ModeleGraphe extends DeepClone {
 
 	public void setNom(String nom) {
 		this.nom = nom;
+	}
+	
+	public void clearJoueurs() {
+		joueurs.clear();
 	}
 
 	@Override

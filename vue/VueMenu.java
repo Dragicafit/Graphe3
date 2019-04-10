@@ -28,6 +28,7 @@ public abstract class VueMenu extends VueRetour {
 
 	public VueMenu(Modele m) {
 		super(m);
+		this.setTitle("Menu");
 		top = creerVBox(Pos.CENTER, 20);
 		bottom = creerVBox(Pos.CENTER, 20);
 		SplitPane main = new SplitPane();

@@ -27,6 +27,7 @@ public class VueCreationRegle extends VueRetour {
 
 	public VueCreationRegle(Modele m) {
 		super(m);
+		this.setTitle("Création d'une règle");
 		BorderPane point = creerBorderPane(true);
 		VBoxPoint = creerVBox(Pos.CENTER_LEFT);
 		VBoxPoint.setStyle("-fx-padding: 10;");

@@ -41,6 +41,7 @@ public class VueAccueil extends Vue {
 
 	public VueAccueil(Modele m) {
 		super(m);
+		this.setTitle("Accueil");
 		graphePredef = new HashMap<>();
 		grapheLocal = new HashMap<>();
 		reglePredef = new HashMap<>();

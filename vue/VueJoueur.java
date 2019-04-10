@@ -25,6 +25,7 @@ public class VueJoueur extends Vue {
 
 	public VueJoueur(Modele m, int nb) {
 		super(m);
+		this.setTitle("Création des Joueurs");
 		joueurs = new ArrayList<>();
 		BorderPane main = creerBorderPane(false);
 		ScrollPane scroll = new ScrollPane();

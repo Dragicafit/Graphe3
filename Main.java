@@ -22,7 +22,7 @@ public class Main extends Application {
 	@Override
 	public void start(Stage primaryStage) {
 		try {
-			m = Modele.importModele();
+			m = initialisation();
 			new VueAccueil(m);
 		} catch (Exception e) {
 			e.printStackTrace();

@@ -75,14 +75,17 @@ public class Regles {
 	public boolean estLie(Point p, ArrayList<Point> point, Point depart) {
 		point.add(p);
 		for (Segment s : modele.getSegments()) {
-			Point deux = s.getVoisin(p);
-			if (deux == depart) {
-				return true;
+			Point voisin = s.getVoisin(p);
+			if(voisin instanceof PointCouleur) {
+				if(((PointCouleur) voisin).getCouleur().equals(((PointCouleur) depart).getCouleur())) {
+					if (voisin == depart) {
+						return true;
+					}
+					if (!point.contains(voisin)) {
+						return estLie(voisin, point, depart);
+					}
+				}
 			}
-			if (deux != null && !point.contains(deux)) {
-				return estLie(deux, point, depart);
-			}
-
 		}
 		return false;
 	}

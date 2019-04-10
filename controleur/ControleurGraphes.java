@@ -16,7 +16,7 @@ import modele.point.PointCouleur;
 import modele.segment.Segment;
 import modele.segment.SegmentCouleur;
 import vue.Vue;
-import vue.VueJeu;
+import vue.VueMenu;
 
 public class ControleurGraphes extends ControleurRetour {
 
@@ -166,7 +166,7 @@ public class ControleurGraphes extends ControleurRetour {
 			} else if (source instanceof Line && vue.getLignes().containsKey(source)) {
 				eventLine(event, (Line) source);
 				vue.update();
-			} else if (vue instanceof VueJeu && source instanceof Pane && source == ((VueJeu) vue).getGraphe()) {
+			} else if (vue instanceof VueMenu && source instanceof Pane && source == ((VueMenu) vue).getGraphe()) {
 				eventPane(event);
 				vue.update();
 			}

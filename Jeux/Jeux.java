@@ -3,6 +3,7 @@ package Jeux;
 import java.util.ArrayList;
 
 import controleur.ControleurJeu;
+import javafx.application.Platform;
 import javafx.scene.input.InputEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.shape.Circle;
@@ -12,6 +13,7 @@ import modele.point.PointCouleur;
 import modele.segment.SegmentCouleur;
 import regles.Regles;
 import vue.Vue;
+import vue.VueGagnant;
 
 public class Jeux extends Thread {
 
@@ -41,6 +43,12 @@ public class Jeux extends Thread {
 			}
 		} catch (InterruptedException e) {
 		} finally {
+			Platform.runLater(new Runnable() {
+				@Override
+				public void run() {
+					new VueGagnant(modele);
+				}
+			});
 			vue.getControleur().exit();
 		}
 	}
@@ -118,11 +126,11 @@ public class Jeux extends Thread {
 	public boolean end_game() {
 		if (modele.getRegleCourant().FinHex.get()) {
 			ArrayList<Point> point = new ArrayList<>();
-			if (regles.estLie(modele.getGrapheCourant().getPointSpeciaux("rouge2"), point, this.modele.getGrapheCourant().getPointSpeciaux("rouge1"))) {
+			if (regles.estLie(modele.getGrapheCourant().getPointSpeciaux("depart1"), point, this.modele.getGrapheCourant().getPointSpeciaux("arrve1"))) {
 				return true;
 			}
 			point.clear();
-			if (regles.estLie(modele.getGrapheCourant().getPointSpeciaux("bleu2"), point, modele.getGrapheCourant().getPointSpeciaux("bleu1"))) {
+			if (regles.estLie(modele.getGrapheCourant().getPointSpeciaux("depart2"), point, modele.getGrapheCourant().getPointSpeciaux("arrive2"))) {
 				return true;
 			}
 			return false;

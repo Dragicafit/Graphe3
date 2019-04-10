@@ -1,6 +1,5 @@
 package vue;
 
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -12,6 +11,7 @@ import javafx.scene.SnapshotParameters;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.control.Slider;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -56,11 +56,6 @@ public abstract class Vue extends Stage {
 
 	@Override
 	public void close() {
-		try {
-			modele.exportModele();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
 		super.close();
 	}	
 	
@@ -205,6 +200,20 @@ public abstract class Vue extends Stage {
 			pane.setStyle("-fx-padding: 10;" + "-fx-border-style: solid inside;" + "-fx-border-width: 2;"
 					+ "-fx-border-insets: 5;" + "-fx-border-radius: 5;" + "-fx-border-color: black;");
 		return pane;
+	}
+	
+	public Slider creerSlider() {
+		Slider slider = new Slider();
+		slider.setMin(0);
+		slider.setMax(255);
+		slider.setValue(0);
+		slider.setShowTickLabels(true);
+		slider.setShowTickMarks(true);
+		slider.setMajorTickUnit(255);
+		slider.setMinorTickCount(10);
+		slider.setBlockIncrement(1);
+		slider.addEventHandler(MouseEvent.MOUSE_RELEASED, controleur);
+		return slider;
 	}
 
 	public abstract void update();

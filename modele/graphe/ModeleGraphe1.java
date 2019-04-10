@@ -1,7 +1,5 @@
 package modele.graphe;
 
-import modele.Couleur;
-import modele.Joueur;
 import modele.point.Point;
 import modele.point.PointCouleur;
 import modele.segment.Segment;
@@ -11,18 +9,16 @@ public class ModeleGraphe1 extends ModeleGraphe {
 
 	public ModeleGraphe1() {
 		super("1");
-		addJoueur(new Joueur("j1", Couleur.ROUGE));
-		addJoueur(new Joueur("j2", Couleur.BLEU));
-		Point p1 = new PointCouleur(200, 100, Couleur.BLANC);
-		Point p2 = new PointCouleur(300, 200, Couleur.BLANC);
-		Point p3 = new PointCouleur(200, 200, Couleur.BLANC);
-		Point p4 = new PointCouleur(400, 200, Couleur.BLANC);
-		Point p5 = new PointCouleur(500, 100, Couleur.BLANC);
-		Point p6 = new PointCouleur(500, 200, Couleur.BLANC);
-		Point p7 = new PointCouleur(200, 300, Couleur.BLANC);
-		Point p8 = new PointCouleur(500, 300, Couleur.BLANC);
-		Point p9 = new PointCouleur(600, 200, Couleur.BLEU);
-		Point p10 = new PointCouleur(100, 200, Couleur.ROUGE);
+		Point p1 = new PointCouleur(200, 100);
+		Point p2 = new PointCouleur(300, 200);
+		Point p3 = new PointCouleur(200, 200);
+		Point p4 = new PointCouleur(400, 200);
+		Point p5 = new PointCouleur(500, 100);
+		Point p6 = new PointCouleur(500, 200);
+		Point p7 = new PointCouleur(200, 300);
+		Point p8 = new PointCouleur(500, 300);
+		Point p9 = new PointCouleur(600, 200);
+		Point p10 = new PointCouleur(100, 200);
 		addPoint(p1);
 		addPoint(p2);
 		addPoint(p3);
@@ -46,5 +42,7 @@ public class ModeleGraphe1 extends ModeleGraphe {
 		addSegment(new Segment(p8, p4));
 		addSegment(new Segment(p3, p10));
 		addSegment(new Segment(p9, p6));
+		addPointSpeciaux("j0", p9);
+		addPointSpeciaux("j1", p10);
 	}
 }

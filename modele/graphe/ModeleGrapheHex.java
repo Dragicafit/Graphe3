@@ -1,7 +1,5 @@
 package modele.graphe;
 
-import modele.Couleur;
-import modele.Joueur;
 import modele.point.Point;
 import modele.point.PointCouleur;
 import modele.segment.Segment;
@@ -12,13 +10,11 @@ public class ModeleGrapheHex extends ModeleGraphe{
 	
 	public ModeleGrapheHex() {
 		super("Hex");
-		addJoueur(new Joueur("Joueur rouge", Couleur.ROUGE));
-		addJoueur(new Joueur("Joueur bleu", Couleur.BLEU));
 		
-		PointCouleur red1 = new PointCouleur(100,360, Couleur.ROUGE);
-		PointCouleur blue1 = new PointCouleur(600, 25, Couleur.BLEU);
-		PointCouleur red2 = new PointCouleur(1100,360, Couleur.ROUGE);
-		PointCouleur blue2 = new PointCouleur(600, 725, Couleur.BLEU);
+		PointCouleur red1 = new PointCouleur(100,360);
+		PointCouleur blue1 = new PointCouleur(600, 25);
+		PointCouleur red2 = new PointCouleur(1100,360);
+		PointCouleur blue2 = new PointCouleur(600, 725);
 		
 		Point[] ligne1 = ligne(100);
 		Point[] ligne2 = ligne(175);
@@ -34,10 +30,14 @@ public class ModeleGrapheHex extends ModeleGraphe{
 		addPoint(blue1);
 		addPoint(blue2);
 		
-		addPointSpeciaux("rouge1", red1);
-		addPointSpeciaux("rouge2", red2);
-		addPointSpeciaux("bleu1", blue1);
-		addPointSpeciaux("bleu2", blue2);
+		addPointSpeciaux("depart1", red1);
+		addPointSpeciaux("arrive1", red2);
+		addPointSpeciaux("depart2", blue1);
+		addPointSpeciaux("arrive2", blue2);
+		addPointSpeciaux("j00", red1);
+		addPointSpeciaux("j01", red2);
+		addPointSpeciaux("j10", blue1);
+		addPointSpeciaux("j11", blue2);
 		
 		for(int i = 0; i< 7; i++) {
 			addSegment(new Segment(ligne1[i], ligne1[i+1]));
@@ -101,14 +101,14 @@ public class ModeleGrapheHex extends ModeleGraphe{
 	}
 	
 	public Point[] ligne(int l) {
-		Point p1 = new PointCouleur(250,l, Couleur.BLANC);
-		Point p2 = new PointCouleur(350,l, Couleur.BLANC);
-		Point p3 = new PointCouleur(450,l, Couleur.BLANC);
-		Point p4 = new PointCouleur(550,l, Couleur.BLANC);
-		Point p5 = new PointCouleur(650,l, Couleur.BLANC);
-		Point p6 = new PointCouleur(750,l, Couleur.BLANC);
-		Point p7 = new PointCouleur(850,l, Couleur.BLANC);
-		Point p8 = new PointCouleur(950,l, Couleur.BLANC);
+		Point p1 = new PointCouleur(250,l);
+		Point p2 = new PointCouleur(350,l);
+		Point p3 = new PointCouleur(450,l);
+		Point p4 = new PointCouleur(550,l);
+		Point p5 = new PointCouleur(650,l);
+		Point p6 = new PointCouleur(750,l);
+		Point p7 = new PointCouleur(850,l);
+		Point p8 = new PointCouleur(950,l);
 		addPoint(p1);
 		addPoint(p2);
 		addPoint(p3);

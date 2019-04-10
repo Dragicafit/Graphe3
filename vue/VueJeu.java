@@ -11,7 +11,7 @@ public class VueJeu extends VueMenu {
 
 	public VueJeu(Modele m) {
 		super(m);
-		this.setTitle("Lets GO !!!");
+		this.setTitle("Jeu");
 		this.nomJoueur = new Text();
 		top.getChildren().add(this.nomJoueur);
 		update();

@@ -12,6 +12,7 @@ public class VueGagnant extends VueRetour {
 
 	public VueGagnant(Modele m) {
 		super(m);
+		this.setTitle("Fin");
 		BorderPane main = creerBorderPane(false);
 		VBox box = creerVBox(Pos.CENTER, 40);
 		Text finJeu = new Text(m.getJoueur(m.getJoueurCourant()).getNom()+ " a gagné");

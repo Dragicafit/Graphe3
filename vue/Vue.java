@@ -130,7 +130,6 @@ public abstract class Vue extends Stage {
 
 	public CheckBox creerCheckBoxUnderline(String nom) {
 		CheckBox c = new CheckBox(nom);
-		// c.setUnderline(true);
 		c.setId("");
 		c.setStyle("-fx-font-size: 25px;" + "-fx-font-weight: bold;" + "-fx-padding: 5 0 5 0;");
 		return c;
@@ -206,7 +205,7 @@ public abstract class Vue extends Stage {
 		Slider slider = new Slider();
 		slider.setMin(0);
 		slider.setMax(255);
-		slider.setValue(0);
+		slider.setValue(255);
 		slider.setShowTickLabels(true);
 		slider.setShowTickMarks(true);
 		slider.setMajorTickUnit(255);

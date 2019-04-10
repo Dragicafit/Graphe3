@@ -42,7 +42,7 @@ public class ModeleGraphe1 extends ModeleGraphe {
 		addSegment(new Segment(p8, p4));
 		addSegment(new Segment(p3, p10));
 		addSegment(new Segment(p9, p6));
-		addPointSpeciaux("j0", p9);
-		addPointSpeciaux("j1", p10);
+		addPointSpeciaux("depart0", p9);
+		addPointSpeciaux("depart1", p10);
 	}
 }

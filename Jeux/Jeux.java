@@ -126,11 +126,11 @@ public class Jeux extends Thread {
 	public boolean end_game() {
 		if (modele.getRegleCourant().FinHex.get()) {
 			ArrayList<Point> point = new ArrayList<>();
-			if (regles.estLie(modele.getGrapheCourant().getPointSpeciaux("depart1"), point, this.modele.getGrapheCourant().getPointSpeciaux("arrve1"))) {
+			if (regles.estLie(modele.getGrapheCourant().getPointSpeciaux("depart0"), point, this.modele.getGrapheCourant().getPointSpeciaux("arrive0"))) {
 				return true;
 			}
 			point.clear();
-			if (regles.estLie(modele.getGrapheCourant().getPointSpeciaux("depart2"), point, modele.getGrapheCourant().getPointSpeciaux("arrive2"))) {
+			if (regles.estLie(modele.getGrapheCourant().getPointSpeciaux("depart1"), point, modele.getGrapheCourant().getPointSpeciaux("arrive1"))) {
 				return true;
 			}
 			return false;

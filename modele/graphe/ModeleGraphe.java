@@ -25,6 +25,47 @@ public class ModeleGraphe extends DeepClone {
 		this();
 		this.nom = nom;
 	}
+	
+	public void creerGrapheAleatoire(int nbPoint, int nbSegment, double maxX, double maxY) {
+		supprimerTout();
+		int x = (int)(Math.random()*nbPoint);
+		Point point;
+		Segment segment;
+		for(int i = 0; i < nbPoint; i++) {
+			point = new Point(Math.random()*maxX, Math.random()*maxY);
+			if (!points.contains(point)) {
+				points.add(point);
+				System.out.println("point add");
+			}else {
+				i=i-1;
+			}
+		}
+		for(int i = 0; i < nbPoint; i++) {
+			x = (int)(Math.random()*nbPoint);
+			point = points.get(x);
+			Point p = points.get(i);
+			segment = new Segment(p, point);
+			if (!(p.getX()==point.getX() && p.getY()==point.getY())) {
+				segments.add(segment);
+				System.out.println("segment add");
+			}else {
+				i=i-1;
+			}
+		}
+		for(int i = 0; i < nbSegment; i++) {
+			x = (int)(Math.random()*nbPoint);
+			point = points.get(x);
+			x = (int)(Math.random()*nbPoint);
+			Point p = points.get(x);
+			segment = new Segment(p, point);
+			if (!(p.getX()==point.getX() && p.getY()==point.getY())) {
+				segments.add(segment);
+				System.out.println("segment add");
+			}else {
+				i=i-1;
+			}
+		}
+	}
 
 	public ModeleGraphe() {
 		this.nom = null;

@@ -29,7 +29,7 @@ public class ControleurJoueur extends ControleurRetour {
 			}
 			for (Map.Entry<String, Point> entry : modele.getGrapheCourant().getPointsSpeciaux().entrySet()) {
 				for (int i = 0; i < modele.getNbJoueurs(); i++) {
-					if(entry.getKey().startsWith("j" + i)) {
+					if(entry.getKey().equals("depart" + i) || entry.getKey().equals("arrive" + i)) {
 						((PointCouleur) entry.getValue()).setCouleur(modele.getJoueur(i).getCouleur());
 					}
 				}

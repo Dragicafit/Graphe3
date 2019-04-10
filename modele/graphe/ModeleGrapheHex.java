@@ -30,14 +30,10 @@ public class ModeleGrapheHex extends ModeleGraphe{
 		addPoint(blue1);
 		addPoint(blue2);
 		
-		addPointSpeciaux("depart1", red1);
-		addPointSpeciaux("arrive1", red2);
-		addPointSpeciaux("depart2", blue1);
-		addPointSpeciaux("arrive2", blue2);
-		addPointSpeciaux("j00", red1);
-		addPointSpeciaux("j01", red2);
-		addPointSpeciaux("j10", blue1);
-		addPointSpeciaux("j11", blue2);
+		addPointSpeciaux("depart0", red1);
+		addPointSpeciaux("arrive0", red2);
+		addPointSpeciaux("depart1", blue1);
+		addPointSpeciaux("arrive1", blue2);
 		
 		for(int i = 0; i< 7; i++) {
 			addSegment(new Segment(ligne1[i], ligne1[i+1]));

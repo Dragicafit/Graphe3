@@ -117,10 +117,19 @@ public class ModeleGraphe extends DeepClone {
 				removeSegment(i);
 		}
 		points.remove(p);
+		removePointSpeciaux(p);
 	}
 
 	public void removePoint(int nb) {
 		removePoint(points.get(nb));
+	}
+	
+	public void removePointSpeciaux(Point p) {
+		while(pointsSpeciaux.values().remove(p));
+	}
+
+	public void removePointSpeciaux(String key) {
+		pointsSpeciaux.remove(key);
 	}
 
 	public void removeSegment(Segment s) {

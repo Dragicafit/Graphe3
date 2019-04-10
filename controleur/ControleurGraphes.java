@@ -95,12 +95,25 @@ public class ControleurGraphes extends ControleurRetour {
 		} else if (point instanceof PointCouleur) {
 			PointCouleur p = (PointCouleur) point;
 			Couleur c = p.getCouleur();
-			if (c.equals(Couleur.BLANC))
+			if (c.equals(Couleur.BLANC)) {
 				p.setCouleur(Couleur.BLEU);
-			else if (c.equals(Couleur.BLEU))
+				if (modele.getGrapheCourant().getPointsSpeciaux().isEmpty())
+					modele.getGrapheCourant().addPointSpeciaux("depart0", point);
+				else
+					modele.getGrapheCourant().addPointSpeciaux("depart1", point);
+			} else if (c.equals(Couleur.BLEU)) {
 				p.setCouleur(Couleur.ROUGE);
-			else if (c.equals(Couleur.ROUGE))
+				if (modele.getGrapheCourant().getPointsSpeciaux().isEmpty()) {
+					modele.getGrapheCourant().removePointSpeciaux("depart0");
+					modele.getGrapheCourant().addPointSpeciaux("arrive0", point);
+				} else {
+					modele.getGrapheCourant().removePointSpeciaux("depart1");
+					modele.getGrapheCourant().addPointSpeciaux("arrive1", point);
+				}
+			} else if (c.equals(Couleur.ROUGE)) {
 				p.setCouleur(Couleur.BLANC);
+				modele.getGrapheCourant().removePointSpeciaux(point);
+			}
 		}
 		premierPoint = point;
 	}

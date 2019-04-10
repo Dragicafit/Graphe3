@@ -11,30 +11,26 @@ public class ModeleGrapheHex2 extends ModeleGraphe{
 	public ModeleGrapheHex2() {
 		super("Petit Hex");
 		
-		PointCouleur red1 = new PointCouleur(100,360);
-		PointCouleur blue1 = new PointCouleur(600, 25);
-		PointCouleur red2 = new PointCouleur(1100,360);
-		PointCouleur blue2 = new PointCouleur(600, 725);
+		PointCouleur depart0 = new PointCouleur(100,360);
+		PointCouleur depart1 = new PointCouleur(600, 25);
+		PointCouleur arrive0 = new PointCouleur(1100,360);
+		PointCouleur arrive1 = new PointCouleur(600, 725);
 		
 		Point ligne1 = new Point(100,100);
 
 				
-		addPoint(red1);
-		addPoint(red2);
-		addPoint(blue1);
-		addPoint(blue2);
+		addPoint(depart0);
+		addPoint(arrive0);
+		addPoint(depart1);
+		addPoint(arrive1);
 		
-		addPointSpeciaux("depart1", red1);
-		addPointSpeciaux("arrive1", red2);
-		addPointSpeciaux("depart2", blue1);
-		addPointSpeciaux("arrive2", blue2);
-		addPointSpeciaux("j00", red1);
-		addPointSpeciaux("j01", red2);
-		addPointSpeciaux("j10", blue1);
-		addPointSpeciaux("j11", blue2);
-		addSegment(new Segment(red1, ligne1));
-		addSegment(new Segment(red2, ligne1));
-		addSegment(new Segment(blue1, ligne1));
-		addSegment(new Segment(blue2, ligne1));
+		addPointSpeciaux("depart0", depart0);
+		addPointSpeciaux("arrive0", arrive0);
+		addPointSpeciaux("depart1", depart1);
+		addPointSpeciaux("arrive1", arrive1);
+		addSegment(new Segment(depart0, ligne1));
+		addSegment(new Segment(arrive0, ligne1));
+		addSegment(new Segment(depart1, ligne1));
+		addSegment(new Segment(arrive1, ligne1));
 	}
 }

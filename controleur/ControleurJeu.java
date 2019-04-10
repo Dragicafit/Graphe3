@@ -65,7 +65,6 @@ public class ControleurJeu extends ControleurRetour {
 		} else if (event instanceof MouseEvent) {
 			eventMouse((MouseEvent) event, source);
 		}
-		event.consume();
 	}
 
 	@Override

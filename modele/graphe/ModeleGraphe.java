@@ -61,19 +61,21 @@ public class ModeleGraphe extends DeepClone {
 		double Y = maxY - 30;
 
 		for (int x = 0; x < nbPoint; x++) {
-			int i = (int) (Math.random() * ((int) (X / gap)));
-			int j = (int) (Math.random() * ((int) (Y / gap)));
-			Point point = new Point(i * gap + 30, j * gap + 30);
-			// point = new Point(Math.random() * maxX, Math.random() * maxY);
-			if (!modeleGraphe.aUnPointClone(point))
-				points.add(point);
+			Point point;
+			do {
+				int i = (int) (Math.random() * (int) (X / gap));
+				int j = (int) (Math.random() * (int) (Y / gap));
+				point = new Point(i * gap + 30, j * gap + 30);
+				// point = new Point(Math.random() * maxX, Math.random() * maxY);
+			} while (modeleGraphe.aUnPointClone(point));
+			points.add(point);
 		}
 
 		for (Point point : points) {
 			Point point2;
 			Segment segment;
 			do {
-				point2 = points.get((int) Math.random() * points.size());
+				point2 = points.get((int) (Math.random() * points.size()));
 				segment = new Segment(point, point2);
 			} while (point.equals(point2) || modeleGraphe.aUnSegmentClone(segment));
 			segments.add(segment);
@@ -84,8 +86,8 @@ public class ModeleGraphe extends DeepClone {
 			Point point2;
 			Segment segment;
 			do {
-				point = points.get((int) Math.random() * nbPoint);
-				point2 = points.get((int) Math.random() * nbPoint);
+				point = points.get((int) (Math.random() * nbPoint));
+				point2 = points.get((int) (Math.random() * nbPoint));
 				segment = new Segment(point, point2);
 			} while (point.equals(point2) || modeleGraphe.aUnSegmentClone(segment));
 			segments.add(segment);

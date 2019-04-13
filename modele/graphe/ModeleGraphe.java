@@ -34,91 +34,65 @@ public class ModeleGraphe extends DeepClone {
 		this.joueurs = new ArrayList<>();
 		this.joueurCourant = 0;
 	}
-	
+
 	public boolean aUnPointClone(Point p) {
-		for (Point poi : points) {
-			if (poi.getX() == p.getX() && poi.getY() == p.getY())
+		for (Point p2 : points) {
+			if (p.equals(p2))
 				return true;
 		}
 		return false;
 	}
 
 	public boolean aUnSegmentClone(Segment s) {
-		for (Segment seg : segments) {
-			if ((seg.getPoint1().getX() == s.getPoint2().getX() && seg.getPoint1().getY() == s.getPoint2().getY()
-					&& seg.getPoint2().getX() == s.getPoint1().getX()
-					&& seg.getPoint2().getY() == s.getPoint1().getY()))
-				return true;
-			if ((seg.getPoint1().getX() == s.getPoint1().getX() && seg.getPoint1().getY() == s.getPoint1().getY()
-					&& seg.getPoint2().getX() == s.getPoint2().getX()
-					&& seg.getPoint2().getY() == s.getPoint2().getY()))
+		for (Segment s2 : segments) {
+			if (s.equals(s2))
 				return true;
 		}
 		return false;
 	}
 
 	public static ModeleGraphe creerGrapheAleatoire(int nbPoint, int nbSegment, double maxX, double maxY, int gap) {
+
 		ModeleGraphe modeleGraphe = new ModeleGraphe();
 		ArrayList<Point> points = modeleGraphe.points;
 		ArrayList<Segment> segments = modeleGraphe.segments;
 
 		double X = maxX - 30;
 		double Y = maxY - 30;
-		int x = (int) (Math.random() * nbPoint);
-		Point point;
-		Segment segment;
-		int[][] tab = new int[(int) X / gap][(int) Y / gap];
-		for (int i = 0; i < nbPoint; i++) {
-			tab[(int) (Math.random() * ((int) (X / gap)))][(int) (Math.random() * ((int) (Y / gap)))] = 1;
+
+		for (int x = 0; x < nbPoint; x++) {
+			int i = (int) (Math.random() * ((int) (X / gap)));
+			int j = (int) (Math.random() * ((int) (Y / gap)));
+			Point point = new Point(i * gap + 30, j * gap + 30);
+			// point = new Point(Math.random() * maxX, Math.random() * maxY);
+			if (!modeleGraphe.aUnPointClone(point))
+				points.add(point);
 		}
 
-		for (int i = 0; i < tab.length; i++) {
-			for (int j = 0; j < tab[i].length; j++) {
-				if (tab[i][j] == 1) {
-					point = new Point(i * gap + 30, j * gap + 30);
-					if (!modeleGraphe.aUnPointClone(point))
-						points.add(point);
-				}
-			}
-		}
-/*
-		for (int i = 0; i < nbPoint; i++) {
-			point = new Point(Math.random() * maxX, Math.random() * maxY);
-			if (!modeleGraphe.aUnPointClone(point)) {
-				points.add(point);
-			} else {
-				i = i - 1;
-			}
-		}
-*/
-		for (int i = 0; i < points.size(); i++) {
-			x = (int) (Math.random() * points.size());
-			point = points.get(x);
-			Point p = points.get(i);
-			segment = new Segment(p, point);
-			if (!modeleGraphe.aUnSegmentClone(segment) && !(p.getX() == point.getX() && p.getY() == point.getY())) {
-				segments.add(segment);
-			} else {
-				i = i - 1;
-			}
+		for (Point point : points) {
+			Point point2;
+			Segment segment;
+			do {
+				point2 = points.get((int) Math.random() * points.size());
+				segment = new Segment(point, point2);
+			} while (point.equals(point2) || modeleGraphe.aUnSegmentClone(segment));
+			segments.add(segment);
 		}
 
 		for (int i = 0; i < nbSegment; i++) {
-			x = (int) (Math.random() * nbPoint);
-			point = points.get(x);
-			x = (int) (Math.random() * nbPoint);
-			Point p = points.get(x);
-			segment = new Segment(p, point);
-			if (!modeleGraphe.aUnSegmentClone(segment) && !(p.getX() == point.getX() && p.getY() == point.getY())) {
-				segments.add(segment);
-			} else {
-				i = i - 1;
-			}
-
+			Point point;
+			Point point2;
+			Segment segment;
+			do {
+				point = points.get((int) Math.random() * nbPoint);
+				point2 = points.get((int) Math.random() * nbPoint);
+				segment = new Segment(point, point2);
+			} while (point.equals(point2) || modeleGraphe.aUnSegmentClone(segment));
+			segments.add(segment);
 		}
+
 		return modeleGraphe;
 	}
-
 
 	public void addPoint(Point point) {
 		if (!points.contains(point))

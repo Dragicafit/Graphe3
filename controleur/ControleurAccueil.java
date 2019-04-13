@@ -15,7 +15,7 @@ import vue.VueJeu;
 import vue.VueJoueur;
 
 public class ControleurAccueil extends Controleur {
-	
+
 	public ControleurAccueil(Vue vue) {
 		super(vue);
 		launcherPartieEnCours();
@@ -34,9 +34,10 @@ public class ControleurAccueil extends Controleur {
 		}
 		launcher();
 	}
-	
+
 	public void eventBouton() {
 		if (bouton == Bouton.ALEATOIRE) {
+			modele.setGrapheCourant(ModeleGraphe.creerGrapheAleatoire(10, 0, 900, 600, 100));
 			new VueCreationGraphe(modele);
 			exit();
 		} else if (bouton == Bouton.CREERGRAPHE) {
@@ -49,14 +50,14 @@ public class ControleurAccueil extends Controleur {
 			exit();
 		}
 	}
-	
+
 	public void eventGraphePredef(Button source) {
 		VueAccueil vueAccueil = (VueAccueil) vue;
 		if (vueAccueil.getGraphePredef().containsKey(source)) {
 			modele.setGrapheCourant((ModeleGraphe) vueAccueil.getGraphePredef(source).clone());
 		}
 	}
-	
+
 	public void eventGrapheLocal(Button source, boolean click) {
 		VueAccueil vueAccueil = (VueAccueil) vue;
 		if (vueAccueil.getGrapheLocal().containsKey(source)) {
@@ -68,14 +69,14 @@ public class ControleurAccueil extends Controleur {
 			}
 		}
 	}
-	
+
 	public void eventReglePredef(Button source) {
 		VueAccueil vueAccueil = (VueAccueil) vue;
 		if (vueAccueil.getReglePredef().containsKey(source)) {
 			modele.setRegleCourant((ModeleRegle) vueAccueil.getReglePredef(source).clone());
 		}
 	}
-	
+
 	public void eventRegleLocal(Button source, boolean click) {
 		VueAccueil vueAccueil = (VueAccueil) vue;
 		if (vueAccueil.getRegleLocal().containsKey(source)) {
@@ -87,14 +88,14 @@ public class ControleurAccueil extends Controleur {
 			}
 		}
 	}
-	
+
 	public void launcher() {
 		if (modele.getGrapheCourant() != null && modele.getRegleCourant() != null) {
 			exit();
 			new VueJoueur(modele, 2);
 		}
 	}
-	
+
 	public void launcherPartieEnCours() {
 		if (modele.getGrapheCourant() != null && modele.getRegleCourant() != null) {
 			exit();

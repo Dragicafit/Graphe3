@@ -28,13 +28,4 @@ public class SegmentCouleur extends Segment implements estColoriable {
 	public void setCouleur(Couleur couleur) {
 		this.couleur = couleur;
 	}
-	
-	@Override
-	public boolean equals(Object obj) {
-		if (obj instanceof SegmentCouleur) {
-			SegmentCouleur segmentCouleur = (SegmentCouleur) obj;
-			return super.equals(obj) && couleur.equals(segmentCouleur.couleur);
-		}
-		return false;
-	}
 }

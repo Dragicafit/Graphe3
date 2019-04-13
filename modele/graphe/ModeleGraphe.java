@@ -41,10 +41,13 @@ public class ModeleGraphe extends DeepClone {
 		return false;
 	}
 	
-	public void creerGrapheAleatoire(int nbPoint, int nbSegment, double maxX, double maxY, int gap) {
+	public static ModeleGraphe creerGrapheAleatoire(int nbPoint, int nbSegment, double maxX, double maxY, int gap) {
+		ModeleGraphe modeleGraphe = new ModeleGraphe();
+		ArrayList<Point> points = modeleGraphe.points;
+		ArrayList<Segment> segments = modeleGraphe.segments;
+		
 		double X = maxX-30;
 		double Y = maxY-30;
-		supprimerTout();
 		int x = (int)(Math.random()*nbPoint);
 		Point point;
 		Segment segment;
@@ -56,14 +59,14 @@ public class ModeleGraphe extends DeepClone {
 			for(int j = 0; j<tab[i].length; j++) {
 				if(tab[i][j]==1) {
 					point = new Point(i*gap+30, j*gap+30);
-					if(!aUnPointClone(point)) points.add(point);
+					if(!modeleGraphe.aUnPointClone(point)) points.add(point);
 				}
 			}
 		}
 		/*
 		for(int i = 0; i < nbPoint; i++) {
 			point = new Point(Math.random()*maxX, Math.random()*maxY);
-			if (!aUnPointClone(point)) {
+			if (!modeleGraphe.aUnPointClone(point)) {
 				points.add(point);
 			}else {
 				i=i-1;
@@ -76,7 +79,7 @@ public class ModeleGraphe extends DeepClone {
 			point = points.get(x);
 			Point p = points.get(i);
 			segment = new Segment(p, point);
-			if (!aUnSegmentClone(segment) && !(p.getX()==point.getX() && p.getY()==point.getY())) {
+			if (!modeleGraphe.aUnSegmentClone(segment) && !(p.getX()==point.getX() && p.getY()==point.getY())) {
 				segments.add(segment);
 			}else {
 				i=i-1;
@@ -88,13 +91,14 @@ public class ModeleGraphe extends DeepClone {
 			x = (int)(Math.random()*nbPoint);
 			Point p = points.get(x);
 			segment = new Segment(p, point);
-			if (!aUnSegmentClone(segment) && !(p.getX()==point.getX() && p.getY()==point.getY())) {
+			if (!modeleGraphe.aUnSegmentClone(segment) && !(p.getX()==point.getX() && p.getY()==point.getY())) {
 				segments.add(segment);
 			}else {
 				i=i-1;
 			}
 
 		}
+		return modeleGraphe;
 	}
 
 	public ModeleGraphe() {

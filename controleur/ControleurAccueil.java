@@ -37,9 +37,7 @@ public class ControleurAccueil extends Controleur {
 	
 	public void eventBouton() {
 		if (bouton == Bouton.ALEATOIRE) {
-			ModeleGraphe m = new ModeleGraphe();
-			m.creerGrapheAleatoire(10, 0, 900, 600, 100);
-			modele.setGrapheCourant(m);
+			modele.setGrapheCourant(ModeleGraphe.creerGrapheAleatoire(10, 0, 900, 600, 100));
 			new VueCreationGraphe(modele);
 			exit();
 		} else if (bouton == Bouton.CREERGRAPHE) {

@@ -35,6 +35,67 @@ public class ModeleGraphe extends DeepClone {
 		this.joueurCourant = 0;
 	}
 
+	public boolean aUnPointClone(Point p) {
+		for (Point p2 : points) {
+			if (p.equals(p2))
+				return true;
+		}
+		return false;
+	}
+
+	public boolean aUnSegmentClone(Segment s) {
+		for (Segment s2 : segments) {
+			if (s.equals(s2))
+				return true;
+		}
+		return false;
+	}
+
+	public static ModeleGraphe creerGrapheAleatoire(int nbPoint, int nbSegment, double maxX, double maxY, int gap) {
+
+		ModeleGraphe modeleGraphe = new ModeleGraphe();
+		ArrayList<Point> points = modeleGraphe.points;
+		ArrayList<Segment> segments = modeleGraphe.segments;
+
+		double X = maxX - 30;
+		double Y = maxY - 30;
+
+		for (int x = 0; x < nbPoint; x++) {
+			Point point;
+			do {
+				int i = (int) (Math.random() * (int) (X / gap));
+				int j = (int) (Math.random() * (int) (Y / gap));
+				point = new Point(i * gap + 30, j * gap + 30);
+				// point = new Point(Math.random() * maxX, Math.random() * maxY);
+			} while (modeleGraphe.aUnPointClone(point));
+			points.add(point);
+		}
+
+		for (Point point : points) {
+			Point point2;
+			Segment segment;
+			do {
+				point2 = points.get((int) (Math.random() * points.size()));
+				segment = new Segment(point, point2);
+			} while (point.equals(point2) || modeleGraphe.aUnSegmentClone(segment));
+			segments.add(segment);
+		}
+
+		for (int i = 0; i < nbSegment; i++) {
+			Point point;
+			Point point2;
+			Segment segment;
+			do {
+				point = points.get((int) (Math.random() * nbPoint));
+				point2 = points.get((int) (Math.random() * nbPoint));
+				segment = new Segment(point, point2);
+			} while (point.equals(point2) || modeleGraphe.aUnSegmentClone(segment));
+			segments.add(segment);
+		}
+
+		return modeleGraphe;
+	}
+
 	public void addPoint(Point point) {
 		if (!points.contains(point))
 			points.add(point);
@@ -86,7 +147,7 @@ public class ModeleGraphe extends DeepClone {
 	public boolean containsSegment(Segment s) {
 		return segments.contains(s);
 	}
-	
+
 	public boolean containsJoueur(Joueur j) {
 		return joueurs.contains(j);
 	}
@@ -127,9 +188,10 @@ public class ModeleGraphe extends DeepClone {
 	public void removePoint(int nb) {
 		removePoint(points.get(nb));
 	}
-	
+
 	public void removePointSpeciaux(Point p) {
-		while(pointsSpeciaux.values().remove(p));
+		while (pointsSpeciaux.values().remove(p))
+			;
 	}
 
 	public void removePointSpeciaux(String key) {
@@ -156,7 +218,7 @@ public class ModeleGraphe extends DeepClone {
 	public void setNom(String nom) {
 		this.nom = nom;
 	}
-	
+
 	public void clearJoueurs() {
 		joueurs.clear();
 	}

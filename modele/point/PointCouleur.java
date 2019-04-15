@@ -37,13 +37,4 @@ public class PointCouleur extends Point implements estColoriable {
 	public void setCouleur(Couleur couleur) {
 		this.couleur = couleur;
 	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (obj instanceof PointCouleur) {
-			PointCouleur pointCouleur = (PointCouleur) obj;
-			return super.equals(obj) && couleur.equals(pointCouleur.couleur);
-		}
-		return false;
-	}
 }

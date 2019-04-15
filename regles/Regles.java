@@ -82,7 +82,8 @@ public class Regles {
 						return true;
 					}
 					if (!point.contains(voisin)) {
-						return estLie(voisin, point, depart);
+						if (estLie(voisin, point, depart))
+						return true;
 					}
 				}
 			}

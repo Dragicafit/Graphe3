@@ -98,4 +98,21 @@ public class Regles {
 		}
 		return true;
 	}
+	
+	public boolean seCroise(Segment s1, Segment s2){
+		double x1A = s1.getPoint1().getX();
+		double y1A = s1.getPoint1().getY();
+		double x1B = s1.getPoint2().getX();
+		double y1B = s1.getPoint2().getY();
+		
+		double x2A = s2.getPoint1().getX();
+		double y2A = s2.getPoint1().getY();
+		double x2B = s2.getPoint2().getX();
+		double y2B = s2.getPoint2().getY();
+		
+		if((y1B-y1A)/(x1B-x1A) != (y2B-y2A)/(x2B-x2A)) {
+			
+		}
+		return false;
+	}
 }

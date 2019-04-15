@@ -4,6 +4,7 @@ import java.util.Map;
 
 import javafx.scene.input.InputEvent;
 import modele.Bouton;
+import modele.Couleur;
 import modele.Joueur;
 import modele.point.Point;
 import modele.point.PointCouleur;
@@ -33,7 +34,7 @@ public class ControleurJoueur extends ControleurRetour {
 				}
 				
 				Joueur joueur = new Joueur(nom, creerJoueur.getCouleur());
-				if(modele.containsJoueur(joueur)) {
+				if(modele.containsJoueur(joueur) || creerJoueur.getCouleur().equals(Couleur.BLANC)) {
 					modele.clearJoueurs();
 					vue.update();
 					return;

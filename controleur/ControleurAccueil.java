@@ -37,7 +37,7 @@ public class ControleurAccueil extends Controleur {
 
 	public void eventBouton() {
 		if (bouton == Bouton.ALEATOIRE) {
-			int i = (int) (Math.random() * 20);
+			int i = (int) (Math.random() * 10) + 5;
 			modele.setGrapheCourant(ModeleGraphe.creerGrapheAleatoire(i, (int) (Math.random() * i), 1200, 700, 100));
 			new VueCreationGraphe(modele);
 			exit();

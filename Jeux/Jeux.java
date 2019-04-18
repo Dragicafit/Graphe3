@@ -33,14 +33,16 @@ public class Jeux extends Thread {
 	@Override
 	public void run() {
 		try {
-			while (!end_game()) {
-				int j = modele.getJoueurCourant();
-				if (!tour(j)) {
-					synchronized (vue.getControleur()) {
-						((ControleurJeu) vue.getControleur()).notify();
+			if (checkDebut()){
+				while (!checkFin()) {
+					int j = modele.getJoueurCourant();
+					if (!tour(j)) {
+						synchronized (vue.getControleur()) {
+							((ControleurJeu) vue.getControleur()).notify();
+						}
 					}
+					sleep(200);
 				}
-				sleep(200);
 			}
 			Platform.runLater(new Runnable() {
 				@Override
@@ -73,7 +75,7 @@ public class Jeux extends Thread {
 			if (modele.getRegleCourant().ClickAutorise.get()) {
 				if (source instanceof Circle && vue.getCercles().containsKey(source)) {
 					PointCouleur point = (PointCouleur) (vue.getCercles().get(source));
-					if (check_regles(point)) {
+					if (checkRegles(point)) {
 						((ControleurJeu) vue.getControleur()).setApplique(point);
 						return true;
 					}
@@ -85,7 +87,7 @@ public class Jeux extends Thread {
 		return false;
 	}
 
-	public boolean check_regles(Point p) {
+	public boolean checkRegles(Point p) {
 		if (modele.getRegleCourant().JouerAcoteSoit.get() != null) {
 			if (modele.getRegleCourant().JouerAcoteSoit.get()) {
 				if (!regles.jouerAcoteSoit((PointCouleur) p)) {
@@ -130,36 +132,42 @@ public class Jeux extends Thread {
 		return true;
 	}
 
-	public boolean end_game() {
+	public boolean checkDebut() {
+		return true;
+	}
+
+	public boolean checkFin() {
 		if (modele.getRegleCourant().FinHex.get()) {
 			ArrayList<Point> point = new ArrayList<>();
-			if (regles.estLie(modele.getGrapheCourant().getPointSpeciaux("depart0"), point, this.modele.getGrapheCourant().getPointSpeciaux("arrive0"))) {
+			if (regles.estLie(modele.getGrapheCourant().getPointSpeciaux("depart0"), point,
+					this.modele.getGrapheCourant().getPointSpeciaux("arrive0"))) {
 				return true;
 			}
 			point.clear();
-			if (regles.estLie(modele.getGrapheCourant().getPointSpeciaux("depart1"), point, modele.getGrapheCourant().getPointSpeciaux("arrive1"))) {
+			if (regles.estLie(modele.getGrapheCourant().getPointSpeciaux("depart1"), point,
+					modele.getGrapheCourant().getPointSpeciaux("arrive1"))) {
 				return true;
 			}
 			return false;
-		}else if(modele.getRegleCourant().FinDeplacement.get()) {
-			for(Segment s : modele.getSegments()) {
-				for(Segment seg: modele.getSegments()){
-					if(!s.sommetCommun(seg) && regles.seCroise(s,seg)) {
+		}
+		if (modele.getRegleCourant().FinDeplacement.get()) {
+			for (Segment s : modele.getSegments()) {
+				for (Segment seg : modele.getSegments()) {
+					if (!s.sommetCommun(seg) && regles.seCroise(s, seg)) {
 						return false;
 					}
 				}
 			}
 			return true;
-		}else {
-			for (Point p : modele.getPoints()) {
-				if (check_regles(p)) {
-					return false;
-				}
-			}
-			return true;
 		}
+		for (Point p : modele.getPoints()) {
+			if (checkRegles(p)) {
+				return false;
+			}
+		}
+		return true;
 	}
-	
+
 	public void applique(Object o) {
 		ControleurJeu c = (ControleurJeu) vue.getControleur();
 		if (o instanceof PointCouleur) {

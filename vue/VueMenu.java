@@ -11,14 +11,11 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
 import modele.Modele;
 import modele.point.Point;
-import modele.point.PointCouleur;
 import modele.segment.Segment;
-import modele.segment.SegmentCouleur;
 
 public abstract class VueMenu extends VueRetour {
 
@@ -73,28 +70,13 @@ public abstract class VueMenu extends VueRetour {
 		if (modele == null)
 			return;
 		for (Segment s : modele.getSegments()) {
-			Line l = new Line(s.getPoint1().getX(), s.getPoint1().getY(), s.getPoint2().getX(), s.getPoint2().getY());
-			if (s instanceof SegmentCouleur) {
-				l.setStroke(((SegmentCouleur) s).getCouleur().toColor());
-			} else {
-				l.setStroke(Color.BLACK);
-			}
-			l.setStrokeWidth(3);
-			l.setVisible(true);
+			Line l = s.toLine();
 			l.addEventHandler(MouseEvent.MOUSE_CLICKED, controleur);
 			lignes.put(l, s);
 			this.graphe.getChildren().add(l);
 		}
 		for (Point p : modele.getPoints()) {
-			Circle c = new Circle(p.getX(), p.getY(), 15);
-			if (p instanceof PointCouleur) {
-				c.setFill(((PointCouleur) p).getCouleur().toColor());
-			} else {
-				c.setFill(Color.WHITE);
-			}
-			c.setStroke(Color.BLACK);
-			c.setStrokeWidth(3);
-			c.setVisible(true);
+			Circle c = p.toCircle();
 			c.addEventHandler(MouseEvent.MOUSE_CLICKED, controleur);
 			c.addEventHandler(MouseEvent.DRAG_DETECTED, controleur);
 			cercles.put(c, p);

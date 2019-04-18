@@ -2,6 +2,9 @@ package modele.point;
 
 import java.io.Serializable;
 
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
+
 public class Point implements Serializable {
 	private static final long serialVersionUID = 10L;
 
@@ -55,6 +58,15 @@ public class Point implements Serializable {
 
 	public void setDeplacable(boolean deplacable) {
 		this.deplacable = deplacable;
+	}
+	
+	public Circle toCircle() {
+		Circle c = new Circle(x, y, 15);
+		c.setFill(Color.WHITE);
+		c.setStroke(Color.BLACK);
+		c.setStrokeWidth(3);
+		c.setVisible(true);
+		return c;
 	}
 
 	@Override

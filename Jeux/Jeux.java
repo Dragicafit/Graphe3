@@ -139,7 +139,7 @@ public class Jeux extends Thread {
 		}else if(modele.getRegleCourant().FinDeplacement.get()) {
 			for(Segment s : modele.getSegments()) {
 				for(Segment seg: modele.getSegments()){
-					if(regles.seCroise(s,seg)) {
+					if(!s.sommetCommun(seg) && regles.seCroise(s,seg)) {
 						return false;
 					}
 				}

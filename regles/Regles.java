@@ -101,25 +101,7 @@ public class Regles {
 	}
 	
 	public boolean seCroise(Segment s1, Segment s2){
-		double x1A = s1.getPoint1().getX();
-		double y1A = s1.getPoint1().getY();
-		double x1B = s1.getPoint2().getX();
-		double y1B = s1.getPoint2().getY();
-		
-		double x2A = s2.getPoint1().getX();
-		double y2A = s2.getPoint1().getY();
-		double x2B = s2.getPoint2().getX();
-		double y2B = s2.getPoint2().getY();
-		
-		double a1 = (y1B-y1A)/(x1B-x1A);
-		double a2 = (y2B-y2A)/(x2B-x2A);
-		if(a1 == a2) {return false;}
-		double b1 = y1A - (a1 * x1A);
-		double b2 = y2B - (a2 * x2B);
-		
-		double xCommun = (b2-b1)/(a1-a2);
-		
-		return (xCommun > x1A && xCommun <x1B && xCommun > x2A && xCommun < x2B) || (xCommun < x1A && xCommun >x1B && xCommun < x2A && xCommun > x2B);
+		return s1.toLine2D().intersectsLine(s2.toLine2D());
 		
 	}
 }

@@ -23,7 +23,7 @@ public class VueJoueur extends Vue {
 
 	private ArrayList<CreerJoueur> joueurs;
 
-	public VueJoueur(Modele m, int nb) {
+	public VueJoueur(Modele m) {
 		super(m);
 		this.setTitle("Création des Joueurs");
 		joueurs = new ArrayList<>();
@@ -38,7 +38,7 @@ public class VueJoueur extends Vue {
 		valider.setAlignment(Pos.CENTER);
 		boutons.put(valider, Bouton.VALIDER);
 		valider.setStyle("-fx-font-size: 30px;");
-		for (int i = 0; i < nb; i++) {
+		for (int i = 0; i < modele.getRegleCourant().NbJoueurMax; i++) {
 			joueurs.add(new CreerJoueur(i+1));
 		}
 		tilePane.getChildren().addAll(joueurs);

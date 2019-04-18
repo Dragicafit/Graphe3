@@ -10,6 +10,7 @@ import javafx.scene.shape.Circle;
 import modele.Modele;
 import modele.point.Point;
 import modele.point.PointCouleur;
+import modele.regle.ModeleRegle;
 import modele.segment.Segment;
 import modele.segment.SegmentCouleur;
 import vue.Vue;
@@ -33,7 +34,7 @@ public class Jeux extends Thread {
 	@Override
 	public void run() {
 		try {
-			if (checkDebut()){
+			if (checkDebut()) {
 				while (!checkFin()) {
 					int j = modele.getJoueurCourant();
 					if (!tour(j)) {
@@ -64,15 +65,16 @@ public class Jeux extends Thread {
 	public synchronized boolean tour(int nb) throws InterruptedException, RuntimeException {
 		wait();
 		Object source = event.getSource();
+		ModeleRegle regle = modele.getRegleCourant();
 		if (event.getEventType() == MouseEvent.DRAG_DETECTED) {
-			if (modele.getRegleCourant().DeplacementAutorise.get()) {
+			if (regle.DeplacementAutorise.get()) {
 				if (source instanceof Circle && vue.getCercles().containsKey(source)) {
 					((ControleurJeu) vue.getControleur()).setApplique((Circle) source);
 					return false;
 				}
 			}
 		} else if (event.getEventType() == MouseEvent.MOUSE_CLICKED) {
-			if (modele.getRegleCourant().ClickAutorise.get()) {
+			if (regle.ClickAutorise.get()) {
 				if (source instanceof Circle && vue.getCercles().containsKey(source)) {
 					PointCouleur point = (PointCouleur) (vue.getCercles().get(source));
 					if (checkRegles(point)) {
@@ -88,8 +90,9 @@ public class Jeux extends Thread {
 	}
 
 	public boolean checkRegles(Point p) {
-		if (modele.getRegleCourant().JouerAcoteSoit.get() != null) {
-			if (modele.getRegleCourant().JouerAcoteSoit.get()) {
+		ModeleRegle regle = modele.getRegleCourant();
+		if (regle.JouerAcoteSoit.get() != null) {
+			if (regle.JouerAcoteSoit.get()) {
 				if (!regles.jouerAcoteSoit((PointCouleur) p)) {
 					return false;
 				}
@@ -99,8 +102,8 @@ public class Jeux extends Thread {
 				}
 			}
 		}
-		if (modele.getRegleCourant().JouerAcoteEnnemi.get() != null) {
-			if (modele.getRegleCourant().JouerAcoteEnnemi.get()) {
+		if (regle.JouerAcoteEnnemi.get() != null) {
+			if (regle.JouerAcoteEnnemi.get()) {
 				if (!regles.jouerAcoteEnnemi((PointCouleur) p)) {
 					return false;
 				}
@@ -110,15 +113,15 @@ public class Jeux extends Thread {
 				}
 			}
 		}
-		if (modele.getRegleCourant().JouerSurEnnemi.get() != null) {
-			if (!modele.getRegleCourant().JouerSurEnnemi.get()) {
+		if (regle.JouerSurEnnemi.get() != null) {
+			if (!regle.JouerSurEnnemi.get()) {
 				if (regles.jouerSurEnnemi((PointCouleur) p)) {
 					return false;
 				}
 			}
 		}
-		if (modele.getRegleCourant().EstBlanc.get() != null) {
-			if (modele.getRegleCourant().EstBlanc.get()) {
+		if (regle.EstBlanc.get() != null) {
+			if (regle.EstBlanc.get()) {
 				if (!regles.estBlanc((PointCouleur) p)) {
 					return false;
 
@@ -137,20 +140,21 @@ public class Jeux extends Thread {
 	}
 
 	public boolean checkFin() {
-		if (modele.getRegleCourant().FinHex.get()) {
+		ModeleRegle regle = modele.getRegleCourant();
+		if (regle.FinHex.get()) {
 			ArrayList<Point> point = new ArrayList<>();
-			if (regles.estLie(modele.getGrapheCourant().getPointSpeciaux("depart0"), point,
-					this.modele.getGrapheCourant().getPointSpeciaux("arrive0"))) {
+			if (regles.estLie(modele.getPointSpecial("depart0"), point,
+					this.modele.getPointSpecial("arrive0"))) {
 				return true;
 			}
 			point.clear();
-			if (regles.estLie(modele.getGrapheCourant().getPointSpeciaux("depart1"), point,
-					modele.getGrapheCourant().getPointSpeciaux("arrive1"))) {
+			if (regles.estLie(modele.getPointSpecial("depart1"), point,
+					modele.getPointSpecial("arrive1"))) {
 				return true;
 			}
 			return false;
 		}
-		if (modele.getRegleCourant().FinDeplacement.get()) {
+		if (regle.FinDeplacement.get()) {
 			for (Segment s : modele.getSegments()) {
 				for (Segment seg : modele.getSegments()) {
 					if (!s.sommetCommun(seg) && regles.seCroise(s, seg)) {

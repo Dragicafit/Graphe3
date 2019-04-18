@@ -59,22 +59,28 @@ public class Jeux extends Thread {
 		notify();
 	}
 
-	public synchronized boolean tour(int nb) throws InterruptedException {
+	public synchronized boolean tour(int nb) throws InterruptedException, RuntimeException {
 		wait();
 		Object source = event.getSource();
 		if (event.getEventType() == MouseEvent.DRAG_DETECTED) {
-			if (source instanceof Circle && vue.getCercles().containsKey(source)) {
-				if (modele.getRegleCourant().DeplacementAutorise.get()) {
+			if (modele.getRegleCourant().DeplacementAutorise.get()) {
+				if (source instanceof Circle && vue.getCercles().containsKey(source)) {
 					((ControleurJeu) vue.getControleur()).setApplique((Circle) source);
 					return false;
 				}
 			}
-		} else if (source instanceof Circle && vue.getCercles().containsKey((Circle) source)) {
-			PointCouleur point = (PointCouleur) (vue.getCercles().get((Circle) source));
-			if (check_regles(point)) {
-				((ControleurJeu) vue.getControleur()).setApplique(point);
-				return true;
+		} else if (event.getEventType() == MouseEvent.MOUSE_CLICKED) {
+			if (modele.getRegleCourant().ClickAutorise.get()) {
+				if (source instanceof Circle && vue.getCercles().containsKey(source)) {
+					PointCouleur point = (PointCouleur) (vue.getCercles().get(source));
+					if (check_regles(point)) {
+						((ControleurJeu) vue.getControleur()).setApplique(point);
+						return true;
+					}
+				}
 			}
+		} else {
+			throw new RuntimeException("mauvait event");
 		}
 		return false;
 	}

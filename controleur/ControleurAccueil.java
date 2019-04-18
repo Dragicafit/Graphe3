@@ -93,7 +93,7 @@ public class ControleurAccueil extends Controleur {
 	public void launcher() {
 		if (modele.getGrapheCourant() != null && modele.getRegleCourant() != null) {
 			exit();
-			new VueJoueur(modele, 2);
+			new VueJoueur(modele);
 		}
 	}
 

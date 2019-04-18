@@ -1,6 +1,5 @@
 package modele.graphe;
 
-import modele.point.Point;
 import modele.point.PointCouleur;
 import modele.segment.Segment;
 
@@ -16,13 +15,14 @@ public class ModeleGrapheHex2 extends ModeleGraphe{
 		PointCouleur arrive0 = new PointCouleur(1100,360);
 		PointCouleur arrive1 = new PointCouleur(600, 725);
 		
-		Point ligne1 = new Point(100,100);
+		PointCouleur ligne1 = new PointCouleur(100,100);
 
-				
+
 		addPoint(depart0);
 		addPoint(arrive0);
 		addPoint(depart1);
 		addPoint(arrive1);
+		addPoint(ligne1);
 		
 		addPointSpeciaux("depart0", depart0);
 		addPointSpeciaux("arrive0", arrive0);

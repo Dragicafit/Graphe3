@@ -41,6 +41,7 @@ public class Jeux extends Thread {
 						((ControleurJeu) vue.getControleur()).notify();
 					}
 				}
+				sleep(200);
 			}
 			Platform.runLater(new Runnable() {
 				@Override

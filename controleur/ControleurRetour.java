@@ -24,14 +24,14 @@ public abstract class ControleurRetour extends Controleur {
 				VueCreationGraphe vueGraphe = (VueCreationGraphe) vue;
 				String nomGraphe = vueGraphe.getNomGraphe().getText();
 				if (!nomGraphe.isEmpty()) {
-					modele.getGrapheCourant().setNom(nomGraphe);
+					modele.setGrapheNom(nomGraphe);
 					modele.sauvegardeGraphe();
 				}
 			} else if (vue instanceof VueCreationRegle) {
 				VueCreationRegle vueRegles = (VueCreationRegle) vue;
 				String nomRegle = vueRegles.getNomRegleField().getText();
 				if (!nomRegle.isEmpty()) {
-					modele.getRegleCourant().setNom(nomRegle);
+					modele.setRegleNom(nomRegle);
 					modele.sauvegardeRegle();
 				}
 			} else if (vue instanceof VueMenu) {

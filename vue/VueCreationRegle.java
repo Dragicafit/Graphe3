@@ -18,6 +18,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import modele.Modele;
 import modele.MutableBoolean;
+import modele.regle.ModeleRegle;
 
 public class VueCreationRegle extends VueRetour {
 
@@ -32,12 +33,13 @@ public class VueCreationRegle extends VueRetour {
 		VBoxPoint = creerVBox(Pos.CENTER_LEFT);
 		VBoxPoint.setStyle("-fx-padding: 10;");
 		reglesChoisis = new HashMap<>();
-		ajoutCheckBox(creerCheckBoxUnderline("Point coloriable"), modele.getRegleCourant().Coloriable);
-		ajoutCheckBox(creerCheckBox("A coté de soit"), modele.getRegleCourant().JouerAcoteSoit);
-		ajoutCheckBox(creerCheckBox("A coté d'un ennemi"), modele.getRegleCourant().JouerAcoteEnnemi);
-		ajoutCheckBox(creerCheckBox("Sur un ennemi"), modele.getRegleCourant().JouerSurEnnemi);
-		ajoutCheckBox(creerCheckBoxUnderline("Point deplacable"), modele.getRegleCourant().DeplacementAutorise);
-		// reglesChoisis.put(creerCheckBox("colorier point entouré par nos points"), modele.getRegleCourant().);
+		ModeleRegle regle = modele.getRegleCourant();
+		ajoutCheckBox(creerCheckBoxUnderline("Point coloriable"), regle.Coloriable);
+		ajoutCheckBox(creerCheckBox("A coté de soit"), regle.JouerAcoteSoit);
+		ajoutCheckBox(creerCheckBox("A coté d'un ennemi"), regle.JouerAcoteEnnemi);
+		ajoutCheckBox(creerCheckBox("Sur un ennemi"), regle.JouerSurEnnemi);
+		ajoutCheckBox(creerCheckBoxUnderline("Point deplacable"), regle.DeplacementAutorise);
+		// reglesChoisis.put(creerCheckBox("colorier point entouré par nos points"), regle);
 		BorderPane main = new BorderPane();
 		SplitPane pointEtSegment = new SplitPane();
 		GridPane segment = creerGridPane(Pos.CENTER_LEFT, true);

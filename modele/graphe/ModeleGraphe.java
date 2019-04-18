@@ -134,7 +134,7 @@ public class ModeleGraphe extends DeepClone {
 		return points;
 	}
 
-	public Point getPointSpeciaux(String string) {
+	public Point getPointSpecial(String string) {
 		return pointsSpeciaux.get(string);
 	}
 

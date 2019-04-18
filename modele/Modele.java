@@ -7,6 +7,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Map;
 
 import modele.graphe.ModeleGraphe;
 import modele.point.Point;
@@ -62,6 +63,14 @@ public class Modele implements Serializable {
 		Modele m = (Modele) ois.readObject();
 		ois.close();
 		return m;
+	}
+
+	public void setGrapheNom(String nom) {
+		grapheCourant.setNom(nom);
+	}
+
+	public void setRegleNom(String nom) {
+		regleCourant.setNom(nom);
 	}
 
 	public ArrayList<ModeleGraphe> getGraphesPredefinis() {
@@ -140,6 +149,10 @@ public class Modele implements Serializable {
 		grapheCourant.addPoint(point);
 	}
 
+	public void addPointSpeciaux(String string, Point point) {
+		grapheCourant.addPointSpeciaux(string, point);
+	}
+
 	public void addSegment(Segment segment) {
 		grapheCourant.addSegment(segment);
 	}
@@ -154,6 +167,14 @@ public class Modele implements Serializable {
 
 	public ArrayList<Point> getPoints() {
 		return grapheCourant.getPoints();
+	}
+
+	public Point getPointSpecial(String string) {
+		return grapheCourant.getPointSpecial(string);
+	}
+
+	public Map<String, Point> getPointsSpeciaux() {
+		return grapheCourant.getPointsSpeciaux();
 	}
 
 	public Segment getSegment(int index) {
@@ -171,7 +192,7 @@ public class Modele implements Serializable {
 	public boolean containsSegment(Segment s) {
 		return grapheCourant.containsSegment(s);
 	}
-	
+
 	public boolean containsJoueur(Joueur j) {
 		return grapheCourant.containsJoueur(j);
 	}
@@ -204,6 +225,14 @@ public class Modele implements Serializable {
 		grapheCourant.removePoint(nb);
 	}
 
+	public void removePointSpeciaux(Point p) {
+		grapheCourant.removePointSpeciaux(p);
+	}
+
+	public void removePointSpeciaux(String key) {
+		grapheCourant.removePointSpeciaux(key);
+	}
+
 	public void removeSegment(Segment s) {
 		grapheCourant.removeSegment(s);
 	}
@@ -215,7 +244,7 @@ public class Modele implements Serializable {
 	public void supprimerTout() {
 		grapheCourant.supprimerTout();
 	}
-	
+
 	public void clearJoueurs() {
 		grapheCourant.clearJoueurs();
 	}

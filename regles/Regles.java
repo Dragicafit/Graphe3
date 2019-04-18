@@ -111,9 +111,15 @@ public class Regles {
 		double x2B = s2.getPoint2().getX();
 		double y2B = s2.getPoint2().getY();
 		
-		if((y1B-y1A)/(x1B-x1A) != (y2B-y2A)/(x2B-x2A)) {
-			
-		}
-		return false;
+		double a1 = (y1B-y1A)/(x1B-x1A);
+		double a2 = (y2B-y2A)/(x2B-x2A);
+		if(a1 == a2) {return false;}
+		double b1 = y1A - (a1 * x1A);
+		double b2 = y2B - (a2 * x2B);
+		
+		double xCommun = (b2-b1)/(a1-a2);
+		
+		return (xCommun > x1A && xCommun <x1B && xCommun > x2A && xCommun < x2B) || (xCommun < x1A && xCommun >x1B && xCommun < x2A && xCommun > x2B);
+		
 	}
 }

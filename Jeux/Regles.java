@@ -1,4 +1,4 @@
-package regles;
+package Jeux;
 
 import java.util.ArrayList;
 

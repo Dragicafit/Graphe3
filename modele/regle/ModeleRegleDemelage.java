@@ -8,5 +8,6 @@ public class ModeleRegleDemelage extends ModeleRegle{
 		this.DeplacementAutorise.set(true);
 		this.SeCroise.set(true);
 		this.FinDeplacement.set(true);
+		this.NbJoueurMax = 1;
 	}
 }

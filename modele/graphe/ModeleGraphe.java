@@ -97,6 +97,14 @@ public class ModeleGraphe extends DeepClone {
 
 		return modeleGraphe;
 	}
+	
+	public void joueurSuivant() {
+		joueurCourant = (joueurCourant + 1) % getNbJoueurs();
+	}
+	
+	public int getJoueurPrecedent() {
+		return (joueurCourant + getNbJoueurs() - 1) % getNbJoueurs();
+	}
 
 	public void addPoint(Point point) {
 		if (!points.contains(point))
@@ -160,10 +168,6 @@ public class ModeleGraphe extends DeepClone {
 
 	public int getJoueurCourant() {
 		return joueurCourant;
-	}
-
-	public void setJoueurCourant(int joueurCourant) {
-		this.joueurCourant = joueurCourant;
 	}
 
 	public int getSizePoints() {

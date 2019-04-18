@@ -128,6 +128,14 @@ public class Modele implements Serializable {
 		this.regleCourant = (ModeleRegle) regleCourant.clone();
 	}
 
+	public void joueurSuivant() {
+		this.grapheCourant.joueurSuivant();
+	}
+
+	public int getJoueurPrecedent() {
+		return this.grapheCourant.getJoueurPrecedent();
+	}
+
 	public void addPoint(Point point) {
 		grapheCourant.addPoint(point);
 	}
@@ -174,11 +182,6 @@ public class Modele implements Serializable {
 
 	public int getJoueurCourant() {
 		return grapheCourant.getJoueurCourant();
-	}
-
-	public void setJoueurCourant(int joueurCourant) {
-		this.grapheCourant.setJoueurCourant(joueurCourant);
-		;
 	}
 
 	public int getSizePoints() {

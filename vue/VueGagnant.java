@@ -15,7 +15,7 @@ public class VueGagnant extends VueRetour {
 		this.setTitle("Fin");
 		BorderPane main = creerBorderPane(false);
 		VBox box = creerVBox(Pos.CENTER, 40);
-		Text finJeu = new Text(m.getJoueur(m.getJoueurCourant()).getNom()+ " a gagné");
+		Text finJeu = new Text(m.getJoueur(m.getJoueurPrecedent()).getNom()+ " a gagné");
 		finJeu.setStyle("-fx-font-size: 80px;");
 		box.getChildren().addAll(finJeu, retour);
 		main.setCenter(box);

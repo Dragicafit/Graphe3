@@ -32,20 +32,20 @@ public class ControleurJeu extends ControleurRetour {
 
 	public void applique(PointCouleur p) {
 		p.setCouleur(modele.getJoueur(modele.getJoueurCourant()).getCouleur());
-		modele.setJoueurCourant((modele.getJoueurCourant() + 1) % modele.getNbJoueurs());
+		modele.joueurSuivant();
 		vue.update();
 	}
 
 	public void applique(PointCouleur p, double x, double y) {
 		p.setX(x);
 		p.setY(y);
-		modele.setJoueurCourant((modele.getJoueurCourant() + 1) % modele.getNbJoueurs());
+		modele.joueurSuivant();
 		vue.update();
 	}
 
 	public void applique(SegmentCouleur s) {
 		s.setCouleur(modele.getJoueur(modele.getJoueurCourant()).getCouleur());
-		modele.setJoueurCourant((modele.getJoueurCourant() + 1) % modele.getNbJoueurs());
+		modele.joueurSuivant();
 		vue.update();
 	}
 

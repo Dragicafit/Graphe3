@@ -1,5 +1,6 @@
 package modele.segment;
 
+import javafx.scene.shape.Line;
 import modele.Couleur;
 import modele.estColoriable;
 import modele.point.Point;
@@ -27,5 +28,12 @@ public class SegmentCouleur extends Segment implements estColoriable {
 	@Override
 	public void setCouleur(Couleur couleur) {
 		this.couleur = couleur;
+	}
+	
+	@Override
+	public Line toLine() {
+		Line l = super.toLine();
+		l.setStroke(couleur.toColor());
+		return l;
 	}
 }

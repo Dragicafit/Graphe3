@@ -99,4 +99,9 @@ public class Regles {
 		}
 		return true;
 	}
+	
+	public boolean seCroise(Segment s1, Segment s2){
+		return s1.toLine2D().intersectsLine(s2.toLine2D());
+		
+	}
 }

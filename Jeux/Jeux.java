@@ -10,6 +10,7 @@ import javafx.scene.shape.Circle;
 import modele.Modele;
 import modele.point.Point;
 import modele.point.PointCouleur;
+import modele.segment.Segment;
 import modele.segment.SegmentCouleur;
 import regles.Regles;
 import vue.Vue;
@@ -135,7 +136,16 @@ public class Jeux extends Thread {
 				return true;
 			}
 			return false;
-		} else {
+		}else if(modele.getRegleCourant().FinDeplacement.get()) {
+			for(Segment s : modele.getSegments()) {
+				for(Segment seg: modele.getSegments()){
+					if(!s.sommetCommun(seg) && regles.seCroise(s,seg)) {
+						return false;
+					}
+				}
+			}
+			return true;
+		}else {
 			for (Point p : modele.getPoints()) {
 				if (check_regles(p)) {
 					return false;

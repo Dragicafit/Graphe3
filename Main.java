@@ -7,6 +7,7 @@ import modele.graphe.ModeleGraphe1;
 import modele.graphe.ModeleGrapheHex;
 import modele.graphe.ModeleGrapheHex2;
 import modele.regle.ModeleRegleCol;
+import modele.regle.ModeleRegleDemelage;
 import modele.regle.ModeleRegleHex;
 import modele.regle.ModeleRegleSnort;
 import vue.VueAccueil;
@@ -50,6 +51,7 @@ public class Main extends Application {
 		modele.addReglesPredefinis(new ModeleRegleSnort());
 		modele.addReglesPredefinis(new ModeleRegleCol());
 		modele.addReglesPredefinis(new ModeleRegleHex());
+		modele.addReglesPredefinis(new ModeleRegleDemelage());
 		
 		return modele;
 	}

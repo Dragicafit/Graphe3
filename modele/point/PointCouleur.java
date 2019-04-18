@@ -1,5 +1,6 @@
 package modele.point;
 
+import javafx.scene.shape.Circle;
 import modele.Couleur;
 import modele.estColoriable;
 
@@ -26,6 +27,13 @@ public class PointCouleur extends Point implements estColoriable {
 	public PointCouleur(double x, double y) {
 		super(x,y);
 		this.couleur = Couleur.BLANC;
+	}
+	
+	@Override
+	public Circle toCircle() {
+		Circle c = super.toCircle();
+		c.setFill(couleur.toColor());
+		return c;
 	}
 
 	@Override

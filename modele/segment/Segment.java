@@ -1,7 +1,10 @@
 package modele.segment;
 
+import java.awt.geom.Line2D;
 import java.io.Serializable;
 
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Line;
 import modele.point.Point;
 
 public class Segment implements Serializable {
@@ -52,6 +55,22 @@ public class Segment implements Serializable {
 			return point1;
 		}
 		return null;
+	}
+	
+	public boolean sommetCommun(Segment segment) {
+		return point1.equals(segment.point1) || point1.equals(segment.point2) || point2.equals(segment.point1) || point2.equals(segment.point2);
+	}
+	
+	public Line toLine() {
+		Line l = new Line(point1.getX(), point1.getY(), point2.getX(), point2.getY());
+		l.setStroke(Color.BLACK);
+		l.setStrokeWidth(3);
+		l.setVisible(true);
+		return l;
+	}
+	
+	public Line2D toLine2D() {
+		return new Line2D.Double(point1.getX(), point1.getY(), point2.getX(), point2.getY());
 	}
 
 	@Override

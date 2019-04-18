@@ -14,6 +14,7 @@ public class ModeleRegle extends DeepClone {
 	public MutableBoolean EstBlanc;
 	public MutableBoolean Coloriable;
 	public MutableBoolean DeplacementAutorise;
+	public MutableBoolean ClickAutorise;
 	public MutableBoolean SeCroise;
 	public MutableBoolean FinDeplacement;
 	public MutableBoolean FinHex;
@@ -30,9 +31,10 @@ public class ModeleRegle extends DeepClone {
 		this.JouerAcoteEnnemi = new MutableBoolean();
 		this.JouerSurEnnemi = new MutableBoolean();
 		this.EstBlanc = new MutableBoolean();
-		this.SeCroise = new MutableBoolean();
 		this.Coloriable = new MutableBoolean(true);
 		this.DeplacementAutorise = new MutableBoolean(false);
+		this.ClickAutorise = new MutableBoolean(true);
+		this.SeCroise = new MutableBoolean();
 		this.FinDeplacement = new MutableBoolean(false);
 		this.FinHex = new MutableBoolean(false);
 		this.NbJoueurMax = 2;
@@ -53,8 +55,10 @@ public class ModeleRegle extends DeepClone {
 			return nom.equals(modeleRegle.nom) && JouerAcoteSoit.equals(modeleRegle.JouerAcoteSoit)
 					&& JouerAcoteEnnemi.equals(modeleRegle.JouerAcoteEnnemi)
 					&& JouerSurEnnemi.equals(modeleRegle.JouerSurEnnemi) && EstBlanc.equals(modeleRegle.EstBlanc)
-					&& DeplacementAutorise == modeleRegle.DeplacementAutorise && FinHex == modeleRegle.FinHex
-					&& SeCroise.equals(modeleRegle.SeCroise) && FinDeplacement == modeleRegle.FinDeplacement && NbJoueurMax == modeleRegle.NbJoueurMax;
+					&& DeplacementAutorise == modeleRegle.DeplacementAutorise
+					&& ClickAutorise == modeleRegle.ClickAutorise && FinHex == modeleRegle.FinHex
+					&& SeCroise.equals(modeleRegle.SeCroise) && FinDeplacement == modeleRegle.FinDeplacement
+					&& NbJoueurMax == modeleRegle.NbJoueurMax;
 		}
 		return false;
 	}

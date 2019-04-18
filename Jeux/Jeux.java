@@ -12,7 +12,6 @@ import modele.point.Point;
 import modele.point.PointCouleur;
 import modele.segment.Segment;
 import modele.segment.SegmentCouleur;
-import regles.Regles;
 import vue.Vue;
 import vue.VueGagnant;
 

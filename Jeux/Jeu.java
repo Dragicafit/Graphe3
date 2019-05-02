@@ -16,14 +16,14 @@ import modele.segment.SegmentCouleur;
 import vue.Vue;
 import vue.VueGagnant;
 
-public class Jeux extends Thread {
+public class Jeu extends Thread {
 
 	protected Regles regles;
 	protected Modele modele;
 	protected Vue vue;
 	protected InputEvent event;
 
-	public Jeux(Vue vue) {
+	public Jeu(Vue vue) {
 		super("Jeu");
 		this.modele = vue.getModele();
 		this.regles = new Regles(modele);

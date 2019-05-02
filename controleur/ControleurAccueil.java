@@ -1,5 +1,6 @@
 package controleur;
 
+import Jeux.JeuModifie;
 import javafx.scene.control.Button;
 import javafx.scene.input.InputEvent;
 import javafx.scene.input.MouseButton;
@@ -100,7 +101,16 @@ public class ControleurAccueil extends Controleur {
 	public void launcherPartieEnCours() {
 		if (modele.getGrapheCourant() != null && modele.getRegleCourant() != null) {
 			exit();
-			new VueJeu(modele);
+			if (modele.getRegleCourant().getNom().equals("JeuModifie")) {
+				new VueJeu(modele) {
+					@Override
+					public Controleur creationControleur() {
+						return new ControleurJeu(this, new JeuModifie(this));
+					}
+				};
+			} else {
+				new VueJeu(modele);
+			}
 		}
 	}
 }

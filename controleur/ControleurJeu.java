@@ -1,6 +1,6 @@
 package controleur;
 
-import Jeux.Jeux;
+import Jeux.Jeu;
 import javafx.scene.input.ClipboardContent;
 import javafx.scene.input.DragEvent;
 import javafx.scene.input.Dragboard;
@@ -16,12 +16,12 @@ import vue.Vue;
 
 public class ControleurJeu extends ControleurRetour {
 
-	protected Jeux jeu;
+	protected Jeu jeu;
 	private Object action;
 
-	public ControleurJeu(Vue vue) {
+	public ControleurJeu(Vue vue, Jeu jeu) {
 		super(vue);
-		this.jeu = new Jeux(vue);
+		this.jeu = jeu;
 		jeu.start();
 	}
 

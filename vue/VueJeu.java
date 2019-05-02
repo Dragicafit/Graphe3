@@ -1,5 +1,6 @@
 package vue;
 
+import Jeux.Jeu;
 import controleur.Controleur;
 import controleur.ControleurJeu;
 import javafx.scene.text.Text;
@@ -19,7 +20,7 @@ public class VueJeu extends VueMenu {
 
 	@Override
 	public Controleur creationControleur() {
-		return new ControleurJeu(this);
+		return new ControleurJeu(this, new Jeu(this));
 	}
 
 	@Override
